@@ -42,8 +42,9 @@ void initColor(){
         unsigned char r2 = 234 + (246 - 234)*factor;
         unsigned char g2 = 234 + (184 - 234)*factor;
         unsigned char b2 = 234 + (113 - 234)*factor;
-        negativeColor[i] = (b1<<24) + (g1<<16) + (r1<<8) + 0xFF;
-        positiveColor[i] = (b2<<24) + (g2<<16) + (r2<<8) + 0xFF;
+        
+        negativeColor[i] = r1 + (g1<<8) + (b1<<16);
+        positiveColor[i] = r2 + (g2<<8) + (b2<<16);
     }
 }
 
@@ -91,7 +92,7 @@ void getHeatData(){
             inputs[0] = (j - 50.0)/50;
             inputs[1] = (i - 50.0)/50;
             double output = network.forwardProp(inputs, 2);
-            output *= 2;
+            output *= 10;
             heatdata[i*100+j] = getColor(output);
         }
     }
@@ -123,6 +124,7 @@ NSString * toShow;
             _outputLabel.text = toShow;
             [_heatMap setBackground:heatdata];
         }];
+        [NSThread sleepForTimeInterval:0.008];
     }
 }
 
