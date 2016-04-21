@@ -82,7 +82,7 @@ class HeatMapView: UIView {
     let bitsPerCompontent = 8
     let bytesPerRow = 4*100
     
-    func setBackground(rawData:UnsafeMutablePointer<Int32>){
+    func setBackground(rawData:UnsafeMutablePointer<UInt32>){
         let bitmap:CGContextRef = CGBitmapContextCreate(rawData, 100, 100, bitsPerCompontent, bytesPerRow, colorSpace, CGBitmapInfo.ByteOrderDefault.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue)!
         
         let newImageRef = CGBitmapContextCreateImage(bitmap)!
