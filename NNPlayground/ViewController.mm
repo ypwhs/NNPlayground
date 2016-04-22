@@ -16,6 +16,7 @@ using namespace std;
 
 @implementation ViewController
 
+//**************************** Thread ***************************
 - (void)xiancheng:(dispatch_block_t)code{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), code);
 }
@@ -25,8 +26,10 @@ using namespace std;
 }
 
 //*************************** Network ***************************
-int networkShape[] = {2, 4, 1};
-Network network = Network(networkShape, 3, aTanh, rNone);
+int networkShape[] = {2, 4, 4, 1};
+int layers = 4;
+Network network = Network(networkShape, layers, aTanh, rNone);
+NSLock * networkLock = [[NSLock alloc] init];
 
 //**************************** Color ****************************
 #define NUM_SHADES 256
@@ -48,30 +51,6 @@ void initColor(){
     }
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    initColor();
-}
-
-int DATA_NUM = 150;
-double inputs[] = {1, 1};
-double * x1 = new double[DATA_NUM];
-double * x2 = new double[DATA_NUM];
-double * y = new double[DATA_NUM];
-
-
-- (IBAction)generateInputs:(id)sender {
-    network = Network(networkShape, 3, aTanh, rNone);
-    for(int i = 0; i < DATA_NUM; i++){
-        x1[i] = drand()*1.8;
-        x2[i] = drand()*1.8;
-        y[i] = x1[i]*x2[i];
-    }
-    [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
-    getHeatData();
-    [_heatMap setBackground:image];
-}
-
 unsigned int getColor(double x){
     if(x > 0){
         if(x > 1)x = 1;
@@ -85,10 +64,34 @@ unsigned int getColor(double x){
     }
 }
 
+//**************************** Inputs ***************************
+int DATA_NUM = 150;
+double inputs[] = {1, 1};
+double * x1 = new double[DATA_NUM];
+double * x2 = new double[DATA_NUM];
+double * y = new double[DATA_NUM];
+
+
+- (IBAction)generateInputs:(id)sender {
+    [networkLock lock];
+    network = Network(networkShape, layers, aTanh, rNone);
+    [networkLock unlock];
+    for(int i = 0; i < DATA_NUM; i++){
+        x1[i] = drand()*1.8;
+        x2[i] = drand()*1.8;
+        y[i] = x1[i]*x2[i];
+    }
+    [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
+    getHeatData();
+    [_heatMap setBackground:image];
+}
+
+//*************************** Heatmap ***************************
 unsigned int * heatdata = new unsigned int[100*100];
 UIImage * image;
 CGContextRef bitmap;
 void getHeatData(){
+    [networkLock lock];
     for(int i = 0; i < 100; i++){
         for(int j = 0; j < 100; j++){
             inputs[0] = (j - 50.0)/50;
@@ -98,6 +101,7 @@ void getHeatData(){
             heatdata[i*100+j] = getColor(output);
         }
     }
+    [networkLock unlock];
     if(image == nil){
         bitmap = CGBitmapContextCreate(heatdata, 100, 100, 8, 400, CGColorSpaceCreateDeviceRGB(), kCGBitmapByteOrder32Big | kCGImageAlphaNoneSkipLast);
     }
@@ -107,29 +111,36 @@ void getHeatData(){
 }
 
 - (IBAction)updateHeatmap:(id)sender {
-
+    [self onestep];
 }
 
+//**************************** Train ****************************
 bool always = false;
 NSString * toShow;
-
+int batch = 1;
+- (void)onestep{
+    double loss = 0;
+    [networkLock lock];
+    for(int n = 0; n < batch; n++)
+    for (int i = 0; i < DATA_NUM; i++) {
+        inputs[0] = x1[i];
+        inputs[1] = x2[i];
+        double output = network.forwardProp(inputs, 2);
+        network.backProp(y[i]);
+        loss += abs(output - y[i]);
+        network.updateWeights(0.3, 0);
+    }
+    [networkLock unlock];
+    toShow = [NSString stringWithFormat:@"%lf",loss/batch];
+    getHeatData();
+    [self ui:^{
+        _outputLabel.text = toShow;
+        [_heatMap setBackground:image];
+    }];
+}
 - (void)train{
     while(always){
-        double loss = 0;
-        for (int i = 0; i < DATA_NUM; i++) {
-            inputs[0] = x1[i];
-            inputs[1] = x2[i];
-            double output = network.forwardProp(inputs, 2);
-            network.backProp(y[i]);
-            loss += abs(output - y[i]);
-            network.updateWeights(0.03, 0);
-        }
-        toShow = [NSString stringWithFormat:@"%lf",loss];
-        getHeatData();
-        [self ui:^{
-            _outputLabel.text = toShow;
-            [_heatMap setBackground:image];
-        }];
+        [self onestep];
         [NSThread sleepForTimeInterval:0.008];
     }
 }
@@ -137,6 +148,11 @@ NSString * toShow;
 - (IBAction)switch:(UISwitch *)sender {
     always = sender.on;
     [self xiancheng:^{[self train];}];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    initColor();
 }
 
 - (void)didReceiveMemoryWarning {

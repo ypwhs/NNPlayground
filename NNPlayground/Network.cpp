@@ -51,14 +51,12 @@ Network::Network(int networkShape[], int numLayers, ActivationFunction activatio
     }
     /** List of layers, with each layer being a list of nodes. */
     for (int layerIdx = 0; layerIdx < numLayers; layerIdx++) {
-        //        bool isOutputLayer = (layerIdx == numLayers - 1);
-        //        bool isInputLayer = (layerIdx == 0);
         vector<Node*>* currentLayer = new vector<Node*>();
         int numNodes = networkShape[layerIdx];
         for (int i = 0; i < numNodes; i++) {
             auto node = new Node(act);
-            node->layer = layerIdx + 1;
-            node->id = i+1;
+            node->layer = layerIdx + 1; //tag this node
+            node->id = i + 1;
             if (layerIdx >= 1) {
                 // Add links from nodes in the previous layer to this node.
                 for (int j = 0; j < network[layerIdx - 1]->size(); j++) {

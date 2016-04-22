@@ -17,7 +17,7 @@ class Link{
 public:
     Node * source;
     Node * dest;
-    double weight = drand();
+    double weight = drand()*2;
     double errorDer = 0;
     /** Accumulated error derivative since the last update. */
     double accErrorDer = 0;
@@ -38,7 +38,7 @@ public:
     int layer = 0;
     int id = 0;
     vector<Link*> inputLinks = vector<Link*>();
-    double bias = 0.1;
+    double bias = 0.5;
     
     vector<Link*> outputs = vector<Link*>();
     double totalInput;
