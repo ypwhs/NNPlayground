@@ -35,6 +35,19 @@
 - (void)testExample {
     // Use recording to get started writing UI tests.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    XCUIApplication *app = [[XCUIApplication alloc] init];
+    XCUIElement *button = [[[[app.otherElements containingType:XCUIElementTypeButton identifier:@"Button"] childrenMatchingType:XCUIElementTypeButton] matchingIdentifier:@"Button"] elementBoundByIndex:0];
+    [button tap];
+    
+    XCUIElement *switch2 = app.switches[@"0"];
+    [switch2 tap];
+    
+    for(int i = 0; i < 5; i++)
+        [button tap];
+    
+    XCUIElement *switch3 = app.switches[@"1"];
+    [switch3 tap];
 }
 
 @end

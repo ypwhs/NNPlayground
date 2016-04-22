@@ -96,8 +96,10 @@ void freeNetwork(){
         y[i] = x1[i]*x2[i];
     }
     [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
-    getHeatData();
-    [_heatMap setBackground:image];
+    [self onestep];
+    
+//    getHeatData();
+//    [_heatMap setBackground:image];
 }
 
 //*************************** Heatmap ***************************
