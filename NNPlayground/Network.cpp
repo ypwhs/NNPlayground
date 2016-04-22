@@ -8,7 +8,7 @@
 
 #import "Network.h"
 
-Network::Network(int networkShape[], int numLayers, ActivationFunction activation, RegularizationFunction regularzation) {
+Network::Network(int ns[], int ls, ActivationFunction activation, RegularizationFunction regularzation) {
     //    int numLayers = (int)networkShape.size();
     Activation act;
     Regularization reg;
@@ -49,6 +49,8 @@ Network::Network(int networkShape[], int numLayers, ActivationFunction activatio
         default:
             break;
     }
+    networkShape = ns;
+    numLayers = ls;
     /** List of layers, with each layer being a list of nodes. */
     for (int layerIdx = 0; layerIdx < numLayers; layerIdx++) {
         vector<Node*>* currentLayer = new vector<Node*>();

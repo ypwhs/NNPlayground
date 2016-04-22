@@ -26,8 +26,8 @@ using namespace std;
 }
 
 //*************************** Network ***************************
-int networkShape[] = {2, 4, 4, 1};
-int layers = 4;
+int networkShape[] = {2, 4, 1};
+int layers = 3;
 Network network = Network(networkShape, layers, aTanh, rNone);
 NSLock * networkLock = [[NSLock alloc] init];
 
@@ -71,9 +71,23 @@ double * x1 = new double[DATA_NUM];
 double * x2 = new double[DATA_NUM];
 double * y = new double[DATA_NUM];
 
+void freeNetwork(){
+    for (int i = 0; i < network.numLayers; i++) {
+        auto currentLayer = *network.network[i];
+        for(int j = 0; j < network.networkShape[i]; j++){
+            //delete every node
+            delete(currentLayer[j]);
+        }
+    }
+    for (int i = 0; i < network.numLayers; i++) {
+        //delete every layer
+        delete(network.network[i]);
+    }
+}
 
 - (IBAction)generateInputs:(id)sender {
     [networkLock lock];
+    freeNetwork();
     network = Network(networkShape, layers, aTanh, rNone);
     [networkLock unlock];
     for(int i = 0; i < DATA_NUM; i++){
@@ -127,7 +141,7 @@ int batch = 1;
         inputs[1] = x2[i];
         double output = network.forwardProp(inputs, 2);
         network.backProp(y[i]);
-        loss += abs(output - y[i]);
+        loss += 0.5 * pow(output - y[i], 2);
         network.updateWeights(0.3, 0);
     }
     [networkLock unlock];

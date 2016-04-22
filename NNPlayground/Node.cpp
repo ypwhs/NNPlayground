@@ -11,10 +11,17 @@
 double Node::updateOutput() {
     // Stores total input into the node.
     totalInput = bias;
-    for (int j = 0; j < inputLinks.size(); j++) {
-        auto link = inputLinks[j];
+    for (int i = 0; i < inputLinks.size(); i++) {
+        auto link = inputLinks[i];
         totalInput += link->weight * link->source->output;
     }
     output = activation.output(totalInput);
     return output;
+}
+
+Node::~Node(){
+    //delete every link
+    for (int i = 0; i < inputLinks.size(); i++) {
+        free(inputLinks[i]);
+    }
 }

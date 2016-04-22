@@ -15,7 +15,9 @@
 class Network{
 public:
     vector<vector<Node*>*> network;
-    Network(int networkShape[], int numLayers, ActivationFunction activation, RegularizationFunction regularzation);
+    int * networkShape;
+    int numLayers;
+    Network(int ns[], int ls, ActivationFunction activation, RegularizationFunction regularzation);
     double forwardProp(double inputs[], int inputSize);
     void backProp(double target);
     void updateWeights(double learningRate, double regularizationRate);

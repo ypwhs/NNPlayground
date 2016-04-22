@@ -37,10 +37,10 @@ class Node {
 public:
     int layer = 0;
     int id = 0;
-    vector<Link*> inputLinks = vector<Link*>();
+    vector<Link*> inputLinks;
     double bias = 0.5;
     
-    vector<Link*> outputs = vector<Link*>();
+    vector<Link*> outputs;
     double totalInput;
     double output;
     double outputDer = 0;
@@ -52,6 +52,7 @@ public:
         activation = act;
     }
     Node(){}
+    ~Node();
     
     double updateOutput();
 };
