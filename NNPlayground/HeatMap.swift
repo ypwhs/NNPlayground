@@ -11,46 +11,26 @@ let SCALE = 3
 class HeatMapView: UIView {
     let NUM_SHADES = 256
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = UIColor.whiteColor()
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        initLayer()
+    }
+    
+    var backgroundLayer = CALayer()
+    var dataLayer = CALayer()
+    
+    func initLayer(){
+        backgroundLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)
+        self.layer.insertSublayer(backgroundLayer, atIndex: 0)
+        dataLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)
+        self.layer.insertSublayer(dataLayer, atIndex: 1)
     }
     
     var img = UIImage()
-    let colorSpace = CGColorSpaceCreateDeviceRGB()
-    let bytesPerPixel = 4
-    let bitsPerCompontent = 8
-    let bytesPerRow = 4*100
-    
-    func setBackground(rawData:UnsafeMutablePointer<UInt32>){
-        let bitmap:CGContextRef = CGBitmapContextCreate(rawData, 100, 100, bitsPerCompontent, bytesPerRow, colorSpace, CGBitmapInfo.ByteOrder32Big.rawValue | CGImageAlphaInfo.NoneSkipLast.rawValue)!
-        
-        let newImageRef = CGBitmapContextCreateImage(bitmap)!
-        img = UIImage(CGImage: newImageRef)
+    func setBackground(image:UIImage){
+        self.img = image;
+        backgroundLayer.contents = img.CGImage
         self.setNeedsDisplay()
-    }
-    
-    override func drawRect(rect: CGRect) {
-        img.drawInRect(rect)
-        let width = Double(rect.width / 2)
-        let height = Double(rect.height / 2)
-        for i in 0..<x.count{
-            var path = UIBezierPath(ovalInRect: CGRect(x: Double(width * x[i][0] + width)-1, y: Double(height * x[i][1] + height)-1, width: 7, height: 7))
-            white.setFill()
-            path.fill()
-            
-            path = UIBezierPath(ovalInRect: CGRect(x: Double(width * x[i][0] + width), y: Double(height * x[i][1] + height), width: 5.0, height: 5.0))
-            if y[i] > 0{
-                orange.setFill()
-            }else{
-                blue.setFill()
-            }
-            path.fill()
-        }
     }
     
     var x:[[Double]] = []
@@ -62,6 +42,28 @@ class HeatMapView: UIView {
         for i in 0..<size{
             self.x.append([x1[i], x2[i]])
             self.y.append(y[i])
+        }
+        dataLayer.sublayers = nil
+        
+        let width = Double(dataLayer.bounds.width / 2)
+        let height = Double(dataLayer.bounds.height / 2)
+        for i in 0..<x.count{
+            var pathLayer = CAShapeLayer()
+            var path = UIBezierPath(ovalInRect: CGRect(x: Double(width * x[i][0] + width)-1, y: Double(height * x[i][1] + height)-1, width: 7, height: 7))
+            pathLayer.path = path.CGPath
+            pathLayer.fillColor = white.CGColor
+            dataLayer.addSublayer(pathLayer)
+            
+            pathLayer = CAShapeLayer()
+            path = UIBezierPath(ovalInRect: CGRect(x: Double(width * x[i][0] + width), y: Double(height * x[i][1] + height), width: 5.0, height: 5.0))
+            pathLayer.path = path.CGPath
+            if y[i] > 0{
+                pathLayer.fillColor = orange.CGColor
+            }else{
+                pathLayer.fillColor = blue.CGColor
+            }
+            dataLayer.addSublayer(pathLayer)
+            
         }
         self.setNeedsDisplay()
     }

@@ -69,7 +69,7 @@ double * y = new double[DATA_NUM];
     }
     [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
     getHeatData();
-    [_heatMap setBackground:heatdata];
+    [_heatMap setBackground:image];
 }
 
 unsigned int getColor(double x){
@@ -86,6 +86,8 @@ unsigned int getColor(double x){
 }
 
 unsigned int * heatdata = new unsigned int[100*100];
+UIImage * image;
+CGContextRef bitmap;
 void getHeatData(){
     for(int i = 0; i < 100; i++){
         for(int j = 0; j < 100; j++){
@@ -96,12 +98,16 @@ void getHeatData(){
             heatdata[i*100+j] = getColor(output);
         }
     }
+    if(image == nil){
+        bitmap = CGBitmapContextCreate(heatdata, 100, 100, 8, 400, CGColorSpaceCreateDeviceRGB(), kCGBitmapByteOrder32Big | kCGImageAlphaNoneSkipLast);
+    }
+    CGImageRef imageRef = CGBitmapContextCreateImage(bitmap);
+    image = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
 }
 
 - (IBAction)updateHeatmap:(id)sender {
-    network = Network(networkShape, 3, aTanh, rNone);
-    getHeatData();
-    [_heatMap setBackground:heatdata];
+
 }
 
 bool always = false;
@@ -122,7 +128,7 @@ NSString * toShow;
         getHeatData();
         [self ui:^{
             _outputLabel.text = toShow;
-            [_heatMap setBackground:heatdata];
+            [_heatMap setBackground:image];
         }];
         [NSThread sleepForTimeInterval:0.008];
     }
