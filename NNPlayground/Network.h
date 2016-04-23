@@ -18,6 +18,7 @@ public:
     int * networkShape;
     int numLayers;
     Network(int ns[], int ls, ActivationFunction activation, RegularizationFunction regularzation);
+    ~Network();
     double forwardProp(double inputs[], int inputSize);
     void backProp(double target);
     void updateWeights(double learningRate, double regularizationRate);

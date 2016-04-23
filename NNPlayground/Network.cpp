@@ -13,49 +13,54 @@ Network::Network(int ns[], int ls, ActivationFunction activation, Regularization
     Activation act;
     Regularization reg;
     switch (activation) {
-        case aReLU:
-            act.output = ReLU;
-            act.der = derReLU;
+        case ReLU:
+            act.output = aReLU;
+            act.der = aderReLU;
             break;
-        case aTanh:
-            act.output = Tanh;
-            act.der = derTanh;
+        case Tanh:
+            act.output = aTanh;
+            act.der = aderTanh;
             break;
-        case aSigmoid:
-            act.output = Sigmoid;
-            act.der = derSigmoid;
+        case Sigmoid:
+            act.output = aSigmoid;
+            act.der = aderSigmoid;
             break;
-        case aLinear:
-            act.output = Linear;
-            act.der = derLinear;
+        case Linear:
+            act.output = aLinear;
+            act.der = aderLinear;
             break;
         default:
             break;
     }
     
     switch (regularzation) {
-        case rNone:
-            reg.output = None;
-            reg.der = None;
+        case None:
+            reg.output = rNone;
+            reg.der = rNone;
             break;
-        case rL1:
-            reg.output = L1;
-            reg.der = derL1;
+        case L1:
+            reg.output = rL1;
+            reg.der = rderL1;
             break;
-        case rL2:
-            reg.output = L2;
-            reg.der = derL2;
+        case L2:
+            reg.output = rL2;
+            reg.der = rderL2;
             break;
         default:
             break;
     }
     networkShape = ns;
     numLayers = ls;
+    
+    //add bias node
+//    for(int i = 0; i < numLayers-1; i++){
+//        networkShape[i] += 1;
+//    }
+    
     /** List of layers, with each layer being a list of nodes. */
     for (int layerIdx = 0; layerIdx < numLayers; layerIdx++) {
         vector<Node*>* currentLayer = new vector<Node*>();
-        int numNodes = networkShape[layerIdx];
-        for (int i = 0; i < numNodes; i++) {
+        for (int i = 0; i < networkShape[layerIdx]; i++) {
             auto node = new Node(act);
             node->layer = layerIdx + 1; //tag this node
             node->id = i + 1;
@@ -74,24 +79,36 @@ Network::Network(int ns[], int ls, ActivationFunction activation, Regularization
     }
 }
 
+Network::~Network(){
+    for (int i = 0; i < numLayers; i++) {
+        auto currentLayer = *network[i];
+        for(int j = 0; j < networkShape[i]; j++){
+            //delete every node
+            delete(currentLayer[j]);
+        }
+    }
+    for (int i = 0; i < numLayers; i++) {
+        //delete every layer
+        delete(network[i]);
+    }
+}
+
 double Network::forwardProp(double inputs[], int inputSize) {
     vector<Node*> &inputLayer = *network[0];
-    auto inputLayerSize = inputLayer.size();
-    if (inputSize != inputLayerSize) {
+    if (inputSize != inputLayer.size()) {
         printf("The number of inputs must match the number of nodes in the input layer!\n");
         return -1;
     }
     
     // Update the input layer.
-    for (int i = 0; i < inputLayerSize; i++) {
+    for (int i = 0; i < inputLayer.size(); i++) {
         inputLayer[i]->output = inputs[i];
     }
     
     for (int layerIdx = 1; layerIdx < network.size(); layerIdx++) {
         // Update all the nodes in this layer.
         vector<Node*> &currentLayer = *network[layerIdx];
-        auto currentLayerSize = currentLayer.size();
-        for (int i = 0; i < currentLayerSize; i++) {
+        for (int i = 0; i < currentLayer.size(); i++) {
             currentLayer[i]->updateOutput();
         }
     }
@@ -101,19 +118,17 @@ double Network::forwardProp(double inputs[], int inputSize) {
 void Network::backProp(double target) {
     // The output node is a special case. We use the user-defined error
     // function for the derivative.
-    auto networkSize = network.size();
-    vector<Node*> &lastLayer = *network[networkSize - 1];
+    vector<Node*> &lastLayer = *network[network.size() - 1];
     auto outputNode = lastLayer[0];
     outputNode->outputDer = outputNode->output - target;
     
     // Go through the layers backwards.
-    for (auto layerIdx = networkSize - 1; layerIdx >= 1; layerIdx--) {
+    for (auto layerIdx = network.size() - 1; layerIdx >= 1; layerIdx--) {
         vector<Node*> &currentLayer = *network[layerIdx];
         // Compute the error derivative of each node with respect to:
         // 1) its total input
         // 2) each of its input weights.
-        auto currentLayerSize = currentLayer.size();
-        for (int i = 0; i < currentLayerSize; i++) {
+        for (int i = 0; i < currentLayer.size(); i++) {
             auto node = currentLayer[i];
             node->inputDer = node->outputDer * node->activation.der(node->totalInput);
             node->accInputDer += node->inputDer;
@@ -121,10 +136,9 @@ void Network::backProp(double target) {
         }
         
         // Error derivative with respect to each weight coming into the node.
-        for (int i = 0; i < currentLayerSize; i++) {
+        for (int i = 0; i < currentLayer.size(); i++) {
             auto node = currentLayer[i];
-            auto inputLinks = node->inputLinks.size();
-            for (int j = 0; j < inputLinks; j++) {
+            for (int j = 0; j < node->inputLinks.size(); j++) {
                 auto link = node->inputLinks[j];
                 link->errorDer = node->inputDer * link->source->output;
                 link->accErrorDer += link->errorDer;
@@ -136,13 +150,11 @@ void Network::backProp(double target) {
         }
         
         vector<Node*> &prevLayer = *network[layerIdx - 1];
-        int prevLayerSize = (int)prevLayer.size();
-        for (int i = 0; i < prevLayerSize; i++) {
+        for (int i = 0; i < prevLayer.size(); i++) {
             auto node = prevLayer[i];
             // Compute the error derivative with respect to each node's output.
             node->outputDer = 0;
-            auto outputs = node->outputs.size();
-            for (int j = 0; j < outputs; j++) {
+            for (int j = 0; j < node->outputs.size(); j++) {
                 auto output = node->outputs[j];
                 node->outputDer += output->weight * output->dest->inputDer;
             }
@@ -151,11 +163,9 @@ void Network::backProp(double target) {
 }
 
 void Network::updateWeights(double learningRate, double regularizationRate) {
-    auto networkSize = network.size();
-    for (int layerIdx = 1; layerIdx < networkSize; layerIdx++) {
+    for (int layerIdx = 1; layerIdx < network.size(); layerIdx++) {
         vector<Node*> &currentLayer = *network[layerIdx];
-        auto currentLayerSize = currentLayer.size();
-        for (int i = 0; i < currentLayerSize; i++) {
+        for (int i = 0; i < currentLayer.size(); i++) {
             auto node = currentLayer[i];
             // Update the node's bias.
             if (node->numAccumulatedDers > 0) {
@@ -164,8 +174,7 @@ void Network::updateWeights(double learningRate, double regularizationRate) {
                 node->numAccumulatedDers = 0;
             }
             // Update the weights coming into this node.
-            auto inputLinks = node->inputLinks.size();
-            for (int j = 0; j < inputLinks; j++) {
+            for (int j = 0; j < node->inputLinks.size(); j++) {
                 auto link = node->inputLinks[j];
                 auto regulDer = link->regularization.der(link->weight);
                 if (link->numAccumulatedDers > 0) {

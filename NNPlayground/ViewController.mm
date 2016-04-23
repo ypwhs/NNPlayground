@@ -28,7 +28,7 @@ using namespace std;
 //*************************** Network ***************************
 int networkShape[] = {2, 4, 1};
 int layers = 3;
-Network network = Network(networkShape, layers, aTanh, rNone);
+Network * network = new Network(networkShape, layers, Tanh, None);
 NSLock * networkLock = [[NSLock alloc] init];
 
 //**************************** Color ****************************
@@ -71,24 +71,10 @@ double * x1 = new double[DATA_NUM];
 double * x2 = new double[DATA_NUM];
 double * y = new double[DATA_NUM];
 
-void freeNetwork(){
-    for (int i = 0; i < network.numLayers; i++) {
-        auto currentLayer = *network.network[i];
-        for(int j = 0; j < network.networkShape[i]; j++){
-            //delete every node
-            delete(currentLayer[j]);
-        }
-    }
-    for (int i = 0; i < network.numLayers; i++) {
-        //delete every layer
-        delete(network.network[i]);
-    }
-}
-
 - (IBAction)generateInputs:(id)sender {
     [networkLock lock];
-    freeNetwork();
-    network = Network(networkShape, layers, aTanh, rNone);
+    delete network;
+    network = new Network(networkShape, layers, Tanh, None);
     [networkLock unlock];
     for(int i = 0; i < DATA_NUM; i++){
         x1[i] = drand()*1.8;
@@ -112,7 +98,7 @@ void getHeatData(){
         for(int j = 0; j < 100; j++){
             inputs[0] = (j - 50.0)/50;
             inputs[1] = (i - 50.0)/50;
-            double output = network.forwardProp(inputs, 2);
+            double output = network->forwardProp(inputs, 2);
             output *= 10;
             heatdata[i*100+j] = getColor(output);
         }
@@ -141,10 +127,10 @@ int batch = 1;
     for (int i = 0; i < DATA_NUM; i++) {
         inputs[0] = x1[i];
         inputs[1] = x2[i];
-        double output = network.forwardProp(inputs, 2);
-        network.backProp(y[i]);
+        double output = network->forwardProp(inputs, 2);
+        network->backProp(y[i]);
         loss += 0.5 * pow(output - y[i], 2);
-        network.updateWeights(0.3, 0);
+        network->updateWeights(0.3, 0);
     }
     [networkLock unlock];
     toShow = [NSString stringWithFormat:@"%lf",loss/batch];
