@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #include "Network.h"
+
 using namespace std;
 
 @interface ViewController ()
@@ -28,99 +29,131 @@ using namespace std;
 //*************************** Network ***************************
 int networkShape[] = {2, 4, 1};
 int layers = 3;
-Network * network = new Network(networkShape, layers, Tanh, None);
+double learningRate = 0.01;
+auto activation = Tanh;
+auto regularization = None;
+
+Network * network = new Network(networkShape, layers, activation, regularization);
 NSLock * networkLock = [[NSLock alloc] init];
 
-//**************************** Color ****************************
-#define NUM_SHADES 256
-unsigned int * positiveColor = new unsigned int[NUM_SHADES];
-unsigned int * negativeColor = new unsigned int[NUM_SHADES];
-void initColor(){
-    for(int i = 0; i < NUM_SHADES; i++){
-        double factor = (double)i/NUM_SHADES;
-        unsigned char r1 = 234 + ( 97 - 234)*factor;
-        unsigned char g1 = 234 + (167 - 234)*factor;
-        unsigned char b1 = 234 + (213 - 234)*factor;
-        
-        unsigned char r2 = 234 + (246 - 234)*factor;
-        unsigned char g2 = 234 + (184 - 234)*factor;
-        unsigned char b2 = 234 + (113 - 234)*factor;
-        
-        negativeColor[i] = r1 + (g1<<8) + (b1<<16);
-        positiveColor[i] = r2 + (g2<<8) + (b2<<16);
-    }
-}
-
-unsigned int getColor(double x){
-    if(x > 0){
-        if(x > 1)x = 1;
-        int index = x*(NUM_SHADES-1);
-        return positiveColor[index];
-    }else{
-        x = -x;
-        if(x > 1)x = 1;
-        int index = x*(NUM_SHADES-1);
-        return negativeColor[index];
-    }
+- (void)resetNetwork{
+    [networkLock lock];
+    
+    epoch = 0;
+    delete network;
+    network = new Network(networkShape, layers, activation, None);
+    [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
+    
+    [networkLock unlock];
+    
+    [self onestep];
 }
 
 //**************************** Inputs ***************************
-int DATA_NUM = 150;
+int DATA_NUM = 300;
 double inputs[] = {1, 1};
 double * x1 = new double[DATA_NUM];
 double * x2 = new double[DATA_NUM];
 double * y = new double[DATA_NUM];
 
-- (IBAction)generateInputs:(id)sender {
-    [networkLock lock];
-    delete network;
-    network = new Network(networkShape, layers, Tanh, None);
-    [networkLock unlock];
-    for(int i = 0; i < DATA_NUM; i++){
-        x1[i] = drand()*1.8;
-        x2[i] = drand()*1.8;
-        y[i] = x1[i]*x2[i];
+void dataset_circle(){
+    for(int i = 0; i < DATA_NUM/2; i++){
+        double r = drand()*0.2+0.7;
+        double dir = arc4random()%360/180.0*3.14;
+        x1[i] = r*sin(dir);
+        x2[i] = r*cos(dir);
+        y[i] = 1;
     }
-    [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
-    [self onestep];
     
-//    getHeatData();
-//    [_heatMap setBackground:image];
+    for(int i = DATA_NUM/2; i < DATA_NUM; i++){
+        double r = drand()*0.5;
+        double dir = arc4random()%360/180.0*3.14;
+        x1[i] = r*sin(dir);
+        x2[i] = r*cos(dir);
+        y[i] = -1;
+    }
 }
 
-//*************************** Heatmap ***************************
-unsigned int * heatdata = new unsigned int[100*100];
-UIImage * image;
-CGContextRef bitmap;
-void getHeatData(){
-    [networkLock lock];
-    for(int i = 0; i < 100; i++){
-        for(int j = 0; j < 100; j++){
-            inputs[0] = (j - 50.0)/50;
-            inputs[1] = (i - 50.0)/50;
-            double output = network->forwardProp(inputs, 2);
-            output *= 10;
-            heatdata[i*100+j] = getColor(output);
-        }
+void dataset_xor(){
+    for(int i = 0; i < DATA_NUM; i++){
+        x1[i] = (drand()-0.5)*1.6;
+        x2[i] = (drand()-0.5)*1.6;
+        y[i] = x1[i]*x2[i]>0 ? 1 : -1;
+        x1[i] += x1[i]>0 ? 0.1 : -0.1;
+        x2[i] += x2[i]>0 ? 0.1 : -0.1;
     }
-    [networkLock unlock];
-    if(image == nil){
-        bitmap = CGBitmapContextCreate(heatdata, 100, 100, 8, 400, CGColorSpaceCreateDeviceRGB(), kCGBitmapByteOrder32Big | kCGImageAlphaNoneSkipLast);
-    }
-    CGImageRef imageRef = CGBitmapContextCreateImage(bitmap);
-    image = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
+
+}
+
+- (IBAction)generateInputs:(id)sender {
+    dataset_xor();
+    [self resetNetwork];
 }
 
 - (IBAction)updateHeatmap:(id)sender {
-    [self onestep];
+    dataset_circle();
+    [self resetNetwork];
+}
+
+//*************************** Heatmap ***************************
+
+UIImage * image;
+UIImage *nodeImage;
+
+- (void) getHeatData{
+    [networkLock lock];
+    
+    for(int i = 0; i < 100; i++){
+        for(int j = 0; j < 100; j++){
+            inputs[0] = (i - 50.0)/50;
+            inputs[1] = (j - 50.0)/50;
+            network->forwardProp(inputs, 2, i, j);
+        }
+    }
+    
+    image = (*network->network[layers-1])[0]->getImage();
+    nodeImage = (*network->network[1])[0]->getImage();
+    [self ui:^{
+        [_heatMap setBackground:image];
+        [nodelayer setContents:(id)nodeImage.CGImage];
+    }];
+    
+    [networkLock unlock];
+}
+
+void outputNetwork(double x, double y){
+    [networkLock lock];
+    inputs[0] = x;
+    inputs[1] = y;
+    network->forwardProp(inputs, 2);
+    [networkLock unlock];
+    for(int i = 0; i < network->networkShape.size(); i++){
+        auto currentLayer = network->network[i];
+        for(int j = 0; j < currentLayer->size(); j++){
+            auto node = (*currentLayer)[j];
+            printf("%d-%d=%lf\n", node->layer, node->id, node->output);
+        }
+        printf("\n");
+    }
+}
+
+CALayer * nodelayer;
+- (void) initNodeLayer{
+    CGRect frame = _heatMap.frame;
+    frame.origin = CGPointMake(frame.origin.x + frame.size.width + 10, frame.origin.y);
+    frame.size = CGSizeMake(30, 30);
+    nodelayer = [[CALayer alloc] init];
+    nodelayer.frame = frame;
+    [self.view.layer insertSublayer:nodelayer atIndex:0];
 }
 
 //**************************** Train ****************************
 bool always = false;
 NSString * toShow;
 int batch = 1;
+int epoch = 0;
 - (void)onestep{
+    epoch += 1;
     double loss = 0;
     [networkLock lock];
     for(int n = 0; n < batch; n++)
@@ -130,16 +163,16 @@ int batch = 1;
         double output = network->forwardProp(inputs, 2);
         network->backProp(y[i]);
         loss += 0.5 * pow(output - y[i], 2);
-        network->updateWeights(0.3, 0);
+        network->updateWeights(learningRate, 0);
     }
     [networkLock unlock];
-    toShow = [NSString stringWithFormat:@"%lf",loss/batch];
-    getHeatData();
+    toShow = [NSString stringWithFormat:@"Epoch:%d,loss:%.3f", epoch, loss/DATA_NUM/batch];
+    [self getHeatData];
     [self ui:^{
         _outputLabel.text = toShow;
-        [_heatMap setBackground:image];
     }];
 }
+
 - (void)train{
     while(always){
         [self onestep];
@@ -155,6 +188,9 @@ int batch = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     initColor();
+    dataset_circle();
+    [self resetNetwork];
+    [self initNodeLayer];
 }
 
 - (void)didReceiveMemoryWarning {

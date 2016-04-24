@@ -15,6 +15,7 @@
 #import <cmath>
 using namespace std;
 
+//************************** Function **************************
 #define ARC4RANDOM_MAX      0x100000000
 
 double drand();
@@ -49,5 +50,12 @@ public:
     double (*der)(double x) = aderTanh;
 };
 
+//**************************** Color ****************************
+#define NUM_SHADES 30
+static unsigned int * positiveColor = new unsigned int[NUM_SHADES];
+static unsigned int * negativeColor = new unsigned int[NUM_SHADES];
+
+void initColor();
+unsigned int getColor(double x);
 
 #endif

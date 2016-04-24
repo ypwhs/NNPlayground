@@ -10,6 +10,7 @@
 #define Node_h
 
 #import "Util.h"
+#import <UIKit/UIKit.h>
 
 class Node;
 
@@ -17,7 +18,7 @@ class Link{
 public:
     Node * source;
     Node * dest;
-    double weight = drand()*2;
+    double weight = drand() - 0.5;
     double errorDer = 0;
     /** Accumulated error derivative since the last update. */
     double accErrorDer = 0;
@@ -38,16 +39,18 @@ public:
     int layer = 0;
     int id = 0;
     vector<Link*> inputLinks;
-    double bias = 0.5;
+    double bias = 1;
     
     vector<Link*> outputs;
-    double totalInput;
-    double output;
+    double totalInput = 0;
+    double output = 0;
     double outputDer = 0;
     double inputDer = 0;
     double accInputDer = 0;
     double numAccumulatedDers = 0;
     Activation activation;
+    int imageWidth = 100;
+    unsigned int * outputBitmap;
     Node(Activation &act) {
         activation = act;
     }
@@ -55,6 +58,9 @@ public:
     ~Node();
     
     double updateOutput();
+    double updateOutput(int x1, int x2);
+    UIImage * nodeImage;
+    UIImage * getImage();
 };
 
 #endif

@@ -17,9 +17,9 @@
 		A19CD7501CC89D5300E8CDF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A19CD74E1CC89D5300E8CDF9 /* LaunchScreen.storyboard */; };
 		A19CD75B1CC89D5300E8CDF9 /* NNPlaygroundTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A19CD75A1CC89D5300E8CDF9 /* NNPlaygroundTests.m */; };
 		A19CD7661CC89D5300E8CDF9 /* NNPlaygroundUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7651CC89D5300E8CDF9 /* NNPlaygroundUITests.m */; };
-		A19CD7791CC89DE700E8CDF9 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7741CC89DE700E8CDF9 /* Node.cpp */; };
-		A19CD77A1CC89DE700E8CDF9 /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7761CC89DE700E8CDF9 /* Network.cpp */; };
-		A19CD77B1CC89DE700E8CDF9 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7781CC89DE700E8CDF9 /* Util.cpp */; };
+		A19CD7791CC89DE700E8CDF9 /* Node.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7741CC89DE700E8CDF9 /* Node.mm */; };
+		A19CD77A1CC89DE700E8CDF9 /* Network.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7761CC89DE700E8CDF9 /* Network.mm */; };
+		A19CD77B1CC89DE700E8CDF9 /* Util.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7781CC89DE700E8CDF9 /* Util.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,11 +60,11 @@
 		A19CD7651CC89D5300E8CDF9 /* NNPlaygroundUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NNPlaygroundUITests.m; sourceTree = "<group>"; };
 		A19CD7671CC89D5300E8CDF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A19CD7731CC89DE700E8CDF9 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
-		A19CD7741CC89DE700E8CDF9 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
+		A19CD7741CC89DE700E8CDF9 /* Node.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Node.mm; sourceTree = "<group>"; };
 		A19CD7751CC89DE700E8CDF9 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
-		A19CD7761CC89DE700E8CDF9 /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
+		A19CD7761CC89DE700E8CDF9 /* Network.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Network.mm; sourceTree = "<group>"; };
 		A19CD7771CC89DE700E8CDF9 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
-		A19CD7781CC89DE700E8CDF9 /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
+		A19CD7781CC89DE700E8CDF9 /* Util.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Util.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,11 +116,11 @@
 			isa = PBXGroup;
 			children = (
 				A19CD7731CC89DE700E8CDF9 /* Node.h */,
-				A19CD7741CC89DE700E8CDF9 /* Node.cpp */,
+				A19CD7741CC89DE700E8CDF9 /* Node.mm */,
 				A19CD7751CC89DE700E8CDF9 /* Network.h */,
-				A19CD7761CC89DE700E8CDF9 /* Network.cpp */,
+				A19CD7761CC89DE700E8CDF9 /* Network.mm */,
 				A19CD7771CC89DE700E8CDF9 /* Util.h */,
-				A19CD7781CC89DE700E8CDF9 /* Util.cpp */,
+				A19CD7781CC89DE700E8CDF9 /* Util.mm */,
 				A19CD7431CC89D5300E8CDF9 /* AppDelegate.h */,
 				A19CD7441CC89D5300E8CDF9 /* AppDelegate.m */,
 				A19CD7461CC89D5300E8CDF9 /* ViewController.h */,
@@ -298,9 +298,9 @@
 				A19CD7451CC89D5300E8CDF9 /* AppDelegate.m in Sources */,
 				A15F49E91CC8B14000409DA5 /* HeatMap.swift in Sources */,
 				A19CD7421CC89D5300E8CDF9 /* main.m in Sources */,
-				A19CD77B1CC89DE700E8CDF9 /* Util.cpp in Sources */,
-				A19CD77A1CC89DE700E8CDF9 /* Network.cpp in Sources */,
-				A19CD7791CC89DE700E8CDF9 /* Node.cpp in Sources */,
+				A19CD77B1CC89DE700E8CDF9 /* Util.mm in Sources */,
+				A19CD77A1CC89DE700E8CDF9 /* Network.mm in Sources */,
+				A19CD7791CC89DE700E8CDF9 /* Node.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +373,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Peiwen Yang (8H535XCXVJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -419,6 +420,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Peiwen Yang (8H535XCXVJ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -447,6 +449,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NNPlayground/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.instabtbu.NNPlayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NNPlayground/NNPlayground-Bridging-Header.h";
@@ -460,6 +463,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NNPlayground/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.instabtbu.NNPlayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "NNPlayground/NNPlayground-Bridging-Header.h";

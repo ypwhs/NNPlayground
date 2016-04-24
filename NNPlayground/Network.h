@@ -9,17 +9,18 @@
 #ifndef Network_h
 #define Network_h
 
-#import "Util.h"
+#include "Util.h"
 #include "Node.h"
 
 class Network{
 public:
     vector<vector<Node*>*> network;
-    int * networkShape;
+    vector<int> networkShape;
     int numLayers;
     Network(int ns[], int ls, ActivationFunction activation, RegularizationFunction regularzation);
     ~Network();
     double forwardProp(double inputs[], int inputSize);
+    double forwardProp(double inputs[], int inputSize, int x1, int x2);
     void backProp(double target);
     void updateWeights(double learningRate, double regularizationRate);
     void forEachNode(bool ignoreInputs, void (*accessor)(Node*));

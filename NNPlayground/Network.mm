@@ -8,6 +8,7 @@
 
 #import "Network.h"
 
+
 Network::Network(int ns[], int ls, ActivationFunction activation, RegularizationFunction regularzation) {
     //    int numLayers = (int)networkShape.size();
     Activation act;
@@ -49,13 +50,11 @@ Network::Network(int ns[], int ls, ActivationFunction activation, Regularization
         default:
             break;
     }
-    networkShape = ns;
-    numLayers = ls;
     
-    //add bias node
-//    for(int i = 0; i < numLayers-1; i++){
-//        networkShape[i] += 1;
-//    }
+    numLayers = ls;
+    for(int i = 0; i < numLayers; i++){
+        networkShape.push_back(ns[i]);
+    }
     
     /** List of layers, with each layer being a list of nodes. */
     for (int layerIdx = 0; layerIdx < numLayers; layerIdx++) {
@@ -63,7 +62,8 @@ Network::Network(int ns[], int ls, ActivationFunction activation, Regularization
         for (int i = 0; i < networkShape[layerIdx]; i++) {
             auto node = new Node(act);
             node->layer = layerIdx + 1; //tag this node
-            node->id = i + 1;
+            node->id = i;
+            node->outputBitmap = new unsigned int[node->imageWidth * node->imageWidth];
             if (layerIdx >= 1) {
                 // Add links from nodes in the previous layer to this node.
                 for (int j = 0; j < network[layerIdx - 1]->size(); j++) {
@@ -110,6 +110,28 @@ double Network::forwardProp(double inputs[], int inputSize) {
         vector<Node*> &currentLayer = *network[layerIdx];
         for (int i = 0; i < currentLayer.size(); i++) {
             currentLayer[i]->updateOutput();
+        }
+    }
+    return (*network[network.size() - 1])[0]->output;
+}
+
+double Network::forwardProp(double inputs[], int inputSize, int x1, int x2) {
+    vector<Node*> &inputLayer = *network[0];
+    if (inputSize != inputLayer.size()) {
+        printf("The number of inputs must match the number of nodes in the input layer!\n");
+        return -1;
+    }
+    
+    // Update the input layer.
+    for (int i = 0; i < inputLayer.size(); i++) {
+        inputLayer[i]->output = inputs[i];
+    }
+    
+    for (int layerIdx = 1; layerIdx < network.size(); layerIdx++) {
+        // Update all the nodes in this layer.
+        vector<Node*> &currentLayer = *network[layerIdx];
+        for (int i = 0; i < currentLayer.size(); i++) {
+            currentLayer[i]->updateOutput(x1, x2);
         }
     }
     return (*network[network.size() - 1])[0]->output;
