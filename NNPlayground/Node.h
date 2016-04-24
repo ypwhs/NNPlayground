@@ -39,7 +39,7 @@ public:
     int layer = 0;
     int id = 0;
     vector<Link*> inputLinks;
-    double bias = 1;
+    double bias = 0.5;
     
     vector<Link*> outputs;
     double totalInput = 0;
@@ -50,6 +50,7 @@ public:
     double numAccumulatedDers = 0;
     Activation activation;
     int imageWidth = 100;
+    int imageBytes = 0;
     unsigned int * outputBitmap;
     Node(Activation &act) {
         activation = act;

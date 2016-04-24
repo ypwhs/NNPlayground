@@ -45,7 +45,7 @@ NSLock * networkLock = [[NSLock alloc] init];
     [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
     
     [networkLock unlock];
-    
+    [self initNodeLayer];
     [self onestep];
 }
 
@@ -98,8 +98,9 @@ void dataset_xor(){
 //*************************** Heatmap ***************************
 
 UIImage * image;
-UIImage *nodeImage;
+vector<UIImage * > nodeImages;
 
+bool first = true;
 - (void) getHeatData{
     [networkLock lock];
     
@@ -112,10 +113,24 @@ UIImage *nodeImage;
     }
     
     image = (*network->network[layers-1])[0]->getImage();
-    nodeImage = (*network->network[1])[0]->getImage();
+    
+    int n = 0;
+    for(int i = 1; i < layers; i++){
+        for(int j = 0; j < networkShape[i]; j++){
+            if(first)
+                nodeImages.push_back((*network->network[i])[j]->getImage());
+            else
+                nodeImages[n] = (*network->network[i])[j]->getImage();
+            n++;
+        }
+    }
+    first = false;
+    
     [self ui:^{
         [_heatMap setBackground:image];
-        [nodelayer setContents:(id)nodeImage.CGImage];
+        for (int i = 0; i < nodeImages.size(); i++) {
+            [nodeLayers[i] setContents:(id)nodeImages[i].CGImage];
+        }
     }];
     
     [networkLock unlock];
@@ -137,14 +152,30 @@ void outputNetwork(double x, double y){
     }
 }
 
-CALayer * nodelayer;
+vector<CALayer*> nodeLayers;
 - (void) initNodeLayer{
+    //remove all old layer
+    while(nodeLayers.size() != 0){
+        CALayer * nodeLayer = nodeLayers.back();
+        [nodeLayer removeFromSuperlayer];
+        nodeLayers.pop_back();
+    }
+    
+    //add layers
     CGRect frame = _heatMap.frame;
-    frame.origin = CGPointMake(frame.origin.x + frame.size.width + 10, frame.origin.y);
+    CGFloat x = frame.origin.x + frame.size.width + 10;
+    CGFloat y = frame.origin.y;
     frame.size = CGSizeMake(30, 30);
-    nodelayer = [[CALayer alloc] init];
-    nodelayer.frame = frame;
-    [self.view.layer insertSublayer:nodelayer atIndex:0];
+    for(int i = 1; i < layers; i++){
+        for(int j = 0; j < networkShape[i]; j++){
+            frame.origin = CGPointMake(x + 40*i, y + 40*j);
+            CALayer * nodeLayer = [[CALayer alloc] init];
+            nodeLayer.frame = frame;
+            [self.view.layer insertSublayer:nodeLayer atIndex:99];
+            nodeLayers.push_back(nodeLayer);
+        }
+    }
+    
 }
 
 //**************************** Train ****************************
@@ -189,8 +220,9 @@ int epoch = 0;
     [super viewDidLoad];
     initColor();
     dataset_circle();
-    [self resetNetwork];
     [self initNodeLayer];
+    [self resetNetwork];
+    
 }
 
 - (void)didReceiveMemoryWarning {

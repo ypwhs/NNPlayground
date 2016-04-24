@@ -24,6 +24,7 @@ double Node::updateOutput(int x1, int x2) {
     updateOutput();
     int bitmapIndex = x1*imageWidth + x2;
     outputBitmap[bitmapIndex] = getColor(output);
+//    printf("%d-%d outputBitmap[%d]=%X\n", layer, id, bitmapIndex, getColor(output));
     return output;
 }
 
