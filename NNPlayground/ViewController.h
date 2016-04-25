@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet HeatMapView *heatMap;
 @property (weak, nonatomic) IBOutlet UILabel *outputLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *myswitch;
 
 @end
 

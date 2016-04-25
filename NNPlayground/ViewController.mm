@@ -27,7 +27,7 @@ using namespace std;
 }
 
 //*************************** Network ***************************
-int networkShape[] = {2, 4, 1};
+int * networkShape = new int[3]{2, 4, 1};
 int layers = 3;
 double learningRate = 0.01;
 auto activation = Tanh;
@@ -43,8 +43,11 @@ NSLock * networkLock = [[NSLock alloc] init];
     delete network;
     network = new Network(networkShape, layers, activation, None);
     [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
+    nodeImages.clear();
+    first = true;
     
     [networkLock unlock];
+    
     [self initNodeLayer];
     [self onestep];
 }
@@ -87,11 +90,15 @@ void dataset_xor(){
 
 - (IBAction)generateInputs:(id)sender {
     dataset_xor();
+    _myswitch.on = false;
+    always = false;
     [self resetNetwork];
 }
 
 - (IBAction)updateHeatmap:(id)sender {
     dataset_circle();
+    _myswitch.on = false;
+    always = false;
     [self resetNetwork];
 }
 
@@ -104,6 +111,7 @@ bool first = true;
 - (void) getHeatData{
     [networkLock lock];
     
+    //用100*100网络获取每个节点的输出
     for(int i = 0; i < 100; i++){
         for(int j = 0; j < 100; j++){
             inputs[0] = (i - 50.0)/50;
@@ -112,8 +120,10 @@ bool first = true;
         }
     }
     
+    //获取大图
     image = (*network->network[layers-1])[0]->getImage();
     
+    //获取每个节点的小图
     int n = 0;
     for(int i = 1; i < layers; i++){
         for(int j = 0; j < networkShape[i]; j++){
@@ -124,8 +134,10 @@ bool first = true;
             n++;
         }
     }
+    
     first = false;
     
+    //更新大图，小图
     [self ui:^{
         [_heatMap setBackground:image];
         for (int i = 0; i < nodeImages.size(); i++) {
@@ -138,10 +150,10 @@ bool first = true;
 
 void outputNetwork(double x, double y){
     [networkLock lock];
+    
     inputs[0] = x;
     inputs[1] = y;
     network->forwardProp(inputs, 2);
-    [networkLock unlock];
     for(int i = 0; i < network->networkShape.size(); i++){
         auto currentLayer = network->network[i];
         for(int j = 0; j < currentLayer->size(); j++){
@@ -150,14 +162,17 @@ void outputNetwork(double x, double y){
         }
         printf("\n");
     }
+    
+    [networkLock unlock];
 }
-
+//vector<CALayer*> oldLayers;
 vector<CALayer*> nodeLayers;
 - (void) initNodeLayer{
+    [networkLock lock];
+    
     //remove all old layer
-    while(nodeLayers.size() != 0){
-        CALayer * nodeLayer = nodeLayers.back();
-        [nodeLayer removeFromSuperlayer];
+    while(nodeLayers.size()){
+        [nodeLayers.back() removeFromSuperlayer];
         nodeLayers.pop_back();
     }
     
@@ -176,17 +191,19 @@ vector<CALayer*> nodeLayers;
         }
     }
     
+    [networkLock unlock];
 }
 
 //**************************** Train ****************************
 bool always = false;
 NSString * toShow;
-int batch = 5;
+int batch = 1;
 int epoch = 0;
 - (void)onestep{
+    [networkLock lock];
+    
     epoch += batch;
     double loss = 0;
-    [networkLock lock];
     for(int n = 0; n < batch; n++)
     for (int i = 0; i < DATA_NUM; i++) {
         inputs[0] = x1[i];
@@ -196,8 +213,11 @@ int epoch = 0;
         loss += 0.5 * pow(output - y[i], 2);
         network->updateWeights(learningRate, 0);
     }
-    [networkLock unlock];
+    
     toShow = [NSString stringWithFormat:@"Epoch:%d,loss:%.3f", epoch, loss/DATA_NUM/batch];
+    
+    [networkLock unlock];
+    
     [self getHeatData];
     [self ui:^{
         _outputLabel.text = toShow;
@@ -207,20 +227,39 @@ int epoch = 0;
 - (void)train{
     while(always){
         [self onestep];
-        [NSThread sleepForTimeInterval:0.008];
+//        [NSThread sleepForTimeInterval:0.008];
     }
 }
 
-- (IBAction)switch:(UISwitch *)sender {
+- (IBAction)changeSwitch:(UISwitch *)sender {
     always = sender.on;
     [self xiancheng:^{[self train];}];
+}
+
+- (IBAction)changeStepper:(UIStepper *)sender {
+    _myswitch.on = false;
+    always = false;
+    [NSThread sleepForTimeInterval:0.008];
+    [networkLock lock];
+    
+    printf("%d\n", int(sender.value + 2));
+    delete[] networkShape;
+    networkShape = new int[int(sender.value + 2)];
+    networkShape[0] = 2;
+    for(int i = 1; i < int(sender.value + 1); i++){
+        networkShape[i] = 8;
+    }
+    networkShape[int(sender.value + 1)] = 1;
+    layers = int(sender.value + 2);
+    
+    [networkLock unlock];
+    [self resetNetwork];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     initColor();
     dataset_circle();
-    [self initNodeLayer];
     [self resetNetwork];
     
 }

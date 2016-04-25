@@ -17,34 +17,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSg-Vu-y5W">
-                                <rect key="frame" x="20" y="28" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="generateInputs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5SL-3S-p95"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYA-1I-afQ">
-                                <rect key="frame" x="131" y="32" width="183" height="21"/>
+                                <rect key="frame" x="20" y="291" width="183" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DZR-z9-Peg">
-                                <rect key="frame" x="74" y="28" width="51" height="31"/>
+                                <rect key="frame" x="112" y="252" width="51" height="31"/>
                                 <connections>
-                                    <action selector="switch:" destination="BYZ-38-t0r" eventType="valueChanged" id="ORx-Ws-sKf"/>
+                                    <action selector="changeSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="B56-fD-TsN"/>
                                 </connections>
                             </switch>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="20" y="66" width="240" height="240"/>
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
                                 <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-DZ-VCy">
-                                <rect key="frame" x="268" y="276" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="58" y="253" width="46" height="30"/>
+                                <state key="normal" title="Circle"/>
                                 <connections>
                                     <action selector="updateHeatmap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ozf-F8-We9"/>
+                                </connections>
+                            </button>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" maximumValue="6" translatesAutoresizingMaskIntoConstraints="NO" id="dh7-vb-pyS">
+                                <rect key="frame" x="169" y="254" width="94" height="29"/>
+                                <connections>
+                                    <action selector="changeStepper:" destination="BYZ-38-t0r" eventType="valueChanged" id="wCG-RZ-zgW"/>
+                                </connections>
+                            </stepper>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSg-Vu-y5W">
+                                <rect key="frame" x="20" y="254" width="30" height="30"/>
+                                <state key="normal" title="Xor"/>
+                                <connections>
+                                    <action selector="generateInputs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5SL-3S-p95"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -53,12 +59,13 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="heatMap" destination="zie-PW-5as" id="EUz-mc-KX6"/>
+                        <outlet property="myswitch" destination="DZR-z9-Peg" id="LpM-Nh-Ozu"/>
                         <outlet property="outputLabel" destination="WYA-1I-afQ" id="YF7-wc-tbU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="348"/>
+            <point key="canvasLocation" x="51" y="375"/>
         </scene>
     </scenes>
 </document>
