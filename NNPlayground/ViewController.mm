@@ -181,10 +181,10 @@ vector<CALayer*> nodeLayers;
 //**************************** Train ****************************
 bool always = false;
 NSString * toShow;
-int batch = 1;
+int batch = 5;
 int epoch = 0;
 - (void)onestep{
-    epoch += 1;
+    epoch += batch;
     double loss = 0;
     [networkLock lock];
     for(int n = 0; n < batch; n++)
