@@ -187,15 +187,15 @@ vector<CALayer*> nodeLayers;
     
     //add layers
     CGRect frame = _heatMap.frame;
-    CGFloat x = frame.origin.x + frame.size.width + 5*scale;
-    CGFloat y = frame.origin.y;
+    CGFloat x = 20 * scale;
+    CGFloat y = 20 * scale;
     
-    CGFloat width = self.view.frame.size.width;
-    width -= x + 30 * scale;
-    if(layers - 2!= 0)width /= layers - 2;
+    CGFloat width = _heatMap.frame.origin.x;
+    width -= 20 * scale;
+    if(layers - 2!= 0)width /= layers - 1;
     
     CGFloat height = self.view.frame.size.height;
-    height -= 10*scale;
+    height -= 20*scale;
     height /= 8;
     
     frame.size = CGSizeMake(height-5*scale, height-5*scale);
