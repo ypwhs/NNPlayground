@@ -43,8 +43,6 @@ NSLock * networkLock = [[NSLock alloc] init];
     delete network;
     network = new Network(networkShape, layers, activation, None);
     [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
-    nodeImages.clear();
-    first = true;
     
     vector<Node*> &inputLayer = *network->network[0];
     for(int i = 0; i < 100; i++){
@@ -114,9 +112,6 @@ void dataset_xor(){
 //*************************** Heatmap ***************************
 
 UIImage * image;
-vector<UIImage * > nodeImages;
-
-bool first = true;
 - (void) getHeatData{
     [networkLock lock];
     
@@ -133,24 +128,16 @@ bool first = true;
     image = (*network->network[layers-1])[0]->getImage();
     
     //获取每个节点的小图
-    int n = 0;
-    for(int i = 0; i < layers - 1; i++){
-        for(int j = 0; j < networkShape[i]; j++){
-            if(first)
-                nodeImages.push_back((*network->network[i])[j]->getImage());
-            else
-                nodeImages[n] = (*network->network[i])[j]->getImage();
-            n++;
-        }
-    }
-    
-    first = false;
+
     
     //更新大图，小图
     [self ui:^{
         [_heatMap setBackground:image];
-        for (int i = 0; i < nodeImages.size(); i++) {
-            [nodeLayers[i] setContents:(id)nodeImages[i].CGImage];
+        for(int i = 0; i < layers - 1; i++){
+            for(int j = 0; j < networkShape[i]; j++){
+                Node * node = (*network->network[i])[j];
+                [node->nodeLayer setContents:(id)node->getImage().CGImage];
+            }
         }
     }];
     
@@ -175,21 +162,8 @@ void outputNetwork(double x, double y){
     [networkLock unlock];
 }
 
-vector<CALayer*> triangleLayers;
-vector<CALayer*> nodeLayers;
 - (void) initNodeLayer{
     [networkLock lock];
-    
-    //remove all old layer
-    while(nodeLayers.size()){
-        [nodeLayers.back() removeFromSuperlayer];
-        nodeLayers.pop_back();
-    }
-    
-    while(triangleLayers.size()){
-        [triangleLayers.back() removeFromSuperlayer];
-        triangleLayers.pop_back();
-    }
     
     //add layers
     CGRect frame = _heatMap.frame;
@@ -206,40 +180,15 @@ vector<CALayer*> nodeLayers;
     height /= 8;
     
     CGFloat iwidth = height-5*scale;
-    CGFloat triangleWidth = iwidth/10;
-    const CGFloat factor = sqrt(3)/2;
     frame.size = CGSizeMake(iwidth, iwidth);
     
     for(int i = 0; i < layers - 1; i++){
         for(int j = 0; j < networkShape[i]; j++){
             frame.origin = CGPointMake(x + width*i, y + height*j);
-            CALayer * nodeLayer = [[CALayer alloc] init];
-            
-            //圆角,边框
-            nodeLayer.masksToBounds = true;
-            nodeLayer.cornerRadius = 5;
-            nodeLayer.borderWidth = 1.5f;
-            nodeLayer.borderColor = [UIColor blackColor].CGColor;
-            
-            UIBezierPath * triangle = [UIBezierPath bezierPath];
-            CGPoint p1 = CGPointMake(frame.origin.x + iwidth, frame.origin.y + iwidth/2-triangleWidth);
-            CGPoint p2 = CGPointMake(frame.origin.x + iwidth, frame.origin.y + iwidth/2+triangleWidth);
-            CGPoint p3 = CGPointMake(frame.origin.x + iwidth+factor*triangleWidth, frame.origin.y + iwidth/2);
-            [triangle moveToPoint:p1];
-            [triangle addLineToPoint:p2];
-            [triangle addLineToPoint:p3];
-            [triangle closePath];
-            
-            CAShapeLayer * triangleLayer = [CAShapeLayer layer];
-            [triangleLayer setPath:triangle.CGPath];
-            [triangleLayer setFillColor:[UIColor blackColor].CGColor];
-            
-            [self.view.layer addSublayer:triangleLayer];
-            triangleLayers.push_back(triangleLayer);
-            
-            nodeLayer.frame = frame;
-            [self.view.layer addSublayer:nodeLayer];
-            nodeLayers.push_back(nodeLayer);
+            Node * node = (*network->network[i])[j];
+            node->initNodeLayer(frame);
+            [self.view.layer addSublayer:node->nodeLayer];
+            [self.view.layer addSublayer:node->triangleLayer];
         }
     }
     

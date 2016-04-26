@@ -63,6 +63,10 @@ public:
     void updateBitmapPixel(int x1, int x2, double value);
     UIImage * nodeImage;
     UIImage * getImage();
+    
+    CALayer * nodeLayer;
+    CAShapeLayer * triangleLayer;
+    void initNodeLayer(CGRect frame);
 };
 
 #endif
