@@ -174,7 +174,8 @@ void outputNetwork(double x, double y){
     
     [networkLock unlock];
 }
-//vector<CALayer*> oldLayers;
+
+vector<CALayer*> triangleLayers;
 vector<CALayer*> nodeLayers;
 - (void) initNodeLayer{
     [networkLock lock];
@@ -185,27 +186,59 @@ vector<CALayer*> nodeLayers;
         nodeLayers.pop_back();
     }
     
+    while(triangleLayers.size()){
+        [triangleLayers.back() removeFromSuperlayer];
+        triangleLayers.pop_back();
+    }
+    
     //add layers
     CGRect frame = _heatMap.frame;
-    CGFloat x = 20 * scale;
-    CGFloat y = 20 * scale;
+    CGFloat margin = _heatMap.frame.origin.y;
+    CGFloat x = margin;
+    CGFloat y = margin;
     
     CGFloat width = _heatMap.frame.origin.x;
-    width -= 20 * scale;
+    width -= margin;
     if(layers - 2!= 0)width /= layers - 1;
     
     CGFloat height = self.view.frame.size.height;
-    height -= 20*scale;
+    height -= margin;
     height /= 8;
     
-    frame.size = CGSizeMake(height-5*scale, height-5*scale);
+    CGFloat iwidth = height-5*scale;
+    CGFloat triangleWidth = iwidth/10;
+    const CGFloat factor = sqrt(3)/2;
+    frame.size = CGSizeMake(iwidth, iwidth);
     
     for(int i = 0; i < layers - 1; i++){
         for(int j = 0; j < networkShape[i]; j++){
             frame.origin = CGPointMake(x + width*i, y + height*j);
             CALayer * nodeLayer = [[CALayer alloc] init];
+            
+            //圆角,边框
+            nodeLayer.masksToBounds = true;
+            nodeLayer.cornerRadius = 5;
+            nodeLayer.borderWidth = 1.5f;
+            nodeLayer.borderColor = [UIColor blackColor].CGColor;
+            
+            UIBezierPath * triangle = [UIBezierPath bezierPath];
+            CGPoint p1 = CGPointMake(frame.origin.x + iwidth, frame.origin.y + iwidth/2-triangleWidth);
+            CGPoint p2 = CGPointMake(frame.origin.x + iwidth, frame.origin.y + iwidth/2+triangleWidth);
+            CGPoint p3 = CGPointMake(frame.origin.x + iwidth+factor*triangleWidth, frame.origin.y + iwidth/2);
+            [triangle moveToPoint:p1];
+            [triangle addLineToPoint:p2];
+            [triangle addLineToPoint:p3];
+            [triangle closePath];
+            
+            CAShapeLayer * triangleLayer = [CAShapeLayer layer];
+            [triangleLayer setPath:triangle.CGPath];
+            [triangleLayer setFillColor:[UIColor blackColor].CGColor];
+            
+            [self.view.layer addSublayer:triangleLayer];
+            triangleLayers.push_back(triangleLayer);
+            
             nodeLayer.frame = frame;
-            [self.view.layer insertSublayer:nodeLayer atIndex:99];
+            [self.view.layer addSublayer:nodeLayer];
             nodeLayers.push_back(nodeLayer);
         }
     }
