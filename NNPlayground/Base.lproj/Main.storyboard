@@ -23,31 +23,31 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="10" y="10" width="240" height="240"/>
+                                <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DZR-z9-Peg">
-                                <rect key="frame" x="112" y="252" width="51" height="31"/>
+                                <rect key="frame" x="112" y="258" width="51" height="31"/>
                                 <connections>
                                     <action selector="changeSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="B56-fD-TsN"/>
                                 </connections>
                             </switch>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
-                                <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-DZ-VCy">
-                                <rect key="frame" x="58" y="253" width="46" height="30"/>
+                                <rect key="frame" x="58" y="259" width="46" height="30"/>
                                 <state key="normal" title="Circle"/>
                                 <connections>
                                     <action selector="updateHeatmap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ozf-F8-We9"/>
                                 </connections>
                             </button>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" maximumValue="6" translatesAutoresizingMaskIntoConstraints="NO" id="dh7-vb-pyS">
-                                <rect key="frame" x="169" y="254" width="94" height="29"/>
+                                <rect key="frame" x="169" y="260" width="94" height="29"/>
                                 <connections>
                                     <action selector="changeStepper:" destination="BYZ-38-t0r" eventType="valueChanged" id="wCG-RZ-zgW"/>
                                 </connections>
                             </stepper>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSg-Vu-y5W">
-                                <rect key="frame" x="20" y="254" width="30" height="30"/>
+                                <rect key="frame" x="20" y="260" width="30" height="30"/>
                                 <state key="normal" title="Xor"/>
                                 <connections>
                                     <action selector="generateInputs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5SL-3S-p95"/>

@@ -60,6 +60,7 @@ public:
     
     double updateOutput();
     double updateOutput(int x1, int x2);
+    void updateBitmapPixel(int x1, int x2, double value);
     UIImage * nodeImage;
     UIImage * getImage();
 };

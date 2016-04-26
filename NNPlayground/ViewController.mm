@@ -46,6 +46,15 @@ NSLock * networkLock = [[NSLock alloc] init];
     nodeImages.clear();
     first = true;
     
+    vector<Node*> &inputLayer = *network->network[0];
+    for(int i = 0; i < 100; i++){
+        for(int j = 0; j < 100; j++){
+            for(int k = 0; k < inputLayer.size(); k++){
+                inputLayer[0]->updateBitmapPixel(i, j, (j - 50.0)/50*6);
+                inputLayer[1]->updateBitmapPixel(i, j, (i - 50.0)/50*6);
+            }
+        }
+    }
     [networkLock unlock];
     
     [self initNodeLayer];
@@ -125,7 +134,7 @@ bool first = true;
     
     //获取每个节点的小图
     int n = 0;
-    for(int i = 1; i < layers; i++){
+    for(int i = 0; i < layers - 1; i++){
         for(int j = 0; j < networkShape[i]; j++){
             if(first)
                 nodeImages.push_back((*network->network[i])[j]->getImage());
@@ -178,12 +187,22 @@ vector<CALayer*> nodeLayers;
     
     //add layers
     CGRect frame = _heatMap.frame;
-    CGFloat x = frame.origin.x + frame.size.width + 10;
+    CGFloat x = frame.origin.x + frame.size.width + 5*scale;
     CGFloat y = frame.origin.y;
-    frame.size = CGSizeMake(30, 30);
-    for(int i = 1; i < layers; i++){
+    
+    CGFloat width = self.view.frame.size.width;
+    width -= x + 30 * scale;
+    if(layers - 2!= 0)width /= layers - 2;
+    
+    CGFloat height = self.view.frame.size.height;
+    height -= 10*scale;
+    height /= 8;
+    
+    frame.size = CGSizeMake(height-5*scale, height-5*scale);
+    
+    for(int i = 0; i < layers - 1; i++){
         for(int j = 0; j < networkShape[i]; j++){
-            frame.origin = CGPointMake(x + 40*i, y + 40*j);
+            frame.origin = CGPointMake(x + width*i, y + height*j);
             CALayer * nodeLayer = [[CALayer alloc] init];
             nodeLayer.frame = frame;
             [self.view.layer insertSublayer:nodeLayer atIndex:99];
@@ -256,8 +275,11 @@ int epoch = 0;
     [self resetNetwork];
 }
 
+CGFloat scale = [UIScreen mainScreen].scale;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    printf("scale:%f\n", scale);
     initColor();
     dataset_circle();
     [self resetNetwork];

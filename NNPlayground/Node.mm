@@ -28,6 +28,11 @@ double Node::updateOutput(int x1, int x2) {
     return output;
 }
 
+void Node::updateBitmapPixel(int x1, int x2, double value){
+    int bitmapIndex = x1*imageWidth + (imageWidth-1-x2);
+    outputBitmap[bitmapIndex] = getColor(value);
+}
+
 Node::~Node(){
     //delete every link
     for (int i = 0; i < inputLinks.size(); i++) {
