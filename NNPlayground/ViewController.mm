@@ -251,6 +251,9 @@ bool always = false;
 NSString * toShow;
 int batch = 1;
 int epoch = 0;
+int last = 0;
+int speed = 0;
+int lasttime = (int)[NSDate date].timeIntervalSince1970;
 - (void)onestep{
     [networkLock lock];
     
@@ -266,7 +269,13 @@ int epoch = 0;
         network->updateWeights(learningRate, 0);
     }
     
-    toShow = [NSString stringWithFormat:@"Epoch:%d,loss:%.3f", epoch, loss/DATA_NUM/batch];
+    if((int)[NSDate date].timeIntervalSince1970 != lasttime){
+        lasttime = (int)[NSDate date].timeIntervalSince1970;
+        speed = epoch - last;
+        last = epoch;
+    }
+    
+    toShow = [NSString stringWithFormat:@"loss:%.3f\nEpoch:%d.speed:%d", loss/DATA_NUM/batch, epoch, speed];
     
     [networkLock unlock];
     

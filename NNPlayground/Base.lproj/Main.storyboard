@@ -18,8 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYA-1I-afQ">
-                                <rect key="frame" x="308" y="291" width="240" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label123" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYA-1I-afQ">
+                                <rect key="frame" x="308" y="289" width="240" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="reZ-3U-aXK"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -74,7 +77,7 @@
                             <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="6Us-un-NHI"/>
                             <constraint firstItem="dh7-vb-pyS" firstAttribute="leading" secondItem="DZR-z9-Peg" secondAttribute="trailing" constant="8" id="9PJ-ln-YYM"/>
                             <constraint firstItem="fSg-Vu-y5W" firstAttribute="bottom" secondItem="7hp-DZ-VCy" secondAttribute="bottom" id="OW3-X4-A3R"/>
-                            <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="dh7-vb-pyS" secondAttribute="bottom" constant="2" id="Tfc-TF-0jo"/>
+                            <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="dh7-vb-pyS" secondAttribute="bottom" id="Tfc-TF-0jo"/>
                             <constraint firstItem="DZR-z9-Peg" firstAttribute="bottom" secondItem="dh7-vb-pyS" secondAttribute="bottom" id="W57-JU-258"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="aNa-tT-4Kn"/>
                             <constraint firstItem="dh7-vb-pyS" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="10" id="hXn-CP-siF"/>
