@@ -78,3 +78,38 @@ void Node::initNodeLayer(CGRect frame){
     [triangleLayer setPath:triangle.CGPath];
     [triangleLayer setFillColor:[UIColor blackColor].CGColor];
 }
+
+void Link::initCurve(){
+    //add curve line
+    Node * node = source;
+    Node * node2 = dest;
+    CGRect frame1 = node->nodeLayer.frame;
+    CGRect frame2 = node2->nodeLayer.frame;
+    CGPoint p1 = CGPointMake(frame1.origin.x + frame1.size.width*1.08, frame1.origin.y + frame1.size.height/2);
+    CGPoint p2 = CGPointMake(frame2.origin.x, frame2.origin.y + frame2.size.height/2);
+    CGPoint c1 = CGPointMake(p1.x + (p2.x-p1.x)/2, p1.y);
+    CGPoint c2 = CGPointMake(p1.x + (p2.x-p1.x)/2, p2.y);
+    UIBezierPath * curve = [UIBezierPath bezierPath];
+    [curve moveToPoint:p1];
+    [curve addCurveToPoint:p2 controlPoint1:c1 controlPoint2:c2];
+    [curve addCurveToPoint:p1 controlPoint1:c2 controlPoint2:c1];
+    [curve closePath];
+    
+    curveLayer = [CAShapeLayer layer];
+    [curveLayer setPath:curve.CGPath];
+    curveLayer.lineWidth = 1;
+    unsigned int color = getColor(weight);
+    CGColorRef color2 = [UIColor colorWithRed:(color&0xFF)/256.0 green:((color>>8)&0xFF)/256.0 blue:((color>>16)&0xFF)/256.0 alpha:1].CGColor;
+    [curveLayer setStrokeColor:color2];
+}
+
+Link::~Link(){
+    [curveLayer removeFromSuperlayer];
+}
+
+void Link::updateCurve(){
+    curveLayer.lineWidth = abs(weight);
+    unsigned int color = getColor(weight);
+    CGColorRef color2 = [UIColor colorWithRed:(color&0xFF)/256.0 green:((color>>8)&0xFF)/256.0 blue:((color>>16)&0xFF)/256.0 alpha:1].CGColor;
+    [curveLayer setStrokeColor:color2];
+}

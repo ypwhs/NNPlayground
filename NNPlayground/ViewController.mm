@@ -92,7 +92,6 @@ void dataset_xor(){
         x1[i] += x1[i]>0 ? 0.1 : -0.1;
         x2[i] += x2[i]>0 ? 0.1 : -0.1;
     }
-
 }
 
 - (IBAction)generateInputs:(id)sender {
@@ -126,10 +125,7 @@ UIImage * image;
     
     //获取大图
     image = (*network->network[layers-1])[0]->getImage();
-    
-    //获取每个节点的小图
 
-    
     //更新大图，小图
     [self ui:^{
         [_heatMap setBackground:image];
@@ -137,6 +133,14 @@ UIImage * image;
             for(int j = 0; j < networkShape[i]; j++){
                 Node * node = (*network->network[i])[j];
                 [node->nodeLayer setContents:(id)node->getImage().CGImage];
+            }
+        }
+        for(int i = 0; i < layers - 1; i++){
+            for(int j = 0; j < networkShape[i]; j++){
+                Node * node = (*network->network[i])[j];
+                for(int k = 0; k < node->outputs.size(); k++){
+                    node->outputs[k]->updateCurve();
+                }
             }
         }
     }];
@@ -167,16 +171,16 @@ void outputNetwork(double x, double y){
     
     //add layers
     CGRect frame = _heatMap.frame;
+    (*network->network[layers - 1])[0]->initNodeLayer(frame);
+    
     CGFloat margin = _heatMap.frame.origin.y;
     CGFloat x = margin;
     CGFloat y = margin;
     
-    CGFloat width = _heatMap.frame.origin.x;
-    width -= margin;
-    if(layers - 2!= 0)width /= layers - 1;
+    CGFloat width = _heatMap.frame.origin.x - margin;
+    width /= layers - 1;
     
-    CGFloat height = self.view.frame.size.height;
-    height -= margin;
+    CGFloat height = self.view.frame.size.height - margin;
     height /= 8;
     
     CGFloat iwidth = height-5*scale;
@@ -189,6 +193,17 @@ void outputNetwork(double x, double y){
             node->initNodeLayer(frame);
             [self.view.layer addSublayer:node->nodeLayer];
             [self.view.layer addSublayer:node->triangleLayer];
+        }
+    }
+    
+    for(int i = 0; i < layers - 1; i++){
+        for(int j = 0; j < networkShape[i]; j++){
+            Node * node = (*network->network[i])[j];
+            for(int k = 0; k < node->outputs.size(); k++){
+                Link * link = node->outputs[k];
+                link->initCurve();
+                [self.view.layer addSublayer:link->curveLayer];
+            }
         }
     }
     
@@ -273,8 +288,11 @@ CGFloat scale = [UIScreen mainScreen].scale;
     printf("scale:%f\n", scale);
     initColor();
     dataset_circle();
-    [self resetNetwork];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [self resetNetwork];
 }
 
 - (void)didReceiveMemoryWarning {

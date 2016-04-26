@@ -30,6 +30,10 @@ public:
         dest = d;
         regularization = r;
     }
+    ~Link();
+    CAShapeLayer * curveLayer = [CAShapeLayer layer];
+    void initCurve();
+    void updateCurve();
 };
 
 enum ProblemType { Classification, Regression };
