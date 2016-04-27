@@ -63,10 +63,11 @@ public:
     ~Node();
     
     double updateOutput();
-    double updateOutput(int x1, int x2);
+    void updateOutput(int x1, int x2);
     void updateBitmapPixel(int x1, int x2, double value);
     UIImage * nodeImage;
     UIImage * getImage();
+    void updateVisibility();
     
     CALayer * nodeLayer = [[CALayer alloc] init];
     CALayer * shadowLayer = [[CALayer alloc] init];

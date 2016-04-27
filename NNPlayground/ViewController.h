@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NNPlayground-Swift.h"
+#include "Network.h"
 
 @interface ViewController : UIViewController
 

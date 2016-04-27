@@ -30,12 +30,12 @@ void initColor(){
 
 unsigned int getColor(double x){
     if(x > 0){
-        if(x > 1)x = 1;
+        x = x > 1 ? 1 : x;
         int index = x*(NUM_SHADES-1);
         return positiveColor[index];
     }else{
         x = -x;
-        if(x > 1)x = 1;
+        x = x > 1 ? 1 : x;
         int index = x*(NUM_SHADES-1);
         return negativeColor[index];
     }

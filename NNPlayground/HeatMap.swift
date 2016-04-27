@@ -26,10 +26,8 @@ class HeatMapView: UIView {
         self.layer.insertSublayer(dataLayer, atIndex: 1)
     }
     
-    var img = UIImage()
     func setBackground(image:UIImage){
-        self.img = image;
-        backgroundLayer.contents = img.CGImage
+        backgroundLayer.contents = image.CGImage
         self.setNeedsDisplay()
     }
     

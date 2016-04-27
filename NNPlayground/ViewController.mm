@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#include "Network.h"
 
 using namespace std;
 
@@ -35,12 +34,16 @@ auto regularization = None;
 
 Network * network = new Network(networkShape, layers, activation, regularization);
 NSLock * networkLock = [[NSLock alloc] init];
+
+//初始化神经网络
 - (void)resetNetwork{
     [networkLock lock];
     epoch = 0;
     lastEpoch = 0;
     Network * oldNetwork = network;
     network = new Network(networkShape, layers, activation, None);
+    
+    //创建input图像
     vector<Node*> &inputLayer = *network->network[0];
     for(int i = 0; i < 100; i++){
         for(int j = 0; j < 100; j++){
@@ -55,7 +58,7 @@ NSLock * networkLock = [[NSLock alloc] init];
     [self initNodeLayer];
     
     [networkLock lock];
-    //calculate loss
+    //计算loss
     double loss = 0;
     for (int i = 0; i < DATA_NUM; i++) {
         inputs[0] = x1[i];
@@ -64,7 +67,6 @@ NSLock * networkLock = [[NSLock alloc] init];
         loss += 0.5 * pow(output - y[i], 2);
     }
     [networkLock unlock];
-    
     [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
     
     delete oldNetwork;
@@ -138,54 +140,64 @@ UIImage * image;
     
     //获取大图
     image = (*network->network[layers-1])[0]->getImage();
-
-    //更新大图，小图
+    
     [self ui:^{
-        [_heatMap setBackground:image];
-        [CATransaction begin];
-        [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+        //更新大图
+        if(image!=nil)[_heatMap setBackground:image];
+        
+        //更新小图
         for(int i = 0; i < layers - 1; i++){
             for(int j = 0; j < networkShape[i]; j++){
                 Node * node = (*network->network[i])[j];
+                [CATransaction begin];
+                [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+                if(layers < 5 && i > 0){
+                    node->updateVisibility();
+                }
                 [node->nodeLayer setContents:(id)node->getImage().CGImage];
+                [CATransaction commit];
             }
         }
         
+        //更新线宽，颜色
         for(int i = 0; i < layers - 1; i++){
             for(int j = 0; j < networkShape[i]; j++){
                 Node * node = (*network->network[i])[j];
                 for(int k = 0; k < node->outputs.size(); k++){
+                    [CATransaction begin];
+                    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
                     node->outputs[k]->updateCurve();
+                    [CATransaction commit];
                 }
             }
         }
-        [CATransaction commit];
+        
     }];
     
     [networkLock unlock];
 }
 
+//初始化每个节点的图像层（CALayer）
 - (void) initNodeLayer{
     [networkLock lock];
     
-    //add layers
     CGRect frame = _heatMap.frame;
-    (*network->network[layers - 1])[0]->initNodeLayer(frame);   //set the heatmap frame to output node
+    (*network->network[layers - 1])[0]->initNodeLayer(frame);   //将heatmap的frame设置到网络的输出节点
     
-    //calculate the points
-    CGFloat margin = _heatMap.frame.origin.y;
+    //计算各个坐标
+    CGFloat margin = _heatMap.frame.origin.y;   //将heatmap的y坐标用于第一个节点的x,y坐标
     CGFloat x = margin;
     CGFloat y = margin;
     
-    CGFloat width = _heatMap.frame.origin.x - margin;
-    width /= layers - 1;
+    CGFloat width = frame.origin.x - margin;
+    width /= layers - 1;    //两个节点的x坐标差
     
     CGFloat height = self.view.frame.size.height - margin;
     height /= 8;
     
-    CGFloat iwidth = height - 5*scale;
-    iwidth = iwidth > 50 ? 50 : iwidth;
-    frame.size = CGSizeMake(iwidth, iwidth);
+    CGFloat ndoeWidth = height - 5*scale;
+    ndoeWidth = ndoeWidth > 50 ? 50 : ndoeWidth;
+    frame.size = CGSizeMake(ndoeWidth, ndoeWidth);
 
     for(int i = 0; i < layers - 1; i++){
         for(int j = 0; j < networkShape[i]; j++){
@@ -205,7 +217,9 @@ UIImage * image;
             Node * node = (*network->network[i])[j];
             [self.view.layer addSublayer:node->nodeLayer];
             [self.view.layer addSublayer:node->triangleLayer];
-            
+            if(layers < 5 && i > 0){
+                node->updateVisibility();
+            }
             [CATransaction begin];
             [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
             [node->nodeLayer setContents:(id)node->getImage().CGImage];
@@ -247,17 +261,12 @@ double lastEpochTime = [NSDate date].timeIntervalSince1970;
     }
     
     double now = [NSDate date].timeIntervalSince1970;
-//    if(now - lastEpochTime > 0.5){
-//        speed = (double)(epoch - lastEpoch)/(now - lastEpochTime);
-//        lastEpochTime = now;
-//        lastEpoch = epoch;
-//    }
     speed = 1.0/(now - lastEpochTime);
     lastEpochTime = now;
     
     toShow = [NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM/batch, epoch];
     fpsString = [NSString stringWithFormat:@"fps:%d", speed];
-    
+
     [networkLock unlock];
     
     [self getHeatData];
@@ -285,6 +294,8 @@ double lastTrainTime = 0;
     lastEpochTime = (int)[NSDate date].timeIntervalSince1970;
     [self xiancheng:^{[self train];}];
 }
+
+extern int layers;
 
 - (IBAction)changeStepper:(UIStepper *)sender {
     _myswitch.on = false;

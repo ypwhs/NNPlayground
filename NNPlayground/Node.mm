@@ -19,13 +19,15 @@ double Node::updateOutput() {
     return output;
 }
 
-double Node::updateOutput(int x1, int x2) {
-    // Stores total input into the node.
-    updateOutput();
+void Node::updateOutput(int x1, int x2) {
+    totalInput = bias;
+    for (int i = 0; i < inputLinks.size(); i++) {
+        auto link = inputLinks[i];
+        totalInput += link->weight * link->source->output;
+    }
+    output = activation.output(totalInput);
     int bitmapIndex = x1*imageWidth + x2;
     outputBitmap[bitmapIndex] = getColor(output);
-//    printf("%d-%d outputBitmap[%d]=%X\n", layer, id, bitmapIndex, getColor(output));
-    return output;
 }
 
 void Node::updateBitmapPixel(int x1, int x2, double value){
@@ -54,9 +56,36 @@ UIImage * Node::getImage(){
     return nodeImage;
 }
 
+void Node::updateVisibility(){
+    double outputWeight = 0, inputWeight = 0;
+    for(int i = 0; i < outputs.size(); i++){
+        double weight = abs(outputs[i]->weight);
+        if(weight > outputWeight){
+            outputWeight = weight;
+        }
+    }
+    
+    for(int i = 0; i < inputLinks.size(); i++){
+        double weight = abs(inputLinks[i]->weight);
+        if(weight > inputWeight){
+            inputWeight = weight;
+        }
+    }
+    
+    if(outputWeight * inputWeight < 1.5){
+        shadowLayer.backgroundColor = [UIColor clearColor].CGColor;
+        nodeLayer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.2].CGColor;
+        triangleLayer.fillColor = [[UIColor blackColor] colorWithAlphaComponent:0.2].CGColor;
+    }else{
+        shadowLayer.backgroundColor = [UIColor blackColor].CGColor;
+        nodeLayer.borderColor = [UIColor blackColor].CGColor;
+        triangleLayer.fillColor = [UIColor blackColor].CGColor;
+    }
+}
+
 void Node::initNodeLayer(CGRect frame){
-    CGFloat iwidth = frame.size.width;
-    CGFloat triangleWidth = iwidth/10;
+    CGFloat ndoeWidth = frame.size.width;
+    CGFloat triangleWidth = ndoeWidth/10;
     //圆角,边框
     nodeLayer.masksToBounds = true;
     nodeLayer.cornerRadius = 5;
@@ -75,9 +104,9 @@ void Node::initNodeLayer(CGRect frame){
     
     //三角形
     UIBezierPath * triangle = [UIBezierPath bezierPath];
-    CGPoint p1 = CGPointMake(frame.origin.x + iwidth - 1, frame.origin.y + iwidth/2-triangleWidth);
+    CGPoint p1 = CGPointMake(frame.origin.x + ndoeWidth - 1, frame.origin.y + ndoeWidth/2-triangleWidth);
     CGPoint p2 = CGPointMake(p1.x, p1.y + 2*triangleWidth);
-    CGPoint p3 = CGPointMake(frame.origin.x + iwidth + sqrt(3)/2*triangleWidth, frame.origin.y + iwidth/2);
+    CGPoint p3 = CGPointMake(frame.origin.x + ndoeWidth + sqrt(3)/2*triangleWidth, frame.origin.y + ndoeWidth/2);
     [triangle moveToPoint:p1];
     [triangle addLineToPoint:p2];
     [triangle addLineToPoint:p3];
@@ -122,6 +151,7 @@ void Link::updateCurve(){
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     
     CGFloat width = abs(weight);
+    
     width = width < 0.5 ? 0.5 : width;
     curveLayer.lineWidth = width;
     

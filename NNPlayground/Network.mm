@@ -116,11 +116,11 @@ double Network::forwardProp(double inputs[], int inputSize) {
     return (*network[network.size() - 1])[0]->output;
 }
 
-double Network::forwardProp(double inputs[], int inputSize, int x1, int x2) {
+void Network::forwardProp(double inputs[], int inputSize, int x1, int x2) {
     vector<Node*> &inputLayer = *network[0];
     if (inputSize != inputLayer.size()) {
         printf("The number of inputs must match the number of nodes in the input layer!\n");
-        return -1;
+        return ;
     }
     
     // Update the input layer.
@@ -135,7 +135,6 @@ double Network::forwardProp(double inputs[], int inputSize, int x1, int x2) {
             currentLayer[i]->updateOutput(x1, x2);
         }
     }
-    return (*network[network.size() - 1])[0]->output;
 }
 
 void Network::backProp(double target) {
