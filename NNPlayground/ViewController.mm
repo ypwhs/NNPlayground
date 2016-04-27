@@ -35,15 +35,16 @@ auto regularization = None;
 
 Network * network = new Network(networkShape, layers, activation, regularization);
 NSLock * networkLock = [[NSLock alloc] init];
-
+bool first = false;
 - (void)resetNetwork{
+    
     [networkLock lock];
     
     epoch = 0;
-    delete network;
+    lastEpoch = 0;
+    Network * oldNetwork = network;
     network = new Network(networkShape, layers, activation, None);
-    [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
-    
+    first = true;
     vector<Node*> &inputLayer = *network->network[0];
     for(int i = 0; i < 100; i++){
         for(int j = 0; j < 100; j++){
@@ -54,9 +55,16 @@ NSLock * networkLock = [[NSLock alloc] init];
         }
     }
     [networkLock unlock];
+    [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
+//    [self onestep];
+    [self getHeatData];
     
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     [self initNodeLayer];
-    [self onestep];
+    [CATransaction commit];
+    
+    delete oldNetwork;
 }
 
 //**************************** Inputs ***************************
@@ -132,14 +140,29 @@ UIImage * image;
         for(int i = 0; i < layers - 1; i++){
             for(int j = 0; j < networkShape[i]; j++){
                 Node * node = (*network->network[i])[j];
+                [CATransaction begin];
+                [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
                 [node->nodeLayer setContents:(id)node->getImage().CGImage];
+                [CATransaction commit];
             }
         }
+        
         for(int i = 0; i < layers - 1; i++){
             for(int j = 0; j < networkShape[i]; j++){
                 Node * node = (*network->network[i])[j];
                 for(int k = 0; k < node->outputs.size(); k++){
                     node->outputs[k]->updateCurve();
+                }
+            }
+        }
+        
+        //addShadows
+        if(first){
+            first = false;
+            for(int i = 0; i < layers - 1; i++){
+                for(int j = 0; j < networkShape[i]; j++){
+                    Node * node = (*network->network[i])[j];
+                    [self.view.layer insertSublayer:node->shadowLayer atIndex:0];
                 }
             }
         }
@@ -184,13 +207,16 @@ void outputNetwork(double x, double y){
     height /= 8;
     
     CGFloat iwidth = height-5*scale;
+    iwidth = iwidth>50?50:iwidth;
     frame.size = CGSizeMake(iwidth, iwidth);
     
+
     for(int i = 0; i < layers - 1; i++){
         for(int j = 0; j < networkShape[i]; j++){
             frame.origin = CGPointMake(x + width*i, y + height*j);
             Node * node = (*network->network[i])[j];
             node->initNodeLayer(frame);
+            
             [self.view.layer addSublayer:node->nodeLayer];
             [self.view.layer addSublayer:node->triangleLayer];
         }
@@ -202,7 +228,7 @@ void outputNetwork(double x, double y){
             for(int k = 0; k < node->outputs.size(); k++){
                 Link * link = node->outputs[k];
                 link->initCurve();
-                [self.view.layer addSublayer:link->curveLayer];
+                [self.view.layer insertSublayer:link->curveLayer atIndex:0];
             }
         }
     }
@@ -213,11 +239,12 @@ void outputNetwork(double x, double y){
 //**************************** Train ****************************
 bool always = false;
 NSString * toShow;
+NSString * fpsString;
 int batch = 1;
 int epoch = 0;
-int last = 0;
+int lastEpoch = 0;
 int speed = 0;
-int lasttime = (int)[NSDate date].timeIntervalSince1970;
+int lastEpocTime = (int)[NSDate date].timeIntervalSince1970;
 - (void)onestep{
     [networkLock lock];
     
@@ -233,25 +260,32 @@ int lasttime = (int)[NSDate date].timeIntervalSince1970;
         network->updateWeights(learningRate, 0);
     }
     
-    if((int)[NSDate date].timeIntervalSince1970 != lasttime){
-        lasttime = (int)[NSDate date].timeIntervalSince1970;
-        speed = epoch - last;
-        last = epoch;
+    if((int)[NSDate date].timeIntervalSince1970 != lastEpocTime){
+        lastEpocTime = (int)[NSDate date].timeIntervalSince1970;
+        speed = epoch - lastEpoch;
+        lastEpoch = epoch;
     }
     
-    toShow = [NSString stringWithFormat:@"loss:%.3f\nEpoch:%d.speed:%d", loss/DATA_NUM/batch, epoch, speed];
+    toShow = [NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM/batch, epoch];
+    fpsString = [NSString stringWithFormat:@"fps:%d", speed];
     
     [networkLock unlock];
     
     [self getHeatData];
     [self ui:^{
         _outputLabel.text = toShow;
+        _fpsLabel.text = fpsString;
     }];
 }
 
+double lastTrainTime = 0;
 - (void)train{
     while(always){
-        [self onestep];
+        if([NSDate date].timeIntervalSince1970 - lastTrainTime > 0.008){
+            lastTrainTime = [NSDate date].timeIntervalSince1970;
+            [self onestep];
+        }
+        usleep(1);
 //        [NSThread sleepForTimeInterval:0.008];
     }
 }

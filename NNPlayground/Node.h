@@ -18,7 +18,7 @@ class Link{
 public:
     Node * source;
     Node * dest;
-    double weight = drand() - 0.5;
+    double weight = (drand() - 0.5)*2;
     double errorDer = 0;
     /** Accumulated error derivative since the last update. */
     double accErrorDer = 0;
@@ -43,7 +43,7 @@ public:
     int layer = 0;
     int id = 0;
     vector<Link*> inputLinks;
-    double bias = 0.5;
+    double bias = (drand() - 0.5)/2;
     
     vector<Link*> outputs;
     double totalInput = 0;
@@ -69,6 +69,7 @@ public:
     UIImage * getImage();
     
     CALayer * nodeLayer;
+    CALayer * shadowLayer;
     CAShapeLayer * triangleLayer;
     void initNodeLayer(CGRect frame);
 };

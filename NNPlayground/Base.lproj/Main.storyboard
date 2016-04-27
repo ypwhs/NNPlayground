@@ -29,6 +29,14 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
                                 <rect key="frame" x="308" y="10" width="240" height="240"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="fps:500" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-2R-oE7">
+                                        <rect key="frame" x="190" y="0.0" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                        <color key="textColor" white="0.91092133620000004" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="Fvb-zI-m4a"/>
@@ -70,7 +78,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="zie-PW-5as" secondAttribute="trailing" id="3T1-Le-dR1"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="width" secondItem="zie-PW-5as" secondAttribute="width" id="4Zl-SX-qF7"/>
@@ -92,6 +100,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="fpsLabel" destination="J6l-2R-oE7" id="lgh-2s-ZVq"/>
                         <outlet property="heatMap" destination="zie-PW-5as" id="EUz-mc-KX6"/>
                         <outlet property="myswitch" destination="DZR-z9-Peg" id="LpM-Nh-Ozu"/>
                         <outlet property="outputLabel" destination="WYA-1I-afQ" id="YF7-wc-tbU"/>
