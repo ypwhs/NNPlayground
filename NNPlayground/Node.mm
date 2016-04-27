@@ -55,7 +55,6 @@ UIImage * Node::getImage(){
 }
 
 void Node::initNodeLayer(CGRect frame){
-    nodeLayer = [[CALayer alloc] init];
     CGFloat iwidth = frame.size.width;
     CGFloat triangleWidth = iwidth/10;
     //圆角,边框
@@ -66,7 +65,6 @@ void Node::initNodeLayer(CGRect frame){
     nodeLayer.frame = frame;
     
     //阴影
-    shadowLayer = [[CALayer alloc] init];
     shadowLayer.frame = frame;
     shadowLayer.cornerRadius = 5;
     shadowLayer.shadowOffset = CGSizeMake(0, 3);
@@ -85,7 +83,6 @@ void Node::initNodeLayer(CGRect frame){
     [triangle addLineToPoint:p3];
     [triangle closePath];
     
-    triangleLayer = [CAShapeLayer layer];
     [triangleLayer setPath:triangle.CGPath];
     [triangleLayer setFillColor:[UIColor blackColor].CGColor];
 }
@@ -99,7 +96,8 @@ void Link::initCurve(){
     
     //贝塞尔曲线
     CGPoint point1 = CGPointMake(frame1.origin.x + frame1.size.width, frame1.origin.y + frame1.size.height/2);
-    CGFloat width = frame2.size.height/15;
+    
+    CGFloat width = frame2.size.height/15;//上下两条link的间距
     width = width > 2 ? 2 : width;
     CGPoint point2 = CGPointMake(frame2.origin.x, frame2.origin.y + frame2.size.height/2 - 5*width + node1->id * width);
     CGPoint controlPoint1 = CGPointMake(point1.x + (point2.x-point1.x)/2, point1.y);
@@ -111,12 +109,8 @@ void Link::initCurve(){
     [curve addCurveToPoint:point1 controlPoint1:controlPoint2 controlPoint2:controlPoint1];
     [curve closePath];
     
-    curveLayer = [CAShapeLayer layer];
     [curveLayer setPath:curve.CGPath];
-    curveLayer.lineWidth = 1;
-    unsigned int color = getColor(-weight);
-    CGColorRef color2 = [UIColor colorWithRed:(color&0xFF)/256.0 green:((color>>8)&0xFF)/256.0 blue:((color>>16)&0xFF)/256.0 alpha:1].CGColor;
-    [curveLayer setStrokeColor:color2];
+    updateCurve();
 }
 
 Link::~Link(){

@@ -68,9 +68,9 @@ public:
     UIImage * nodeImage;
     UIImage * getImage();
     
-    CALayer * nodeLayer;
-    CALayer * shadowLayer;
-    CAShapeLayer * triangleLayer;
+    CALayer * nodeLayer = [[CALayer alloc] init];
+    CALayer * shadowLayer = [[CALayer alloc] init];
+    CAShapeLayer * triangleLayer = [CAShapeLayer layer];
     void initNodeLayer(CGRect frame);
 };
 
