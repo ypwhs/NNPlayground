@@ -19,20 +19,20 @@ double Node::updateOutput() {
     return output;
 }
 
-void Node::updateOutput(int x1, int x2) {
+void Node::updateOutput(int x, int y) {
     totalInput = bias;
     for (int i = 0; i < inputLinks.size(); i++) {
         auto link = inputLinks[i];
         totalInput += link->weight * link->source->output;
     }
     output = activation.output(totalInput);
-    int bitmapIndex = x1*imageWidth + x2;
-    outputBitmap[bitmapIndex] = getColor(output);
+    int bitmapIndex = (imageWidth-1-y)*imageWidth + x;
+    outputBitmap[bitmapIndex] = getColor(-output);
 }
 
-void Node::updateBitmapPixel(int x1, int x2, double value){
-    int bitmapIndex = x1*imageWidth + (imageWidth-1-x2);
-    outputBitmap[bitmapIndex] = getColor(value);
+void Node::updateBitmapPixel(int x, int y, double value){
+    int bitmapIndex = (imageWidth-1-y)*imageWidth + x;
+    outputBitmap[bitmapIndex] = getColor(-value);
 }
 
 Node::~Node(){

@@ -45,14 +45,15 @@ NSLock * networkLock = [[NSLock alloc] init];
     
     //创建input图像
     vector<Node*> &inputLayer = *network->network[0];
-    for(int i = 0; i < 100; i++){
-        for(int j = 0; j < 100; j++){
+    for(int j = 0; j < 100; j++){
+        for(int i = 0; i < 100; i++){
             for(int k = 0; k < inputLayer.size(); k++){
-                inputLayer[0]->updateBitmapPixel(i, j, (j - 50.0)/50*6);
-                inputLayer[1]->updateBitmapPixel(i, j, (i - 50.0)/50*6);
+                inputLayer[0]->updateBitmapPixel(i, j, (i - 50.0)/50*6);
+                inputLayer[1]->updateBitmapPixel(i, j, (j - 50.0)/50*6);
             }
         }
     }
+    
     [networkLock unlock];
     
     [self initNodeLayer];
@@ -87,15 +88,23 @@ void dataset_circle(){
         double dir = arc4random()%360/180.0*3.14;
         x1[i] = r*sin(dir);
         x2[i] = r*cos(dir);
-        y[i] = 1;
+        y[i] = -1;
     }
     
     for(int i = DATA_NUM/2; i < DATA_NUM; i++){
         double r = drand()*0.5;
         double dir = arc4random()%360/180.0*3.14;
-        x1[i] = r*sin(dir);
-        x2[i] = r*cos(dir);
-        y[i] = -1;
+        x1[i] = r*cos(dir);
+        x2[i] = r*sin(dir);
+        y[i] = 1;
+    }
+}
+
+void dataset_twoGaussData(){
+    for(int i = 0; i < DATA_NUM; i++){
+        y[i] = i > DATA_NUM/2 ? 1 : -1;
+        x1[i] = 0.5 * y[i] + (drand()-0.5)*0.8;
+        x2[i] = 0.5 * y[i] + (drand()-0.5)*0.8;
     }
 }
 
@@ -123,6 +132,13 @@ void dataset_xor(){
     [self resetNetwork];
 }
 
+- (IBAction)dataset3:(id)sender {
+    dataset_twoGaussData();
+    _myswitch.on = false;
+    always = false;
+    [self resetNetwork];
+}
+
 //*************************** Heatmap ***************************
 
 UIImage * image;
@@ -130,20 +146,18 @@ UIImage * image;
     [networkLock lock];
     
     //用100*100网络获取每个节点的输出
-    for(int i = 0; i < 100; i++){
-        for(int j = 0; j < 100; j++){
+    for(int j = 0; j < 100; j++){
+        for(int i = 0; i < 100; i++){
             inputs[0] = (i - 50.0)/50;
             inputs[1] = (j - 50.0)/50;
             network->forwardProp(inputs, 2, i, j);
         }
     }
     
-    //获取大图
-    image = (*network->network[layers-1])[0]->getImage();
-    
     [self ui:^{
         //更新大图
-        if(image!=nil)[_heatMap setBackground:image];
+        Node * outputNode = (*network->network[layers-1])[0];
+        [_heatMap.backgroundLayer setContents:(id)outputNode->getImage().CGImage];
         
         //更新小图
         for(int i = 0; i < layers - 1; i++){

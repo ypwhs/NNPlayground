@@ -43,8 +43,7 @@ public:
     int layer = 0;
     int id = 0;
     vector<Link*> inputLinks;
-    double bias = (drand() - 0.5)/2;
-    
+    double bias = (drand() - 0.5)/3;
     vector<Link*> outputs;
     double totalInput = 0;
     double output = 0;
