@@ -28,7 +28,7 @@ using namespace std;
 //*************************** Network ***************************
 int * networkShape = new int[3]{2, 4, 1};
 int layers = 3;
-double learningRate = 0.01;
+double learningRate = 0.001;
 auto activation = Tanh;
 auto regularization = None;
 
@@ -72,6 +72,7 @@ NSLock * networkLock = [[NSLock alloc] init];
     
     delete oldNetwork;
     toShow = [NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM, epoch];
+    _outputLabel.text = toShow;
     
 }
 
@@ -81,19 +82,19 @@ double inputs[] = {1, 1};
 double * x1 = new double[DATA_NUM];
 double * x2 = new double[DATA_NUM];
 double * y = new double[DATA_NUM];
-
+#define π 3.1415926
 void dataset_circle(){
     for(int i = 0; i < DATA_NUM/2; i++){
-        double r = drand()*0.2+0.7;
-        double dir = arc4random()%360/180.0*3.14;
-        x1[i] = r*sin(dir);
-        x2[i] = r*cos(dir);
+        double r = drand(0.7, 0.9);
+        double dir = drand(0, 2*π);
+        x1[i] = r*cos(dir);
+        x2[i] = r*sin(dir);
         y[i] = -1;
     }
     
     for(int i = DATA_NUM/2; i < DATA_NUM; i++){
-        double r = drand()*0.5;
-        double dir = arc4random()%360/180.0*3.14;
+        double r = drand(0, 0.5);
+        double dir = drand(0, 2*π);
         x1[i] = r*cos(dir);
         x2[i] = r*sin(dir);
         y[i] = 1;
@@ -103,40 +104,65 @@ void dataset_circle(){
 void dataset_twoGaussData(){
     for(int i = 0; i < DATA_NUM; i++){
         y[i] = i > DATA_NUM/2 ? 1 : -1;
-        x1[i] = 0.5 * y[i] + (drand()-0.5)*0.8;
-        x2[i] = 0.5 * y[i] + (drand()-0.5)*0.8;
+        x1[i] = 0.5 * y[i] + (drand(-0.4, 0.4));
+        x2[i] = 0.5 * y[i] + (drand(-0.4, 0.4));
     }
 }
 
 void dataset_xor(){
     for(int i = 0; i < DATA_NUM; i++){
-        x1[i] = (drand()-0.5)*1.6;
-        x2[i] = (drand()-0.5)*1.6;
+        x1[i] = drand(-0.8, 0.8);
+        x2[i] = drand(-0.8, 0.8);
         y[i] = x1[i]*x2[i]>0 ? 1 : -1;
         x1[i] += x1[i]>0 ? 0.1 : -0.1;
         x2[i] += x2[i]>0 ? 0.1 : -0.1;
     }
 }
 
-- (IBAction)generateInputs:(id)sender {
-    dataset_xor();
+void dataset_spiral(){
+    int n = DATA_NUM/2;
+    double deltaT = 0;
+    for (int i = 0; i < n; i++) {
+        double r = (double)i/n*0.8;
+        double t = t = 1.75 * i / n * 2 * π + deltaT;
+        x1[i] = r * sin(t);
+        x2[i] = r * cos(t);
+        y[i] = 1;
+    }
+    deltaT = π;
+    for (int i = 0; i < n; i++) {
+        double r = (double)i/n*0.8;
+        double t = t = 1.75 * i / n * 2 * π + deltaT;
+        x1[i+n] = r * sin(t);
+        x2[i+n] = r * cos(t);
+        y[i+n] = -1;
+    }
+}
+
+-(void) finishGenerate{
     _myswitch.on = false;
     always = false;
     [self resetNetwork];
+}
+
+- (IBAction)generateInputs:(id)sender {
+    dataset_xor();
+    [self finishGenerate];
 }
 
 - (IBAction)updateHeatmap:(id)sender {
     dataset_circle();
-    _myswitch.on = false;
-    always = false;
-    [self resetNetwork];
+    [self finishGenerate];
 }
 
 - (IBAction)dataset3:(id)sender {
     dataset_twoGaussData();
-    _myswitch.on = false;
-    always = false;
-    [self resetNetwork];
+    [self finishGenerate];
+}
+
+- (IBAction)dataset4:(id)sender {
+    dataset_spiral();
+    [self finishGenerate];
 }
 
 //*************************** Heatmap ***************************
@@ -254,7 +280,7 @@ UIImage * image;
 bool always = false;
 NSString * toShow;
 NSString * fpsString;
-int batch = 1;
+int batch = 60;
 int epoch = 0;
 int lastEpoch = 0;
 int speed = 0;
@@ -262,7 +288,7 @@ double lastEpochTime = [NSDate date].timeIntervalSince1970;
 - (void)onestep{
     [networkLock lock];
     
-    epoch += batch;
+    epoch += 1;
     double loss = 0;
     for(int n = 0; n < batch; n++)
     for (int i = 0; i < DATA_NUM; i++) {

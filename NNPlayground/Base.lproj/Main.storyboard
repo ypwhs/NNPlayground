@@ -84,6 +84,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwl-XC-lgo">
+                                <rect key="frame" x="461" y="325" width="46" height="30"/>
+                                <state key="normal" title="Spiral"/>
+                                <connections>
+                                    <action selector="dataset4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rnc-Qj-qgQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
