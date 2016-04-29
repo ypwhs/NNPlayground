@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NNPlayground-Swift.h"
+#ifndef VIEW_CONTROLLER_H
+#define VIEW_CONTROLLER_H
+#include "NNPlayground-Swift.h"
 #include "Network.h"
 
 @interface ViewController : UIViewController
@@ -19,3 +21,4 @@
 
 @end
 
+#endif

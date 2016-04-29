@@ -145,27 +145,37 @@ void dataset_spiral(){
     [self resetNetwork];
 }
 
-- (IBAction)generateInputs:(id)sender {
+int maxfps = 120;
+
+- (IBAction)dataset1:(id)sender {
     dataset_xor();
-    batch = 1;
+    batch = 5;
+    maxfps = 120;
+    learningRate = 0.03;
     [self finishGenerate];
 }
 
-- (IBAction)updateHeatmap:(id)sender {
+- (IBAction)dataset2:(id)sender {
     dataset_circle();
-    batch = 1;
+    batch = 5;
+    maxfps = 120;
+    learningRate = 0.03;
     [self finishGenerate];
 }
 
 - (IBAction)dataset3:(id)sender {
     dataset_twoGaussData();
     batch = 1;
+    maxfps = 120;
+    learningRate = 0.03;
     [self finishGenerate];
 }
 
 - (IBAction)dataset4:(id)sender {
     dataset_spiral();
     batch = 60;
+    maxfps = 120;
+    learningRate = 0.03;
     [self finishGenerate];
 }
 
@@ -239,7 +249,7 @@ UIImage * image;
     CGFloat height = self.view.frame.size.height - margin;
     height /= 8;
     
-    CGFloat ndoeWidth = height - 5*scale;
+    CGFloat ndoeWidth = height - 5*screenScale;
     ndoeWidth = ndoeWidth > 50 ? 50 : ndoeWidth;
     frame.size = CGSizeMake(ndoeWidth, ndoeWidth);
 
@@ -294,13 +304,14 @@ double lastEpochTime = [NSDate date].timeIntervalSince1970;
     
     epoch += 1;
     double loss = 0;
-    for(int n = 0; n < batch; n++)
-    for (int i = 0; i < DATA_NUM; i++) {
-        inputs[0] = x1[i];
-        inputs[1] = x2[i];
-        double output = network->forwardProp(inputs, 2);
-        network->backProp(y[i]);
-        loss += 0.5 * pow(output - y[i], 2);
+    for(int n = 0; n < batch; n++){
+        for (int i = 0; i < DATA_NUM; i++) {
+            inputs[0] = x1[i];
+            inputs[1] = x2[i];
+            double output = network->forwardProp(inputs, 2);
+            network->backProp(y[i]);
+            loss += 0.5 * pow(output - y[i], 2);
+        }
         network->updateWeights(learningRate, 0);
     }
     
@@ -324,7 +335,7 @@ double lastTrainTime = 0;
 - (void)train{
     while(always){
         //帧数控制
-        if([NSDate date].timeIntervalSince1970 - lastTrainTime > 1.0/120){
+        if([NSDate date].timeIntervalSince1970 - lastTrainTime > 1.0/maxfps){
             lastTrainTime = [NSDate date].timeIntervalSince1970;
             [self onestep];
         }
@@ -361,13 +372,12 @@ extern int layers;
     [self resetNetwork];
 }
 
-CGFloat scale = [UIScreen mainScreen].scale;
+CGFloat screenScale = [UIScreen mainScreen].scale;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     initColor();
-    dataset_circle();
-    
+    [self dataset2:0];
 }
 
 - (void)viewDidAppear:(BOOL)animated{

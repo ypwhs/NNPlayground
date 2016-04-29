@@ -7,7 +7,6 @@
 //
 
 import UIKit
-let SCALE = 3
 class HeatMapView: UIView {
     let NUM_SHADES = 256
     
@@ -24,6 +23,16 @@ class HeatMapView: UIView {
         self.layer.insertSublayer(backgroundLayer, atIndex: 0)
         dataLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)
         self.layer.insertSublayer(dataLayer, atIndex: 1)
+        
+        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(HeatMapView.longpress))
+        recognizer.minimumPressDuration = 0.5; //设置最小长按时间；默认为0.5秒
+        self.addGestureRecognizer(recognizer)
+    }
+    
+    func longpress(rec:UILongPressGestureRecognizer){
+        if(rec.state == UIGestureRecognizerState.Began){
+            print("long press")
+        }
     }
     
     func setBackground(image:UIImage){
