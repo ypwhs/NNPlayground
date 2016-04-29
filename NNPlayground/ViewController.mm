@@ -147,21 +147,25 @@ void dataset_spiral(){
 
 - (IBAction)generateInputs:(id)sender {
     dataset_xor();
+    batch = 1;
     [self finishGenerate];
 }
 
 - (IBAction)updateHeatmap:(id)sender {
     dataset_circle();
+    batch = 1;
     [self finishGenerate];
 }
 
 - (IBAction)dataset3:(id)sender {
     dataset_twoGaussData();
+    batch = 1;
     [self finishGenerate];
 }
 
 - (IBAction)dataset4:(id)sender {
     dataset_spiral();
+    batch = 60;
     [self finishGenerate];
 }
 

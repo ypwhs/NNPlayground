@@ -21,8 +21,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
                                 <rect key="frame" x="407" y="10" width="240" height="240"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="fps:0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-2R-oE7">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fps:0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-2R-oE7">
                                         <rect key="frame" x="162" y="0.0" width="70" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="7g0-C8-Haq"/>
+                                            <constraint firstAttribute="height" constant="21" id="EKt-QX-0SY"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                         <color key="textColor" white="0.91092133620000004" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -32,6 +36,8 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="Fvb-zI-m4a"/>
                                     <constraint firstAttribute="height" constant="240" id="Idk-Sb-ycb"/>
+                                    <constraint firstItem="J6l-2R-oE7" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="top" id="NvW-v2-g5t"/>
+                                    <constraint firstAttribute="trailing" secondItem="J6l-2R-oE7" secondAttribute="trailing" constant="8" id="XqH-g0-f1w"/>
                                 </constraints>
                             </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DZR-z9-Peg">
@@ -68,13 +74,6 @@
                                     <action selector="generateInputs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5SL-3S-p95"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEW-hG-nns">
-                                <rect key="frame" x="407" y="325" width="46" height="30"/>
-                                <state key="normal" title="Linear"/>
-                                <connections>
-                                    <action selector="dataset3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="APZ-g0-9Sl"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label123" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYA-1I-afQ">
                                 <rect key="frame" x="407" y="289" width="240" height="40"/>
                                 <constraints>
@@ -84,11 +83,18 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwl-XC-lgo">
-                                <rect key="frame" x="461" y="325" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwl-XC-lgo">
+                                <rect key="frame" x="455" y="325" width="39" height="30"/>
                                 <state key="normal" title="Spiral"/>
                                 <connections>
                                     <action selector="dataset4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rnc-Qj-qgQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEW-hG-nns">
+                                <rect key="frame" x="404" y="325" width="43" height="30"/>
+                                <state key="normal" title="Linear"/>
+                                <connections>
+                                    <action selector="dataset3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="APZ-g0-9Sl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -98,15 +104,19 @@
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="width" secondItem="zie-PW-5as" secondAttribute="width" id="4Zl-SX-qF7"/>
                             <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="6Us-un-NHI"/>
                             <constraint firstItem="dh7-vb-pyS" firstAttribute="leading" secondItem="DZR-z9-Peg" secondAttribute="trailing" constant="8" id="9PJ-ln-YYM"/>
+                            <constraint firstItem="hEW-hG-nns" firstAttribute="leading" secondItem="fSg-Vu-y5W" secondAttribute="leading" id="N74-Ru-FrK"/>
                             <constraint firstItem="fSg-Vu-y5W" firstAttribute="bottom" secondItem="7hp-DZ-VCy" secondAttribute="bottom" id="OW3-X4-A3R"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="dh7-vb-pyS" secondAttribute="bottom" id="Tfc-TF-0jo"/>
                             <constraint firstItem="DZR-z9-Peg" firstAttribute="bottom" secondItem="dh7-vb-pyS" secondAttribute="bottom" id="W57-JU-258"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="aNa-tT-4Kn"/>
+                            <constraint firstItem="gwl-XC-lgo" firstAttribute="leading" secondItem="hEW-hG-nns" secondAttribute="trailing" constant="8" id="dWE-cO-dOA"/>
                             <constraint firstItem="dh7-vb-pyS" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="10" id="hXn-CP-siF"/>
                             <constraint firstItem="dh7-vb-pyS" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="haz-cl-SU8"/>
                             <constraint firstItem="7hp-DZ-VCy" firstAttribute="bottom" secondItem="DZR-z9-Peg" secondAttribute="bottom" id="o4b-ET-WWU"/>
+                            <constraint firstItem="gwl-XC-lgo" firstAttribute="bottom" secondItem="hEW-hG-nns" secondAttribute="bottom" id="uk2-dd-HAA"/>
                             <constraint firstItem="DZR-z9-Peg" firstAttribute="leading" secondItem="7hp-DZ-VCy" secondAttribute="trailing" constant="8" id="ykh-JD-Irl"/>
                             <constraint firstItem="7hp-DZ-VCy" firstAttribute="leading" secondItem="fSg-Vu-y5W" secondAttribute="trailing" constant="8" id="z1S-N1-YF1"/>
+                            <constraint firstItem="hEW-hG-nns" firstAttribute="top" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="-4" id="z8f-QE-the"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
