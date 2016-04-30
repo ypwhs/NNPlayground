@@ -124,7 +124,7 @@ void dataset_spiral(){
     double deltaT = 0;
     for (int i = 0; i < n; i++) {
         double r = (double)i/n*0.8;
-        double t = t = 1.75 * i / n * 2 * π + deltaT;
+        double t = 1.75 * i / n * 2 * π + deltaT;
         x1[i] = r * sin(t);
         x2[i] = r * cos(t);
         y[i] = 1;
@@ -132,7 +132,7 @@ void dataset_spiral(){
     deltaT = π;
     for (int i = 0; i < n; i++) {
         double r = (double)i/n*0.8;
-        double t = t = 1.75 * i / n * 2 * π + deltaT;
+        double t = 1.75 * i / n * 2 * π + deltaT;
         x1[i+n] = r * sin(t);
         x2[i+n] = r * cos(t);
         y[i+n] = -1;
