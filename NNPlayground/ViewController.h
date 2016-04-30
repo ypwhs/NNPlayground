@@ -11,6 +11,7 @@
 #define VIEW_CONTROLLER_H
 #include "NNPlayground-Swift.h"
 #include "Network.h"
+#import "MBProgressHUD.h"
 
 @interface ViewController : UIViewController
 

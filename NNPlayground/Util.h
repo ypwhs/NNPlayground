@@ -52,7 +52,7 @@ public:
 };
 
 //**************************** Color ****************************
-#define NUM_SHADES 30
+#define NUM_SHADES 256
 static unsigned int * positiveColor = new unsigned int[NUM_SHADES];
 static unsigned int * negativeColor = new unsigned int[NUM_SHADES];
 

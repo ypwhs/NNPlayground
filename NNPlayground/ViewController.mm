@@ -18,7 +18,7 @@ using namespace std;
 
 //**************************** Thread ***************************
 - (void)xiancheng:(dispatch_block_t)code{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), code);
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0), code);
 }
 
 - (void)ui:(dispatch_block_t)code{
@@ -180,6 +180,29 @@ int maxfps = 120;
 }
 
 //*************************** Heatmap ***************************
+UIImage * bigOutputImage;
+int bigOutputImageWidth = 512;
+unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImageWidth];
+- (void)generateBigOutputImage{
+    bigOutputImage = nil;
+    double hwidth = bigOutputImageWidth/2;
+    for(int y = 0; y < bigOutputImageWidth; y++){
+        for(int x = 0; x < bigOutputImageWidth; x++){
+            inputs[0] = (x - hwidth)/hwidth;
+            inputs[1] = (y - hwidth)/hwidth;
+            double output = network->forwardProp(inputs, 2);
+            outputBitmap[(bigOutputImageWidth-1-y)*bigOutputImageWidth + x] = getColor(-output);
+        }
+        [self ui:^{
+            hud.progress = (double)y/bigOutputImageWidth;
+        }];
+    }
+    CGContextRef bitmapContext = CGBitmapContextCreate(outputBitmap, bigOutputImageWidth, bigOutputImageWidth, 8, 4*bigOutputImageWidth, CGColorSpaceCreateDeviceRGB(), kCGBitmapByteOrder32Big | kCGImageAlphaNoneSkipLast);
+    CGImageRef imageRef = CGBitmapContextCreateImage(bitmapContext);
+    bigOutputImage = [UIImage imageWithCGImage:imageRef];
+    CGContextRelease(bitmapContext);
+    CGImageRelease(imageRef);
+}
 
 UIImage * image;
 - (void) getHeatData{
@@ -278,6 +301,7 @@ UIImage * image;
             [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
             [node->nodeLayer setContents:(id)node->getImage().CGImage];
             [self.view.layer insertSublayer:node->shadowLayer atIndex:0];
+            
             for(int k = 0; k < node->outputs.size(); k++){
                 Link * link = node->outputs[k];
                 link->initCurve();
@@ -378,7 +402,53 @@ CGFloat screenScale = [UIScreen mainScreen].scale;
     [super viewDidLoad];
     initColor();
     [self dataset2:0];
+    
+    UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpressAction:)];
+    longpress.minimumPressDuration = 0.5;
+    [_heatMap addGestureRecognizer:longpress];
 }
+
+MBProgressHUD *hud;
+
+- (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    NSString *message = @"";
+    if (!error) {
+        message = @"成功保存到相册";
+        UIImage *image = [[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        hud.mode = MBProgressHUDModeCustomView;
+        hud.customView = imageView;
+    }else {
+        message = [error description];
+    }
+    hud.label.text = message;
+    printf("%s\n", [message UTF8String]);
+    [hud hideAnimated:YES afterDelay:1];
+}
+
+- (void)longpressAction:(UILongPressGestureRecognizer *)longpress{
+    if(longpress.state == UIGestureRecognizerStateBegan){
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"保存到相册" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            printf("cancel\n");
+        }];
+        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeAnnularDeterminate;
+            hud.label.text = @"生成图像中";
+            [self xiancheng:^{
+                [self generateBigOutputImage];
+                UIImageWriteToSavedPhotosAlbum(bigOutputImage, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+            }];
+        }];
+        [alert addAction:cancel];
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:^(){
+            printf("alert\n");
+        }];
+    }
+}
+
 
 - (void)viewDidAppear:(BOOL)animated{
     [self resetNetwork];

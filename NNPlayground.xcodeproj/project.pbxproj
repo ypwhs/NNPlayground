@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A12F039E1CD49BA100CA4890 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A12F039D1CD49BA100CA4890 /* MBProgressHUD.m */; };
 		A15F49E91CC8B14000409DA5 /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F49E81CC8B14000409DA5 /* HeatMap.swift */; };
 		A185E5FF1CCBD3A900CB8A4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A185E5FE1CCBD3A900CB8A4A /* Images.xcassets */; };
 		A19CD7421CC89D5300E8CDF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7411CC89D5300E8CDF9 /* main.m */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A12F039C1CD49BA100CA4890 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		A12F039D1CD49BA100CA4890 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A15F49E71CC8B14000409DA5 /* NNPlayground-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NNPlayground-Bridging-Header.h"; sourceTree = "<group>"; };
 		A15F49E81CC8B14000409DA5 /* HeatMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
 		A185E5FE1CCBD3A900CB8A4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -123,6 +126,8 @@
 				A19CD7781CC89DE700E8CDF9 /* Util.mm */,
 				A19CD7431CC89D5300E8CDF9 /* AppDelegate.h */,
 				A19CD7441CC89D5300E8CDF9 /* AppDelegate.m */,
+				A12F039C1CD49BA100CA4890 /* MBProgressHUD.h */,
+				A12F039D1CD49BA100CA4890 /* MBProgressHUD.m */,
 				A19CD7461CC89D5300E8CDF9 /* ViewController.h */,
 				A19CD7471CC89D5300E8CDF9 /* ViewController.mm */,
 				A15F49E81CC8B14000409DA5 /* HeatMap.swift */,
@@ -302,6 +307,7 @@
 				A19CD77B1CC89DE700E8CDF9 /* Util.mm in Sources */,
 				A19CD77A1CC89DE700E8CDF9 /* Network.mm in Sources */,
 				A19CD7791CC89DE700E8CDF9 /* Node.mm in Sources */,
+				A12F039E1CD49BA100CA4890 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

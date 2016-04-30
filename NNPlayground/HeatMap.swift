@@ -25,7 +25,7 @@ class HeatMapView: UIView {
         self.layer.insertSublayer(dataLayer, atIndex: 1)
         
         let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(HeatMapView.longpress))
-        recognizer.minimumPressDuration = 0.5; //设置最小长按时间；默认为0.5秒
+        recognizer.minimumPressDuration = 1;
         self.addGestureRecognizer(recognizer)
     }
     
