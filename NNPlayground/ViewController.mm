@@ -102,11 +102,23 @@ void dataset_circle(){
     }
 }
 
+double normalRandom(double mean, double variance){
+    double v1, v2, s;
+    do {
+        v1 = 2 * drand() - 1;
+        v2 = 2 * drand() - 1;
+        s = v1 * v1 + v2 * v2;
+    } while (s > 1);
+    
+    double result = sqrt(-2 * log(s) / s) * v1;
+    return mean + variance * result;
+}
+
 void dataset_twoGaussData(){
     for(int i = 0; i < DATA_NUM; i++){
         y[i] = i > DATA_NUM/2 ? 1 : -1;
-        x1[i] = 0.5 * y[i] + (drand(-0.4, 0.4));
-        x2[i] = 0.5 * y[i] + (drand(-0.4, 0.4));
+        x1[i] = normalRandom(y[i] * 0.4, 0.1);
+        x2[i] = normalRandom(y[i] * 0.4, 0.1);
     }
 }
 
@@ -146,7 +158,6 @@ void dataset_spiral(){
     learningRate = 0.01;
     batch = 5;
     maxfps = 120;
-    _speedupswitch.on = false;
     [self resetNetwork];
 }
 
