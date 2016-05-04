@@ -83,6 +83,7 @@ double * x1 = new double[DATA_NUM];
 double * x2 = new double[DATA_NUM];
 double * y = new double[DATA_NUM];
 #define π 3.1415926
+
 void dataset_circle(){
     for(int i = 0; i < DATA_NUM/2; i++){
         double r = drand(0.7, 0.9);
@@ -139,44 +140,59 @@ void dataset_spiral(){
     }
 }
 
--(void) finishGenerate{
+-(void) reset{
     _myswitch.on = false;
     always = false;
+    learningRate = 0.01;
+    batch = 5;
+    maxfps = 120;
+    _speedupswitch.on = false;
     [self resetNetwork];
 }
 
-int maxfps = 120;
+- (IBAction)speedup:(UISwitch *)sender {
+    if(sender.on){
+        batch = 120;
+    }else{
+        batch = 5;
+    }
+}
 
+int maxfps = 120;
 - (IBAction)dataset1:(id)sender {
     dataset_xor();
-    batch = 5;
-    maxfps = 120;
-    learningRate = 0.03;
-    [self finishGenerate];
+    [self reset];
 }
 
 - (IBAction)dataset2:(id)sender {
     dataset_circle();
-    batch = 5;
-    maxfps = 120;
-    learningRate = 0.03;
-    [self finishGenerate];
+    [self reset];
 }
 
 - (IBAction)dataset3:(id)sender {
     dataset_twoGaussData();
-    batch = 1;
-    maxfps = 120;
-    learningRate = 0.03;
-    [self finishGenerate];
+    [self reset];
 }
 
 - (IBAction)dataset4:(id)sender {
     dataset_spiral();
-    batch = 60;
-    maxfps = 120;
-    learningRate = 0.03;
-    [self finishGenerate];
+    [self reset];
+}
+
+- (IBAction)activationTanh:(id)sender {
+    activation = Tanh;
+    [self reset];
+}
+
+- (IBAction)activationReLU:(id)sender {
+    activation = ReLU;
+    [self reset];
+}
+
+- (IBAction)activationSigmoid:(id)sender {
+    activation = Sigmoid;
+    [self reset];
+    learningRate = 0.3;
 }
 
 //*************************** Heatmap ***************************

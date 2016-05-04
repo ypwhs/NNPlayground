@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *outputLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fpsLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *myswitch;
+@property (weak, nonatomic) IBOutlet UISwitch *speedupswitch;
 
 @end
 

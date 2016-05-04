@@ -17,6 +17,8 @@ public:
     vector<vector<Node*>*> network;
     vector<int> networkShape;
     int numLayers;
+    ActivationFunction activation;
+    RegularizationFunction regularzation;
     Network(int ns[], int ls, ActivationFunction activation, RegularizationFunction regularzation);
     ~Network();
     double forwardProp(double inputs[], int inputSize);

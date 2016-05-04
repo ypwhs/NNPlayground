@@ -18,7 +18,7 @@ class Link{
 public:
     Node * source;
     Node * dest;
-    double weight = (drand() - 0.5)*3;
+    double weight = (drand() - 0.5)*4;
     double errorDer = 0;
     /** Accumulated error derivative since the last update. */
     double accErrorDer = 0;

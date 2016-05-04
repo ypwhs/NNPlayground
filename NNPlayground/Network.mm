@@ -9,10 +9,13 @@
 #import "Network.h"
 
 
-Network::Network(int ns[], int ls, ActivationFunction activation, RegularizationFunction regularzation) {
+Network::Network(int ns[], int ls, ActivationFunction _activation, RegularizationFunction _regularzation) {
     //    int numLayers = (int)networkShape.size();
+    activation = _activation;
+    regularzation = _regularzation;
     Activation act;
     Regularization reg;
+    act.activation = activation;
     switch (activation) {
         case ReLU:
             act.output = aReLU;
@@ -55,12 +58,22 @@ Network::Network(int ns[], int ls, ActivationFunction activation, Regularization
     for(int i = 0; i < numLayers; i++){
         networkShape.push_back(ns[i]);
     }
+    Activation outputActivation;
+    outputActivation.output = aTanh;
+    outputActivation.der = aderTanh;
     
     /** List of layers, with each layer being a list of nodes. */
     for (int layerIdx = 0; layerIdx < numLayers; layerIdx++) {
         vector<Node*>* currentLayer = new vector<Node*>();
         for (int i = 0; i < networkShape[layerIdx]; i++) {
-            auto node = new Node(act);
+            Node * node;
+            
+            if(layerIdx == numLayers-1){
+                node = new Node(outputActivation);
+            }else{
+                node = new Node(act);
+            }
+            
             node->layer = layerIdx + 1; //tag this node
             node->id = i + 1;
             node->outputBitmap = new unsigned int[node->imageWidth * node->imageWidth];
@@ -113,7 +126,8 @@ double Network::forwardProp(double inputs[], int inputSize) {
             currentLayer[i]->updateOutput();
         }
     }
-    return (*network[network.size() - 1])[0]->output;
+    double output = (*network[network.size() - 1])[0]->output;
+    return output;
 }
 
 void Network::forwardProp(double inputs[], int inputSize, int x1, int x2) {
@@ -140,6 +154,7 @@ void Network::forwardProp(double inputs[], int inputSize, int x1, int x2) {
 void Network::backProp(double target) {
     // The output node is a special case. We use the user-defined error
     // function for the derivative.
+    
     vector<Node*> &lastLayer = *network[network.size() - 1];
     auto outputNode = lastLayer[0];
     outputNode->outputDer = outputNode->output - target;

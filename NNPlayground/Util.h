@@ -47,6 +47,7 @@ public:
 
 class Activation {
 public:
+    ActivationFunction activation;
     double (*output)(double x) = aTanh;
     double (*der)(double x) = aderTanh;
 };

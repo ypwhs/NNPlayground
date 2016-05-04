@@ -104,7 +104,7 @@ void Node::initNodeLayer(CGRect frame){
     
     //三角形
     UIBezierPath * triangle = [UIBezierPath bezierPath];
-    CGPoint p1 = CGPointMake(frame.origin.x + ndoeWidth - 1, frame.origin.y + ndoeWidth/2-triangleWidth);
+    CGPoint p1 = CGPointMake(frame.origin.x + ndoeWidth - 0.1, frame.origin.y + ndoeWidth/2-triangleWidth);
     CGPoint p2 = CGPointMake(p1.x, p1.y + 2*triangleWidth);
     CGPoint p3 = CGPointMake(frame.origin.x + ndoeWidth + sqrt(3)/2*triangleWidth, frame.origin.y + ndoeWidth/2);
     [triangle moveToPoint:p1];
@@ -127,7 +127,7 @@ void Link::initCurve(){
     CGPoint point1 = CGPointMake(frame1.origin.x + frame1.size.width, frame1.origin.y + frame1.size.height/2);
     
     CGFloat width = frame2.size.height/15;//上下两条link的间距
-    width = width > 2 ? 2 : width;
+    width = width > 4 ? 4 : width;
     CGPoint point2 = CGPointMake(frame2.origin.x, frame2.origin.y + frame2.size.height/2 - 5*width + node1->id * width);
     CGPoint controlPoint1 = CGPointMake(point1.x + (point2.x-point1.x)/2, point1.y);
     CGPoint controlPoint2 = CGPointMake(point1.x + (point2.x-point1.x)/2, point2.y);
@@ -153,6 +153,7 @@ void Link::updateCurve(){
     CGFloat width = abs(weight);
     
     width = width < 0.5 ? 0.5 : width;
+    width = width > 4 ? 4 : width;
     curveLayer.lineWidth = width;
     
     unsigned int color = getColor(-weight);

@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="348" y="10" width="200" height="200"/>
+                                <rect key="frame" x="516" y="10" width="200" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fps:0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-2R-oE7">
                                         <rect key="frame" x="122" y="0.0" width="70" height="21"/>
@@ -41,29 +41,26 @@
                                 </constraints>
                             </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DZR-z9-Peg">
-                                <rect key="frame" x="397" y="218" width="51" height="31"/>
+                                <rect key="frame" x="565" y="218" width="51" height="31"/>
                                 <connections>
                                     <action selector="changeSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="B56-fD-TsN"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-DZ-VCy">
-                                <rect key="frame" x="404" y="285" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="12T-O9-jP2"/>
-                                </constraints>
+                                <rect key="frame" x="578" y="285" width="40" height="30"/>
                                 <state key="normal" title="Circle"/>
                                 <connections>
                                     <action selector="dataset2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0ia-8o-Y56"/>
                                 </connections>
                             </button>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" maximumValue="6" translatesAutoresizingMaskIntoConstraints="NO" id="dh7-vb-pyS">
-                                <rect key="frame" x="454" y="220" width="94" height="29"/>
+                                <rect key="frame" x="622" y="220" width="94" height="29"/>
                                 <connections>
                                     <action selector="changeStepper:" destination="BYZ-38-t0r" eventType="valueChanged" id="wCG-RZ-zgW"/>
                                 </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loss:0.123,Epoch:1234" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYA-1I-afQ">
-                                <rect key="frame" x="348" y="249" width="200" height="28"/>
+                                <rect key="frame" x="516" y="249" width="200" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="reZ-3U-aXK"/>
                                 </constraints>
@@ -72,69 +69,99 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwl-XC-lgo">
-                                <rect key="frame" x="509" y="285" width="39" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="39" id="1UM-h3-PIh"/>
-                                </constraints>
+                                <rect key="frame" x="677" y="285" width="39" height="30"/>
                                 <state key="normal" title="Spiral"/>
                                 <connections>
                                     <action selector="dataset4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rnc-Qj-qgQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEW-hG-nns">
-                                <rect key="frame" x="458" y="285" width="43" height="30"/>
+                                <rect key="frame" x="626" y="285" width="43" height="30"/>
                                 <state key="normal" title="Linear"/>
                                 <connections>
                                     <action selector="dataset3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="APZ-g0-9Sl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSg-Vu-y5W">
-                                <rect key="frame" x="366" y="285" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="ZPh-q8-znR"/>
-                                </constraints>
+                                <rect key="frame" x="540" y="285" width="30" height="30"/>
                                 <state key="normal" title="Xor"/>
                                 <connections>
                                     <action selector="dataset1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dY0-KA-wpQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Tx-e6-Epe">
+                                <rect key="frame" x="637" y="323" width="37" height="30"/>
+                                <state key="normal" title="ReLU"/>
+                                <connections>
+                                    <action selector="activationReLU:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qmT-s9-deu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRC-sA-DL1">
+                                <rect key="frame" x="573" y="323" width="56" height="30"/>
+                                <state key="normal" title="Sigmoid"/>
+                                <connections>
+                                    <action selector="activationSigmoid:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WLa-Px-W0G"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAf-fj-8aV">
+                                <rect key="frame" x="682" y="323" width="34" height="30"/>
+                                <state key="normal" title="Tanh"/>
+                                <connections>
+                                    <action selector="activationTanh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7lu-eC-uhs"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YZb-u3-eD2">
+                                <rect key="frame" x="508" y="218" width="51" height="31"/>
+                                <connections>
+                                    <action selector="speedup:" destination="BYZ-38-t0r" eventType="valueChanged" id="Fu3-Wd-sRO"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="zie-PW-5as" secondAttribute="trailing" id="3T1-Le-dR1"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="width" secondItem="zie-PW-5as" secondAttribute="width" id="4Zl-SX-qF7"/>
                             <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="6Us-un-NHI"/>
+                            <constraint firstItem="YZb-u3-eD2" firstAttribute="bottom" secondItem="DZR-z9-Peg" secondAttribute="bottom" id="75y-mW-qtD"/>
                             <constraint firstItem="dh7-vb-pyS" firstAttribute="leading" secondItem="DZR-z9-Peg" secondAttribute="trailing" constant="8" id="9PJ-ln-YYM"/>
+                            <constraint firstItem="3Tx-e6-Epe" firstAttribute="leading" secondItem="RRC-sA-DL1" secondAttribute="trailing" constant="8" id="Abf-sd-OJk"/>
+                            <constraint firstItem="hEW-hG-nns" firstAttribute="top" secondItem="gwl-XC-lgo" secondAttribute="top" id="Icp-go-Zii"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gwl-XC-lgo" secondAttribute="trailing" id="MTc-ie-35Z"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DAf-fj-8aV" secondAttribute="trailing" id="NSb-z0-afS"/>
                             <constraint firstItem="gwl-XC-lgo" firstAttribute="top" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" id="Ohm-SJ-XyG"/>
+                            <constraint firstItem="RRC-sA-DL1" firstAttribute="top" secondItem="3Tx-e6-Epe" secondAttribute="top" id="PkX-mC-WYh"/>
+                            <constraint firstItem="DAf-fj-8aV" firstAttribute="leading" secondItem="3Tx-e6-Epe" secondAttribute="trailing" constant="8" id="RX3-Z0-XPn"/>
+                            <constraint firstItem="DAf-fj-8aV" firstAttribute="top" secondItem="gwl-XC-lgo" secondAttribute="bottom" constant="8" id="TE7-sH-XzJ"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="dh7-vb-pyS" secondAttribute="bottom" id="Tfc-TF-0jo"/>
-                            <constraint firstItem="fSg-Vu-y5W" firstAttribute="top" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" id="Tkg-vi-Son"/>
                             <constraint firstItem="DZR-z9-Peg" firstAttribute="bottom" secondItem="dh7-vb-pyS" secondAttribute="bottom" id="W57-JU-258"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="aNa-tT-4Kn"/>
                             <constraint firstItem="gwl-XC-lgo" firstAttribute="leading" secondItem="hEW-hG-nns" secondAttribute="trailing" constant="8" id="dWE-cO-dOA"/>
                             <constraint firstItem="hEW-hG-nns" firstAttribute="leading" secondItem="7hp-DZ-VCy" secondAttribute="trailing" constant="8" symbolic="YES" id="fH2-QJ-4bn"/>
                             <constraint firstItem="dh7-vb-pyS" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="10" id="hXn-CP-siF"/>
                             <constraint firstItem="dh7-vb-pyS" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="haz-cl-SU8"/>
-                            <constraint firstItem="7hp-DZ-VCy" firstAttribute="top" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" id="yj6-WW-3Rq"/>
+                            <constraint firstItem="3Tx-e6-Epe" firstAttribute="top" secondItem="DAf-fj-8aV" secondAttribute="top" id="lny-o7-eWk"/>
+                            <constraint firstItem="DZR-z9-Peg" firstAttribute="leading" secondItem="YZb-u3-eD2" secondAttribute="trailing" constant="8" id="mL6-YB-2VT"/>
+                            <constraint firstItem="fSg-Vu-y5W" firstAttribute="top" secondItem="7hp-DZ-VCy" secondAttribute="top" id="txh-Dk-erC"/>
+                            <constraint firstItem="7hp-DZ-VCy" firstAttribute="top" secondItem="hEW-hG-nns" secondAttribute="top" id="wuL-aI-4Sd"/>
                             <constraint firstItem="7hp-DZ-VCy" firstAttribute="leading" secondItem="fSg-Vu-y5W" secondAttribute="trailing" constant="8" id="z1S-N1-YF1"/>
-                            <constraint firstItem="hEW-hG-nns" firstAttribute="top" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" id="z8f-QE-the"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="fpsLabel" destination="J6l-2R-oE7" id="lgh-2s-ZVq"/>
                         <outlet property="heatMap" destination="zie-PW-5as" id="EUz-mc-KX6"/>
                         <outlet property="myswitch" destination="DZR-z9-Peg" id="LpM-Nh-Ozu"/>
                         <outlet property="outputLabel" destination="WYA-1I-afQ" id="YF7-wc-tbU"/>
+                        <outlet property="speedupswitch" destination="YZb-u3-eD2" id="t7J-vd-qVW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="50.5" y="374.5"/>
+            <point key="canvasLocation" x="50" y="374"/>
         </scene>
     </scenes>
 </document>
