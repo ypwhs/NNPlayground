@@ -402,33 +402,7 @@ double lastTrainTime = 0;
 
 extern int layers;
 
-- (IBAction)changeStepper:(UIStepper *)sender {
-    _myswitch.on = false;
-    always = false;
-    [NSThread sleepForTimeInterval:0.008];
-    
-    [networkLock lock];
-    
-    delete[] networkShape;
-    networkShape = new int[int(sender.value + 2)];
-    networkShape[0] = 2;
-    for(int i = 1; i < int(sender.value + 1); i++){
-        networkShape[i] = 8;
-    }
-    networkShape[int(sender.value + 1)] = 1;
-    layers = int(sender.value + 2);
-    
-    [networkLock unlock];
-    [self resetNetwork];
-}
-
-CGFloat screenScale = [UIScreen mainScreen].scale;
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    initColor();
-    [self dataset2:0];
-    
+-(void)initSpreadView{
     _spreadView = [SpreadView new];
     _spreadView.addLayer = ^{
         _myswitch.on = false;
@@ -449,7 +423,16 @@ CGFloat screenScale = [UIScreen mainScreen].scale;
         [networkLock unlock];
         [self resetNetwork];
     };
-    
+}
+
+CGFloat screenScale = [UIScreen mainScreen].scale;
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    initColor();
+    [self dataset2:0];
+    [self initSpreadView];
+
     UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpressAction:)];
     longpress.minimumPressDuration = 0.5;
     [_heatMap addGestureRecognizer:longpress];
