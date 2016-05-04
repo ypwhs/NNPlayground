@@ -429,6 +429,27 @@ CGFloat screenScale = [UIScreen mainScreen].scale;
     initColor();
     [self dataset2:0];
     
+    _spreadView = [SpreadView new];
+    _spreadView.addLayer = ^{
+        _myswitch.on = false;
+        always = false;
+        [NSThread sleepForTimeInterval:0.008];
+        
+        [networkLock lock];
+        
+        delete[] networkShape;
+        networkShape = new int[int(_spreadView.layers)];
+        networkShape[0] = 2;
+        for(int i = 1; i < int(_spreadView.layers - 1); i++){
+            networkShape[i] = 8;
+        }
+        networkShape[int(_spreadView.layers - 1)] = 1;
+        layers = int(_spreadView.layers);
+        
+        [networkLock unlock];
+        [self resetNetwork];
+    };
+    
     UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpressAction:)];
     longpress.minimumPressDuration = 0.5;
     [_heatMap addGestureRecognizer:longpress];
@@ -483,5 +504,12 @@ MBProgressHUD *hud;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+- (IBAction)createSpread:(ConfigureButton *)sender {
+    if (UIWindow *window = self.view.window) {
+        [_spreadView showInView:window];
+    }
+}
+
 
 @end

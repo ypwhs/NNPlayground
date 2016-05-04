@@ -116,6 +116,12 @@
                                     <action selector="speedup:" destination="BYZ-38-t0r" eventType="valueChanged" id="Fu3-Wd-sRO"/>
                                 </connections>
                             </switch>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7P-z9-49f" customClass="ConfigureButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="516" y="323" width="30" height="30"/>
+                                <connections>
+                                    <action selector="createSpread:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cdW-di-qNw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

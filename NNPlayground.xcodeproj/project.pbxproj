@@ -21,6 +21,15 @@
 		A19CD7791CC89DE700E8CDF9 /* Node.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7741CC89DE700E8CDF9 /* Node.mm */; };
 		A19CD77A1CC89DE700E8CDF9 /* Network.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7761CC89DE700E8CDF9 /* Network.mm */; };
 		A19CD77B1CC89DE700E8CDF9 /* Util.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7781CC89DE700E8CDF9 /* Util.mm */; };
+		AB6C37EE1CDA4D05004AAAE9 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37E91CDA4D05004AAAE9 /* AddButton.swift */; };
+		AB6C37EF1CDA4D05004AAAE9 /* ConfigureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37EA1CDA4D05004AAAE9 /* ConfigureButton.swift */; };
+		AB6C37F01CDA4D05004AAAE9 /* DropDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37EB1CDA4D05004AAAE9 /* DropDownButton.swift */; };
+		AB6C37F11CDA4D05004AAAE9 /* ResetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37EC1CDA4D05004AAAE9 /* ResetButton.swift */; };
+		AB6C37F21CDA4D05004AAAE9 /* RunButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37ED1CDA4D05004AAAE9 /* RunButton.swift */; };
+		AB6C37F51CDA4D15004AAAE9 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F31CDA4D15004AAAE9 /* DropDownCell.swift */; };
+		AB6C37F61CDA4D15004AAAE9 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6C37F41CDA4D15004AAAE9 /* DropDownCell.xib */; };
+		AB6C37F91CDA4D20004AAAE9 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */; };
+		AB6C37FA1CDA4D20004AAAE9 /* SpreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +77,15 @@
 		A19CD7761CC89DE700E8CDF9 /* Network.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Network.mm; sourceTree = "<group>"; };
 		A19CD7771CC89DE700E8CDF9 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		A19CD7781CC89DE700E8CDF9 /* Util.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Util.mm; sourceTree = "<group>"; };
+		AB6C37E91CDA4D05004AAAE9 /* AddButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddButton.swift; path = Views/Buttons/AddButton.swift; sourceTree = "<group>"; };
+		AB6C37EA1CDA4D05004AAAE9 /* ConfigureButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigureButton.swift; path = Views/Buttons/ConfigureButton.swift; sourceTree = "<group>"; };
+		AB6C37EB1CDA4D05004AAAE9 /* DropDownButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownButton.swift; path = Views/Buttons/DropDownButton.swift; sourceTree = "<group>"; };
+		AB6C37EC1CDA4D05004AAAE9 /* ResetButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetButton.swift; path = Views/Buttons/ResetButton.swift; sourceTree = "<group>"; };
+		AB6C37ED1CDA4D05004AAAE9 /* RunButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RunButton.swift; path = Views/Buttons/RunButton.swift; sourceTree = "<group>"; };
+		AB6C37F31CDA4D15004AAAE9 /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownCell.swift; path = Views/Cells/DropDownCell.swift; sourceTree = "<group>"; };
+		AB6C37F41CDA4D15004AAAE9 /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownCell.xib; path = Views/Cells/DropDownCell.xib; sourceTree = "<group>"; };
+		AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownView.swift; path = Views/DropDownView.swift; sourceTree = "<group>"; };
+		AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpreadView.swift; path = Views/SpreadView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +136,7 @@
 		A19CD73F1CC89D5300E8CDF9 /* NNPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				AB6C37E61CDA4CE4004AAAE9 /* Views */,
 				A19CD7731CC89DE700E8CDF9 /* Node.h */,
 				A19CD7741CC89DE700E8CDF9 /* Node.mm */,
 				A19CD7751CC89DE700E8CDF9 /* Network.h */,
@@ -166,6 +185,38 @@
 				A19CD7671CC89D5300E8CDF9 /* Info.plist */,
 			);
 			path = NNPlaygroundUITests;
+			sourceTree = "<group>";
+		};
+		AB6C37E61CDA4CE4004AAAE9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C37E71CDA4CED004AAAE9 /* Cells */,
+				AB6C37E81CDA4CF5004AAAE9 /* Buttons */,
+				AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */,
+				AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		AB6C37E71CDA4CED004AAAE9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C37F31CDA4D15004AAAE9 /* DropDownCell.swift */,
+				AB6C37F41CDA4D15004AAAE9 /* DropDownCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		AB6C37E81CDA4CF5004AAAE9 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C37E91CDA4D05004AAAE9 /* AddButton.swift */,
+				AB6C37EA1CDA4D05004AAAE9 /* ConfigureButton.swift */,
+				AB6C37EB1CDA4D05004AAAE9 /* DropDownButton.swift */,
+				AB6C37EC1CDA4D05004AAAE9 /* ResetButton.swift */,
+				AB6C37ED1CDA4D05004AAAE9 /* RunButton.swift */,
+			);
+			name = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +326,7 @@
 				A19CD7501CC89D5300E8CDF9 /* LaunchScreen.storyboard in Resources */,
 				A185E5FF1CCBD3A900CB8A4A /* Images.xcassets in Resources */,
 				A19CD74D1CC89D5300E8CDF9 /* Assets.xcassets in Resources */,
+				AB6C37F61CDA4D15004AAAE9 /* DropDownCell.xib in Resources */,
 				A19CD74B1CC89D5300E8CDF9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,11 +352,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB6C37EF1CDA4D05004AAAE9 /* ConfigureButton.swift in Sources */,
 				A19CD7481CC89D5300E8CDF9 /* ViewController.mm in Sources */,
 				A19CD7451CC89D5300E8CDF9 /* AppDelegate.m in Sources */,
+				AB6C37F01CDA4D05004AAAE9 /* DropDownButton.swift in Sources */,
 				A15F49E91CC8B14000409DA5 /* HeatMap.swift in Sources */,
+				AB6C37FA1CDA4D20004AAAE9 /* SpreadView.swift in Sources */,
+				AB6C37EE1CDA4D05004AAAE9 /* AddButton.swift in Sources */,
 				A19CD7421CC89D5300E8CDF9 /* main.m in Sources */,
+				AB6C37F21CDA4D05004AAAE9 /* RunButton.swift in Sources */,
+				AB6C37F11CDA4D05004AAAE9 /* ResetButton.swift in Sources */,
 				A19CD77B1CC89DE700E8CDF9 /* Util.mm in Sources */,
+				AB6C37F51CDA4D15004AAAE9 /* DropDownCell.swift in Sources */,
+				AB6C37F91CDA4D20004AAAE9 /* DropDownView.swift in Sources */,
 				A19CD77A1CC89DE700E8CDF9 /* Network.mm in Sources */,
 				A19CD7791CC89DE700E8CDF9 /* Node.mm in Sources */,
 				A12F039E1CD49BA100CA4890 /* MBProgressHUD.m in Sources */,

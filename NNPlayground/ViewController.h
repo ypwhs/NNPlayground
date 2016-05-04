@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *fpsLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *myswitch;
 @property (weak, nonatomic) IBOutlet UISwitch *speedupswitch;
+@property (nonatomic, strong) SpreadView *spreadView;
 
 @end
 
