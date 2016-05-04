@@ -30,6 +30,7 @@
 		AB6C37F61CDA4D15004AAAE9 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6C37F41CDA4D15004AAAE9 /* DropDownCell.xib */; };
 		AB6C37F91CDA4D20004AAAE9 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */; };
 		AB6C37FA1CDA4D20004AAAE9 /* SpreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */; };
+		AB6C37FC1CDA5108004AAAE9 /* SpreadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6C37FB1CDA5108004AAAE9 /* SpreadView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		AB6C37F41CDA4D15004AAAE9 /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownCell.xib; path = Views/Cells/DropDownCell.xib; sourceTree = "<group>"; };
 		AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownView.swift; path = Views/DropDownView.swift; sourceTree = "<group>"; };
 		AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpreadView.swift; path = Views/SpreadView.swift; sourceTree = "<group>"; };
+		AB6C37FB1CDA5108004AAAE9 /* SpreadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpreadView.xib; path = Views/SpreadView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 				AB6C37E81CDA4CF5004AAAE9 /* Buttons */,
 				AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */,
 				AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */,
+				AB6C37FB1CDA5108004AAAE9 /* SpreadView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A19CD7501CC89D5300E8CDF9 /* LaunchScreen.storyboard in Resources */,
+				AB6C37FC1CDA5108004AAAE9 /* SpreadView.xib in Resources */,
 				A185E5FF1CCBD3A900CB8A4A /* Images.xcassets in Resources */,
 				A19CD74D1CC89D5300E8CDF9 /* Assets.xcassets in Resources */,
 				AB6C37F61CDA4D15004AAAE9 /* DropDownCell.xib in Resources */,

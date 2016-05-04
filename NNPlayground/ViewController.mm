@@ -403,7 +403,9 @@ double lastTrainTime = 0;
 extern int layers;
 
 -(void)initSpreadView{
-    _spreadView = [SpreadView new];
+    //view.registerNib(UINib(nibName: "DropDownCell", bundle: nil), forCellReuseIdentifier: "DropDownCell")
+    NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"SpreadView" owner:self options:nil];
+    _spreadView = [nib objectAtIndex:0];
     _spreadView.addLayer = ^{
         _myswitch.on = false;
         always = false;
