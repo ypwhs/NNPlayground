@@ -156,7 +156,6 @@ void dataset_spiral(){
     _myswitch.on = false;
     always = false;
     learningRate = 0.01;
-    batch = 5;
     maxfps = 120;
     [self resetNetwork];
 }
@@ -165,7 +164,7 @@ void dataset_spiral(){
     if(sender.on){
         batch = 120;
     }else{
-        batch = 5;
+        batch = 9;
     }
 }
 
@@ -345,7 +344,7 @@ UIImage * image;
 bool always = false;
 NSString * toShow;
 NSString * fpsString;
-int batch = 60;
+int batch = 9;
 int epoch = 0;
 int lastEpoch = 0;
 int speed = 0;
@@ -353,7 +352,7 @@ double lastEpochTime = [NSDate date].timeIntervalSince1970;
 - (void)onestep{
     [networkLock lock];
     
-    epoch += 1;
+    epoch += batch;
     double loss = 0;
     for(int n = 0; n < batch; n++){
         for (int i = 0; i < DATA_NUM; i++) {
