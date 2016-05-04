@@ -70,6 +70,14 @@ NSLock * networkLock = [[NSLock alloc] init];
     [networkLock unlock];
     [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
     
+    //保存数据点截图
+//    _fpsLabel.text = @"";
+//    UIGraphicsBeginImageContextWithOptions(_heatMap.bounds.size, NO, 0);
+//    [_heatMap.dataLayer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    
     delete oldNetwork;
     toShow = [NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM, epoch];
     _outputLabel.text = toShow;
@@ -117,8 +125,8 @@ double normalRandom(double mean, double variance){
 void dataset_twoGaussData(){
     for(int i = 0; i < DATA_NUM; i++){
         y[i] = i > DATA_NUM/2 ? 1 : -1;
-        x1[i] = normalRandom(y[i] * 0.4, 0.1);
-        x2[i] = normalRandom(y[i] * 0.4, 0.1);
+        x1[i] = normalRandom(y[i] * 0.4, 0.15);
+        x2[i] = normalRandom(y[i] * 0.4, 0.15);
     }
 }
 
