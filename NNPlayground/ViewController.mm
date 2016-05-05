@@ -421,6 +421,22 @@ double lastTrainTime = 0;
     //view.registerNib(UINib(nibName: "DropDownCell", bundle: nil), forCellReuseIdentifier: "DropDownCell")
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"SpreadView" owner:self options:nil];
     _spreadView = [nib objectAtIndex:0];
+    _spreadView.setCircleData = ^{
+        dataset_circle();
+        [self reset];
+    };
+    _spreadView.setExclusiveOrData = ^{
+        dataset_circle();
+        [self reset];
+    };
+    _spreadView.setGaussianData = ^{
+        dataset_twoGaussData();
+        [self reset];
+    };
+    _spreadView.setSpiralData = ^{
+        dataset_spiral();
+        [self reset];
+    };
     _spreadView.addLayer = ^{
         _myswitch.on = false;
         always = false;

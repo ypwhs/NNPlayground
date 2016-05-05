@@ -39,6 +39,25 @@ class SpreadView: UIView {
         return views
     }()
     
+    // MARK: - SetData
+    var setCircleData: (() -> Void)?
+    var setExclusiveOrData: (() -> Void)?
+    var setGaussianData: (() -> Void)?
+    var setSpiralData: (() -> Void)?
+    
+    @IBAction func setCircle(sender: UIButton) {
+        setCircleData?()
+    }
+    @IBAction func setExclusiveOr(sender: UIButton) {
+        setExclusiveOrData?()
+    }
+    @IBAction func setGaussian(sender: UIButton) {
+        setGaussianData?()
+    }
+    @IBAction func setSpiral(sender: UIButton) {
+        setSpiralData?()
+    }    
+    
     // MARK: - AddLayer
     var addLayer: (() -> Void)?
     
@@ -205,8 +224,7 @@ class SpreadView: UIView {
     }
     
     func makeUI() {
-        print("\(learningRateButton.titleLabel)")
-        print("\(learningRateButton.frame)")
+        
         for i in 0...5 {
             self.addSubview(addNodeButton[i])
             self.addSubview(subNodeButton[i])

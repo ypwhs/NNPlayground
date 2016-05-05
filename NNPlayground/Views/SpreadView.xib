@@ -94,32 +94,44 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1s7-Nq-d30">
                     <rect key="frame" x="10" y="47" width="27" height="27"/>
-                    <color key="backgroundColor" red="0.19377315532060957" green="0.31361438139445785" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="1s7-Nq-d30" secondAttribute="height" multiplier="1:1" id="yhr-19-hk4"/>
                     </constraints>
+                    <state key="normal" backgroundImage="CircleData"/>
+                    <connections>
+                        <action selector="setCircle:" destination="iN0-l3-epB" eventType="touchUpInside" id="qqD-nD-zjg"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ut-zU-vXX">
                     <rect key="frame" x="47" y="47" width="27" height="27"/>
-                    <color key="backgroundColor" red="0.1937731553" green="0.31361438139999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="9ut-zU-vXX" secondAttribute="height" multiplier="1:1" id="hno-LC-vXa"/>
                     </constraints>
+                    <state key="normal" backgroundImage="ExclusiveOrData"/>
+                    <connections>
+                        <action selector="setExclusiveOr:" destination="iN0-l3-epB" eventType="touchUpInside" id="TNP-Hw-oXv"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWs-vb-uXG">
                     <rect key="frame" x="10" y="84" width="27" height="27"/>
-                    <color key="backgroundColor" red="0.1937731553" green="0.31361438139999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="tWs-vb-uXG" secondAttribute="height" multiplier="1:1" id="mpk-Dy-EkX"/>
                     </constraints>
+                    <state key="normal" backgroundImage="GaussianData"/>
+                    <connections>
+                        <action selector="setGaussian:" destination="iN0-l3-epB" eventType="touchUpInside" id="lNv-HC-vlw"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUN-he-QAE">
                     <rect key="frame" x="47" y="84" width="27" height="27"/>
-                    <color key="backgroundColor" red="0.1937731553" green="0.31361438139999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="CUN-he-QAE" secondAttribute="height" multiplier="1:1" id="Fj4-nq-3XN"/>
                         <constraint firstAttribute="width" secondItem="CUN-he-QAE" secondAttribute="height" multiplier="1:1" id="woX-z2-Dlm"/>
                     </constraints>
+                    <state key="normal" backgroundImage="SpiralData"/>
+                    <connections>
+                        <action selector="setSpiral:" destination="iN0-l3-epB" eventType="touchUpInside" id="0VL-Hz-NvG"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="maW-eY-OTH" customClass="DropDownButton" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="482" y="10" width="108" height="27"/>
@@ -192,4 +204,10 @@
             </connections>
         </view>
     </objects>
+    <resources>
+        <image name="CircleData" width="600" height="600"/>
+        <image name="ExclusiveOrData" width="600" height="600"/>
+        <image name="GaussianData" width="600" height="600"/>
+        <image name="SpiralData" width="600" height="600"/>
+    </resources>
 </document>
