@@ -8,6 +8,7 @@
 
 #include "Node.h"
 
+//更新输出
 double Node::updateOutput() {
     totalInput = bias;
     for (int i = 0; i < inputLinks.size(); i++) {

@@ -153,8 +153,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "363"
             endingLineNumber = "363"
-            landmarkName = "-onestep"
-            landmarkType = "5">
+            landmarkName = "@implementation ViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -281,7 +281,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "406"
             endingLineNumber = "406"
-            landmarkName = "-changeSwitch:"
+            landmarkName = "-train"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -308,11 +308,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NNPlayground/Node.mm"
-            timestampString = "483517924.140279"
+            timestampString = "484124937.660798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "Node::getImage()"
             landmarkType = "5">
             <Locations>
@@ -372,12 +372,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NNPlayground/Node.mm"
-            timestampString = "483517924.140279"
+            timestampString = "484124937.660798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "Node::getImage()"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "Node::updateVisibility()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NNPlayground/ViewController.mm"
+            timestampString = "484124907.944507"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
+            landmarkName = "-initSpreadView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

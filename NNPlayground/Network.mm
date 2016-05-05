@@ -77,7 +77,6 @@ Network::Network(int ns[], int ls, ActivationFunction _activation, Regularizatio
             node->layer = layerIdx + 1; //tag this node
             node->id = i + 1;
             node->outputBitmap = new unsigned int[node->imageWidth * node->imageWidth];
-            node->imageBytes = 4 * node->imageWidth * node->imageWidth;
             if (layerIdx >= 1) {
                 // Add links from nodes in the previous layer to this node.
                 for (int j = 0; j < network[layerIdx - 1]->size(); j++) {

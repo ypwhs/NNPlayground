@@ -417,8 +417,6 @@ double lastTrainTime = 0;
     [self xiancheng:^{[self train];}];
 }
 
-extern int layers;
-
 -(void)initSpreadView{
     //view.registerNib(UINib(nibName: "DropDownCell", bundle: nil), forCellReuseIdentifier: "DropDownCell")
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"SpreadView" owner:self options:nil];

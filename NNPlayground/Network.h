@@ -14,11 +14,11 @@
 
 class Network{
 public:
-    vector<vector<Node*>*> network;
-    vector<int> networkShape;
-    int numLayers;
-    ActivationFunction activation;
-    RegularizationFunction regularzation;
+    vector<vector<Node*>*> network; //Node二维数组
+    vector<int> networkShape;   //网络形状
+    int numLayers;  //层数
+    ActivationFunction activation;  //激活函数
+    RegularizationFunction regularzation;   //正则函数
     Network(int ns[], int ls, ActivationFunction activation, RegularizationFunction regularzation);
     ~Network();
     double forwardProp(double inputs[], int inputSize);
