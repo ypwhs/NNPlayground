@@ -9,7 +9,6 @@
 #include "Node.h"
 
 double Node::updateOutput() {
-    // Stores total input into the node.
     totalInput = bias;
     for (int i = 0; i < inputLinks.size(); i++) {
         auto link = inputLinks[i];
@@ -20,16 +19,13 @@ double Node::updateOutput() {
 }
 
 void Node::updateOutput(int x, int y) {
-    totalInput = bias;
-    for (int i = 0; i < inputLinks.size(); i++) {
-        auto link = inputLinks[i];
-        totalInput += link->weight * link->source->output;
-    }
-    output = activation.output(totalInput);
+    updateOutput();
+    //更新outputBitmap(HeatMap)
     int bitmapIndex = (imageWidth-1-y)*imageWidth + x;
     outputBitmap[bitmapIndex] = getColor(-output);
 }
 
+//更新bitmap某个像素点
 void Node::updateBitmapPixel(int x, int y, double value){
     int bitmapIndex = (imageWidth-1-y)*imageWidth + x;
     outputBitmap[bitmapIndex] = getColor(-value);
@@ -47,6 +43,7 @@ Node::~Node(){
     delete outputBitmap;
 }
 
+//获取图像
 UIImage * Node::getImage(){
     CGContextRef nodeBitmapContext = CGBitmapContextCreate(outputBitmap, imageWidth, imageWidth, 8, 4*imageWidth, CGColorSpaceCreateDeviceRGB(), kCGBitmapByteOrder32Big | kCGImageAlphaNoneSkipLast);
     CGImageRef nodeImageRef = CGBitmapContextCreateImage(nodeBitmapContext);
@@ -56,6 +53,7 @@ UIImage * Node::getImage(){
     return nodeImage;
 }
 
+//更新结点可见性（隐藏层小于3时）
 void Node::updateVisibility(){
     double outputWeight = 0, inputWeight = 0;
     for(int i = 0; i < outputs.size(); i++){
@@ -83,6 +81,7 @@ void Node::updateVisibility(){
     }
 }
 
+//初始化结点UI
 void Node::initNodeLayer(CGRect frame){
     CGFloat ndoeWidth = frame.size.width;
     CGFloat triangleWidth = ndoeWidth/10;
@@ -111,27 +110,25 @@ void Node::initNodeLayer(CGRect frame){
     [triangle addLineToPoint:p2];
     [triangle addLineToPoint:p3];
     [triangle closePath];
-    
     [triangleLayer setPath:triangle.CGPath];
     [triangleLayer setFillColor:[UIColor blackColor].CGColor];
 }
 
+//初始化连接线
 void Link::initCurve(){
-    //add curve line
     Node * node1 = source;
     Node * node2 = dest;
     CGRect frame1 = node1->nodeLayer.frame;
     CGRect frame2 = node2->nodeLayer.frame;
     
-    //贝塞尔曲线
+    CGFloat d = frame2.size.height/15;  //上下两条link的间距
+    d = d > 4 ? 4 : d;
     CGPoint point1 = CGPointMake(frame1.origin.x + frame1.size.width, frame1.origin.y + frame1.size.height/2);
-    
-    CGFloat width = frame2.size.height/15;//上下两条link的间距
-    width = width > 4 ? 4 : width;
-    CGPoint point2 = CGPointMake(frame2.origin.x, frame2.origin.y + frame2.size.height/2 - 5*width + node1->id * width);
+    CGPoint point2 = CGPointMake(frame2.origin.x, frame2.origin.y + frame2.size.height/2 - 5*d + node1->id * d);
     CGPoint controlPoint1 = CGPointMake(point1.x + (point2.x-point1.x)/2, point1.y);
     CGPoint controlPoint2 = CGPointMake(point1.x + (point2.x-point1.x)/2, point2.y);
     
+    //贝塞尔曲线
     UIBezierPath * curve = [UIBezierPath bezierPath];
     [curve moveToPoint:point1];
     [curve addCurveToPoint:point2 controlPoint1:controlPoint1 controlPoint2:controlPoint2];
@@ -146,6 +143,7 @@ Link::~Link(){
     [curveLayer removeFromSuperlayer];
 }
 
+//更新曲线颜色
 void Link::updateCurve(){
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];

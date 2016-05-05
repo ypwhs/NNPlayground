@@ -214,35 +214,12 @@ int maxfps = 120;
 }
 
 //*************************** Heatmap ***************************
-UIImage * bigOutputImage;
-int bigOutputImageWidth = 512;
-unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImageWidth];
-- (void)generateBigOutputImage{
-    bigOutputImage = nil;
-    double hwidth = bigOutputImageWidth/2;
-    for(int y = 0; y < bigOutputImageWidth; y++){
-        for(int x = 0; x < bigOutputImageWidth; x++){
-            inputs[0] = (x - hwidth)/hwidth;
-            inputs[1] = (y - hwidth)/hwidth;
-            double output = network->forwardProp(inputs, 2);
-            outputBitmap[(bigOutputImageWidth-1-y)*bigOutputImageWidth + x] = getColor(-output);
-        }
-        [self ui:^{
-            hud.progress = (double)y/bigOutputImageWidth;
-        }];
-    }
-    CGContextRef bitmapContext = CGBitmapContextCreate(outputBitmap, bigOutputImageWidth, bigOutputImageWidth, 8, 4*bigOutputImageWidth, CGColorSpaceCreateDeviceRGB(), kCGBitmapByteOrder32Big | kCGImageAlphaNoneSkipLast);
-    CGImageRef imageRef = CGBitmapContextCreateImage(bitmapContext);
-    bigOutputImage = [UIImage imageWithCGImage:imageRef];
-    CGContextRelease(bitmapContext);
-    CGImageRelease(imageRef);
-}
 
 UIImage * image;
 - (void) getHeatData{
     [networkLock lock];
     
-    //用100*100网络获取每个节点的输出
+    //用100*100网络获取每个结点的输出
     for(int j = 0; j < 100; j++){
         for(int i = 0; i < 100; i++){
             inputs[0] = (i - 50.0)/50;
@@ -288,20 +265,49 @@ UIImage * image;
     [networkLock unlock];
 }
 
-//初始化每个节点的图像层（CALayer）
+
+//获取大图
+UIImage * bigOutputImage;
+int bigOutputImageWidth = 512;
+unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImageWidth];
+
+- (void)generateBigOutputImage{
+    bigOutputImage = nil;
+    double halfWidth = bigOutputImageWidth/2;
+    for(int y = 0; y < bigOutputImageWidth; y++){
+        for(int x = 0; x < bigOutputImageWidth; x++){
+            inputs[0] = (x - halfWidth)/halfWidth;
+            inputs[1] = (y - halfWidth)/halfWidth;
+            double output = network->forwardProp(inputs, 2);
+            outputBitmap[(bigOutputImageWidth-1-y)*bigOutputImageWidth + x] = getColor(-output);
+        }
+        [self ui:^{
+            hud.progress = (double)y/bigOutputImageWidth;
+        }];
+    }
+    CGContextRef bitmapContext = CGBitmapContextCreate(outputBitmap, bigOutputImageWidth, bigOutputImageWidth, 8, 4*bigOutputImageWidth, CGColorSpaceCreateDeviceRGB(), kCGBitmapByteOrder32Big | kCGImageAlphaNoneSkipLast);
+    CGImageRef imageRef = CGBitmapContextCreateImage(bitmapContext);
+    bigOutputImage = [UIImage imageWithCGImage:imageRef];
+    CGContextRelease(bitmapContext);
+    CGImageRelease(imageRef);
+}
+
+
+
+//初始化每个结点的图像层（CALayer）
 - (void) initNodeLayer{
     [networkLock lock];
     
     CGRect frame = _heatMap.frame;
-    (*network->network[layers - 1])[0]->initNodeLayer(frame);   //将heatmap的frame设置到网络的输出节点
+    (*network->network[layers - 1])[0]->initNodeLayer(frame);   //将heatmap的frame设置到网络的输出结点
     
     //计算各个坐标
-    CGFloat margin = _heatMap.frame.origin.y;   //将heatmap的y坐标用于第一个节点的x,y坐标
+    CGFloat margin = _heatMap.frame.origin.y;   //将heatmap的y坐标用于第一个结点的x,y坐标
     CGFloat x = margin;
     CGFloat y = margin;
     
     CGFloat width = frame.origin.x - margin;
-    width /= layers - 1;    //两个节点的x坐标差
+    width /= layers - 1;    //两个结点的x坐标差
     
     CGFloat height = self.view.frame.size.height - margin;
     height /= 8;
@@ -323,6 +329,8 @@ UIImage * image;
     [self getHeatData];
     
     [networkLock lock];
+    
+    //将每个结点的layer，每个连接线的layer都插入到view中
     for(int i = 0; i < layers - 1; i++){
         for(int j = 0; j < networkShape[i]; j++){
             Node * node = (*network->network[i])[j];
@@ -357,10 +365,11 @@ int epoch = 0;
 int lastEpoch = 0;
 int speed = 0;
 double lastEpochTime = [NSDate date].timeIntervalSince1970;
+
 - (void)onestep{
     [networkLock lock];
     
-    epoch += batch;
+    //进行batch轮训练
     double loss = 0;
     for(int n = 0; n < batch; n++){
         for (int i = 0; i < DATA_NUM; i++) {
@@ -372,6 +381,8 @@ double lastEpochTime = [NSDate date].timeIntervalSince1970;
         }
         network->updateWeights(learningRate, 0);
     }
+    epoch += batch;
+    [networkLock unlock];
     
     double now = [NSDate date].timeIntervalSince1970;
     speed = 1.0/(now - lastEpochTime);
@@ -379,8 +390,6 @@ double lastEpochTime = [NSDate date].timeIntervalSince1970;
     
     toShow = [NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM/batch, epoch];
     fpsString = [NSString stringWithFormat:@"fps:%d", speed];
-
-    [networkLock unlock];
     
     [self getHeatData];
     [self ui:^{
