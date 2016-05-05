@@ -25,14 +25,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="o3R-Dc-l3K">
-                        <rect key="frame" x="76" y="4" width="16" height="16"/>
+                        <rect key="frame" x="73" y="4" width="16" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="o3R-Dc-l3K" secondAttribute="height" multiplier="1:1" id="sFW-Vq-sZa"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="o3R-Dc-l3K" secondAttribute="trailing" constant="4" id="7IV-3O-AOP"/>
+                    <constraint firstAttribute="trailing" secondItem="o3R-Dc-l3K" secondAttribute="trailing" constant="7" id="7IV-3O-AOP"/>
                     <constraint firstAttribute="bottom" secondItem="TGM-YF-B6P" secondAttribute="bottom" id="83g-eZ-THY"/>
                     <constraint firstItem="TGM-YF-B6P" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Jo7-Uy-Ghd"/>
                     <constraint firstItem="TGM-YF-B6P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Q9F-PI-0Zj"/>

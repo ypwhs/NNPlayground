@@ -65,9 +65,15 @@ class SpreadView: UIView {
     }
 
     // MARK: - DropDown
+    @IBOutlet weak var learningRateButton: DropDownButton!
+    
     private lazy var learningRateDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["0.00001","0.0001","0.001","0.003","0.01","0.03","0.1","0.3","1","3","10"]
+        view.showSelectedLabel = {(name: String) in
+            self.learningRateButton.setTitle(name, forState: .Normal)
+            view.hide()
+        }
         view.labelIsSelected = 5
         return view
     }()
@@ -78,9 +84,16 @@ class SpreadView: UIView {
         }
     }
     
+    
+    @IBOutlet weak var activationButton: DropDownButton!
+    
     private lazy var activationDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["ReLU","Tanh","Sigmoid","Linear"]
+        view.showSelectedLabel = {(name: String) in
+            self.activationButton.setTitle(name, forState: .Normal)
+            view.hide()
+        }
         view.labelIsSelected = 1
         return view
     }()
@@ -91,9 +104,16 @@ class SpreadView: UIView {
         }
     }
     
+    
+    @IBOutlet weak var regularizationButton: DropDownButton!
+    
     private lazy var regularizationDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["None","L1","L2"]
+        view.showSelectedLabel = {(name: String) in
+            self.regularizationButton.setTitle(name, forState: .Normal)
+            view.hide()
+        }
         view.labelIsSelected = 0
         return view
     }()
@@ -104,9 +124,16 @@ class SpreadView: UIView {
         }
     }
     
+    
+    @IBOutlet weak var regularizationRateButton: DropDownButton!
+    
     private lazy var regularizationRateDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["0","0.001","0.003","0.01","0.03","0.1","0.3","1","3","10"]
+        view.showSelectedLabel = {(name: String) in
+            self.regularizationRateButton.setTitle(name, forState: .Normal)
+            view.hide()
+        }
         view.labelIsSelected = 0
         return view
     }()
@@ -117,9 +144,16 @@ class SpreadView: UIView {
         }
     }
     
+    
+    @IBOutlet weak var problemTypeButton: DropDownButton!
+    
     private lazy var problemTypeDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["Classification","Regression"]
+        view.showSelectedLabel = {(name: String) in
+            self.problemTypeButton.setTitle(name, forState: .Normal)
+            view.hide()
+        }
         view.labelIsSelected = 0
         return view
     }()
@@ -171,7 +205,8 @@ class SpreadView: UIView {
     }
     
     func makeUI() {
-                
+        print("\(learningRateButton.titleLabel)")
+        print("\(learningRateButton.frame)")
         for i in 0...5 {
             self.addSubview(addNodeButton[i])
             self.addSubview(subNodeButton[i])

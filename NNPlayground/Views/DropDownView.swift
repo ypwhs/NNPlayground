@@ -15,6 +15,7 @@ class DropDownView: UIView {
     var labelIsSelected = 0
     
     var dropDownButton:DropDownButton?
+    var showSelectedLabel: ((name: String) -> Void)?
     
     lazy var containerView: UIView = {
         let view = UIView()
@@ -156,5 +157,17 @@ extension DropDownView: UITableViewDataSource, UITableViewDelegate {
         }
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        defer {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+        
+        (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: labelIsSelected, inSection: 0)) as! DropDownCell).isSelectedImage.hidden = true
+        labelIsSelected = indexPath.row
+        (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: labelIsSelected, inSection: 0)) as! DropDownCell).isSelectedImage.hidden = false
+        
+        showSelectedLabel!(name: "\(labelName[indexPath.row])")
     }
 }

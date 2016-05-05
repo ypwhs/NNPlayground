@@ -16,7 +16,7 @@ class DropDownButton: UIButton {
     override func drawRect(rect: CGRect) {
         //title左对齐
         self.contentHorizontalAlignment = .Left
-        self.contentEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0)
+        self.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
         
         let path = UIBezierPath(rect: rect)
         fillColor.setFill()

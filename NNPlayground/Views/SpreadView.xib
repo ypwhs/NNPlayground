@@ -17,6 +17,8 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="x0o-NZ-BgK" secondAttribute="height" multiplier="4:1" id="AV3-Yy-pz1"/>
                     </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                    <state key="normal" title="0.03"/>
                     <connections>
                         <action selector="learningRateDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="AxH-BM-xPl"/>
                     </connections>
@@ -26,6 +28,7 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="mjJ-aY-Y1O" secondAttribute="height" multiplier="4:1" id="isM-hW-rwV"/>
                     </constraints>
+                    <state key="normal" title="Tanh"/>
                     <connections>
                         <action selector="activationDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="cQe-4z-llh"/>
                     </connections>
@@ -35,6 +38,7 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="n5I-wD-LN0" secondAttribute="height" multiplier="4:1" id="zny-wT-qCJ"/>
                     </constraints>
+                    <state key="normal" title="None"/>
                     <connections>
                         <action selector="regularizationDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="13g-wV-Mu6"/>
                     </connections>
@@ -44,6 +48,7 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="mul-yL-jyk" secondAttribute="height" multiplier="4:1" id="Uit-dZ-nN3"/>
                     </constraints>
+                    <state key="normal" title="0"/>
                     <connections>
                         <action selector="regularizationRateDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="dox-HR-psV"/>
                     </connections>
@@ -121,6 +126,7 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="maW-eY-OTH" secondAttribute="height" multiplier="4:1" id="e1S-no-na1"/>
                     </constraints>
+                    <state key="normal" title="Classification"/>
                     <connections>
                         <action selector="problemTypeDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="fPa-s1-Q0P"/>
                     </connections>
@@ -177,6 +183,13 @@
                 <constraint firstAttribute="bottom" secondItem="bbM-tD-nBE" secondAttribute="bottom" constant="10" id="viz-DH-K1r"/>
                 <constraint firstItem="ntt-EQ-Czi" firstAttribute="top" secondItem="CUN-he-QAE" secondAttribute="bottom" constant="10" id="woZ-bn-OfF"/>
             </constraints>
+            <connections>
+                <outlet property="activationButton" destination="mjJ-aY-Y1O" id="Cgn-3k-2DQ"/>
+                <outlet property="learningRateButton" destination="x0o-NZ-BgK" id="i0d-gL-Vp8"/>
+                <outlet property="problemTypeButton" destination="maW-eY-OTH" id="5Za-H0-jih"/>
+                <outlet property="regularizationButton" destination="n5I-wD-LN0" id="L8z-sy-ld8"/>
+                <outlet property="regularizationRateButton" destination="mul-yL-jyk" id="qdR-1K-MdW"/>
+            </connections>
         </view>
     </objects>
 </document>
