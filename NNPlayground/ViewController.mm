@@ -439,6 +439,9 @@ double lastTrainTime = 0;
         [strongSelf reset];
     };
     
+    _spreadView.setLearningRate = ^(NSInteger num){
+        
+    };
     _spreadView.setActivation = ^(NSInteger num){
         switch (num) {
             case 0:
@@ -454,9 +457,19 @@ double lastTrainTime = 0;
                 [strongSelf reset];
                 learningRate = 0.3;
                 break;
+            // 缺一个Linear
             default:
                 break;
         }
+    };
+    _spreadView.setRegularization = ^(NSInteger num){
+        
+    };
+    _spreadView.setRegularizationRate = ^(NSInteger num){
+        
+    };
+    _spreadView.setProblemType = ^(NSInteger num){
+        
     };
     
     _spreadView.addLayer = ^{

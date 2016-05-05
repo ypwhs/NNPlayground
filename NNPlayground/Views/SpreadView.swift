@@ -85,13 +85,14 @@ class SpreadView: UIView {
 
     // MARK: - DropDown
     @IBOutlet weak var learningRateButton: DropDownButton!
-    
+    var setLearningRate: ((num: Int) -> Void)?
     private lazy var learningRateDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["0.00001","0.0001","0.001","0.003","0.01","0.03","0.1","0.3","1","3","10"]
         view.showSelectedLabel = {(name: String, num: Int) in
             self.learningRateButton.setTitle(name, forState: .Normal)
             view.hide()
+            self.setLearningRate?(num: num)
         }
         view.labelIsSelected = 5
         return view
@@ -126,13 +127,14 @@ class SpreadView: UIView {
     
     
     @IBOutlet weak var regularizationButton: DropDownButton!
-    
+    var setRegularization: ((num: Int) -> Void)?
     private lazy var regularizationDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["None","L1","L2"]
         view.showSelectedLabel = {(name: String, num: Int) in
             self.regularizationButton.setTitle(name, forState: .Normal)
             view.hide()
+            self.setRegularization?(num: num)
         }
         view.labelIsSelected = 0
         return view
@@ -146,13 +148,14 @@ class SpreadView: UIView {
     
     
     @IBOutlet weak var regularizationRateButton: DropDownButton!
-    
+    var setRegularizationRate: ((num: Int) -> Void)?
     private lazy var regularizationRateDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["0","0.001","0.003","0.01","0.03","0.1","0.3","1","3","10"]
         view.showSelectedLabel = {(name: String, num: Int) in
             self.regularizationRateButton.setTitle(name, forState: .Normal)
             view.hide()
+            self.setRegularizationRate?(num: num)
         }
         view.labelIsSelected = 0
         return view
@@ -166,13 +169,14 @@ class SpreadView: UIView {
     
     
     @IBOutlet weak var problemTypeButton: DropDownButton!
-    
+    var setProblemType: ((num: Int) -> Void)?
     private lazy var problemTypeDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["Classification","Regression"]
         view.showSelectedLabel = {(name: String, num: Int) in
             self.problemTypeButton.setTitle(name, forState: .Normal)
             view.hide()
+            self.setProblemType?(num: num)
         }
         view.labelIsSelected = 0
         return view
