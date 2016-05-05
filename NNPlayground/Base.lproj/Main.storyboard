@@ -46,61 +46,12 @@
                                     <action selector="changeSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="B56-fD-TsN"/>
                                 </connections>
                             </switch>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hp-DZ-VCy">
-                                <rect key="frame" x="578" y="268" width="40" height="30"/>
-                                <state key="normal" title="Circle"/>
-                                <connections>
-                                    <action selector="dataset2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0ia-8o-Y56"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loss:0.123,Epoch:1234" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYA-1I-afQ">
                                 <rect key="frame" x="516" y="249" width="200" height="19"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwl-XC-lgo">
-                                <rect key="frame" x="677" y="268" width="39" height="30"/>
-                                <state key="normal" title="Spiral"/>
-                                <connections>
-                                    <action selector="dataset4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rnc-Qj-qgQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEW-hG-nns">
-                                <rect key="frame" x="626" y="268" width="43" height="30"/>
-                                <state key="normal" title="Linear"/>
-                                <connections>
-                                    <action selector="dataset3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="APZ-g0-9Sl"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSg-Vu-y5W">
-                                <rect key="frame" x="540" y="268" width="30" height="30"/>
-                                <state key="normal" title="Xor"/>
-                                <connections>
-                                    <action selector="dataset1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dY0-KA-wpQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Tx-e6-Epe">
-                                <rect key="frame" x="637" y="298" width="37" height="30"/>
-                                <state key="normal" title="ReLU"/>
-                                <connections>
-                                    <action selector="activationReLU:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qmT-s9-deu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRC-sA-DL1">
-                                <rect key="frame" x="573" y="298" width="56" height="30"/>
-                                <state key="normal" title="Sigmoid"/>
-                                <connections>
-                                    <action selector="activationSigmoid:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WLa-Px-W0G"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAf-fj-8aV">
-                                <rect key="frame" x="682" y="298" width="34" height="30"/>
-                                <state key="normal" title="Tanh"/>
-                                <connections>
-                                    <action selector="activationTanh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7lu-eC-uhs"/>
-                                </connections>
-                            </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YZb-u3-eD2">
                                 <rect key="frame" x="610" y="218" width="51" height="31"/>
                                 <connections>
@@ -108,7 +59,7 @@
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7P-z9-49f" customClass="ConfigureButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="516" y="298" width="30" height="30"/>
+                                <rect key="frame" x="572" y="219" width="30" height="30"/>
                                 <connections>
                                     <action selector="createSpread:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cdW-di-qNw"/>
                                 </connections>
@@ -116,31 +67,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="x7P-z9-49f" secondAttribute="bottom" id="0g1-QP-rbB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zie-PW-5as" secondAttribute="trailing" id="3T1-Le-dR1"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="width" secondItem="zie-PW-5as" secondAttribute="width" id="4Zl-SX-qF7"/>
                             <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="6Us-un-NHI"/>
                             <constraint firstItem="YZb-u3-eD2" firstAttribute="bottom" secondItem="DZR-z9-Peg" secondAttribute="bottom" id="75y-mW-qtD"/>
-                            <constraint firstItem="3Tx-e6-Epe" firstAttribute="leading" secondItem="RRC-sA-DL1" secondAttribute="trailing" constant="8" id="Abf-sd-OJk"/>
-                            <constraint firstItem="hEW-hG-nns" firstAttribute="top" secondItem="gwl-XC-lgo" secondAttribute="top" id="Icp-go-Zii"/>
+                            <constraint firstItem="x7P-z9-49f" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="9" id="GWn-XN-rtq"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="DZR-z9-Peg" secondAttribute="bottom" id="K6K-ke-6ns"/>
-                            <constraint firstItem="RRC-sA-DL1" firstAttribute="leading" secondItem="x7P-z9-49f" secondAttribute="trailing" constant="27" id="KWv-ho-ZhE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gwl-XC-lgo" secondAttribute="trailing" id="MTc-ie-35Z"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DAf-fj-8aV" secondAttribute="trailing" id="NSb-z0-afS"/>
-                            <constraint firstItem="gwl-XC-lgo" firstAttribute="top" secondItem="WYA-1I-afQ" secondAttribute="bottom" id="Ohm-SJ-XyG"/>
-                            <constraint firstItem="RRC-sA-DL1" firstAttribute="top" secondItem="3Tx-e6-Epe" secondAttribute="top" id="PkX-mC-WYh"/>
-                            <constraint firstItem="DAf-fj-8aV" firstAttribute="leading" secondItem="3Tx-e6-Epe" secondAttribute="trailing" constant="8" id="RX3-Z0-XPn"/>
                             <constraint firstItem="DZR-z9-Peg" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="8" id="SNb-yj-mvy"/>
-                            <constraint firstItem="DAf-fj-8aV" firstAttribute="top" secondItem="gwl-XC-lgo" secondAttribute="bottom" id="TE7-sH-XzJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DZR-z9-Peg" secondAttribute="trailing" id="UYf-BS-eIg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WYA-1I-afQ" secondAttribute="trailing" id="dHR-Em-Wx3"/>
-                            <constraint firstItem="gwl-XC-lgo" firstAttribute="leading" secondItem="hEW-hG-nns" secondAttribute="trailing" constant="8" id="dWE-cO-dOA"/>
-                            <constraint firstItem="hEW-hG-nns" firstAttribute="leading" secondItem="7hp-DZ-VCy" secondAttribute="trailing" constant="8" symbolic="YES" id="fH2-QJ-4bn"/>
-                            <constraint firstItem="x7P-z9-49f" firstAttribute="bottom" secondItem="RRC-sA-DL1" secondAttribute="bottom" id="itl-HB-uXz"/>
-                            <constraint firstItem="3Tx-e6-Epe" firstAttribute="top" secondItem="DAf-fj-8aV" secondAttribute="top" id="lny-o7-eWk"/>
                             <constraint firstItem="DZR-z9-Peg" firstAttribute="leading" secondItem="YZb-u3-eD2" secondAttribute="trailing" constant="8" id="mL6-YB-2VT"/>
-                            <constraint firstItem="fSg-Vu-y5W" firstAttribute="top" secondItem="7hp-DZ-VCy" secondAttribute="top" id="txh-Dk-erC"/>
-                            <constraint firstItem="7hp-DZ-VCy" firstAttribute="top" secondItem="hEW-hG-nns" secondAttribute="top" id="wuL-aI-4Sd"/>
-                            <constraint firstItem="7hp-DZ-VCy" firstAttribute="leading" secondItem="fSg-Vu-y5W" secondAttribute="trailing" constant="8" id="z1S-N1-YF1"/>
+                            <constraint firstItem="YZb-u3-eD2" firstAttribute="leading" secondItem="x7P-z9-49f" secondAttribute="trailing" constant="8" id="sp0-io-3Zt"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

@@ -177,41 +177,6 @@ void dataset_spiral(){
 }
 
 int maxfps = 120;
-- (IBAction)dataset1:(id)sender {
-    dataset_xor();
-    [self reset];
-}
-
-- (IBAction)dataset2:(id)sender {
-    dataset_circle();
-    [self reset];
-}
-
-- (IBAction)dataset3:(id)sender {
-    dataset_twoGaussData();
-    [self reset];
-}
-
-- (IBAction)dataset4:(id)sender {
-    dataset_spiral();
-    [self reset];
-}
-
-- (IBAction)activationTanh:(id)sender {
-    activation = Tanh;
-    [self reset];
-}
-
-- (IBAction)activationReLU:(id)sender {
-    activation = ReLU;
-    [self reset];
-}
-
-- (IBAction)activationSigmoid:(id)sender {
-    activation = Sigmoid;
-    [self reset];
-    learningRate = 0.3;
-}
 
 //*************************** Heatmap ***************************
 
@@ -498,7 +463,8 @@ CGFloat screenScale = [UIScreen mainScreen].scale;
 - (void)viewDidLoad {
     [super viewDidLoad];
     initColor();
-    [self dataset2:0];
+    dataset_circle();
+    [self reset];
     [self initSpreadView];
 
     UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpressAction:)];
