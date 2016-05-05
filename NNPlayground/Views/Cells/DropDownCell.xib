@@ -16,55 +16,45 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGM-YF-B6P">
-                        <rect key="frame" x="10" y="0.0" width="52" height="23.5"/>
+                        <rect key="frame" x="10" y="0.0" width="76" height="23.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="TGM-YF-B6P" secondAttribute="height" multiplier="52:23.5" id="vea-6Y-Efp"/>
+                            <constraint firstAttribute="width" secondItem="TGM-YF-B6P" secondAttribute="height" multiplier="76:23.5" id="vea-6Y-Efp"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="√" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7f-1D-l57">
-                        <rect key="frame" x="72.5" y="0.0" width="23.5" height="23.5"/>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="o3R-Dc-l3K">
+                        <rect key="frame" x="76" y="4" width="16" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="24" id="FCP-Z7-Goi"/>
-                            <constraint firstAttribute="width" secondItem="a7f-1D-l57" secondAttribute="height" multiplier="1:1" id="XCk-GI-NsM"/>
+                            <constraint firstAttribute="width" secondItem="o3R-Dc-l3K" secondAttribute="height" multiplier="1:1" id="sFW-Vq-sZa"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="FCP-Z7-Goi"/>
-                            </mask>
-                        </variation>
-                    </label>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="a7f-1D-l57" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="5He-cF-ah7"/>
+                    <constraint firstAttribute="trailing" secondItem="o3R-Dc-l3K" secondAttribute="trailing" constant="4" id="7IV-3O-AOP"/>
                     <constraint firstAttribute="bottom" secondItem="TGM-YF-B6P" secondAttribute="bottom" id="83g-eZ-THY"/>
                     <constraint firstItem="TGM-YF-B6P" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Jo7-Uy-Ghd"/>
-                    <constraint firstAttribute="trailing" secondItem="a7f-1D-l57" secondAttribute="trailing" id="NhG-wc-Kk1"/>
                     <constraint firstItem="TGM-YF-B6P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Q9F-PI-0Zj"/>
-                    <constraint firstAttribute="bottom" secondItem="a7f-1D-l57" secondAttribute="bottom" id="Qfu-Es-LXA"/>
+                    <constraint firstItem="o3R-Dc-l3K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="U9F-Ei-H3C"/>
                     <constraint firstItem="TGM-YF-B6P" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZYd-Ft-L6J"/>
+                    <constraint firstAttribute="bottom" secondItem="o3R-Dc-l3K" secondAttribute="bottom" constant="4" id="ZYy-uG-E2q"/>
                     <constraint firstAttribute="bottom" secondItem="TGM-YF-B6P" secondAttribute="bottom" id="e8W-EN-ku1"/>
-                    <constraint firstItem="a7f-1D-l57" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fyX-dE-9mr"/>
-                    <constraint firstItem="a7f-1D-l57" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qNe-Pu-9ZA"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="Jo7-Uy-Ghd"/>
                         <exclude reference="e8W-EN-ku1"/>
-                        <exclude reference="5He-cF-ah7"/>
-                        <exclude reference="qNe-Pu-9ZA"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="detailLabel" destination="TGM-YF-B6P" id="1ec-Ma-uu7"/>
-                <outlet property="isSelectedLabel" destination="a7f-1D-l57" id="2db-FZ-cio"/>
+                <outlet property="isSelectedImage" destination="o3R-Dc-l3K" id="LjD-O9-mbA"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Checkmark" width="37" height="37"/>
+    </resources>
 </document>

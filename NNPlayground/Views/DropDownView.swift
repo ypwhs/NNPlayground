@@ -48,7 +48,7 @@ class DropDownView: UIView {
         
         containerView.alpha = 1
         
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .TransitionCurlUp, animations: {[weak self]  _ in
+        UIView.animateWithDuration(Double(labelName.count) * 0.02, delay: 0.0, options: .TransitionCurlUp, animations: {[weak self]  _ in
             if let strongSelf = self {
                 if (strongSelf.dropDownButton) != nil {
                     strongSelf.tableView.frame = CGRect(x: (strongSelf.dropDownButton?.frame.minX)!, y: (strongSelf.dropDownButton?.frame.maxY)!, width: (strongSelf.dropDownButton?.frame.width)!, height: strongSelf.totalHeight)
@@ -63,7 +63,7 @@ class DropDownView: UIView {
     
     func hide() {
         
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .TransitionCurlDown, animations: {[weak self]  _ in
+        UIView.animateWithDuration(Double(labelName.count) * 0.02, delay: 0.0, options: .TransitionCurlDown, animations: {[weak self]  _ in
             
             if let strongSelf = self {
                 if (strongSelf.dropDownButton) != nil {
@@ -151,9 +151,9 @@ extension DropDownView: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("DropDownCell") as! DropDownCell
         cell.detailLabel.text = labelName[indexPath.row]
-//        if indexPath.row == labelIsSelected {
-//            cell.isSelectedLabel.hidden = false
-//        }
+        if indexPath.row == labelIsSelected {
+            cell.isSelectedImage.hidden = false
+        }
         
         return cell
     }

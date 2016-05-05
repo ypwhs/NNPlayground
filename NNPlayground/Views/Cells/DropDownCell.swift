@@ -20,8 +20,7 @@ class DropDownCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    @IBOutlet weak var isSelectedLabel: UILabel!
+    @IBOutlet weak var isSelectedImage: UIImageView!
     
     @IBOutlet weak var detailLabel: UILabel!
 }

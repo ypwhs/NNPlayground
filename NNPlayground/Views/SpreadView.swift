@@ -13,12 +13,6 @@ class SpreadView: UIView {
     var layers = 3
     var buttonWidth:CGFloat = 30
     
-    lazy var containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.clearColor()
-        return view
-    }()
-    
     lazy var addNodeButton: [AddButton] = {
         let view = AddButton()
         view.frame = CGRect(x: 50, y: 100, width: 30, height: 30)
@@ -47,6 +41,7 @@ class SpreadView: UIView {
     
     // MARK: - AddLayer
     var addLayer: (() -> Void)?
+    
     func addLayerButtons(sender:AddButton) {
         if sender.isAddButton && layers < 8 {
             layers += 1
@@ -62,41 +57,80 @@ class SpreadView: UIView {
         addLayer?()
     }
     
-    lazy var addLayerButton: AddButton = {
-        let view = AddButton()
-        view.frame = CGRect(x: 50, y: 20, width: 30, height: 30)
-        view.addTarget(self, action: #selector(addLayerButtons), forControlEvents: .TouchUpInside)
-        return view
-    }()
-    
-    lazy var subLayerButton: AddButton = {
-        let view = AddButton()
-        view.isAddButton = false
-        view.frame = CGRect(x: 100, y: 20, width: 30, height: 30)
-        view.addTarget(self, action: #selector(addLayerButtons), forControlEvents: .TouchUpInside)
-        return view
-    }()
-    
+    @IBAction func addLayerButton(sender: AddButton) {
+        addLayerButtons(sender)
+    }
+    @IBAction func subLayerButton(sender: AddButton) {
+        addLayerButtons(sender)
+    }
+
     // MARK: - DropDown
-    private lazy var dropDownView: DropDownView = {
+    private lazy var learningRateDropView: DropDownView = {
         let view = DropDownView()
-        view.labelName = ["ReLU","Tanh","Sigmoid","Linear"]
+        view.labelName = ["0.00001","0.0001","0.001","0.003","0.01","0.03","0.1","0.3","1","3","10"]
+        view.labelIsSelected = 5
         return view
     }()
     
-    @objc private func dropDown() {
+    @IBAction func learningRateDrop(sender: DropDownButton) {
         if let window = self.window {
-            dropDownView.showInView(window,button: dropDownButton)
+            learningRateDropView.showInView(window,button: sender)
         }
     }
     
-    lazy var dropDownButton: DropDownButton = {
-        let view = DropDownButton()
-        view.frame = CGRect(x: 200, y: 100, width: 96, height: 24)
-        view.addTarget(self, action: #selector(dropDown), forControlEvents: .TouchUpInside)
+    private lazy var activationDropView: DropDownView = {
+        let view = DropDownView()
+        view.labelName = ["ReLU","Tanh","Sigmoid","Linear"]
+        view.labelIsSelected = 1
         return view
     }()
     
+    @IBAction func activationDrop(sender: DropDownButton) {
+        if let window = self.window {
+            activationDropView.showInView(window,button: sender)
+        }
+    }
+    
+    private lazy var regularizationDropView: DropDownView = {
+        let view = DropDownView()
+        view.labelName = ["None","L1","L2"]
+        view.labelIsSelected = 0
+        return view
+    }()
+    
+    @IBAction func regularizationDrop(sender: DropDownButton) {
+        if let window = self.window {
+            regularizationDropView.showInView(window,button: sender)
+        }
+    }
+    
+    private lazy var regularizationRateDropView: DropDownView = {
+        let view = DropDownView()
+        view.labelName = ["0","0.001","0.003","0.01","0.03","0.1","0.3","1","3","10"]
+        view.labelIsSelected = 0
+        return view
+    }()
+    
+    @IBAction func regularizationRateDrop(sender: DropDownButton) {
+        if let window = self.window {
+            regularizationRateDropView.showInView(window,button: sender)
+        }
+    }
+    
+    private lazy var problemTypeDropView: DropDownView = {
+        let view = DropDownView()
+        view.labelName = ["Classification","Regression"]
+        view.labelIsSelected = 0
+        return view
+    }()
+    
+    @IBAction func problemTypeDrop(sender: DropDownButton) {
+        if let window = self.window {
+            problemTypeDropView.showInView(window,button: sender)
+        }
+    }
+    
+    //MARK: - View
     func showInView(view:UIView) {
         frame = view.bounds
         view.addSubview(self)
@@ -104,23 +138,15 @@ class SpreadView: UIView {
         layoutIfNeeded()
         
         UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {[weak self]  _ in
-            self?.containerView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
-            
+            self?.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
             }, completion: { _ in
         })
         
-        //        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        //
-        //        rotateAnimation.fromValue = 0.0
-        //        rotateAnimation.toValue = π/2
-        //        rotateAnimation.duration = 0.2
-        //        addLayerButton.layer.addAnimation(rotateAnimation, forKey: "addLayerButtonGra")
     }
     
     func hide() {
         UIView.animateWithDuration(0.2, delay: 0.1, options: .CurveEaseOut, animations: {[weak self]  _ in
-            self?.containerView.backgroundColor = UIColor.clearColor()
-            
+            self?.backgroundColor = UIColor.clearColor()
             }, completion: {[weak self]  _ in
                 self?.removeFromSuperview()
             })
@@ -137,7 +163,7 @@ class SpreadView: UIView {
             makeUI()
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(SpreadView.hide))
-            containerView.addGestureRecognizer(tap)
+            self.addGestureRecognizer(tap)
             
             tap.cancelsTouchesInView = true
             tap.delegate = self
@@ -145,35 +171,15 @@ class SpreadView: UIView {
     }
     
     func makeUI() {
-        addSubview(containerView)
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let viewsDictionary = [
-            "containerView": containerView,
-            "addLayerButton":addLayerButton,
-            "subLayerButton":subLayerButton
-            ,"dropDownButton":dropDownButton
-        ]
-        
-        let containerViewConstraintsH = NSLayoutConstraint.constraintsWithVisualFormat("H:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
-        let containerViewConstraintsV = NSLayoutConstraint.constraintsWithVisualFormat("V:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
-        
-        NSLayoutConstraint.activateConstraints(containerViewConstraintsH)
-        NSLayoutConstraint.activateConstraints(containerViewConstraintsV)
-        
-        addLayerButton.frame.size = CGSize(width: buttonWidth, height: buttonWidth)
-        //        addLayerButton.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: buttonWidth, height: buttonWidth)
-        containerView.addSubview(addLayerButton)
-        containerView.addSubview(subLayerButton)
+                
         for i in 0...5 {
-            containerView.addSubview(addNodeButton[i])
-            containerView.addSubview(subNodeButton[i])
+            self.addSubview(addNodeButton[i])
+            self.addSubview(subNodeButton[i])
             if i != 0 {
                 addNodeButton[i].hidden = true
                 subNodeButton[i].hidden = true
             }
         }
-                containerView.addSubview(dropDownButton)
         
     }
     
@@ -183,7 +189,7 @@ extension SpreadView: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         
-        if touch.view != containerView {
+        if touch.view != self {
             return false
         }
         return true
