@@ -418,27 +418,27 @@ double lastTrainTime = 0;
 }
 
 -(void)initSpreadView{
-    //view.registerNib(UINib(nibName: "DropDownCell", bundle: nil), forCellReuseIdentifier: "DropDownCell")
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"SpreadView" owner:self options:nil];
     _spreadView = [nib objectAtIndex:0];
+    ViewController *strongSelf = self;
     _spreadView.setCircleData = ^{
         dataset_circle();
-        [self reset];
+        [strongSelf reset];
     };
     _spreadView.setExclusiveOrData = ^{
         dataset_circle();
-        [self reset];
+        [strongSelf reset];
     };
     _spreadView.setGaussianData = ^{
         dataset_twoGaussData();
-        [self reset];
+        [strongSelf reset];
     };
     _spreadView.setSpiralData = ^{
         dataset_spiral();
-        [self reset];
+        [strongSelf reset];
     };
     _spreadView.addLayer = ^{
-        _myswitch.on = false;
+        strongSelf.myswitch.on = false;
         always = false;
         [NSThread sleepForTimeInterval:0.008];
         
@@ -454,7 +454,7 @@ double lastTrainTime = 0;
         layers = int(_spreadView.layers);
         
         [networkLock unlock];
-        [self resetNetwork];
+        [strongSelf resetNetwork];
     };
 }
 
