@@ -81,7 +81,6 @@
                     </constraints>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="mjJ-aY-Y1O" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="0bf-0A-T4b"/>
                 <constraint firstItem="x0o-NZ-BgK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="1BB-kG-ZNS"/>
