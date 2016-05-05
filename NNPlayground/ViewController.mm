@@ -440,7 +440,8 @@ double lastTrainTime = 0;
     };
     
     _spreadView.setLearningRate = ^(NSInteger num){
-        
+        double learnForm[] = {0.00001,0.0001,0.001,0.003,0.01,0.03,0.1,0.3,1,3,10};
+        learningRate = learnForm[num];
     };
     _spreadView.setActivation = ^(NSInteger num){
         switch (num) {
@@ -455,7 +456,6 @@ double lastTrainTime = 0;
             case 2:
                 activation = Sigmoid;
                 [strongSelf reset];
-                learningRate = 0.3;
                 break;
             // 缺一个Linear
             default:

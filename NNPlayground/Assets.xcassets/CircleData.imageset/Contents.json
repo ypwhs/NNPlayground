@@ -2,17 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "CircleData-1.JPG",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "CircleData.JPG",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "CircleData-2.JPG",
+      "filename" : "CircleData.jpg",
       "scale" : "3x"
     }
   ],
