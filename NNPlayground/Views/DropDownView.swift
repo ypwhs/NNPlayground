@@ -15,7 +15,7 @@ class DropDownView: UIView {
     var labelIsSelected = 0
     
     var dropDownButton:DropDownButton?
-    var showSelectedLabel: ((name: String) -> Void)?
+    var showSelectedLabel: ((name: String,num:Int) -> Void)?
     
     lazy var containerView: UIView = {
         let view = UIView()
@@ -168,6 +168,6 @@ extension DropDownView: UITableViewDataSource, UITableViewDelegate {
         labelIsSelected = indexPath.row
         (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: labelIsSelected, inSection: 0)) as! DropDownCell).isSelectedImage.hidden = false
         
-        showSelectedLabel!(name: "\(labelName[indexPath.row])")
+        showSelectedLabel?(name: "\(labelName[indexPath.row])", num: indexPath.row)
     }
 }

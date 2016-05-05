@@ -421,6 +421,7 @@ double lastTrainTime = 0;
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"SpreadView" owner:self options:nil];
     _spreadView = [nib objectAtIndex:0];
     ViewController *strongSelf = self;
+    
     _spreadView.setCircleData = ^{
         dataset_circle();
         [strongSelf reset];
@@ -437,6 +438,27 @@ double lastTrainTime = 0;
         dataset_spiral();
         [strongSelf reset];
     };
+    
+    _spreadView.setActivation = ^(NSInteger num){
+        switch (num) {
+            case 0:
+                activation = ReLU;
+                [strongSelf reset];
+                break;
+            case 1:
+                activation = Tanh;
+                [strongSelf reset];
+                break;
+            case 2:
+                activation = Sigmoid;
+                [strongSelf reset];
+                learningRate = 0.3;
+                break;
+            default:
+                break;
+        }
+    };
+    
     _spreadView.addLayer = ^{
         strongSelf.myswitch.on = false;
         always = false;
