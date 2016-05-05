@@ -92,7 +92,7 @@
                         <action selector="subLayerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="UZT-ZF-Vlc"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1s7-Nq-d30">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1s7-Nq-d30" customClass="SelectDataButton" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="10" y="47" width="27" height="27"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="1s7-Nq-d30" secondAttribute="height" multiplier="1:1" id="yhr-19-hk4"/>
@@ -102,7 +102,7 @@
                         <action selector="setCircle:" destination="iN0-l3-epB" eventType="touchUpInside" id="qqD-nD-zjg"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ut-zU-vXX">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ut-zU-vXX" customClass="SelectDataButton" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="47" y="47" width="27" height="27"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="9ut-zU-vXX" secondAttribute="height" multiplier="1:1" id="hno-LC-vXa"/>
@@ -112,7 +112,7 @@
                         <action selector="setExclusiveOr:" destination="iN0-l3-epB" eventType="touchUpInside" id="TNP-Hw-oXv"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWs-vb-uXG">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWs-vb-uXG" customClass="SelectDataButton" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="10" y="84" width="27" height="27"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="tWs-vb-uXG" secondAttribute="height" multiplier="1:1" id="mpk-Dy-EkX"/>
@@ -122,7 +122,7 @@
                         <action selector="setGaussian:" destination="iN0-l3-epB" eventType="touchUpInside" id="lNv-HC-vlw"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUN-he-QAE">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUN-he-QAE" customClass="SelectDataButton" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="47" y="84" width="27" height="27"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="CUN-he-QAE" secondAttribute="height" multiplier="1:1" id="Fj4-nq-3XN"/>
@@ -205,9 +205,9 @@
         </view>
     </objects>
     <resources>
-        <image name="CircleData" width="600" height="600"/>
-        <image name="ExclusiveOrData" width="600" height="600"/>
-        <image name="GaussianData" width="600" height="600"/>
-        <image name="SpiralData" width="600" height="600"/>
+        <image name="CircleData" width="200" height="200"/>
+        <image name="ExclusiveOrData" width="200" height="200"/>
+        <image name="GaussianData" width="200" height="200"/>
+        <image name="SpiralData" width="200" height="200"/>
     </resources>
 </document>
