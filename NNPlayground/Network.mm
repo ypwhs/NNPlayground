@@ -214,8 +214,7 @@ void Network::updateWeights(double learningRate, double regularizationRate) {
                 auto link = node->inputLinks[j];
                 auto regulDer = link->regularization.der(link->weight);
                 if (link->numAccumulatedDers > 0) {
-                    link->weight -= (learningRate / link->numAccumulatedDers) *
-                    (link->accErrorDer + regularizationRate * regulDer);
+                    link->weight -= learningRate * (link->accErrorDer + regularizationRate * regulDer) / link->numAccumulatedDers;
                     link->accErrorDer = 0;
                     link->numAccumulatedDers = 0;
                 }

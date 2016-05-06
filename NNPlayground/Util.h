@@ -26,7 +26,7 @@ enum RegularizationFunction{None, L1, L2};
 
 auto rNone =     [](double w){return w;};
 auto rL1 =       [](double w){return abs(w);};
-auto rderL1 =    [](double w){return w < 0 ? -1.0 : 1.0;};
+auto rderL1 =    [](double w){return (double)((w>0) - (w<0));};
 auto rL2 =       [](double w){return 0.5 * w * w;};
 auto rderL2 =    [](double w){return w;};
 
