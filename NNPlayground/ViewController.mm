@@ -29,6 +29,7 @@ using namespace std;
 int * networkShape = new int[3]{2, 4, 1};
 int layers = 3;
 double learningRate = 0.001;
+double regularizationRate = 0;
 auto activation = Tanh;
 auto regularization = None;
 
@@ -342,7 +343,7 @@ double lastEpochTime = [NSDate date].timeIntervalSince1970;
             network->backProp(y[i]);
             loss += 0.5 * pow(output - y[i], 2);
         }
-        network->updateWeights(learningRate, 0);
+        network->updateWeights(learningRate, regularizationRate);
     }
     epoch += batch;
     [networkLock unlock];
@@ -391,7 +392,7 @@ double lastTrainTime = 0;
         [strongSelf reset];
     };
     _spreadView.setExclusiveOrData = ^{
-        dataset_circle();
+        dataset_xor();
         [strongSelf reset];
     };
     _spreadView.setGaussianData = ^{
@@ -408,29 +409,16 @@ double lastTrainTime = 0;
         learningRate = learnForm[num];
     };
     _spreadView.setActivation = ^(NSInteger num){
-        switch (num) {
-            case 0:
-                activation = ReLU;
-                [strongSelf reset];
-                break;
-            case 1:
-                activation = Tanh;
-                [strongSelf reset];
-                break;
-            case 2:
-                activation = Sigmoid;
-                [strongSelf reset];
-                break;
-            // 缺一个Linear
-            default:
-                break;
-        }
+        activation = (ActivationFunction)num;
+        [strongSelf reset];
     };
     _spreadView.setRegularization = ^(NSInteger num){
-        
+        regularization = (RegularizationFunction)num;
+        [strongSelf reset];
     };
     _spreadView.setRegularizationRate = ^(NSInteger num){
-        
+        double form[] = {0,0.001,0.003,0.01,0.03,0.1,0.3,1,3,10};
+        regularizationRate = form[num];
     };
     _spreadView.setProblemType = ^(NSInteger num){
         
