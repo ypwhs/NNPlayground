@@ -257,8 +257,6 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     CGImageRelease(imageRef);
 }
 
-
-
 //初始化每个结点的图像层（CALayer）
 - (void) initNodeLayer{
     [networkLock lock];
