@@ -18,7 +18,9 @@
                         <constraint firstAttribute="width" secondItem="x0o-NZ-BgK" secondAttribute="height" multiplier="4:1" id="AV3-Yy-pz1"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                    <state key="normal" title="0.03"/>
+                    <state key="normal" title="0.03">
+                        <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="learningRateDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="AxH-BM-xPl"/>
                     </connections>
@@ -28,7 +30,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="mjJ-aY-Y1O" secondAttribute="height" multiplier="4:1" id="isM-hW-rwV"/>
                     </constraints>
-                    <state key="normal" title="Tanh"/>
+                    <state key="normal" title="Tanh">
+                        <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="activationDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="cQe-4z-llh"/>
                     </connections>
@@ -38,7 +42,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="n5I-wD-LN0" secondAttribute="height" multiplier="4:1" id="zny-wT-qCJ"/>
                     </constraints>
-                    <state key="normal" title="None"/>
+                    <state key="normal" title="None">
+                        <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="regularizationDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="13g-wV-Mu6"/>
                     </connections>
@@ -48,28 +54,55 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="mul-yL-jyk" secondAttribute="height" multiplier="4:1" id="Uit-dZ-nN3"/>
                     </constraints>
-                    <state key="normal" title="0"/>
+                    <state key="normal" title="0">
+                        <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="regularizationRateDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="dox-HR-psV"/>
                     </connections>
                 </button>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V7U-wg-OaH">
-                    <rect key="frame" x="474" y="57" width="118" height="31"/>
+                    <rect key="frame" x="480" y="57" width="112" height="31"/>
+                    <color key="tintColor" red="0.094117647058823528" green="0.23921568627450979" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="V7U-wg-OaH" secondAttribute="height" multiplier="19:5" id="6k2-7N-U3W"/>
                     </constraints>
+                    <color key="minimumTrackTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="6k2-7N-U3W"/>
+                        </mask>
+                    </variation>
                 </slider>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aF4-tL-qCh">
-                    <rect key="frame" x="474" y="107" width="118" height="31"/>
+                    <rect key="frame" x="480" y="107" width="112" height="31"/>
+                    <color key="tintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="aF4-tL-qCh" secondAttribute="height" multiplier="19:5" id="vSA-Gy-6XK"/>
                     </constraints>
+                    <color key="minimumTrackTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="thumbTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="vSA-Gy-6XK"/>
+                        </mask>
+                    </variation>
                 </slider>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="AnX-3Z-GdI">
-                    <rect key="frame" x="474" y="145" width="118" height="31"/>
+                    <rect key="frame" x="480" y="157" width="112" height="31"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="AnX-3Z-GdI" secondAttribute="height" multiplier="19:5" id="CH1-yq-rJW"/>
                     </constraints>
+                    <color key="minimumTrackTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="thumbTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="CH1-yq-rJW"/>
+                        </mask>
+                    </variation>
                 </slider>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eol-uD-pSL" customClass="AddButton" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="246" y="563" width="27" height="27"/>
@@ -77,7 +110,7 @@
                         <constraint firstAttribute="width" secondItem="eol-uD-pSL" secondAttribute="height" multiplier="1:1" id="jKE-xz-JQ9"/>
                     </constraints>
                     <connections>
-                        <action selector="addLayerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="gYt-yu-3Mc"/>
+                        <action selector="addLayerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="X1P-bk-0mn"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbM-tD-nBE" customClass="AddButton" customModule="NNPlayground" customModuleProvider="target">
@@ -138,7 +171,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="maW-eY-OTH" secondAttribute="height" multiplier="4:1" id="e1S-no-na1"/>
                     </constraints>
-                    <state key="normal" title="Classification"/>
+                    <state key="normal" title="Classification">
+                        <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="problemTypeDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="fPa-s1-Q0P"/>
                     </connections>
@@ -148,7 +183,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="ntt-EQ-Czi" secondAttribute="height" multiplier="23:15" id="YMg-cg-frf"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                 </button>
             </subviews>
             <constraints>
@@ -158,6 +195,8 @@
                 <constraint firstItem="CUN-he-QAE" firstAttribute="height" secondItem="x0o-NZ-BgK" secondAttribute="height" id="2KO-DI-xyu"/>
                 <constraint firstItem="tWs-vb-uXG" firstAttribute="leading" secondItem="x0o-NZ-BgK" secondAttribute="leading" id="2YB-kM-Tfo"/>
                 <constraint firstItem="1s7-Nq-d30" firstAttribute="leading" secondItem="x0o-NZ-BgK" secondAttribute="leading" id="3kg-5C-tlv"/>
+                <constraint firstItem="AnX-3Z-GdI" firstAttribute="leading" secondItem="V7U-wg-OaH" secondAttribute="leading" id="50k-C6-COV"/>
+                <constraint firstItem="bbM-tD-nBE" firstAttribute="height" secondItem="eol-uD-pSL" secondAttribute="height" id="7IP-fz-yuC"/>
                 <constraint firstItem="maW-eY-OTH" firstAttribute="trailing" secondItem="V7U-wg-OaH" secondAttribute="trailing" id="89p-JA-Ik5"/>
                 <constraint firstItem="AnX-3Z-GdI" firstAttribute="trailing" secondItem="V7U-wg-OaH" secondAttribute="trailing" id="ARZ-gy-acG"/>
                 <constraint firstItem="mul-yL-jyk" firstAttribute="leading" secondItem="n5I-wD-LN0" secondAttribute="trailing" constant="10" id="Ajg-3q-lPW"/>
@@ -165,13 +204,14 @@
                 <constraint firstItem="maW-eY-OTH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="EZr-mv-QyS"/>
                 <constraint firstItem="mul-yL-jyk" firstAttribute="width" secondItem="x0o-NZ-BgK" secondAttribute="width" id="G4c-gH-yF0"/>
                 <constraint firstItem="mjJ-aY-Y1O" firstAttribute="leading" secondItem="x0o-NZ-BgK" secondAttribute="trailing" constant="10" id="I0Z-VT-Qzu"/>
+                <constraint firstItem="aF4-tL-qCh" firstAttribute="leading" secondItem="V7U-wg-OaH" secondAttribute="leading" id="IeI-SV-OPU"/>
                 <constraint firstAttribute="bottom" secondItem="eol-uD-pSL" secondAttribute="bottom" constant="10" id="KbC-Dh-j7j"/>
                 <constraint firstItem="tWs-vb-uXG" firstAttribute="top" secondItem="1s7-Nq-d30" secondAttribute="bottom" constant="10" id="Lyj-Vk-aaT"/>
                 <constraint firstItem="maW-eY-OTH" firstAttribute="leading" secondItem="mul-yL-jyk" secondAttribute="trailing" constant="10" id="OVh-NE-rkH"/>
                 <constraint firstItem="maW-eY-OTH" firstAttribute="width" secondItem="x0o-NZ-BgK" secondAttribute="width" id="PA7-tl-GhC"/>
                 <constraint firstAttribute="trailing" secondItem="maW-eY-OTH" secondAttribute="trailing" constant="10" id="Pb9-LI-NGv"/>
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="R3E-eS-rwx"/>
-                <constraint firstItem="AnX-3Z-GdI" firstAttribute="top" secondItem="aF4-tL-qCh" secondAttribute="bottom" constant="8" id="UDA-2g-9d8"/>
+                <constraint firstItem="AnX-3Z-GdI" firstAttribute="top" secondItem="aF4-tL-qCh" secondAttribute="bottom" constant="20" id="UDA-2g-9d8"/>
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="VUc-aX-R5V"/>
                 <constraint firstItem="mjJ-aY-Y1O" firstAttribute="width" secondItem="x0o-NZ-BgK" secondAttribute="width" id="XLQ-S9-H3W"/>
                 <constraint firstItem="1s7-Nq-d30" firstAttribute="top" secondItem="x0o-NZ-BgK" secondAttribute="bottom" constant="10" id="Y3U-dQ-40e"/>
@@ -194,11 +234,14 @@
                 <constraint firstItem="9ut-zU-vXX" firstAttribute="leading" secondItem="1s7-Nq-d30" secondAttribute="trailing" constant="10" id="ugY-ty-thQ"/>
                 <constraint firstAttribute="bottom" secondItem="bbM-tD-nBE" secondAttribute="bottom" constant="10" id="viz-DH-K1r"/>
                 <constraint firstItem="ntt-EQ-Czi" firstAttribute="top" secondItem="CUN-he-QAE" secondAttribute="bottom" constant="10" id="woZ-bn-OfF"/>
+                <constraint firstItem="maW-eY-OTH" firstAttribute="leading" secondItem="V7U-wg-OaH" secondAttribute="leading" id="yXq-Vu-VlR"/>
             </constraints>
             <connections>
                 <outlet property="activationButton" destination="mjJ-aY-Y1O" id="Cgn-3k-2DQ"/>
+                <outlet property="addLayerButtons" destination="eol-uD-pSL" id="lch-G7-zYS"/>
                 <outlet property="learningRateButton" destination="x0o-NZ-BgK" id="i0d-gL-Vp8"/>
                 <outlet property="problemTypeButton" destination="maW-eY-OTH" id="5Za-H0-jih"/>
+                <outlet property="ratioTrainingTest" destination="V7U-wg-OaH" id="m8N-W0-o11"/>
                 <outlet property="regularizationButton" destination="n5I-wD-LN0" id="L8z-sy-ld8"/>
                 <outlet property="regularizationRateButton" destination="mul-yL-jyk" id="qdR-1K-MdW"/>
             </connections>

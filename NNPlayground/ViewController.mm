@@ -386,6 +386,7 @@ double lastTrainTime = 0;
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"SpreadView" owner:self options:nil];
     _spreadView = [nib objectAtIndex:0];
     ViewController *strongSelf = self;
+//    _spreadView.addLayerButtons.frame.size = CGSizeMake(_heatMap.frame.size.height, _heatMap.frame.size.height);
     
     _spreadView.setCircleData = ^{
         dataset_circle();

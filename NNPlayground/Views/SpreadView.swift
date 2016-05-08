@@ -56,7 +56,10 @@ class SpreadView: UIView {
     }
     @IBAction func setSpiral(sender: UIButton) {
         setSpiralData?()
-    }    
+    }
+    
+    // MARK: - UISlider
+    @IBOutlet weak var ratioTrainingTest: UISlider!
     
     // MARK: - AddLayer
     var addLayer: (() -> Void)?
@@ -76,6 +79,7 @@ class SpreadView: UIView {
         addLayer?()
     }
     
+    @IBOutlet weak var addLayerButtons: AddButton!
     @IBAction func addLayerButton(sender: AddButton) {
         addLayerButtons(sender)
     }
@@ -212,9 +216,19 @@ class SpreadView: UIView {
     
     var isFirstTimeBeenAddAsSubview = true
     
+    func OriginImage(image:UIImage, size:CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        image.drawInRect(CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return scaledImage
+    }
+    
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        let thumbImage = UIImage(named: "Slider")
         
+        ratioTrainingTest.setThumbImage(OriginImage(thumbImage!, size: CGSize(width: 20, height: 20)), forState: .Normal)
         if isFirstTimeBeenAddAsSubview {
             isFirstTimeBeenAddAsSubview = false
             
@@ -229,7 +243,6 @@ class SpreadView: UIView {
     }
     
     func makeUI() {
-        
         for i in 0...5 {
             self.addSubview(addNodeButton[i])
             self.addSubview(subNodeButton[i])
