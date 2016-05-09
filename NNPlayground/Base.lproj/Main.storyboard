@@ -64,10 +64,6 @@
                                     <action selector="createSpread:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cdW-di-qNw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lo6-2h-1oX" customClass="SelectDataButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="217" y="20" width="30" height="30"/>
-                                <state key="normal" backgroundImage="CircleData"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -103,7 +99,4 @@
             <point key="canvasLocation" x="50" y="374"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="CircleData" width="200" height="200"/>
-    </resources>
 </document>

@@ -74,8 +74,11 @@
                             <exclude reference="6k2-7N-U3W"/>
                         </mask>
                     </variation>
+                    <connections>
+                        <action selector="setRatioAction:" destination="iN0-l3-epB" eventType="valueChanged" id="p23-uJ-EIY"/>
+                    </connections>
                 </slider>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aF4-tL-qCh" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aF4-tL-qCh" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="480" y="107" width="112" height="31"/>
                     <color key="tintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -88,8 +91,11 @@
                             <exclude reference="vSA-Gy-6XK"/>
                         </mask>
                     </variation>
+                    <connections>
+                        <action selector="setNoiseAction:" destination="iN0-l3-epB" eventType="valueChanged" id="dfl-HV-SnY"/>
+                    </connections>
                 </slider>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="AnX-3Z-GdI" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.33333333300000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="AnX-3Z-GdI" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="480" y="157" width="112" height="31"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="AnX-3Z-GdI" secondAttribute="height" multiplier="19:5" id="CH1-yq-rJW"/>
@@ -101,6 +107,9 @@
                             <exclude reference="CH1-yq-rJW"/>
                         </mask>
                     </variation>
+                    <connections>
+                        <action selector="setBatchSizeAction:" destination="iN0-l3-epB" eventType="valueChanged" id="Pkf-Bl-IE3"/>
+                    </connections>
                 </slider>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eol-uD-pSL" customClass="AddButton" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="246" y="563" width="27" height="27"/>
@@ -239,7 +248,6 @@
                 <outlet property="addLayerButtons" destination="eol-uD-pSL" id="lch-G7-zYS"/>
                 <outlet property="learningRateButton" destination="x0o-NZ-BgK" id="i0d-gL-Vp8"/>
                 <outlet property="problemTypeButton" destination="maW-eY-OTH" id="5Za-H0-jih"/>
-                <outlet property="ratioTrainingTest" destination="V7U-wg-OaH" id="m8N-W0-o11"/>
                 <outlet property="regularizationButton" destination="n5I-wD-LN0" id="L8z-sy-ld8"/>
                 <outlet property="regularizationRateButton" destination="mul-yL-jyk" id="qdR-1K-MdW"/>
                 <outlet property="setCircleButton" destination="1s7-Nq-d30" id="cfD-Ip-RF2"/>

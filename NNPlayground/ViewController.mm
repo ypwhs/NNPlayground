@@ -387,6 +387,23 @@ double lastTrainTime = 0;
     ViewController *strongSelf = self;
 //    _spreadView.addLayerButtons.frame.size = CGSizeMake(_heatMap.frame.size.height, _heatMap.frame.size.height);
     
+    //增加节点 layerNum:范围为[1,6]的第n隐藏层
+    _spreadView.addNode = ^(NSInteger layerNum,BOOL isAdd){
+        
+    };
+    
+    //滑条 [0,10];[0,10];[0,30]
+    _spreadView.setRatio = ^(NSInteger current){
+        
+    };
+    _spreadView.setNoise = ^(NSInteger current){
+        
+    };
+    _spreadView.setBatchSize = ^(NSInteger current){
+        
+    };
+    
+    //选择数据
     _spreadView.setCircleData = ^{
         dataset_circle();
         [strongSelf reset];
@@ -404,6 +421,7 @@ double lastTrainTime = 0;
         [strongSelf reset];
     };
     
+    //下拉菜单
     _spreadView.setLearningRate = ^(NSInteger num){
         double learnForm[] = {0.00001,0.0001,0.001,0.003,0.01,0.03,0.1,0.3,1,3,10};
         learningRate = learnForm[num];
@@ -424,6 +442,7 @@ double lastTrainTime = 0;
         
     };
     
+    //增加层数
     _spreadView.addLayer = ^{
         strongSelf.myswitch.on = false;
         always = false;

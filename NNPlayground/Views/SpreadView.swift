@@ -13,31 +13,6 @@ class SpreadView: UIView {
     var layers = 3
     var buttonWidth:CGFloat = 30
     
-    lazy var addNodeButton: [AddButton] = {
-        let view = AddButton()
-        view.frame = CGRect(x: 50, y: 100, width: 30, height: 30)
-        var views = [view]
-        for i in 2...6 {
-            let view = AddButton()
-            view.frame = CGRect(x: i*50, y: 100, width: 30, height: 30)
-            views.append(view)
-        }
-        return views
-    }()
-    
-    lazy var subNodeButton: [AddButton] = {
-        let view = AddButton()
-        view.frame = CGRect(x: 50, y: 150, width: 30, height: 30)
-        view.isAddButton = false
-        var views = [view]
-        for i in 2...6 {
-            let view = AddButton()
-            view.isAddButton = false
-            view.frame = CGRect(x: i*50, y: 150, width: 30, height: 30)
-            views.append(view)
-        }
-        return views
-    }()
     
     // MARK: - SetData
     var setCircleData: (() -> Void)?
@@ -79,7 +54,25 @@ class SpreadView: UIView {
     }
     
     // MARK: - UISlider
-    @IBOutlet weak var ratioTrainingTest: UISlider!
+    var setRatio: ((current: Int) -> Void)?
+    var setNoise: ((current: Int) -> Void)?
+    var setBatchSize: ((current: Int) -> Void)?
+    func setSpacing(sender: EasySlider, total: Float) -> Int {
+        let spacing = (sender.maximumValue - sender.minimumValue)/total
+        let num = Int(sender.value/spacing)
+        sender.setValue(Float(num)*spacing, animated: true)
+        return num
+    }
+    
+    @IBAction func setRatioAction(sender: EasySlider) {
+        setRatio?(current: setSpacing(sender, total: 10))
+    }
+    @IBAction func setNoiseAction(sender: EasySlider) {
+        setNoise?(current: setSpacing(sender, total: 10))
+    }
+    @IBAction func setBatchSizeAction(sender: EasySlider) {
+        setBatchSize?(current: setSpacing(sender, total: 30))
+    }
     
     // MARK: - AddLayer
     var addLayer: (() -> Void)?
@@ -106,6 +99,56 @@ class SpreadView: UIView {
     @IBAction func subLayerButton(sender: AddButton) {
         addLayerButtons(sender)
     }
+    
+    // MARK: - AddNode
+    var addNode: ((layer: Int, isAdd: Bool) -> Void)?
+    func addNodeAction(sender:AddButton) {
+        var num = 1
+        for i in addNodeButton {
+            if i == sender {
+                addNode?(layer: num, isAdd: true)
+            }
+            num += 1
+        }
+    }
+    func subNodeAction(sender:AddButton) {
+        var num = 1
+        for i in subNodeButton {
+            if i == sender {
+                addNode?(layer: num, isAdd: false)
+            }
+            num += 1
+        }
+    }
+    lazy var addNodeButton: [AddButton] = {
+        let view = AddButton()
+        view.frame = CGRect(x: 50, y: 100, width: 30, height: 30)
+        view.addTarget(self, action: #selector(addNodeAction), forControlEvents: .TouchUpInside)
+        var views = [view]
+        for i in 2...6 {
+            let view = AddButton()
+            view.frame = CGRect(x: i*50, y: 100, width: 30, height: 30)
+            view.addTarget(self, action: #selector(addNodeAction), forControlEvents: .TouchUpInside)
+            views.append(view)
+        }
+        return views
+    }()
+    
+    lazy var subNodeButton: [AddButton] = {
+        let view = AddButton()
+        view.frame = CGRect(x: 50, y: 150, width: 30, height: 30)
+        view.isAddButton = false
+        view.addTarget(self, action: #selector(subNodeAction), forControlEvents: .TouchUpInside)
+        var views = [view]
+        for i in 2...6 {
+            let view = AddButton()
+            view.isAddButton = false
+            view.frame = CGRect(x: i*50, y: 150, width: 30, height: 30)
+            view.addTarget(self, action: #selector(subNodeAction), forControlEvents: .TouchUpInside)
+            views.append(view)
+        }
+        return views
+    }()
 
     // MARK: - DropDown
     @IBOutlet weak var learningRateButton: DropDownButton!

@@ -11,6 +11,7 @@ import UIKit
 class EasySlider: UISlider {
     
     var thumbImage = UIImage(named: "Slider")
+    
     var diameter:CGFloat = 20
     {
         didSet{
