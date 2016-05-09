@@ -45,17 +45,37 @@ class SpreadView: UIView {
     var setGaussianData: (() -> Void)?
     var setSpiralData: (() -> Void)?
     
-    @IBAction func setCircle(sender: UIButton) {
+    @IBOutlet weak var setCircleButton: SelectDataButton!
+    @IBOutlet weak var setExclusiveOrButton: SelectDataButton!
+    @IBOutlet weak var setGaussianButton: SelectDataButton!
+    @IBOutlet weak var setSpiralButton: SelectDataButton!
+    func resetAlpha(sender: SelectDataButton) {
+        let setDataButtons = [setCircleButton,setExclusiveOrButton,setGaussianButton,setSpiralButton]
+        for i in setDataButtons {
+            if i == sender {
+                i.isChosen = true
+            }
+            else {
+                i.isChosen = false
+            }
+        }
+    }
+    
+    @IBAction func setCircle(sender: SelectDataButton) {
         setCircleData?()
+        resetAlpha(sender)
     }
-    @IBAction func setExclusiveOr(sender: UIButton) {
+    @IBAction func setExclusiveOr(sender: SelectDataButton) {
         setExclusiveOrData?()
+        resetAlpha(sender)
     }
-    @IBAction func setGaussian(sender: UIButton) {
+    @IBAction func setGaussian(sender: SelectDataButton) {
         setGaussianData?()
+        resetAlpha(sender)
     }
-    @IBAction func setSpiral(sender: UIButton) {
+    @IBAction func setSpiral(sender: SelectDataButton) {
         setSpiralData?()
+        resetAlpha(sender)
     }
     
     // MARK: - UISlider
@@ -243,6 +263,7 @@ class SpreadView: UIView {
     }
     
     func makeUI() {
+        setCircleButton.isChosen = true
         for i in 0...5 {
             self.addSubview(addNodeButton[i])
             self.addSubview(subNodeButton[i])
