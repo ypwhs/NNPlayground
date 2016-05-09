@@ -286,6 +286,7 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
             Node * node = (*network->network[i])[j];
             node->initNodeLayer(frame);
         }
+        //最后一个Node的 frame
     }
     
     [networkLock unlock];
@@ -389,7 +390,11 @@ double lastTrainTime = 0;
     
     //增加节点 layerNum:范围为[1,6]的第n隐藏层
     _spreadView.addNode = ^(NSInteger layerNum,BOOL isAdd){
-        
+        int value = isAdd? 1 : -1;
+        networkShape[layerNum] += value;
+        if(networkShape[layerNum] < 1)networkShape[layerNum] = 1;
+        if(networkShape[layerNum] > 8)networkShape[layerNum] = 8;
+        [strongSelf reset];
     };
     
     //滑条 [0,10];[0,10];[0,30]
