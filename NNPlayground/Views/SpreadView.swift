@@ -236,19 +236,9 @@ class SpreadView: UIView {
     
     var isFirstTimeBeenAddAsSubview = true
     
-    func OriginImage(image:UIImage, size:CGSize) -> UIImage {
-        UIGraphicsBeginImageContext(size)
-        image.drawInRect(CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return scaledImage
-    }
-    
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        let thumbImage = UIImage(named: "Slider")
         
-        ratioTrainingTest.setThumbImage(OriginImage(thumbImage!, size: CGSize(width: 20, height: 20)), forState: .Normal)
         if isFirstTimeBeenAddAsSubview {
             isFirstTimeBeenAddAsSubview = false
             

@@ -61,7 +61,7 @@
                         <action selector="regularizationRateDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="dox-HR-psV"/>
                     </connections>
                 </button>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V7U-wg-OaH">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V7U-wg-OaH" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="480" y="57" width="112" height="31"/>
                     <color key="tintColor" red="0.094117647058823528" green="0.23921568627450979" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -75,7 +75,7 @@
                         </mask>
                     </variation>
                 </slider>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aF4-tL-qCh">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aF4-tL-qCh" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="480" y="107" width="112" height="31"/>
                     <color key="tintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -83,21 +83,19 @@
                     </constraints>
                     <color key="minimumTrackTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="thumbTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="vSA-Gy-6XK"/>
                         </mask>
                     </variation>
                 </slider>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="AnX-3Z-GdI">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="AnX-3Z-GdI" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="480" y="157" width="112" height="31"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="AnX-3Z-GdI" secondAttribute="height" multiplier="19:5" id="CH1-yq-rJW"/>
                     </constraints>
                     <color key="minimumTrackTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="thumbTintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="CH1-yq-rJW"/>
