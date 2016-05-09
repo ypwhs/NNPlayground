@@ -287,6 +287,12 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
             node->initNodeLayer(frame);
         }
         //最后一个Node的 frame
+        if (i > 0) {
+            AddButton *addButton = [_spreadView.addNodeButton objectAtIndex:(i - 1)];
+            addButton.frame = CGRectMake(frame.origin.x, 150, frame.size.width, frame.size.height);
+            AddButton *subButton = [_spreadView.subNodeButton objectAtIndex:(i - 1)];
+            subButton.frame = CGRectMake(frame.origin.x, 200, frame.size.width, frame.size.height);
+        }
     }
     
     [networkLock unlock];
