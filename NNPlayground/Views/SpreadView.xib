@@ -186,13 +186,16 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ntt-EQ-Czi">
-                    <rect key="frame" x="28" y="121" width="46" height="30"/>
+                    <rect key="frame" x="10" y="121" width="90" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="ntt-EQ-Czi" secondAttribute="height" multiplier="23:15" id="YMg-cg-frf"/>
+                        <constraint firstAttribute="width" secondItem="ntt-EQ-Czi" secondAttribute="height" multiplier="3:1" id="YMg-cg-frf"/>
                     </constraints>
-                    <state key="normal" title="Button">
+                    <state key="normal" title="Regenerate">
                         <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="Regenerate:" destination="iN0-l3-epB" eventType="touchUpInside" id="FuL-Ba-ZG2"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
@@ -228,6 +231,7 @@
                 <constraint firstItem="CUN-he-QAE" firstAttribute="leading" secondItem="tWs-vb-uXG" secondAttribute="trailing" constant="10" id="bH3-Zm-baG"/>
                 <constraint firstItem="aF4-tL-qCh" firstAttribute="top" secondItem="V7U-wg-OaH" secondAttribute="bottom" constant="20" id="bz0-t0-SKB"/>
                 <constraint firstItem="bbM-tD-nBE" firstAttribute="height" secondItem="n5I-wD-LN0" secondAttribute="height" id="caM-2S-dcO"/>
+                <constraint firstItem="ntt-EQ-Czi" firstAttribute="leading" secondItem="tWs-vb-uXG" secondAttribute="leading" id="dPk-hg-Uhb"/>
                 <constraint firstItem="bbM-tD-nBE" firstAttribute="trailing" secondItem="n5I-wD-LN0" secondAttribute="trailing" id="eHa-Vi-5ev"/>
                 <constraint firstItem="eol-uD-pSL" firstAttribute="height" secondItem="n5I-wD-LN0" secondAttribute="height" id="fKK-TC-Kff"/>
                 <constraint firstItem="mul-yL-jyk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="iyU-iz-36g"/>
@@ -243,6 +247,11 @@
                 <constraint firstItem="ntt-EQ-Czi" firstAttribute="top" secondItem="CUN-he-QAE" secondAttribute="bottom" constant="10" id="woZ-bn-OfF"/>
                 <constraint firstItem="maW-eY-OTH" firstAttribute="leading" secondItem="V7U-wg-OaH" secondAttribute="leading" id="yXq-Vu-VlR"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="qxM-Xd-JYL"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="activationButton" destination="mjJ-aY-Y1O" id="Cgn-3k-2DQ"/>
                 <outlet property="addLayerButtons" destination="eol-uD-pSL" id="lch-G7-zYS"/>
@@ -250,9 +259,12 @@
                 <outlet property="problemTypeButton" destination="maW-eY-OTH" id="5Za-H0-jih"/>
                 <outlet property="regularizationButton" destination="n5I-wD-LN0" id="L8z-sy-ld8"/>
                 <outlet property="regularizationRateButton" destination="mul-yL-jyk" id="qdR-1K-MdW"/>
+                <outlet property="setBatchSizeSlider" destination="AnX-3Z-GdI" id="MJR-iC-WVg"/>
                 <outlet property="setCircleButton" destination="1s7-Nq-d30" id="cfD-Ip-RF2"/>
                 <outlet property="setExclusiveOrButton" destination="9ut-zU-vXX" id="ucs-wr-c95"/>
                 <outlet property="setGaussianButton" destination="tWs-vb-uXG" id="Moc-BL-TEA"/>
+                <outlet property="setNoiseSlider" destination="aF4-tL-qCh" id="ZMf-Nd-air"/>
+                <outlet property="setRatioSlider" destination="V7U-wg-OaH" id="vWs-FB-RDX"/>
                 <outlet property="setSpiralButton" destination="CUN-he-QAE" id="P8z-Jf-mD2"/>
             </connections>
         </view>

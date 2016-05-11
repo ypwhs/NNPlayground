@@ -13,6 +13,21 @@ class SpreadView: UIView {
     var layers = 3
     var buttonWidth:CGFloat = 30
     
+    @IBAction func Regenerate(sender: UIButton) {
+        //setData
+        setCircleData?()
+        resetAlpha(setCircleButton)
+        //slider
+        setRatioSlider.setValue(0.5, animated: true)
+        setNoiseSlider.setValue(0, animated: true)
+        setBatchSizeSlider.setValue(0.333333333, animated: true)
+        //addLayer
+        layers = 3
+        addLayer?()
+        //addNode
+        //dropDown
+        
+    }
     
     // MARK: - SetData
     var setCircleData: (() -> Void)?
@@ -57,6 +72,11 @@ class SpreadView: UIView {
     var setRatio: ((current: Int) -> Void)?
     var setNoise: ((current: Int) -> Void)?
     var setBatchSize: ((current: Int) -> Void)?
+    
+    @IBOutlet weak var setRatioSlider: EasySlider!
+    @IBOutlet weak var setNoiseSlider: EasySlider!
+    @IBOutlet weak var setBatchSizeSlider: EasySlider!
+    
     func setSpacing(sender: EasySlider, total: Float) -> Int {
         let spacing = (sender.maximumValue - sender.minimumValue)/total
         let num = Int(sender.value/spacing)
@@ -88,7 +108,6 @@ class SpreadView: UIView {
             addNodeButton[layers - 2].hidden = true
             subNodeButton[layers - 2].hidden = true
         }
-        print("\(layers)")
         addLayer?()
     }
     
