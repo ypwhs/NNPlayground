@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *myswitch;
 @property (weak, nonatomic) IBOutlet UISwitch *speedupswitch;
 @property (nonatomic, strong) SpreadView *spreadView;
+@property (weak, nonatomic) IBOutlet LossView *lossView;
 
 @end
 

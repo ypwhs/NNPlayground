@@ -28,7 +28,7 @@ using namespace std;
 //*************************** Network ***************************
 int * networkShape = new int[3]{2, 4, 1};
 int layers = 3;
-double learningRate = 0.001;
+double learningRate = 0.03;
 double regularizationRate = 0;
 auto activation = Tanh;
 auto regularization = None;
@@ -62,54 +62,41 @@ NSLock * networkLock = [[NSLock alloc] init];
     [networkLock lock];
     //计算loss
     double loss = 0;
-    for (int i = 0; i < DATA_NUM; i++) {
-        inputs[0] = x1[i];
-        inputs[1] = x2[i];
+    for (int i = 0; i < testNum; i++) {
+        inputs[0] = testx1[i];
+        inputs[1] = testx2[i];
         double output = network->forwardProp(inputs, 2);
-        loss += 0.5 * pow(output - y[i], 2);
+        loss += 0.5 * pow(output - testy[i], 2);
     }
-    [networkLock unlock];
-    [_heatMap setData:x1 x2:x2 y:y size:DATA_NUM];
+    testLoss = loss/testNum;
     
-    //保存数据点截图
-//    _fpsLabel.text = @"";
-//    UIGraphicsBeginImageContextWithOptions(_heatMap.bounds.size, NO, 0);
-//    [_heatMap.dataLayer renderInContext:UIGraphicsGetCurrentContext()];
-//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    loss = 0;
+    for (int i = 0; i < trainNum; i++) {
+        inputs[0] = trainx1[i];
+        inputs[1] = trainx2[i];
+        double output = network->forwardProp(inputs, 2);
+        loss += 0.5 * pow(output - trainy[i], 2);
+    }
+    trainLoss = loss/testNum;
     
     delete oldNetwork;
-    toShow = [NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM, epoch];
-    _outputLabel.text = toShow;
+    [networkLock unlock];
+    
+    [_heatMap setData:trainx1 x2:trainx2 y:trainy size:trainNum];
+    
+    [_outputLabel setText:[NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM, epoch]];
     
 }
 
 //**************************** Inputs ***************************
-int DATA_NUM = 300;
+const int DATA_NUM = 500;
 double inputs[] = {1, 1};
-double * x1 = new double[DATA_NUM];
-double * x2 = new double[DATA_NUM];
-double * y = new double[DATA_NUM];
-#define π 3.1415926
+double * rawx1 = new double[DATA_NUM];
+double * rawx2 = new double[DATA_NUM];
+double * rawy = new double[DATA_NUM];
+double noise = 0;
 
-void dataset_circle(){
-    for(int i = 0; i < DATA_NUM/2; i++){
-        double r = drand(0.7, 0.9);
-        double dir = drand(0, 2*π);
-        x1[i] = r*cos(dir);
-        x2[i] = r*sin(dir);
-        y[i] = -1;
-    }
-    
-    for(int i = DATA_NUM/2; i < DATA_NUM; i++){
-        double r = drand(0, 0.5);
-        double dir = drand(0, 2*π);
-        x1[i] = r*cos(dir);
-        x2[i] = r*sin(dir);
-        y[i] = 1;
-    }
-}
+#define π 3.1415926
 
 double normalRandom(double mean, double variance){
     double v1, v2, s;
@@ -123,61 +110,149 @@ double normalRandom(double mean, double variance){
     return mean + variance * result;
 }
 
+void dataset_circle(){
+    for(int i = 0; i < DATA_NUM; i++){
+        double r;
+        if(i < DATA_NUM/2)r = drand(0.7, 0.9);
+        else r = drand(0, 0.5);
+        double dir = drand(0, 2*π);
+        rawx1[i] = r*cos(dir);
+        rawx2[i] = r*sin(dir);
+        double noisex1 = drand(-1, 1) * noise + rawx1[i];
+        double noisex2 = drand(-1, 1) * noise + rawx2[i];
+        rawy[i] = (noisex1*noisex1 + noisex2*noisex2)<0.25? 1 : -1;
+    }
+}
+
 void dataset_twoGaussData(){
     for(int i = 0; i < DATA_NUM; i++){
-        y[i] = i > DATA_NUM/2 ? 1 : -1;
-        x1[i] = normalRandom(y[i] * 0.4, 0.15);
-        x2[i] = normalRandom(y[i] * 0.4, 0.15);
+        rawy[i] = i > DATA_NUM/2 ? 1 : -1;
+        double variance = 0.14 + noise*0.5;
+        rawx1[i] = normalRandom(rawy[i] * 0.4, variance);
+        rawx2[i] = normalRandom(rawy[i] * 0.4, variance);
     }
 }
 
 void dataset_xor(){
+    double padding = 0.05;
     for(int i = 0; i < DATA_NUM; i++){
-        x1[i] = drand(-0.8, 0.8);
-        x2[i] = drand(-0.8, 0.8);
-        y[i] = x1[i]*x2[i]>0 ? 1 : -1;
-        x1[i] += x1[i]>0 ? 0.1 : -0.1;
-        x2[i] += x2[i]>0 ? 0.1 : -0.1;
+        rawx1[i] = drand(-0.8, 0.8);
+        rawx2[i] = drand(-0.8, 0.8);
+        rawx1[i] += rawx1[i]>0 ? padding : -padding;
+        rawx2[i] += rawx2[i]>0 ? padding : -padding;
+        double noisex1 = drand(-1, 1) * noise + rawx1[i];
+        double noisex2 = drand(-1, 1) * noise + rawx2[i];
+        rawy[i] = noisex1*noisex2 > 0 ? 1 : -1;
     }
 }
 
 void dataset_spiral(){
-    int n = DATA_NUM/2;
     double deltaT = 0;
-    for (int i = 0; i < n; i++) {
-        double r = (double)i/n*0.8;
+    for (int i = 0; i < DATA_NUM/2; i++) {
+        double n = DATA_NUM/2;
+        double r = (double)i / n * 0.8;
         double t = 1.75 * i / n * 2 * π + deltaT;
-        x1[i] = r * sin(t);
-        x2[i] = r * cos(t);
-        y[i] = 1;
+        rawx1[i] = r * sin(t) + drand(-1, 1)/6 * noise;
+        rawx2[i] = r * cos(t) + drand(-1, 1)/6 * noise;
+        rawy[i] = 1;
     }
     deltaT = π;
-    for (int i = 0; i < n; i++) {
-        double r = (double)i/n*0.8;
+    for (int i = 0; i < DATA_NUM/2; i++) {
+        double n = DATA_NUM/2;
+        double r = (double)i / n * 0.8;
         double t = 1.75 * i / n * 2 * π + deltaT;
-        x1[i+n] = r * sin(t);
-        x2[i+n] = r * cos(t);
-        y[i+n] = -1;
+        rawx1[i+DATA_NUM/2] = r * sin(t) + drand(-1, 1)/6 * noise;
+        rawx2[i+DATA_NUM/2] = r * cos(t) + drand(-1, 1)/6 * noise;
+        rawy[i+DATA_NUM/2] = -1;
     }
 }
+
+double * trainx1 = new double[DATA_NUM];
+double * trainx2 = new double[DATA_NUM];
+double * trainy = new double[DATA_NUM];
+double * testx1 = new double[DATA_NUM];
+double * testx2 = new double[DATA_NUM];
+double * testy = new double[DATA_NUM];
+double ratioOfTrainingData = 0.5;
+
+int trainNum = 0;
+int testNum = 0;
+double lastRatio = 0.5;
+enum Dataset{Circle, Xor, TwoGaussian, Spiral};
+Dataset dataset = Circle;
+
+- (void)updateDataset{
+    switch (dataset) {
+        case Circle: {
+            dataset_circle();
+            break;
+        }
+        case Xor: {
+            dataset_xor();
+            break;
+        }
+        case TwoGaussian: {
+            dataset_twoGaussData();
+            break;
+        }
+        case Spiral: {
+            dataset_spiral();
+            break;
+        }
+    }
+    
+    //Fisher-Yates algorithm
+    for(int i = 0; i < DATA_NUM; i++){
+        int r = floor(drand(0, DATA_NUM));
+        double t1 = rawx1[i];
+        double t2 = rawx2[i];
+        double t3 = rawy[i];
+        rawx1[i] = rawx1[r];
+        rawx2[i] = rawx2[r];
+        rawy[i] = rawy[r];
+        rawx1[r] = t1;
+        rawx2[r] = t2;
+        rawy[r] = t3;
+    }
+    
+    trainNum = ratioOfTrainingData * DATA_NUM;
+    testNum = DATA_NUM - trainNum;
+    for(int i = 0; i < trainNum; i++){
+        trainx1[i] = rawx1[i];
+        trainx2[i] = rawx2[i];
+        trainy[i] = rawy[i];
+    }
+    
+    for(int i = 0; i < testNum; i++){
+        testx1[i] = rawx1[trainNum + i];
+        testx2[i] = rawx2[trainNum + i];
+        testy[i] = rawy[trainNum + i];
+    }
+    
+    [self reset];
+}
+
 
 -(void) reset{
     _myswitch.on = false;
     always = false;
-    learningRate = 0.01;
-    maxfps = 120;
+    [networkLock lock];
+    [networkLock unlock];
+    [self ui:^{
+        [_lossView clearData];
+    }];
     [self resetNetwork];
 }
 
 - (IBAction)speedup:(UISwitch *)sender {
+    [networkLock lock];
     if(sender.on){
-        batch = 120;
+        trainBatch = 100;
     }else{
-        batch = 9;
+        trainBatch = 1;
     }
+    [networkLock unlock];
 }
-
-int maxfps = 120;
 
 //*************************** Heatmap ***************************
 
@@ -257,6 +332,9 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     CGContextRelease(bitmapContext);
     CGImageRelease(imageRef);
 }
+- (IBAction)resetClick:(ResetButton *)sender {
+    [self updateDataset];
+}
 
 //初始化每个结点的图像层（CALayer）
 - (void) initNodeLayer{
@@ -331,33 +409,54 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
 bool always = false;
 NSString * toShow;
 NSString * fpsString;
-int batch = 9;
+int trainBatch = 1;
+int batch = 10;
 int epoch = 0;
 int lastEpoch = 0;
 int speed = 0;
 double lastEpochTime = [NSDate date].timeIntervalSince1970;
-
+double trainLoss = 0, testLoss = 0;
 - (void)onestep{
     [networkLock lock];
     
-    //进行batch轮训练
     double loss = 0;
-    for(int n = 0; n < batch; n++){
-        for (int i = 0; i < DATA_NUM; i++) {
-            inputs[0] = x1[i];
-            inputs[1] = x2[i];
-            double output = network->forwardProp(inputs, 2);
-            network->backProp(y[i]);
-            loss += 0.5 * pow(output - y[i], 2);
-        }
-        network->updateWeights(learningRate, regularizationRate);
+    for (int i = 0; i < testNum; i++) {
+        inputs[0] = testx1[i];
+        inputs[1] = testx2[i];
+        double output = network->forwardProp(inputs, 2);
+        loss += 0.5 * pow(output - testy[i], 2);
     }
-    epoch += batch;
-    [networkLock unlock];
+    testLoss = loss/testNum;
     
+    loss = 0;
+    int trainEpoch = 0;
+    //进行trainBatch轮训练
+    for(int n = 0; n < trainBatch; n++){
+        for (int i = 0; i < trainNum; i++) {
+            inputs[0] = trainx1[i];
+            inputs[1] = trainx2[i];
+            double output = network->forwardProp(inputs, 2);
+            network->backProp(trainy[i]);
+            loss += 0.5 * pow(output - trainy[i], 2);
+            trainEpoch++;
+            if((trainEpoch+1)%batch==0){
+                network->updateWeights(learningRate, regularizationRate);
+            }
+        }
+    }
+    epoch += trainBatch;
+    trainLoss = loss/trainNum/trainBatch;
+    
+    double tmp1 = trainLoss, tmp2 = testLoss;
+    [self ui:^{
+        [_lossView addLoss:tmp1 b:tmp2];
+    }];
+    
+    [networkLock unlock];
     double now = [NSDate date].timeIntervalSince1970;
     speed = 1.0/(now - lastEpochTime);
     lastEpochTime = now;
+
     
     toShow = [NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM/batch, epoch];
     fpsString = [NSString stringWithFormat:@"fps:%d", speed];
@@ -370,6 +469,7 @@ double lastEpochTime = [NSDate date].timeIntervalSince1970;
 }
 
 double lastTrainTime = 0;
+int maxfps = 120;
 - (void)train{
     while(always){
         //帧数控制
@@ -416,20 +516,20 @@ double lastTrainTime = 0;
     
     //选择数据
     _spreadView.setCircleData = ^{
-        dataset_circle();
-        [strongSelf reset];
+        dataset = Circle;
+        [strongSelf updateDataset];
     };
     _spreadView.setExclusiveOrData = ^{
-        dataset_xor();
-        [strongSelf reset];
+        dataset = Xor;
+        [strongSelf updateDataset];
     };
     _spreadView.setGaussianData = ^{
-        dataset_twoGaussData();
-        [strongSelf reset];
+        dataset = TwoGaussian;
+        [strongSelf updateDataset];
     };
     _spreadView.setSpiralData = ^{
-        dataset_spiral();
-        [strongSelf reset];
+        dataset = Spiral;
+        [strongSelf updateDataset];
     };
     
     //下拉菜单
@@ -477,8 +577,8 @@ CGFloat screenScale = [UIScreen mainScreen].scale;
 - (void)viewDidLoad {
     [super viewDidLoad];
     initColor();
-    dataset_circle();
-    [self reset];
+    dataset = Circle;
+    [self updateDataset];
     [self initSpreadView];
 
     UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpressAction:)];

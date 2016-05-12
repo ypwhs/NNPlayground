@@ -55,6 +55,9 @@ class HeatMapView: UIView {
         let halfWidth = Double(dataLayer.frame.size.width / 2)
         let halfHeight = Double(dataLayer.frame.size.height / 2)
         for i in 0..<x.count{
+            if abs(x[i][0]) > 1 || abs(x[i][1]) > 1{
+                continue;
+            }
             //先添加白底圆，再添加颜色圆
             var pathLayer = CAShapeLayer()
             var path = UIBezierPath(ovalInRect: CGRect(x: Double(halfWidth * x[i][0] + halfWidth)-1, y: Double(halfHeight - halfHeight * x[i][1])-1, width: 7.0, height: 7.0))  //减1是为了圆心和半径5的圆匹配

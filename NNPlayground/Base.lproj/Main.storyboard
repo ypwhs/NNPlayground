@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -64,6 +65,22 @@
                                     <action selector="createSpread:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cdW-di-qNw"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNS-Qj-hId" customClass="LossView" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="516" y="276" width="200" height="130"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="er9-Sp-Ywg"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jju-Ya-qaA" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="534" y="219" width="30" height="30"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isResetButton" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="resetClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZWj-qP-x1D"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -72,11 +89,18 @@
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="width" secondItem="zie-PW-5as" secondAttribute="width" id="4Zl-SX-qF7"/>
                             <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="6Us-un-NHI"/>
                             <constraint firstItem="YZb-u3-eD2" firstAttribute="bottom" secondItem="DZR-z9-Peg" secondAttribute="bottom" id="75y-mW-qtD"/>
+                            <constraint firstItem="jju-Ya-qaA" firstAttribute="firstBaseline" secondItem="x7P-z9-49f" secondAttribute="firstBaseline" id="8HH-6P-kCe"/>
+                            <constraint firstItem="jju-Ya-qaA" firstAttribute="baseline" secondItem="x7P-z9-49f" secondAttribute="baseline" id="8Vs-qn-zFT"/>
                             <constraint firstItem="x7P-z9-49f" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="9" id="GWn-XN-rtq"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="DZR-z9-Peg" secondAttribute="bottom" id="K6K-ke-6ns"/>
+                            <constraint firstItem="jju-Ya-qaA" firstAttribute="top" secondItem="x7P-z9-49f" secondAttribute="top" id="NwN-ep-yvQ"/>
+                            <constraint firstItem="x7P-z9-49f" firstAttribute="leading" secondItem="jju-Ya-qaA" secondAttribute="trailing" constant="8" symbolic="YES" id="OHd-EW-B5Y"/>
                             <constraint firstItem="DZR-z9-Peg" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="8" id="SNb-yj-mvy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DZR-z9-Peg" secondAttribute="trailing" id="UYf-BS-eIg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WYA-1I-afQ" secondAttribute="trailing" id="dHR-Em-Wx3"/>
+                            <constraint firstItem="NNS-Qj-hId" firstAttribute="top" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" id="duN-Jw-KQx"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NNS-Qj-hId" secondAttribute="bottom" constant="8" symbolic="YES" id="eg9-fA-gi5"/>
+                            <constraint firstItem="NNS-Qj-hId" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="gaH-hc-6vX"/>
                             <constraint firstItem="DZR-z9-Peg" firstAttribute="leading" secondItem="YZb-u3-eD2" secondAttribute="trailing" constant="8" id="mL6-YB-2VT"/>
                             <constraint firstItem="YZb-u3-eD2" firstAttribute="leading" secondItem="x7P-z9-49f" secondAttribute="trailing" constant="8" id="sp0-io-3Zt"/>
                         </constraints>
@@ -89,6 +113,7 @@
                     <connections>
                         <outlet property="fpsLabel" destination="J6l-2R-oE7" id="lgh-2s-ZVq"/>
                         <outlet property="heatMap" destination="zie-PW-5as" id="EUz-mc-KX6"/>
+                        <outlet property="lossView" destination="NNS-Qj-hId" id="6t2-hD-ySm"/>
                         <outlet property="myswitch" destination="DZR-z9-Peg" id="LpM-Nh-Ozu"/>
                         <outlet property="outputLabel" destination="WYA-1I-afQ" id="YF7-wc-tbU"/>
                         <outlet property="speedupswitch" destination="YZb-u3-eD2" id="t7J-vd-qVW"/>

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A12F039E1CD49BA100CA4890 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A12F039D1CD49BA100CA4890 /* MBProgressHUD.m */; };
+		A14F78971CE4C6620056FF51 /* LossView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F78961CE4C6620056FF51 /* LossView.swift */; };
 		A15F49E91CC8B14000409DA5 /* HeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F49E81CC8B14000409DA5 /* HeatMap.swift */; };
 		A185E5FF1CCBD3A900CB8A4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A185E5FE1CCBD3A900CB8A4A /* Images.xcassets */; };
 		A19CD7421CC89D5300E8CDF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7411CC89D5300E8CDF9 /* main.m */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		A12F039C1CD49BA100CA4890 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A12F039D1CD49BA100CA4890 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		A14F78961CE4C6620056FF51 /* LossView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LossView.swift; sourceTree = "<group>"; };
 		A15F49E71CC8B14000409DA5 /* NNPlayground-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NNPlayground-Bridging-Header.h"; sourceTree = "<group>"; };
 		A15F49E81CC8B14000409DA5 /* HeatMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeatMap.swift; sourceTree = "<group>"; };
 		A185E5FE1CCBD3A900CB8A4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				AB6C37E81CDA4CF5004AAAE9 /* Buttons */,
 				AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */,
 				AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */,
+				A14F78961CE4C6620056FF51 /* LossView.swift */,
 				AB6C37FB1CDA5108004AAAE9 /* SpreadView.xib */,
 			);
 			name = Views;
@@ -371,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB6C37EF1CDA4D05004AAAE9 /* ConfigureButton.swift in Sources */,
+				A14F78971CE4C6620056FF51 /* LossView.swift in Sources */,
 				A19CD7481CC89D5300E8CDF9 /* ViewController.mm in Sources */,
 				A19CD7451CC89D5300E8CDF9 /* AppDelegate.m in Sources */,
 				AB6C37F01CDA4D05004AAAE9 /* DropDownButton.swift in Sources */,
