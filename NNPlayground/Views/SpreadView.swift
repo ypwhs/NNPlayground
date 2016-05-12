@@ -17,16 +17,33 @@ class SpreadView: UIView {
         //setData
         setCircleData?()
         resetAlpha(setCircleButton)
+        
         //slider
         setRatioSlider.setValue(0.5, animated: true)
         setNoiseSlider.setValue(0, animated: true)
         setBatchSizeSlider.setValue(0.333333333, animated: true)
+        
         //addLayer
         layers = 3
         addLayer?()
-        //addNode
-        //dropDown
+        addNodeButton[0].hidden = false
+        subNodeButton[0].hidden = false
+        for i in 1...5 {
+            addNodeButton[i].hidden = true
+            subNodeButton[i].hidden = true
+        }
         
+        //addNode
+        
+        //dropDown
+        learningRateDropView.showSelectedLabel?(name: "0.03", num: 5)
+        learningRateDropView.labelIsSelected = 5
+        activationDropView.showSelectedLabel?(name: "Tanh", num: 1)
+        activationDropView.labelIsSelected = 1
+        regularizationDropView.showSelectedLabel?(name: "None", num: 0)
+        regularizationDropView.labelIsSelected = 0
+        regularizationRateDropView.showSelectedLabel?(name: "0", num: 0)
+        regularizationRateDropView.labelIsSelected = 0
     }
     
     // MARK: - SetData
@@ -183,7 +200,6 @@ class SpreadView: UIView {
         view.labelIsSelected = 5
         return view
     }()
-    
     @IBAction func learningRateDrop(sender: DropDownButton) {
         if let window = self.window {
             learningRateDropView.showInView(window,button: sender)
@@ -204,7 +220,6 @@ class SpreadView: UIView {
         view.labelIsSelected = 1
         return view
     }()
-    
     @IBAction func activationDrop(sender: DropDownButton) {
         if let window = self.window {
             activationDropView.showInView(window,button: sender)
@@ -225,7 +240,6 @@ class SpreadView: UIView {
         view.labelIsSelected = 0
         return view
     }()
-    
     @IBAction func regularizationDrop(sender: DropDownButton) {
         if let window = self.window {
             regularizationDropView.showInView(window,button: sender)
@@ -246,34 +260,12 @@ class SpreadView: UIView {
         view.labelIsSelected = 0
         return view
     }()
-    
     @IBAction func regularizationRateDrop(sender: DropDownButton) {
         if let window = self.window {
             regularizationRateDropView.showInView(window,button: sender)
         }
     }
-    
-    
-    @IBOutlet weak var problemTypeButton: DropDownButton!
-    var setProblemType: ((num: Int) -> Void)?
-    private lazy var problemTypeDropView: DropDownView = {
-        let view = DropDownView()
-        view.labelName = ["Classification","Regression"]
-        view.showSelectedLabel = {(name: String, num: Int) in
-            self.problemTypeButton.setTitle(name, forState: .Normal)
-            view.hide()
-            self.setProblemType?(num: num)
-        }
-        view.labelIsSelected = 0
-        return view
-    }()
-    
-    @IBAction func problemTypeDrop(sender: DropDownButton) {
-        if let window = self.window {
-            problemTypeDropView.showInView(window,button: sender)
-        }
-    }
-    
+        
     //MARK: - View
     func showInView(view:UIView) {
         frame = view.bounds

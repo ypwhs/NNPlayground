@@ -449,10 +449,7 @@ double lastTrainTime = 0;
         double form[] = {0,0.001,0.003,0.01,0.03,0.1,0.3,1,3,10};
         regularizationRate = form[num];
     };
-    _spreadView.setProblemType = ^(NSInteger num){
-        
-    };
-    
+
     //增加层数
     _spreadView.addLayer = ^{
         strongSelf.myswitch.on = false;
