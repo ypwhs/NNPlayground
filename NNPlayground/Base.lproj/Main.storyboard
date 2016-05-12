@@ -19,28 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="516" y="10" width="200" height="200"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fps:0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-2R-oE7">
-                                        <rect key="frame" x="122" y="0.0" width="70" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="7g0-C8-Haq"/>
-                                            <constraint firstAttribute="height" constant="21" id="EKt-QX-0SY"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                        <color key="textColor" white="0.91092133620000004" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="Fvb-zI-m4a"/>
-                                    <constraint firstAttribute="height" constant="200" id="Idk-Sb-ycb"/>
-                                    <constraint firstItem="J6l-2R-oE7" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="top" id="NvW-v2-g5t"/>
-                                    <constraint firstAttribute="trailing" secondItem="J6l-2R-oE7" secondAttribute="trailing" constant="8" id="XqH-g0-f1w"/>
-                                </constraints>
-                            </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DZR-z9-Peg">
                                 <rect key="frame" x="667" y="218" width="51" height="31"/>
                                 <connections>
@@ -81,6 +59,37 @@
                                     <action selector="resetClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZWj-qP-x1D"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="516" y="10" width="200" height="200"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fps:0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-2R-oE7">
+                                        <rect key="frame" x="122" y="0.0" width="70" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="7g0-C8-Haq"/>
+                                            <constraint firstAttribute="height" constant="21" id="EKt-QX-0SY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                        <color key="textColor" white="0.91092133620000004" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXT-FW-wso">
+                                        <rect key="frame" x="8" y="0.0" width="45" height="30"/>
+                                        <state key="normal" title="不显示"/>
+                                        <connections>
+                                            <action selector="showTestData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HI7-MC-8vR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="WXT-FW-wso" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="top" id="BSk-6W-MjV"/>
+                                    <constraint firstAttribute="width" constant="200" id="Fvb-zI-m4a"/>
+                                    <constraint firstAttribute="height" constant="200" id="Idk-Sb-ycb"/>
+                                    <constraint firstItem="J6l-2R-oE7" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="top" id="NvW-v2-g5t"/>
+                                    <constraint firstItem="WXT-FW-wso" firstAttribute="leading" secondItem="zie-PW-5as" secondAttribute="leading" constant="8" id="Pkk-jz-hhv"/>
+                                    <constraint firstAttribute="trailing" secondItem="J6l-2R-oE7" secondAttribute="trailing" constant="8" id="XqH-g0-f1w"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

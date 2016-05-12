@@ -83,6 +83,7 @@ NSLock * networkLock = [[NSLock alloc] init];
     [networkLock unlock];
     
     [_heatMap setData:trainx1 x2:trainx2 y:trainy size:trainNum];
+    if(isShowTestData)[_heatMap setTestData:testx1 x2:testx2 y:testy size:testNum];
     
     [_outputLabel setText:[NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM, epoch]];
     
@@ -177,7 +178,7 @@ double ratioOfTrainingData = 0.5;
 
 int trainNum = 0;
 int testNum = 0;
-double lastRatio = 0.5;
+double lastRatio = 0.5, lastNoise = 0;
 enum Dataset{Circle, Xor, TwoGaussian, Spiral};
 Dataset dataset = Circle;
 
@@ -505,13 +506,21 @@ int maxfps = 120;
     
     //滑条 [0,8];[0,10];[0,29]
     _spreadView.setRatio = ^(NSInteger current){
-        
+        ratioOfTrainingData = (current+1.0)/10.0;   // 0.1~0.9
+        if(ratioOfTrainingData != lastRatio){
+            lastRatio = ratioOfTrainingData;
+            [strongSelf updateDataset];
+        }
     };
     _spreadView.setNoise = ^(NSInteger current){
-        
+        noise = current / 20.0;    //0~50%
+        if(noise != lastNoise){
+            lastNoise = noise;
+            [strongSelf updateDataset];
+        }
     };
     _spreadView.setBatchSize = ^(NSInteger current){
-        
+        batch = (int)current + 1;
     };
     
     //选择数据
@@ -627,6 +636,17 @@ MBProgressHUD *hud;
     }
 }
 
+bool isShowTestData = false;
+- (IBAction)showTestData:(UIButton *)sender {
+    isShowTestData = !isShowTestData;
+    if(isShowTestData){
+        [sender setTitle:@"显示" forState: UIControlStateNormal];
+        [_heatMap setTestData:testx1 x2:testx2 y:testy size:testNum];
+    }else{
+        [sender setTitle:@"不显示" forState: UIControlStateNormal];
+        [_heatMap setData:trainx1 x2:trainx2 y:trainy size:trainNum];
+    }
+}
 
 - (void)viewDidAppear:(BOOL)animated{
     [self resetNetwork];
