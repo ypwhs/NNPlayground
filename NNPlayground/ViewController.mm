@@ -403,7 +403,7 @@ double lastTrainTime = 0;
         [strongSelf reset];
     };
     
-    //滑条 [0,10];[0,10];[0,30]
+    //滑条 [0,8];[0,10];[0,29]
     _spreadView.setRatio = ^(NSInteger current){
         
     };

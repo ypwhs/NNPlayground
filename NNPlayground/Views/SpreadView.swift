@@ -102,13 +102,13 @@ class SpreadView: UIView {
     }
     
     @IBAction func setRatioAction(sender: EasySlider) {
-        setRatio?(current: setSpacing(sender, total: 10))
+        setRatio?(current: setSpacing(sender, total: 8))
     }
     @IBAction func setNoiseAction(sender: EasySlider) {
         setNoise?(current: setSpacing(sender, total: 10))
     }
     @IBAction func setBatchSizeAction(sender: EasySlider) {
-        setBatchSize?(current: setSpacing(sender, total: 30))
+        setBatchSize?(current: setSpacing(sender, total: 29))
     }
     
     // MARK: - AddLayer
