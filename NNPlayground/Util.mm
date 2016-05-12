@@ -8,10 +8,6 @@
 
 #import "Util.h"
 
-double drand(){
-    return (double)arc4random()/ARC4RANDOM_MAX;
-}
-
 double drand(double a, double b){
     return (double)arc4random()/ARC4RANDOM_MAX * (b - a) + a;;
 }

@@ -105,8 +105,8 @@ double noise = 0;
 double normalRandom(double mean, double variance){
     double v1, v2, s;
     do {
-        v1 = 2 * drand() - 1;
-        v2 = 2 * drand() - 1;
+        v1 = drand(-1, 1);
+        v2 = drand(-1, 1);
         s = v1 * v1 + v2 * v2;
     } while (s > 1);
     

@@ -18,7 +18,7 @@ class Link{
 public:
     Node * source;
     Node * dest;
-    double weight = (drand() - 0.5)*4;  //随机权重
+    double weight = drand(-1, 1);  //随机权重
     double errorDer = 0;    //误差导数
     double accErrorDer = 0; //累计误差
     double numAccumulatedDers = 0;  //误差累计次数

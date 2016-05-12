@@ -18,7 +18,6 @@ using namespace std;
 //************************** Function **************************
 #define ARC4RANDOM_MAX      0x100000000
 
-double drand();
 double drand(double a, double b);
 
 enum ActivationFunction{ReLU, Tanh, Sigmoid, Linear};
