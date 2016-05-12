@@ -36,6 +36,20 @@ auto regularization = None;
 Network * network = new Network(networkShape, layers, activation, regularization);
 NSLock * networkLock = [[NSLock alloc] init];
 
+bool discretize = false;
+- (void)buildInputImage{
+    //创建input图像
+    vector<Node*> &inputLayer = *network->network[0];
+    for(int j = 0; j < 100; j++){
+        for(int i = 0; i < 100; i++){
+            for(int k = 0; k < inputLayer.size(); k++){
+                inputLayer[0]->updateBitmapPixel(i, j, (i - 50.0)/50*6, discretize);
+                inputLayer[1]->updateBitmapPixel(i, j, (j - 50.0)/50*6, discretize);
+            }
+        }
+    }
+}
+
 //初始化神经网络
 - (void)resetNetwork{
     [networkLock lock];
@@ -43,18 +57,7 @@ NSLock * networkLock = [[NSLock alloc] init];
     lastEpoch = 0;
     Network * oldNetwork = network;
     network = new Network(networkShape, layers, activation, None);
-    
-    //创建input图像
-    vector<Node*> &inputLayer = *network->network[0];
-    for(int j = 0; j < 100; j++){
-        for(int i = 0; i < 100; i++){
-            for(int k = 0; k < inputLayer.size(); k++){
-                inputLayer[0]->updateBitmapPixel(i, j, (i - 50.0)/50*6);
-                inputLayer[1]->updateBitmapPixel(i, j, (j - 50.0)/50*6);
-            }
-        }
-    }
-    
+    [self buildInputImage];
     [networkLock unlock];
     
     [self initNodeLayer];
@@ -266,7 +269,7 @@ UIImage * image;
         for(int i = 0; i < 100; i++){
             inputs[0] = (i - 50.0)/50;
             inputs[1] = (j - 50.0)/50;
-            network->forwardProp(inputs, 2, i, j);
+            network->forwardProp(inputs, 2, i, j, discretize);
         }
     }
     
@@ -646,6 +649,18 @@ bool isShowTestData = false;
         [sender setTitle:@"不显示" forState: UIControlStateNormal];
         [_heatMap setData:trainx1 x2:trainx2 y:trainy size:trainNum];
     }
+}
+- (IBAction)changeDiscretize:(UIButton *)sender {
+    [networkLock lock];
+    discretize = !discretize;
+    if(discretize){
+        [sender setTitle:@"边界" forState: UIControlStateNormal];
+    }else{
+        [sender setTitle:@"正常" forState: UIControlStateNormal];
+    }
+    [self buildInputImage];
+    [networkLock unlock];
+    [self getHeatData];
 }
 
 - (void)viewDidAppear:(BOOL)animated{

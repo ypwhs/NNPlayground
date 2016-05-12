@@ -57,8 +57,8 @@ public:
     ~Node();
     
     double updateOutput();
-    void updateOutput(int x1, int x2);
-    void updateBitmapPixel(int x1, int x2, double value);
+    void updateOutput(int x, int y, bool discretize);
+    void updateBitmapPixel(int x1, int x2, double value, bool discretize);
     UIImage * nodeImage;
     UIImage * getImage();
     void updateVisibility();

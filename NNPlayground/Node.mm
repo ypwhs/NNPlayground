@@ -19,17 +19,25 @@ double Node::updateOutput() {
     return output;
 }
 
-void Node::updateOutput(int x, int y) {
+void Node::updateOutput(int x, int y, bool discretize) {
     updateOutput();
     //更新outputBitmap(HeatMap)
     int bitmapIndex = (imageWidth-1-y)*imageWidth + x;
-    outputBitmap[bitmapIndex] = getColor(-output);
+    if(discretize){
+        outputBitmap[bitmapIndex] = getColor(-output >=0 ? 1 : -1);
+    }else{
+        outputBitmap[bitmapIndex] = getColor(-output);
+    }
 }
 
 //更新bitmap某个像素点
-void Node::updateBitmapPixel(int x, int y, double value){
+void Node::updateBitmapPixel(int x, int y, double value, bool discretize){
     int bitmapIndex = (imageWidth-1-y)*imageWidth + x;
-    outputBitmap[bitmapIndex] = getColor(-value);
+    if(discretize){
+        outputBitmap[bitmapIndex] = getColor(-value >=0 ? 1 : -1);
+    }else{
+        outputBitmap[bitmapIndex] = getColor(-value);
+    }
 }
 
 Node::~Node(){

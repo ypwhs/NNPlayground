@@ -22,7 +22,7 @@ public:
     Network(int ns[], int ls, ActivationFunction activation, RegularizationFunction regularzation);
     ~Network();
     double forwardProp(double inputs[], int inputSize);
-    void forwardProp(double inputs[], int inputSize, int x1, int x2);
+    void forwardProp(double inputs[], int inputSize, int x1, int x2, bool discretize);
     void backProp(double target);
     void updateWeights(double learningRate, double regularizationRate);
     void forEachNode(bool ignoreInputs, void (*accessor)(Node*));

@@ -79,15 +79,24 @@
                                             <action selector="showTestData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HI7-MC-8vR"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yc8-U9-G5u">
+                                        <rect key="frame" x="8" y="38" width="30" height="30"/>
+                                        <state key="normal" title="正常"/>
+                                        <connections>
+                                            <action selector="changeDiscretize:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jQ1-6e-C8C"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="WXT-FW-wso" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="top" id="BSk-6W-MjV"/>
                                     <constraint firstAttribute="width" constant="200" id="Fvb-zI-m4a"/>
                                     <constraint firstAttribute="height" constant="200" id="Idk-Sb-ycb"/>
+                                    <constraint firstItem="yc8-U9-G5u" firstAttribute="leading" secondItem="zie-PW-5as" secondAttribute="leading" constant="8" id="KNj-pC-5rI"/>
                                     <constraint firstItem="J6l-2R-oE7" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="top" id="NvW-v2-g5t"/>
                                     <constraint firstItem="WXT-FW-wso" firstAttribute="leading" secondItem="zie-PW-5as" secondAttribute="leading" constant="8" id="Pkk-jz-hhv"/>
                                     <constraint firstAttribute="trailing" secondItem="J6l-2R-oE7" secondAttribute="trailing" constant="8" id="XqH-g0-f1w"/>
+                                    <constraint firstItem="yc8-U9-G5u" firstAttribute="top" secondItem="WXT-FW-wso" secondAttribute="bottom" constant="8" id="grr-46-dcM"/>
                                 </constraints>
                             </view>
                         </subviews>

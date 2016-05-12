@@ -129,7 +129,7 @@ double Network::forwardProp(double inputs[], int inputSize) {
     return output;
 }
 
-void Network::forwardProp(double inputs[], int inputSize, int x1, int x2) {
+void Network::forwardProp(double inputs[], int inputSize, int x1, int x2, bool discretize) {
     vector<Node*> &inputLayer = *network[0];
     if (inputSize != inputLayer.size()) {
         printf("The number of inputs must match the number of nodes in the input layer!\n");
@@ -145,7 +145,7 @@ void Network::forwardProp(double inputs[], int inputSize, int x1, int x2) {
         // Update all the nodes in this layer.
         vector<Node*> &currentLayer = *network[layerIdx];
         for (int i = 0; i < currentLayer.size(); i++) {
-            currentLayer[i]->updateOutput(x1, x2);
+            currentLayer[i]->updateOutput(x1, x2, discretize);
         }
     }
 }
