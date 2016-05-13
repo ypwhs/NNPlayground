@@ -251,7 +251,7 @@ Dataset dataset = Circle;
 - (IBAction)speedup:(UISwitch *)sender {
     [networkLock lock];
     if(sender.on){
-        trainBatch = 100;
+        trainBatch = 10;
     }else{
         trainBatch = 1;
     }
