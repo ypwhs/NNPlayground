@@ -22,6 +22,7 @@
 		A19CD7791CC89DE700E8CDF9 /* Node.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7741CC89DE700E8CDF9 /* Node.mm */; };
 		A19CD77A1CC89DE700E8CDF9 /* Network.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7761CC89DE700E8CDF9 /* Network.mm */; };
 		A19CD77B1CC89DE700E8CDF9 /* Util.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7781CC89DE700E8CDF9 /* Util.mm */; };
+		AB2D2A0F1CE5DA6000E4FFA4 /* AccelerateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2A0E1CE5DA6000E4FFA4 /* AccelerateButton.swift */; };
 		AB5083121CDBABB200ABAC59 /* SelectDataButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5083111CDBABB100ABAC59 /* SelectDataButton.swift */; };
 		AB52CDE11CE0A394008EC13C /* EasySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB52CDE01CE0A394008EC13C /* EasySlider.swift */; };
 		AB6C37EE1CDA4D05004AAAE9 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37E91CDA4D05004AAAE9 /* AddButton.swift */; };
@@ -82,6 +83,7 @@
 		A19CD7761CC89DE700E8CDF9 /* Network.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Network.mm; sourceTree = "<group>"; };
 		A19CD7771CC89DE700E8CDF9 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		A19CD7781CC89DE700E8CDF9 /* Util.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Util.mm; sourceTree = "<group>"; };
+		AB2D2A0E1CE5DA6000E4FFA4 /* AccelerateButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccelerateButton.swift; path = Views/Buttons/AccelerateButton.swift; sourceTree = "<group>"; };
 		AB5083111CDBABB100ABAC59 /* SelectDataButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectDataButton.swift; path = Views/Buttons/SelectDataButton.swift; sourceTree = "<group>"; };
 		AB52CDE01CE0A394008EC13C /* EasySlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EasySlider.swift; path = Views/Sliders/EasySlider.swift; sourceTree = "<group>"; };
 		AB6C37E91CDA4D05004AAAE9 /* AddButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddButton.swift; path = Views/Buttons/AddButton.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				AB6C37EA1CDA4D05004AAAE9 /* ConfigureButton.swift */,
 				AB6C37EB1CDA4D05004AAAE9 /* DropDownButton.swift */,
 				AB6C37EC1CDA4D05004AAAE9 /* ResetButton.swift */,
+				AB2D2A0E1CE5DA6000E4FFA4 /* AccelerateButton.swift */,
 				AB6C37ED1CDA4D05004AAAE9 /* RunButton.swift */,
 				AB5083111CDBABB100ABAC59 /* SelectDataButton.swift */,
 			);
@@ -383,6 +386,7 @@
 				AB6C37FA1CDA4D20004AAAE9 /* SpreadView.swift in Sources */,
 				AB6C37EE1CDA4D05004AAAE9 /* AddButton.swift in Sources */,
 				A19CD7421CC89D5300E8CDF9 /* main.m in Sources */,
+				AB2D2A0F1CE5DA6000E4FFA4 /* AccelerateButton.swift in Sources */,
 				AB6C37F21CDA4D05004AAAE9 /* RunButton.swift in Sources */,
 				AB6C37F11CDA4D05004AAAE9 /* ResetButton.swift in Sources */,
 				A19CD77B1CC89DE700E8CDF9 /* Util.mm in Sources */,

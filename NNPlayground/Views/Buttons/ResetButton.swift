@@ -8,10 +8,10 @@
 
 import UIKit
 
-let π:CGFloat = CGFloat(M_PI)
-
 @IBDesignable
 class ResetButton: UIButton {
+    
+    let π:CGFloat = CGFloat(M_PI)
 
     @IBInspectable var fillColor: UIColor = UIColor.whiteColor()
     @IBInspectable var isResetButton: Bool = true

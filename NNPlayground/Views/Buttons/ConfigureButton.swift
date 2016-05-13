@@ -10,6 +10,8 @@ import UIKit
 
 @IBDesignable
 class ConfigureButton: UIButton {
+    
+    let π:CGFloat = CGFloat(M_PI)
 
     override func drawRect(rect: CGRect) {
         let width = bounds.width

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -53,7 +53,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jju-Ya-qaA" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
                                 <rect key="frame" x="534" y="219" width="30" height="30"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isResetButton" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isResetButton" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="resetClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZWj-qP-x1D"/>
@@ -99,27 +99,53 @@
                                     <constraint firstItem="yc8-U9-G5u" firstAttribute="top" secondItem="WXT-FW-wso" secondAttribute="bottom" constant="8" id="grr-46-dcM"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTC-Kh-L79" customClass="AccelerateButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="496" y="219" width="30" height="30"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEquilateralTriangle" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tja-gj-riN" customClass="AccelerateButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="458" y="219" width="30" height="30"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEquilateralTriangle" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="x7P-z9-49f" secondAttribute="bottom" id="0g1-QP-rbB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zie-PW-5as" secondAttribute="trailing" id="3T1-Le-dR1"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="width" secondItem="zie-PW-5as" secondAttribute="width" id="4Zl-SX-qF7"/>
+                            <constraint firstItem="Tja-gj-riN" firstAttribute="firstBaseline" secondItem="jju-Ya-qaA" secondAttribute="firstBaseline" id="5wv-Lf-jgu"/>
                             <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="6Us-un-NHI"/>
                             <constraint firstItem="YZb-u3-eD2" firstAttribute="bottom" secondItem="DZR-z9-Peg" secondAttribute="bottom" id="75y-mW-qtD"/>
                             <constraint firstItem="jju-Ya-qaA" firstAttribute="firstBaseline" secondItem="x7P-z9-49f" secondAttribute="firstBaseline" id="8HH-6P-kCe"/>
                             <constraint firstItem="jju-Ya-qaA" firstAttribute="baseline" secondItem="x7P-z9-49f" secondAttribute="baseline" id="8Vs-qn-zFT"/>
+                            <constraint firstItem="Tja-gj-riN" firstAttribute="firstBaseline" secondItem="x7P-z9-49f" secondAttribute="firstBaseline" id="A52-T5-rfF"/>
                             <constraint firstItem="x7P-z9-49f" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="9" id="GWn-XN-rtq"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="DZR-z9-Peg" secondAttribute="bottom" id="K6K-ke-6ns"/>
+                            <constraint firstItem="Tja-gj-riN" firstAttribute="baseline" secondItem="RTC-Kh-L79" secondAttribute="baseline" id="LSM-aJ-1LV"/>
                             <constraint firstItem="jju-Ya-qaA" firstAttribute="top" secondItem="x7P-z9-49f" secondAttribute="top" id="NwN-ep-yvQ"/>
                             <constraint firstItem="x7P-z9-49f" firstAttribute="leading" secondItem="jju-Ya-qaA" secondAttribute="trailing" constant="8" symbolic="YES" id="OHd-EW-B5Y"/>
+                            <constraint firstItem="jju-Ya-qaA" firstAttribute="leading" secondItem="RTC-Kh-L79" secondAttribute="trailing" constant="8" symbolic="YES" id="Rf5-pg-jm8"/>
+                            <constraint firstItem="RTC-Kh-L79" firstAttribute="firstBaseline" secondItem="jju-Ya-qaA" secondAttribute="firstBaseline" id="S6l-e9-P30"/>
                             <constraint firstItem="DZR-z9-Peg" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="8" id="SNb-yj-mvy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DZR-z9-Peg" secondAttribute="trailing" id="UYf-BS-eIg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WYA-1I-afQ" secondAttribute="trailing" id="dHR-Em-Wx3"/>
+                            <constraint firstItem="RTC-Kh-L79" firstAttribute="baseline" secondItem="jju-Ya-qaA" secondAttribute="baseline" id="dcw-dn-JTb"/>
                             <constraint firstItem="NNS-Qj-hId" firstAttribute="top" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" id="duN-Jw-KQx"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NNS-Qj-hId" secondAttribute="bottom" constant="8" symbolic="YES" id="eg9-fA-gi5"/>
+                            <constraint firstItem="RTC-Kh-L79" firstAttribute="baseline" secondItem="x7P-z9-49f" secondAttribute="baseline" id="fRL-6R-drX"/>
+                            <constraint firstItem="RTC-Kh-L79" firstAttribute="leading" secondItem="Tja-gj-riN" secondAttribute="trailing" constant="8" symbolic="YES" id="fv9-S7-6Uc"/>
                             <constraint firstItem="NNS-Qj-hId" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="gaH-hc-6vX"/>
+                            <constraint firstItem="Tja-gj-riN" firstAttribute="firstBaseline" secondItem="RTC-Kh-L79" secondAttribute="firstBaseline" id="hWv-vL-k0s"/>
+                            <constraint firstItem="RTC-Kh-L79" firstAttribute="top" secondItem="jju-Ya-qaA" secondAttribute="top" id="hhG-8P-jsC"/>
+                            <constraint firstItem="Tja-gj-riN" firstAttribute="baseline" secondItem="x7P-z9-49f" secondAttribute="baseline" id="khh-5S-bj8"/>
+                            <constraint firstItem="RTC-Kh-L79" firstAttribute="firstBaseline" secondItem="x7P-z9-49f" secondAttribute="firstBaseline" id="lci-iN-DYo"/>
                             <constraint firstItem="DZR-z9-Peg" firstAttribute="leading" secondItem="YZb-u3-eD2" secondAttribute="trailing" constant="8" id="mL6-YB-2VT"/>
+                            <constraint firstItem="Tja-gj-riN" firstAttribute="top" secondItem="RTC-Kh-L79" secondAttribute="top" id="q53-1t-G08"/>
+                            <constraint firstItem="Tja-gj-riN" firstAttribute="baseline" secondItem="jju-Ya-qaA" secondAttribute="baseline" id="qI3-LJ-m05"/>
                             <constraint firstItem="YZb-u3-eD2" firstAttribute="leading" secondItem="x7P-z9-49f" secondAttribute="trailing" constant="8" id="sp0-io-3Zt"/>
                         </constraints>
                     </view>
