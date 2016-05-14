@@ -20,8 +20,14 @@ class SpreadView: UIView {
         
         //slider
         setRatioSlider.setValue(0.5, animated: true)
+        setRatioLabel.text = "训练数据百分比：50%"
+        setRatio?(current: 4)
         setNoiseSlider.setValue(0, animated: true)
+        setNoiseLabel.text = "噪声：0"
+        setNoise?(current: 0)
         setBatchSizeSlider.setValue(0.333333333, animated: true)
+        setBatchSizeLabel.text = "批量大小：10"
+        setBatchSize?(current: 9)
         
         //addLayer
         layers = 3
@@ -32,6 +38,7 @@ class SpreadView: UIView {
             addNodeButton[i].hidden = true
             subNodeButton[i].hidden = true
         }
+        addLayerLabel.text = "隐藏层数：\(layers-2)"
         
         //addNode
         
@@ -93,6 +100,9 @@ class SpreadView: UIView {
     @IBOutlet weak var setRatioSlider: EasySlider!
     @IBOutlet weak var setNoiseSlider: EasySlider!
     @IBOutlet weak var setBatchSizeSlider: EasySlider!
+    @IBOutlet weak var setRatioLabel: UILabel!
+    @IBOutlet weak var setNoiseLabel: UILabel!
+    @IBOutlet weak var setBatchSizeLabel: UILabel!
     
     func setSpacing(sender: EasySlider, total: Float) -> Int {
         let spacing = (sender.maximumValue - sender.minimumValue)/total
@@ -102,17 +112,24 @@ class SpreadView: UIView {
     }
     
     @IBAction func setRatioAction(sender: EasySlider) {
-        setRatio?(current: setSpacing(sender, total: 8))
+        let num = setSpacing(sender, total: 8)
+        setRatio?(current: num)
+        setRatioLabel.text = "训练数据百分比：\(num + 1)0%"
     }
     @IBAction func setNoiseAction(sender: EasySlider) {
-        setNoise?(current: setSpacing(sender, total: 10))
+        let num = setSpacing(sender, total: 10)
+        setNoise?(current: num)
+        setNoiseLabel.text = "噪声：\(num)"
     }
     @IBAction func setBatchSizeAction(sender: EasySlider) {
-        setBatchSize?(current: setSpacing(sender, total: 29))
+        let num = setSpacing(sender, total: 29)
+        setBatchSize?(current: num)
+        setBatchSizeLabel.text = "批量大小：\(num + 1)"
     }
     
     // MARK: - AddLayer
     var addLayer: (() -> Void)?
+    @IBOutlet weak var addLayerLabel: UILabel!
     
     func addLayerButtons(sender:AddButton) {
         if sender.isAddButton && layers < 8 {
@@ -126,6 +143,7 @@ class SpreadView: UIView {
             subNodeButton[layers - 2].hidden = true
         }
         addLayer?()
+        addLayerLabel.text = "隐藏层数：\(layers-2)"
     }
     
     @IBOutlet weak var addLayerButtons: AddButton!
