@@ -12,7 +12,8 @@ import UIKit
 class SelectButton: UIButton {
     
     @IBInspectable var isChosen:Bool = false
-    @IBInspectable var fillColor: UIColor = UIColor(red: 24/255.0, green: 61/255.0, blue: 78/255.0, alpha: 1)
+//    @IBInspectable var fillColor: UIColor = UIColor(red: 24/255.0, green: 61/255.0, blue: 78/255.0, alpha: 1)
+    @IBInspectable var fillColor: UIColor = UIColor.whiteColor().colorWithAlphaComponent(1)
 
     override func drawRect(rect: CGRect) {
      
@@ -27,8 +28,9 @@ class SelectButton: UIButton {
         super.didMoveToSuperview()
         layer.masksToBounds = true
         layer.cornerRadius = 5
-        layer.borderWidth = 2
-        layer.borderColor = fillColor.CGColor
+//        layer.borderWidth = 2
+//        layer.borderColor = fillColor.CGColor
+        layer.backgroundColor = fillColor.CGColor
         titleLabel?.textColor = fillColor
     }
 
