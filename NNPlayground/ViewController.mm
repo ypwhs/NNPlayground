@@ -583,7 +583,7 @@ int maxfps = 120;
         layers = int(_spreadView.layers);
         
         [networkLock unlock];
-        [strongSelf resetNetwork];
+        [strongSelf reset];
     };
 }
 
