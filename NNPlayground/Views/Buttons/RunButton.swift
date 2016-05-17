@@ -13,6 +13,11 @@ class RunButton: UIButton {
 
     @IBInspectable var fillColor: UIColor = UIColor(red: 24/255.0, green: 61/255.0, blue: 78/255.0, alpha: 1)
     @IBInspectable var isRunButton: Bool = true
+    {
+        didSet{
+            setNeedsDisplay()
+        }
+    }
     
     override func drawRect(rect: CGRect) {
         let path = UIBezierPath(ovalInRect: rect)

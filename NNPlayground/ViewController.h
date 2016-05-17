@@ -18,10 +18,9 @@
 @property (weak, nonatomic) IBOutlet HeatMapView *heatMap;
 @property (weak, nonatomic) IBOutlet UILabel *outputLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fpsLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *myswitch;
-@property (weak, nonatomic) IBOutlet UISwitch *speedupswitch;
 @property (nonatomic, strong) SpreadView *spreadView;
 @property (weak, nonatomic) IBOutlet LossView *lossView;
+@property (weak, nonatomic) IBOutlet RunButton *runButton;
 
 @end
 

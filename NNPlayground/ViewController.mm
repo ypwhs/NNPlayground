@@ -238,7 +238,7 @@ Dataset dataset = Circle;
 
 
 -(void) reset{
-    _myswitch.on = false;
+    _runButton.isRunButton = true;
     always = false;
     [networkLock lock];
     [networkLock unlock];
@@ -248,13 +248,15 @@ Dataset dataset = Circle;
     [self resetNetwork];
 }
 
-- (IBAction)speedup:(UISwitch *)sender {
+bool isSpeedUp = false;
+- (IBAction)speedUp:(AccelerateButton *)sender {
     [networkLock lock];
-    if(sender.on){
-        trainBatch = 10;
-    }else{
+    if(isSpeedUp){
         trainBatch = 1;
+    }else{
+        trainBatch = 10;
     }
+    isSpeedUp = !isSpeedUp;
     [networkLock unlock];
 }
 
@@ -371,9 +373,9 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
         //最后一个Node的 frame
         if (i > 0) {
             AddButton *addButton = [_spreadView.addNodeButton objectAtIndex:(i - 1)];
-            addButton.frame = CGRectMake(frame.origin.x, 150, frame.size.width, frame.size.height);
+            addButton.frame = CGRectMake(frame.origin.x, 200, frame.size.width, frame.size.height);
             AddButton *subButton = [_spreadView.subNodeButton objectAtIndex:(i - 1)];
-            subButton.frame = CGRectMake(frame.origin.x, 200, frame.size.width, frame.size.height);
+            subButton.frame = CGRectMake(frame.origin.x, 150, frame.size.width, frame.size.height);
         }
     }
     
@@ -486,8 +488,9 @@ int maxfps = 120;
     }
 }
 
-- (IBAction)changeSwitch:(UISwitch *)sender {
-    always = sender.on;
+- (IBAction)runNN:(RunButton *)sender {
+    always = sender.isRunButton;
+    sender.isRunButton = !sender.isRunButton;
     lastEpochTime = (int)[NSDate date].timeIntervalSince1970;
     [self xiancheng:^{[self train];}];
 }
@@ -564,7 +567,7 @@ int maxfps = 120;
 
     //增加层数
     _spreadView.addLayer = ^{
-        strongSelf.myswitch.on = false;
+        strongSelf.runButton.isRunButton = true;
         always = false;
         [NSThread sleepForTimeInterval:0.008];
         
