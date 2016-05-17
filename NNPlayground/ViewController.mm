@@ -88,9 +88,10 @@ bool discretize = false;
     [_heatMap setData:trainx1 x2:trainx2 y:trainy size:trainNum];
     if(isShowTestData)[_heatMap setTestData:testx1 x2:testx2 y:testy size:testNum];
     
-    [_outputLabel setText:[NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM, epoch]];
+    [self updateLabel];
     
 }
+
 
 //**************************** Inputs ***************************
 const int DATA_NUM = 500;
@@ -235,7 +236,6 @@ Dataset dataset = Circle;
     
     [self reset];
 }
-
 
 -(void) reset{
     _runButton.isRunButton = true;
@@ -463,14 +463,14 @@ double trainLoss = 0, testLoss = 0;
     speed = 1.0/(now - lastEpochTime);
     lastEpochTime = now;
 
-    
-    toShow = [NSString stringWithFormat:@"loss:%.3f,Epoch:%d", loss/DATA_NUM/batch, epoch];
-    fpsString = [NSString stringWithFormat:@"fps:%d", speed];
-    
     [self getHeatData];
+    [self updateLabel];
+}
+
+- (void)updateLabel{
     [self ui:^{
-        _outputLabel.text = toShow;
-        _fpsLabel.text = fpsString;
+        [_outputLabel setText:[NSString stringWithFormat:@"训练误差：\n%.3f\n测试误差：\n%.3f\n训练次数：\n%d", trainLoss, testLoss, epoch]];
+        [_fpsLabel setText:[NSString stringWithFormat:@"fps:%d", speed]];
     }];
 }
 
@@ -641,26 +641,24 @@ MBProgressHUD *hud;
         }];
     }
 }
+- (IBAction)oneStep:(id)sender {
+    [self onestep];
+}
 
 bool isShowTestData = false;
-- (IBAction)showTestData:(UIButton *)sender {
+- (IBAction)showTestData:(CheckButton *)sender {
+    sender.checked = !sender.checked;
     isShowTestData = !isShowTestData;
     if(isShowTestData){
-        [sender setTitle:@"显示" forState: UIControlStateNormal];
         [_heatMap setTestData:testx1 x2:testx2 y:testy size:testNum];
     }else{
-        [sender setTitle:@"不显示" forState: UIControlStateNormal];
         [_heatMap setData:trainx1 x2:trainx2 y:trainy size:trainNum];
     }
 }
-- (IBAction)changeDiscretize:(UIButton *)sender {
+- (IBAction)changeDiscretize:(CheckButton *)sender {
+    sender.checked = !sender.checked;
     [networkLock lock];
     discretize = !discretize;
-    if(discretize){
-        [sender setTitle:@"边界" forState: UIControlStateNormal];
-    }else{
-        [sender setTitle:@"正常" forState: UIControlStateNormal];
-    }
     [self buildInputImage];
     [networkLock unlock];
     [self getHeatData];

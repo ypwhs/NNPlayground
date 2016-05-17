@@ -10,6 +10,7 @@
 		A12F039E1CD49BA100CA4890 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A12F039D1CD49BA100CA4890 /* MBProgressHUD.m */; };
 		A14F78971CE4C6620056FF51 /* LossView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F78961CE4C6620056FF51 /* LossView.swift */; };
 		A15F49E91CC8B14000409DA5 /* HeatMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F49E81CC8B14000409DA5 /* HeatMapView.swift */; };
+		A1667C131CEB6663002372D4 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1667C121CEB6663002372D4 /* CheckButton.swift */; };
 		A185E5FF1CCBD3A900CB8A4A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A185E5FE1CCBD3A900CB8A4A /* Images.xcassets */; };
 		A19CD7421CC89D5300E8CDF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7411CC89D5300E8CDF9 /* main.m */; };
 		A19CD7451CC89D5300E8CDF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7441CC89D5300E8CDF9 /* AppDelegate.m */; };
@@ -61,6 +62,7 @@
 		A14F78961CE4C6620056FF51 /* LossView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LossView.swift; sourceTree = "<group>"; };
 		A15F49E71CC8B14000409DA5 /* NNPlayground-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NNPlayground-Bridging-Header.h"; sourceTree = "<group>"; };
 		A15F49E81CC8B14000409DA5 /* HeatMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeatMapView.swift; sourceTree = "<group>"; };
+		A1667C121CEB6663002372D4 /* CheckButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		A185E5FE1CCBD3A900CB8A4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A19CD73D1CC89D5300E8CDF9 /* NNPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NNPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19CD7411CC89D5300E8CDF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -152,7 +154,6 @@
 				A19CD7731CC89DE700E8CDF9 /* Node.h */,
 				A19CD7741CC89DE700E8CDF9 /* Node.mm */,
 				A19CD7751CC89DE700E8CDF9 /* Network.h */,
-				A19CD7761CC89DE700E8CDF9 /* Network.mm */,
 				A19CD7771CC89DE700E8CDF9 /* Util.h */,
 				A19CD7781CC89DE700E8CDF9 /* Util.mm */,
 				A19CD7431CC89D5300E8CDF9 /* AppDelegate.h */,
@@ -162,6 +163,7 @@
 				A19CD7461CC89D5300E8CDF9 /* ViewController.h */,
 				A19CD7471CC89D5300E8CDF9 /* ViewController.mm */,
 				A15F49E81CC8B14000409DA5 /* HeatMapView.swift */,
+				A19CD7761CC89DE700E8CDF9 /* Network.mm */,
 				A19CD7491CC89D5300E8CDF9 /* Main.storyboard */,
 				A19CD74C1CC89D5300E8CDF9 /* Assets.xcassets */,
 				A19CD74E1CC89D5300E8CDF9 /* LaunchScreen.storyboard */,
@@ -233,11 +235,12 @@
 		AB6C37E81CDA4CF5004AAAE9 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				AB2D2A0E1CE5DA6000E4FFA4 /* AccelerateButton.swift */,
 				AB6C37E91CDA4D05004AAAE9 /* AddButton.swift */,
+				A1667C121CEB6663002372D4 /* CheckButton.swift */,
 				AB6C37EA1CDA4D05004AAAE9 /* ConfigureButton.swift */,
 				AB6C37EB1CDA4D05004AAAE9 /* DropDownButton.swift */,
 				AB6C37EC1CDA4D05004AAAE9 /* ResetButton.swift */,
-				AB2D2A0E1CE5DA6000E4FFA4 /* AccelerateButton.swift */,
 				AB6C37ED1CDA4D05004AAAE9 /* RunButton.swift */,
 				AB5083111CDBABB100ABAC59 /* SelectDataButton.swift */,
 				AB2D2A101CE7137800E4FFA4 /* SelectButton.swift */,
@@ -399,6 +402,7 @@
 				AB6C37F91CDA4D20004AAAE9 /* DropDownView.swift in Sources */,
 				A19CD77A1CC89DE700E8CDF9 /* Network.mm in Sources */,
 				A19CD7791CC89DE700E8CDF9 /* Node.mm in Sources */,
+				A1667C131CEB6663002372D4 /* CheckButton.swift in Sources */,
 				A12F039E1CD49BA100CA4890 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
