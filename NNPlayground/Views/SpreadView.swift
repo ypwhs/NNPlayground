@@ -143,37 +143,74 @@ class SpreadView: UIView {
             subNodeButton[layers - 2].hidden = true
         }
         addLayer?()
+        if layers == 8 {
+            addLayerButton.strokeColor = UIColor.lightGrayColor()
+            addLayerButton.enabled = false
+        }
+        else {
+            addLayerButton.strokeColor = UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0)
+            addLayerButton.enabled = true
+        }
+        if layers == 2 {
+            subLayerButton.strokeColor = UIColor.lightGrayColor()
+            subLayerButton.enabled = false
+        }
+        else {
+            subLayerButton.strokeColor = UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0)
+            subLayerButton.enabled = true
+        }
         addLayerLabel.text = "隐藏层数：\(layers-2)"
     }
     
-    @IBOutlet weak var addLayerButtons: AddButton!
-    @IBAction func addLayerButton(sender: AddButton) {
+    @IBOutlet weak var addLayerButton: AddButton!
+    @IBOutlet weak var subLayerButton: AddButton!
+    @IBAction func addLayerAction(sender: AddButton) {
         addLayerButtons(sender)
     }
-    @IBAction func subLayerButton(sender: AddButton) {
+    @IBAction func subLayerAction(sender: AddButton) {
         addLayerButtons(sender)
     }
     
     // MARK: - AddNode
-    var addNode: ((layer: Int, isAdd: Bool) -> Void)?
+    var addNode: ((layer: Int, isAdd: Bool) -> Int)?
     func addNodeAction(sender:AddButton) {
         var num = 1
-        for i in addNodeButton {
-            if i == sender {
-                addNode?(layer: num, isAdd: true)
+        var nodes = 4
+        if sender.isAddButton {
+            for i in addNodeButton {
+                if i == sender {
+                    nodes = addNode!(layer: num, isAdd: true)
+                    break
+                }
+                num += 1
             }
-            num += 1
         }
-    }
-    func subNodeAction(sender:AddButton) {
-        var num = 1
-        for i in subNodeButton {
-            if i == sender {
-                addNode?(layer: num, isAdd: false)
+        else {
+            for i in subNodeButton {
+                if i == sender {
+                    nodes = addNode!(layer: num, isAdd: false)
+                    break
+                }
+                num += 1
             }
-            num += 1
         }
+        if nodes == 8 || nodes == 1 {
+            sender.strokeColor = UIColor.lightGrayColor()
+            sender.enabled = false
+        }
+        else{
+            if sender.isAddButton {
+                subNodeButton[num - 1].strokeColor = UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0)
+                subNodeButton[num - 1].enabled = true
+            }
+            else {
+                addNodeButton[num - 1].strokeColor = UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0)
+                addNodeButton[num - 1].enabled = true
+            }
+        }
+        
     }
+    
     lazy var addNodeButton: [AddButton] = {
         let view = AddButton()
         view.frame = CGRect(x: 50, y: 100, width: 30, height: 30)
@@ -192,13 +229,13 @@ class SpreadView: UIView {
         let view = AddButton()
         view.frame = CGRect(x: 50, y: 150, width: 30, height: 30)
         view.isAddButton = false
-        view.addTarget(self, action: #selector(subNodeAction), forControlEvents: .TouchUpInside)
+        view.addTarget(self, action: #selector(addNodeAction), forControlEvents: .TouchUpInside)
         var views = [view]
         for i in 2...6 {
             let view = AddButton()
             view.isAddButton = false
             view.frame = CGRect(x: i*50, y: 150, width: 30, height: 30)
-            view.addTarget(self, action: #selector(subNodeAction), forControlEvents: .TouchUpInside)
+            view.addTarget(self, action: #selector(addNodeAction), forControlEvents: .TouchUpInside)
             views.append(view)
         }
         return views
@@ -292,7 +329,7 @@ class SpreadView: UIView {
         layoutIfNeeded()
         
         UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseIn, animations: {[weak self]  _ in
-            self?.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
+            self?.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
             }, completion: { _ in
         })
         

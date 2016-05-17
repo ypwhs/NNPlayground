@@ -12,6 +12,11 @@ import UIKit
 class AddButton: UIButton {
     
     @IBInspectable var fillColor: UIColor = UIColor.whiteColor()
+    @IBInspectable var strokeColor: UIColor = UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0){
+        didSet{
+            setNeedsDisplay()
+        }
+    }
     @IBInspectable var isAddButton: Bool = true
     
     override func drawRect(rect: CGRect) {
@@ -53,7 +58,7 @@ class AddButton: UIButton {
         }
         
         //set the stroke color
-        UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0).setStroke()
+        strokeColor.setStroke()
         
         //draw the stroke
         plusPath.stroke()

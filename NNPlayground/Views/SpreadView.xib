@@ -95,7 +95,7 @@
                         <action selector="setNoiseAction:" destination="iN0-l3-epB" eventType="valueChanged" id="dfl-HV-SnY"/>
                     </connections>
                 </slider>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eol-uD-pSL" customClass="AddButton" customModule="NNPlayground" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eol-uD-pSL" customClass="AddButton" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="177.5" y="565" width="24.5" height="24.5"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="eol-uD-pSL" secondAttribute="height" multiplier="1:1" id="jKE-xz-JQ9"/>
@@ -104,10 +104,10 @@
                         <rect key="frame" x="227.5" y="754" width="37" height="36"/>
                     </variation>
                     <connections>
-                        <action selector="addLayerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="X1P-bk-0mn"/>
+                        <action selector="addLayerAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="uRI-GU-03M"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbM-tD-nBE" customClass="AddButton" customModule="NNPlayground" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbM-tD-nBE" customClass="AddButton" customModule="NNPlayground" customModuleProvider="target">
                     <rect key="frame" x="103" y="565" width="24.5" height="24.5"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="bbM-tD-nBE" secondAttribute="height" multiplier="1:1" id="1o5-Qh-NAd"/>
@@ -119,7 +119,7 @@
                         <rect key="frame" x="141.5" y="754" width="36" height="36"/>
                     </variation>
                     <connections>
-                        <action selector="subLayerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="UZT-ZF-Vlc"/>
+                        <action selector="subLayerAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="w8K-qk-XPq"/>
                     </connections>
                 </button>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.33000000000000002" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xqd-KB-OVV" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
@@ -413,7 +413,7 @@
             </variation>
             <connections>
                 <outlet property="activationButton" destination="mjJ-aY-Y1O" id="Cgn-3k-2DQ"/>
-                <outlet property="addLayerButtons" destination="eol-uD-pSL" id="lch-G7-zYS"/>
+                <outlet property="addLayerButton" destination="eol-uD-pSL" id="mAO-Ud-k0D"/>
                 <outlet property="addLayerLabel" destination="lYQ-eG-Pz5" id="Q1e-Uf-xMW"/>
                 <outlet property="learningRateButton" destination="x0o-NZ-BgK" id="i0d-gL-Vp8"/>
                 <outlet property="regularizationButton" destination="n5I-wD-LN0" id="L8z-sy-ld8"/>
@@ -428,6 +428,7 @@
                 <outlet property="setRatioLabel" destination="18p-Rh-BWZ" id="CgV-I1-LDI"/>
                 <outlet property="setRatioSlider" destination="V7U-wg-OaH" id="vWs-FB-RDX"/>
                 <outlet property="setSpiralButton" destination="CUN-he-QAE" id="P8z-Jf-mD2"/>
+                <outlet property="subLayerButton" destination="bbM-tD-nBE" id="2KB-xp-rwN"/>
             </connections>
             <point key="canvasLocation" x="355" y="355"/>
         </view>

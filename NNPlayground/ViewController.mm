@@ -508,6 +508,7 @@ int maxfps = 120;
         if(networkShape[layerNum] < 1)networkShape[layerNum] = 1;
         if(networkShape[layerNum] > 8)networkShape[layerNum] = 8;
         [strongSelf reset];
+        return NSInteger(networkShape[layerNum]);
     };
     
     //滑条 [0,8];[0,10];[0,29]

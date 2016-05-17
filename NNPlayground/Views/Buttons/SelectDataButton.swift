@@ -17,7 +17,7 @@ class SelectDataButton: UIButton {
                 alpha = 1
             }
             else {
-                alpha = 0.3
+                alpha = 0.4
             }
         }
     }
@@ -28,7 +28,7 @@ class SelectDataButton: UIButton {
         layer.cornerRadius = 5
         layer.borderWidth = 2
         layer.borderColor = UIColor.blackColor().CGColor
-        alpha = 0.3
+        alpha = 0.4
     }
     
 }
