@@ -572,15 +572,24 @@ int maxfps = 120;
         [NSThread sleepForTimeInterval:0.008];
         
         [networkLock lock];
+        int newLayers = (int)strongSelf.spreadView.layers;
+        always = false;
+        int * oldNetworkShape = networkShape;
         
-        delete[] networkShape;
-        networkShape = new int[int(_spreadView.layers)];
+        networkShape = new int[newLayers];
         networkShape[0] = 2;
-        for(int i = 1; i < int(_spreadView.layers - 1); i++){
-            networkShape[i] = 8;
+        int i = 1;
+        for(; i < layers - 1; i++){
+            networkShape[i] = oldNetworkShape[i];
         }
-        networkShape[int(_spreadView.layers - 1)] = 1;
-        layers = int(_spreadView.layers);
+        int repeatValue = oldNetworkShape[layers - 2];
+        layers = newLayers;
+        for(;i < layers - 1; i++){
+            networkShape[i] = repeatValue;
+        }
+        networkShape[layers - 1] = 1;
+        
+        delete[] oldNetworkShape;
         
         [networkLock unlock];
         [strongSelf reset];
