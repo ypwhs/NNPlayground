@@ -12,6 +12,7 @@ import UIKit
 class DropDownButton: UIButton {
 
     @IBInspectable var fillColor: UIColor = UIColor.whiteColor()
+    @IBInspectable var strokeColor: UIColor = UIColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0)
     
     override func drawRect(rect: CGRect) {
         //title左对齐
@@ -36,7 +37,7 @@ class DropDownButton: UIButton {
             x:bounds.width/2 + underlineWidth/2 + 0.5,
             y:bounds.height))
         
-        UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0).setStroke()
+        strokeColor.setStroke()
         
         underlinePath.stroke()
         
@@ -51,7 +52,7 @@ class DropDownButton: UIButton {
         trianglePath.addLineToPoint(CGPoint(x:originPoint.x + drawSize.width/2,
             y:originPoint.y + drawSize.height))
 
-        UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0).setFill()
+        strokeColor.setFill()
         trianglePath.fill()
 
     }

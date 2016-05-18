@@ -12,6 +12,8 @@ class SpreadView: UIView {
     
     var layers = 3
     var buttonWidth:CGFloat = 30
+    var blueColor = UIColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0)
+    
     
     @IBAction func Regenerate(sender: UIButton) {
         //setData
@@ -143,12 +145,13 @@ class SpreadView: UIView {
             subNodeButton[layers - 2].hidden = true
         }
         addLayer?()
+        
         if layers == 8 {
             addLayerButton.strokeColor = UIColor.lightGrayColor()
             addLayerButton.enabled = false
         }
         else {
-            addLayerButton.strokeColor = UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0)
+            addLayerButton.strokeColor = blueColor
             addLayerButton.enabled = true
         }
         if layers == 2 {
@@ -156,7 +159,7 @@ class SpreadView: UIView {
             subLayerButton.enabled = false
         }
         else {
-            subLayerButton.strokeColor = UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0)
+            subLayerButton.strokeColor = blueColor
             subLayerButton.enabled = true
         }
         addLayerLabel.text = "隐藏层数：\(layers-2)"
@@ -200,11 +203,11 @@ class SpreadView: UIView {
         }
         else{
             if sender.isAddButton {
-                subNodeButton[num - 1].strokeColor = UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0)
+                subNodeButton[num - 1].strokeColor = blueColor
                 subNodeButton[num - 1].enabled = true
             }
             else {
-                addNodeButton[num - 1].strokeColor = UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0)
+                addNodeButton[num - 1].strokeColor = blueColor
                 addNodeButton[num - 1].enabled = true
             }
         }
@@ -379,7 +382,6 @@ class SpreadView: UIView {
 extension SpreadView: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-        
         if touch.view != self {
             return false
         }

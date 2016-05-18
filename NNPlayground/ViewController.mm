@@ -252,8 +252,10 @@ bool isSpeedUp = false;
 - (IBAction)speedUp:(AccelerateButton *)sender {
     [networkLock lock];
     if(isSpeedUp){
+        _speedUpLabel.hidden = true;
         trainBatch = 1;
     }else{
+        _speedUpLabel.hidden = false;
         trainBatch = 10;
     }
     isSpeedUp = !isSpeedUp;
@@ -469,7 +471,7 @@ double trainLoss = 0, testLoss = 0;
 
 - (void)updateLabel{
     [self ui:^{
-        [_outputLabel setText:[NSString stringWithFormat:@"训练误差：\n%.3f\n测试误差：\n%.3f\n训练次数：\n%d", trainLoss, testLoss, epoch]];
+        [_outputLabel setText:[NSString stringWithFormat:@"训练误差\n%.3f\n测试误差\n%.3f\n训练次数\n%d", trainLoss, testLoss, epoch]];
         [_fpsLabel setText:[NSString stringWithFormat:@"fps:%d", speed]];
     }];
 }
@@ -605,6 +607,20 @@ CGFloat screenScale = [UIScreen mainScreen].scale;
     dataset = Circle;
     [self updateDataset];
     [self initSpreadView];
+    
+    //左侧约束
+    int height = self.view.frame.size.height;
+    NSLayoutConstraint * runButtonWidth;
+    if (height == 320) {
+        runButtonWidth = [NSLayoutConstraint constraintWithItem:_runButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:39];
+    }
+    else {
+        runButtonWidth = [NSLayoutConstraint constraintWithItem:_runButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:46];
+    }
+    [NSLayoutConstraint activateConstraints:[NSArray arrayWithObjects:runButtonWidth, nil]];
+    [self.view layoutIfNeeded];
+    NSLog(@"%f",_runButton.frame.size.height);
+    
 
     UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpressAction:)];
     longpress.minimumPressDuration = 0.5;

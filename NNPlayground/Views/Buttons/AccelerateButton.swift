@@ -13,9 +13,23 @@ class AccelerateButton: UIButton {
     
     let π:CGFloat = CGFloat(M_PI)
     
-    @IBInspectable var fillColor: UIColor = UIColor.whiteColor()
+    @IBInspectable var fillColor: UIColor = UIColor.whiteColor(){
+        didSet{
+            setNeedsDisplay()
+        }
+    }
     @IBInspectable var isEquilateralTriangle: Bool = true
     @IBInspectable var frontWidthRatio: CGFloat = 3/16
+    override var highlighted: Bool {
+        didSet{
+            if highlighted {
+                fillColor = UIColor(red: 0xEE/0xFF, green: 0xEE/0xFF, blue: 0xEE/0xFF, alpha: 1.0)
+            }
+            else {
+                fillColor = UIColor.whiteColor()
+            }
+        }
+    }
     
     override func drawRect(rect: CGRect) {
         let path = UIBezierPath(ovalInRect: rect)

@@ -21,7 +21,7 @@
                             <constraint firstAttribute="width" secondItem="TGM-YF-B6P" secondAttribute="height" multiplier="76:23.5" id="vea-6Y-Efp"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.3921568627" green="0.70980392160000005" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="o3R-Dc-l3K">

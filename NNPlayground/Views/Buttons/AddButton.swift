@@ -11,13 +11,28 @@ import UIKit
 @IBDesignable
 class AddButton: UIButton {
     
-    @IBInspectable var fillColor: UIColor = UIColor.whiteColor()
-    @IBInspectable var strokeColor: UIColor = UIColor(red: 102/255.0, green: 204/255.0, blue: 255/255.0, alpha: 1.0){
+    @IBInspectable var fillColor: UIColor = UIColor.whiteColor(){
+        didSet{
+            setNeedsDisplay()
+        }
+    }
+    @IBInspectable var strokeColor: UIColor = UIColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0){
         didSet{
             setNeedsDisplay()
         }
     }
     @IBInspectable var isAddButton: Bool = true
+    
+    override var highlighted: Bool {
+        didSet{
+            if highlighted {
+                fillColor = UIColor(red: 0xEE/0xFF, green: 0xEE/0xFF, blue: 0xEE/0xFF, alpha: 1.0)
+            }
+            else {
+                fillColor = UIColor.whiteColor()
+            }
+        }
+    }
     
     override func drawRect(rect: CGRect) {
         let path = UIBezierPath(ovalInRect: rect)
@@ -62,7 +77,6 @@ class AddButton: UIButton {
         
         //draw the stroke
         plusPath.stroke()
-
     }
 
 }

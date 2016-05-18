@@ -21,6 +21,7 @@
 @property (nonatomic, strong) SpreadView *spreadView;
 @property (weak, nonatomic) IBOutlet LossView *lossView;
 @property (weak, nonatomic) IBOutlet RunButton *runButton;
+@property (weak, nonatomic) IBOutlet UILabel *speedUpLabel;
 
 @end
 
