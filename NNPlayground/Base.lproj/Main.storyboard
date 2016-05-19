@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -20,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="训练误差 0.123 测试误差 0.123 训练次数 1234" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYA-1I-afQ">
-                                <rect key="frame" x="447" y="220" width="60" height="155"/>
+                                <rect key="frame" x="457" y="220" width="60" height="155"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="oGP-1Q-fiQ"/>
                                 </constraints>
@@ -29,7 +28,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="447" y="10" width="200" height="200"/>
+                                <rect key="frame" x="457" y="10" width="200" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fps:0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-2R-oE7">
                                         <rect key="frame" x="122" y="0.0" width="70" height="21"/>
@@ -81,7 +80,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNS-Qj-hId" customClass="LossView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="507" y="230" width="140" height="135"/>
+                                <rect key="frame" x="517" y="230" width="140" height="135"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIM-jn-lzj" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
@@ -97,7 +96,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2o-KL-JYB" customClass="CheckButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="553" y="210" width="94" height="20"/>
+                                <rect key="frame" x="563" y="210" width="94" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="0dN-f3-Iuz"/>
                                     <constraint firstAttribute="width" constant="94" id="8j5-Mx-8HL"/>
@@ -111,7 +110,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zL4-Pb-Aym" customClass="CheckButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="447" y="210" width="100" height="20"/>
+                                <rect key="frame" x="457" y="210" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="b65-K7-qA5"/>
                                     <constraint firstAttribute="width" constant="100" id="c58-vg-akY"/>
@@ -146,7 +145,6 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="leading" secondItem="zL4-Pb-Aym" secondAttribute="leading" id="1Vg-4I-JWv"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="zie-PW-5as" secondAttribute="trailing" id="3T1-Le-dR1"/>
                             <constraint firstItem="NNS-Qj-hId" firstAttribute="leading" secondItem="WYA-1I-afQ" secondAttribute="trailing" id="48E-6B-CGh"/>
                             <constraint firstItem="c6G-jM-tKd" firstAttribute="top" secondItem="1iR-R1-8lA" secondAttribute="bottom" id="5Tf-ic-vor"/>
                             <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="6Us-un-NHI"/>
@@ -162,6 +160,7 @@
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="leading" secondItem="zie-PW-5as" secondAttribute="leading" id="WXR-QA-Kjg"/>
                             <constraint firstItem="jju-Ya-qaA" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="WsR-mK-XsL"/>
                             <constraint firstItem="1iR-R1-8lA" firstAttribute="top" secondItem="jju-Ya-qaA" secondAttribute="bottom" constant="10" id="Ycc-Tf-eGe"/>
+                            <constraint firstItem="zie-PW-5as" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" constant="-10" id="ZjM-dZ-noL"/>
                             <constraint firstItem="1iR-R1-8lA" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="b1c-Gy-Lce"/>
                             <constraint firstItem="jju-Ya-qaA" firstAttribute="top" secondItem="AnS-AF-TXQ" secondAttribute="bottom" constant="5" id="dyn-EL-muX"/>
                             <constraint firstItem="c6G-jM-tKd" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="ejC-WE-xZT"/>

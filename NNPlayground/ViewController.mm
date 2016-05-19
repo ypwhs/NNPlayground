@@ -375,11 +375,20 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
         //最后一个Node的 frame
         if (i > 0) {
             AddButton *addButton = [_spreadView.addNodeButton objectAtIndex:(i - 1)];
-            addButton.frame = CGRectMake(frame.origin.x, 200, frame.size.width, frame.size.height);
+            addButton.frame = CGRectMake(frame.origin.x, _spreadView.subNodeButtonY + 2 * _spreadView.buttonWidth, frame.size.width, frame.size.height);
             AddButton *subButton = [_spreadView.subNodeButton objectAtIndex:(i - 1)];
-            subButton.frame = CGRectMake(frame.origin.x, 150, frame.size.width, frame.size.height);
+            subButton.frame = CGRectMake(frame.origin.x, _spreadView.subNodeButtonY, frame.size.width, frame.size.height);
         }
     }
+    
+    int viewHeight = self.view.frame.size.height;
+    if (viewHeight == 320) {
+        _spreadView.buttonWidth = 29;
+    }
+    else {
+        _spreadView.buttonWidth = 36;
+    }
+
     
     [networkLock unlock];
     

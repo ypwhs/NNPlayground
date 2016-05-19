@@ -12,6 +12,8 @@ class SpreadView: UIView {
     
     var layers = 3
     var buttonWidth:CGFloat = 30
+    var subNodeButtonY:CGFloat = 114
+    var addNodeButtonY:CGFloat = 114
     var blueColor = UIColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0)
     
     
@@ -366,9 +368,19 @@ class SpreadView: UIView {
     
     func makeUI() {
         setCircleButton.isChosen = true
+        
+        let setDataButtonWidth = NSLayoutConstraint(item: setCircleButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: buttonWidth + 10)
+        let addLayerButtonWidth = NSLayoutConstraint(item: addLayerButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: buttonWidth)
+        NSLayoutConstraint.activateConstraints([setDataButtonWidth,addLayerButtonWidth])
+        
+        self.layoutIfNeeded()
+        
+        subNodeButtonY = setRatioSlider.frame.minY
         for i in 0...5 {
             self.addSubview(addNodeButton[i])
+            (addNodeButton[i] as AddButton).frame.origin = CGPoint(x: (addNodeButton[i] as AddButton).frame.minX, y: subNodeButtonY + 2 * buttonWidth)
             self.addSubview(subNodeButton[i])
+            (subNodeButton[i] as AddButton).frame.origin = CGPoint(x: (subNodeButton[i] as AddButton).frame.minX, y: subNodeButtonY)
             if i != 0 {
                 addNodeButton[i].hidden = true
                 subNodeButton[i].hidden = true
