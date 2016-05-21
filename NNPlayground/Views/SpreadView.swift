@@ -13,7 +13,6 @@ class SpreadView: UIView {
     var layers = 3
     var buttonWidth:CGFloat = 30
     var subNodeButtonY:CGFloat = 114
-    var addNodeButtonY:CGFloat = 114
     var blueColor = UIColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0)
     
     
@@ -57,6 +56,19 @@ class SpreadView: UIView {
         regularizationRateDropView.labelIsSelected = 0
     }
     
+    // MARK: - Introduce
+    private lazy var introduceDropWebView: DropWebView = {
+        let view = DropWebView()
+        return view
+    }()
+    var introduce: ((url: NSURL) -> Void)?
+    @IBAction func IntroduceAction(sender: UIButton) {
+//        if let window = self.window {
+//            introduceDropWebView.showInView(window, button: sender, url: "https://ypwhs.gitbooks.io/nnplayground/content/")
+//        }
+//        openURL(NSURL(string: "https://ypwhs.gitbooks.io/nnplayground/content/"))
+        introduce?(url: NSURL(string: "https://ypwhs.gitbooks.io/nnplayground/content/")!)
+    }
     // MARK: - SetData
     var setCircleData: (() -> Void)?
     var setExclusiveOrData: (() -> Void)?

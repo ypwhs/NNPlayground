@@ -37,6 +37,10 @@
 		AB6C37F91CDA4D20004AAAE9 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */; };
 		AB6C37FA1CDA4D20004AAAE9 /* SpreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */; };
 		AB6C37FC1CDA5108004AAAE9 /* SpreadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6C37FB1CDA5108004AAAE9 /* SpreadView.xib */; };
+		ABAC9B0A1CEF433200B74734 /* DropWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B091CEF433200B74734 /* DropWebView.swift */; };
+		ABAC9B0C1CEF475800B74734 /* ShowWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B0B1CEF475800B74734 /* ShowWebView.swift */; };
+		ABAC9B0F1CEF55F900B74734 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B0E1CEF55F900B74734 /* Reachability.m */; };
+		ABAC9B121CF0AD6000B74734 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B111CF0AD6000B74734 /* ViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +104,11 @@
 		AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownView.swift; path = Views/DropDownView.swift; sourceTree = "<group>"; };
 		AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpreadView.swift; path = Views/SpreadView.swift; sourceTree = "<group>"; };
 		AB6C37FB1CDA5108004AAAE9 /* SpreadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpreadView.xib; path = Views/SpreadView.xib; sourceTree = "<group>"; };
+		ABAC9B091CEF433200B74734 /* DropWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropWebView.swift; path = Views/DropWebView.swift; sourceTree = "<group>"; };
+		ABAC9B0B1CEF475800B74734 /* ShowWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowWebView.swift; path = Views/ShowWebView.swift; sourceTree = "<group>"; };
+		ABAC9B0D1CEF55F900B74734 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		ABAC9B0E1CEF55F900B74734 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		ABAC9B111CF0AD6000B74734 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +164,8 @@
 				A19CD7741CC89DE700E8CDF9 /* Node.mm */,
 				A19CD7751CC89DE700E8CDF9 /* Network.h */,
 				A19CD7761CC89DE700E8CDF9 /* Network.mm */,
+				ABAC9B0D1CEF55F900B74734 /* Reachability.h */,
+				ABAC9B0E1CEF55F900B74734 /* Reachability.m */,
 				A19CD7771CC89DE700E8CDF9 /* Util.h */,
 				A19CD7781CC89DE700E8CDF9 /* Util.mm */,
 				A19CD7431CC89D5300E8CDF9 /* AppDelegate.h */,
@@ -171,6 +182,7 @@
 				A19CD7401CC89D5300E8CDF9 /* Supporting Files */,
 				A15F49E71CC8B14000409DA5 /* NNPlayground-Bridging-Header.h */,
 				A185E5FE1CCBD3A900CB8A4A /* Images.xcassets */,
+				ABAC9B111CF0AD6000B74734 /* ViewControllerExtension.swift */,
 			);
 			path = NNPlayground;
 			sourceTree = "<group>";
@@ -216,6 +228,8 @@
 				AB6C37E71CDA4CED004AAAE9 /* Cells */,
 				AB6C37E81CDA4CF5004AAAE9 /* Buttons */,
 				AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */,
+				ABAC9B091CEF433200B74734 /* DropWebView.swift */,
+				ABAC9B0B1CEF475800B74734 /* ShowWebView.swift */,
 				AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */,
 				A14F78961CE4C6620056FF51 /* LossView.swift */,
 				AB6C37FB1CDA5108004AAAE9 /* SpreadView.xib */,
@@ -315,7 +329,7 @@
 				TargetAttributes = {
 					A19CD73C1CC89D5300E8CDF9 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = W26WBSVK66;
+						DevelopmentTeam = ME6769WAA3;
 					};
 					A19CD7551CC89D5300E8CDF9 = {
 						CreatedOnToolsVersion = 7.3;
@@ -382,9 +396,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABAC9B121CF0AD6000B74734 /* ViewControllerExtension.swift in Sources */,
+				ABAC9B0A1CEF433200B74734 /* DropWebView.swift in Sources */,
 				AB6C37EF1CDA4D05004AAAE9 /* ConfigureButton.swift in Sources */,
 				A14F78971CE4C6620056FF51 /* LossView.swift in Sources */,
 				A19CD7481CC89D5300E8CDF9 /* ViewController.mm in Sources */,
+				ABAC9B0F1CEF55F900B74734 /* Reachability.m in Sources */,
 				A19CD7451CC89D5300E8CDF9 /* AppDelegate.m in Sources */,
 				AB6C37F01CDA4D05004AAAE9 /* DropDownButton.swift in Sources */,
 				AB52CDE11CE0A394008EC13C /* EasySlider.swift in Sources */,
@@ -403,6 +420,7 @@
 				A19CD77A1CC89DE700E8CDF9 /* Network.mm in Sources */,
 				A19CD7791CC89DE700E8CDF9 /* Node.mm in Sources */,
 				A1667C131CEB6663002372D4 /* CheckButton.swift in Sources */,
+				ABAC9B0C1CEF475800B74734 /* ShowWebView.swift in Sources */,
 				A12F039E1CD49BA100CA4890 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

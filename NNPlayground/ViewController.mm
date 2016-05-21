@@ -512,6 +512,10 @@ int maxfps = 120;
     ViewController *strongSelf = self;
 //    _spreadView.addLayerButtons.frame.size = CGSizeMake(_heatMap.frame.size.height, _heatMap.frame.size.height);
     
+    _spreadView.introduce = ^(NSURL *url){
+        exOpenURL:url;
+    };
+    
     //增加节点 layerNum:范围为[1,6]的第n隐藏层
     _spreadView.addNode = ^(NSInteger layerNum,BOOL isAdd){
         int value = isAdd? 1 : -1;
