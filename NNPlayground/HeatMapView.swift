@@ -31,7 +31,7 @@ class HeatMapView: UIView {
     
     func longpress(rec:UILongPressGestureRecognizer){
         if(rec.state == UIGestureRecognizerState.Began){
-            print("long press")
+//            print("long press")
         }
     }
     

@@ -633,7 +633,7 @@ CGFloat screenScale = [UIScreen mainScreen].scale;
     }
     [NSLayoutConstraint activateConstraints:[NSArray arrayWithObjects:runButtonWidth, nil]];
     [self.view layoutIfNeeded];
-    NSLog(@"%f",_runButton.frame.size.height);
+//    NSLog(@"%f",_runButton.frame.size.height);
     
 
     UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpressAction:)];
@@ -655,7 +655,7 @@ MBProgressHUD *hud;
         message = [error description];
     }
     hud.label.text = message;
-    printf("%s\n", [message UTF8String]);
+//    printf("%s\n", [message UTF8String]);
     [hud hideAnimated:YES afterDelay:1];
 }
 
@@ -663,7 +663,7 @@ MBProgressHUD *hud;
     if(longpress.state == UIGestureRecognizerStateBegan){
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"保存到相册" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            printf("cancel\n");
+//            printf("cancel\n");
         }];
         UIAlertAction * ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -677,7 +677,7 @@ MBProgressHUD *hud;
         [alert addAction:cancel];
         [alert addAction:ok];
         [self presentViewController:alert animated:YES completion:^(){
-            printf("alert\n");
+//            printf("alert\n");
         }];
     }
 }
