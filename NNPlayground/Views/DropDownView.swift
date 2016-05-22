@@ -29,7 +29,7 @@ class DropDownView: UIView {
         view.dataSource = self
         view.delegate = self
         view.rowHeight = 60
-        view.scrollEnabled = false
+        view.scrollEnabled = true
         view.separatorStyle = .None
         view.registerNib(UINib(nibName: "DropDownCell", bundle: nil), forCellReuseIdentifier: "DropDownCell")
         return view
@@ -41,6 +41,9 @@ class DropDownView: UIView {
         if (dropDownButton) != nil {
             totalHeight = (dropDownButton?.frame.height)! * CGFloat(labelName.count)
             tableView.rowHeight = (dropDownButton?.frame.height)!
+            if totalHeight > frame.height - (dropDownButton?.frame.maxY)! {
+                totalHeight = frame.height - (dropDownButton?.frame.maxY)! - 10
+            }
         }
         
         view.addSubview(self)
@@ -155,6 +158,9 @@ extension DropDownView: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == labelIsSelected {
             cell.isSelectedImage.hidden = false
         }
+        else {
+            cell.isSelectedImage.hidden = true
+        }
         
         return cell
     }
@@ -164,7 +170,9 @@ extension DropDownView: UITableViewDataSource, UITableViewDelegate {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         
-        (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: labelIsSelected, inSection: 0)) as! DropDownCell).isSelectedImage.hidden = true
+        if tableView.cellForRowAtIndexPath(NSIndexPath(forRow: labelIsSelected, inSection: 0)) != nil {
+            (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: labelIsSelected, inSection: 0)) as! DropDownCell).isSelectedImage.hidden = true
+        }
         labelIsSelected = indexPath.row
         (tableView.cellForRowAtIndexPath(NSIndexPath(forRow: labelIsSelected, inSection: 0)) as! DropDownCell).isSelectedImage.hidden = false
         

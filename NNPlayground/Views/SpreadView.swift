@@ -57,16 +57,18 @@ class SpreadView: UIView {
     }
     
     // MARK: - Introduce
-    private lazy var introduceDropWebView: DropWebView = {
-        let view = DropWebView()
-        return view
-    }()
+//    private lazy var introduceDropWebView: DropWebView = {
+//        let view = DropWebView()
+//        return view
+//    }()
     var introduce: ((url: NSURL) -> Void)?
     @IBAction func IntroduceAction(sender: UIButton) {
 //        if let window = self.window {
 //            introduceDropWebView.showInView(window, button: sender, url: "https://ypwhs.gitbooks.io/nnplayground/content/")
 //        }
-//        openURL(NSURL(string: "https://ypwhs.gitbooks.io/nnplayground/content/"))
+        //        openURL(NSURL(string: "https://ypwhs.gitbooks.io/nnplayground/content/"))
+        
+        self.hide()
         introduce?(url: NSURL(string: "https://ypwhs.gitbooks.io/nnplayground/content/")!)
     }
     // MARK: - SetData
@@ -152,6 +154,14 @@ class SpreadView: UIView {
             layers += 1
             addNodeButton[layers - 3].hidden = false
             subNodeButton[layers - 3].hidden = false
+            if !addNodeButton[layers - 4].enabled {
+                addNodeButton[layers - 3].strokeColor = UIColor.lightGrayColor()
+                addNodeButton[layers - 3].enabled = false
+            }
+            if !subNodeButton[layers - 4].enabled {
+                subNodeButton[layers - 3].strokeColor = UIColor.lightGrayColor()
+                subNodeButton[layers - 3].enabled = false
+            }
         }
         if !sender.isAddButton && layers > 2 {
             layers -= 1

@@ -400,6 +400,7 @@
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="width" secondItem="x0o-NZ-BgK" secondAttribute="width" id="lLx-nT-XaF"/>
                 <constraint firstItem="mul-yL-jyk" firstAttribute="top" secondItem="x0o-NZ-BgK" secondAttribute="top" id="m4D-aB-mbc"/>
                 <constraint firstItem="mjJ-aY-Y1O" firstAttribute="top" secondItem="x0o-NZ-BgK" secondAttribute="top" id="mq8-WK-bs8"/>
+                <constraint firstItem="qL9-aa-PSr" firstAttribute="top" secondItem="mul-yL-jyk" secondAttribute="top" id="oCg-Zc-cI5"/>
                 <constraint firstItem="aF4-tL-qCh" firstAttribute="trailing" secondItem="V7U-wg-OaH" secondAttribute="trailing" id="oom-aQ-hnW"/>
                 <constraint firstItem="lYQ-eG-Pz5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pFP-zY-FBW"/>
                 <constraint firstItem="ntt-EQ-Czi" firstAttribute="trailing" secondItem="CUN-he-QAE" secondAttribute="trailing" id="qxM-Xd-JYL"/>
@@ -415,12 +416,13 @@
             </constraints>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="R3E-eS-rwx"/>
                     <exclude reference="0wK-ja-bCL"/>
                     <exclude reference="ugY-ty-thQ"/>
-                    <exclude reference="R3E-eS-rwx"/>
-                    <exclude reference="NC3-VB-aEu"/>
                     <exclude reference="dPk-hg-Uhb"/>
                     <exclude reference="qxM-Xd-JYL"/>
+                    <exclude reference="EjF-6d-z1E"/>
+                    <exclude reference="NC3-VB-aEu"/>
                 </mask>
             </variation>
             <connections>

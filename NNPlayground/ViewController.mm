@@ -506,14 +506,15 @@ int maxfps = 120;
     [self xiancheng:^{[self train];}];
 }
 
--(void)initSpreadView{
+- (void)initSpreadView{
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"SpreadView" owner:self options:nil];
     _spreadView = [nib objectAtIndex:0];
     ViewController *strongSelf = self;
 //    _spreadView.addLayerButtons.frame.size = CGSizeMake(_heatMap.frame.size.height, _heatMap.frame.size.height);
     
     _spreadView.introduce = ^(NSURL *url){
-        exOpenURL:url;
+        [strongSelf exOpenURL:url];
+//        NSLog(@"%@",url);
     };
     
     //增加节点 layerNum:范围为[1,6]的第n隐藏层
@@ -712,6 +713,11 @@ bool isShowTestData = false;
 }
 
 - (IBAction)createSpread:(ConfigureButton *)sender {
+    CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    [rotateAnimation setFromValue:[NSNumber numberWithDouble:0.0]];
+    [rotateAnimation setToValue:[NSNumber numberWithDouble:M_PI/2]];
+    [rotateAnimation setDuration:0.2];
+    [sender.layer addAnimation:rotateAnimation forKey:@"configureButtonRotate"];
     if (UIWindow *window = self.view.window) {
         [_spreadView showInView:window];
     }
