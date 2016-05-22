@@ -510,17 +510,18 @@ int maxfps = 120;
     NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"SpreadView" owner:self options:nil];
     _spreadView = [nib objectAtIndex:0];
     ViewController *strongSelf = self;
-//    _spreadView.addLayerButtons.frame.size = CGSizeMake(_heatMap.frame.size.height, _heatMap.frame.size.height);
+    
+    _spreadView.regenerate = ^{
+        [strongSelf resetNetworkShape];
+    };
     
     _spreadView.introduce = ^(NSURL *url){
         [strongSelf exOpenURL:url];
-//        NSLog(@"%@",url);
     };
     
     //增加节点 layerNum:范围为[1,6]的第n隐藏层
-    _spreadView.addNode = ^(NSInteger layerNum,BOOL isAdd){
-        int value = isAdd? 1 : -1;
-        networkShape[layerNum] += value;
+    _spreadView.addNode = ^(NSInteger layerNum,NSInteger num){
+        networkShape[layerNum] += num;
         if(networkShape[layerNum] < 1)networkShape[layerNum] = 1;
         if(networkShape[layerNum] > 8)networkShape[layerNum] = 8;
         [strongSelf reset];
@@ -707,6 +708,23 @@ bool isShowTestData = false;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)resetNetworkShape{
+    self.runButton.isRunButton = true;
+    always = false;
+    [NSThread sleepForTimeInterval:0.008];
+    
+    [networkLock lock];
+    int newLayers = 3;
+    always = false;
+    int * oldNetworkShape = networkShape;
+    networkShape = new int[3]{2, 4, 1};
+    layers = newLayers;
+    delete[] oldNetworkShape;
+    
+    [networkLock unlock];
+    [self reset];
 }
 
 - (IBAction)createSpread:(ConfigureButton *)sender {

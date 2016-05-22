@@ -12,7 +12,11 @@ class DropDownView: UIView {
 
     var totalHeight: CGFloat = 60 * 4
     var labelName: [String] = [""]
-    var labelIsSelected = 0
+    var labelIsSelected = 0 {
+        didSet{
+            tableView.reloadData()
+        }
+    }
     
     var dropDownButton:DropDownButton?
     var showSelectedLabel: ((name: String,num:Int) -> Void)?

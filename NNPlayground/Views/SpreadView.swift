@@ -15,8 +15,9 @@ class SpreadView: UIView {
     var subNodeButtonY:CGFloat = 114
     var blueColor = UIColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0)
     
-    
+    var regenerate: (() -> Void)?
     @IBAction func Regenerate(sender: UIButton) {
+        regenerate?()
         //setData
         setCircleData?()
         resetAlpha(setCircleButton)
@@ -34,7 +35,6 @@ class SpreadView: UIView {
         
         //addLayer
         layers = 3
-        addLayer?()
         addNodeButton[0].hidden = false
         subNodeButton[0].hidden = false
         for i in 1...5 {
@@ -42,8 +42,16 @@ class SpreadView: UIView {
             subNodeButton[i].hidden = true
         }
         addLayerLabel.text = "隐藏层数：\(layers-2)"
+        addLayerButton.strokeColor = blueColor
+        addLayerButton.enabled = true
+        subLayerButton.strokeColor = blueColor
+        subLayerButton.enabled = true
         
         //addNode
+        addNodeButton[0].strokeColor = blueColor
+        addNodeButton[0].enabled = true
+        subNodeButton[0].strokeColor = blueColor
+        subNodeButton[0].enabled = true
         
         //dropDown
         learningRateDropView.showSelectedLabel?(name: "0.03", num: 5)
@@ -137,7 +145,7 @@ class SpreadView: UIView {
     @IBAction func setNoiseAction(sender: EasySlider) {
         let num = setSpacing(sender, total: 10)
         setNoise?(current: num)
-        setNoiseLabel.text = "噪声：\(num)"
+        setNoiseLabel.text = "噪声：\(num*5)"
     }
     @IBAction func setBatchSizeAction(sender: EasySlider) {
         let num = setSpacing(sender, total: 29)
@@ -154,13 +162,29 @@ class SpreadView: UIView {
             layers += 1
             addNodeButton[layers - 3].hidden = false
             subNodeButton[layers - 3].hidden = false
-            if !addNodeButton[layers - 4].enabled {
-                addNodeButton[layers - 3].strokeColor = UIColor.lightGrayColor()
-                addNodeButton[layers - 3].enabled = false
+            if layers != 3 {
+                if !addNodeButton[layers - 4].enabled {
+                    addNodeButton[layers - 3].strokeColor = UIColor.lightGrayColor()
+                    addNodeButton[layers - 3].enabled = false
+                }
+                else {
+                    addNodeButton[layers - 3].strokeColor = blueColor
+                    addNodeButton[layers - 3].enabled = true
+                }
+                if !subNodeButton[layers - 4].enabled {
+                    subNodeButton[layers - 3].strokeColor = UIColor.lightGrayColor()
+                    subNodeButton[layers - 3].enabled = false
+                }
+                else {
+                    subNodeButton[layers - 3].strokeColor = blueColor
+                    subNodeButton[layers - 3].enabled = true
+                }
             }
-            if !subNodeButton[layers - 4].enabled {
-                subNodeButton[layers - 3].strokeColor = UIColor.lightGrayColor()
-                subNodeButton[layers - 3].enabled = false
+            else {
+                addNodeButton[0].strokeColor = blueColor
+                addNodeButton[0].enabled = true
+                subNodeButton[0].strokeColor = blueColor
+                subNodeButton[0].enabled = true
             }
         }
         if !sender.isAddButton && layers > 2 {
@@ -199,14 +223,14 @@ class SpreadView: UIView {
     }
     
     // MARK: - AddNode
-    var addNode: ((layer: Int, isAdd: Bool) -> Int)?
+    var addNode: ((layer: Int, num: Int) -> Int)?
     func addNodeAction(sender:AddButton) {
         var num = 1
         var nodes = 4
         if sender.isAddButton {
             for i in addNodeButton {
                 if i == sender {
-                    nodes = addNode!(layer: num, isAdd: true)
+                    nodes = addNode!(layer: num, num: 1)
                     break
                 }
                 num += 1
@@ -215,7 +239,7 @@ class SpreadView: UIView {
         else {
             for i in subNodeButton {
                 if i == sender {
-                    nodes = addNode!(layer: num, isAdd: false)
+                    nodes = addNode!(layer: num, num: -1)
                     break
                 }
                 num += 1
