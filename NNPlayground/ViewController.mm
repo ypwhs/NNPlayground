@@ -639,6 +639,7 @@ CGFloat screenScale = [UIScreen mainScreen].scale;
     UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpressAction:)];
     longpress.minimumPressDuration = 0.5;
     [_heatMap addGestureRecognizer:longpress];
+    [self resetNetwork];
 }
 
 MBProgressHUD *hud;
@@ -702,10 +703,6 @@ bool isShowTestData = false;
     [self buildInputImage];
     [networkLock unlock];
     [self getHeatData];
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    [self resetNetwork];
 }
 
 - (void)didReceiveMemoryWarning {
