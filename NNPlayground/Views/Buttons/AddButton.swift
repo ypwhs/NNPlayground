@@ -18,10 +18,16 @@ class AddButton: UIButton {
     }
     @IBInspectable var strokeColor: UIColor = UIColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0){
         didSet{
+            useColor = strokeColor
+        }
+    }
+    @IBInspectable var unableColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var isAddButton: Bool = true
+    var useColor: UIColor = UIColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0){
+        didSet{
             setNeedsDisplay()
         }
     }
-    @IBInspectable var isAddButton: Bool = true
     
     override var highlighted: Bool {
         didSet{
@@ -34,46 +40,47 @@ class AddButton: UIButton {
         }
     }
     
+    override var enabled: Bool {
+        didSet{
+            if enabled {
+                useColor = strokeColor
+            }
+            else {
+                useColor = unableColor
+            }
+        }
+    }
+    
     override func drawRect(rect: CGRect) {
         let path = UIBezierPath(ovalInRect: rect)
         fillColor.setFill()
         path.fill()
         
-        //set up the width and height variables
-        //for the horizontal stroke
         let plusHeight: CGFloat = 3.0
         let plusWidth: CGFloat = min(bounds.width, bounds.height) * 0.6
         
-        //create the path
         let plusPath = UIBezierPath()
         plusPath.lineWidth = plusHeight
         
-        //move the initial point of the path
-        //to the start of the horizontal stroke
         plusPath.moveToPoint(CGPoint(
             x:bounds.width/2 - plusWidth/2,
             y:bounds.height/2))
         
-        //add a point to the path at the end of the stroke
         plusPath.addLineToPoint(CGPoint(
             x:bounds.width/2 + plusWidth/2,
             y:bounds.height/2))
         
-        //Vertical Line
         if isAddButton {
-            //move to the start of the vertical stroke
             plusPath.moveToPoint(CGPoint(
                 x:bounds.width/2,
                 y:bounds.height/2 - plusWidth/2))
-            
-            //add the end point to the vertical stroke
+
             plusPath.addLineToPoint(CGPoint(
                 x:bounds.width/2,
                 y:bounds.height/2 + plusWidth/2))
         }
         
-        //set the stroke color
-        strokeColor.setStroke()
+        useColor.setStroke()
         
         //draw the stroke
         plusPath.stroke()

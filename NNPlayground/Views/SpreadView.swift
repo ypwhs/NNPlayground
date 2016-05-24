@@ -13,7 +13,6 @@ class SpreadView: UIView {
     var layers = 3
     var buttonWidth:CGFloat = 30
     var subNodeButtonY:CGFloat = 114
-    var blueColor = UIColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0)
     
     var regenerate: (() -> Void)?
     @IBAction func Regenerate(sender: UIButton) {
@@ -42,15 +41,11 @@ class SpreadView: UIView {
             subNodeButton[i].hidden = true
         }
         addLayerLabel.text = "隐藏层数：\(layers-2)"
-        addLayerButton.strokeColor = blueColor
         addLayerButton.enabled = true
-        subLayerButton.strokeColor = blueColor
         subLayerButton.enabled = true
         
         //addNode
-        addNodeButton[0].strokeColor = blueColor
         addNodeButton[0].enabled = true
-        subNodeButton[0].strokeColor = blueColor
         subNodeButton[0].enabled = true
         
         //dropDown
@@ -164,26 +159,20 @@ class SpreadView: UIView {
             subNodeButton[layers - 3].hidden = false
             if layers != 3 {
                 if !addNodeButton[layers - 4].enabled {
-                    addNodeButton[layers - 3].strokeColor = UIColor.lightGrayColor()
                     addNodeButton[layers - 3].enabled = false
                 }
                 else {
-                    addNodeButton[layers - 3].strokeColor = blueColor
                     addNodeButton[layers - 3].enabled = true
                 }
                 if !subNodeButton[layers - 4].enabled {
-                    subNodeButton[layers - 3].strokeColor = UIColor.lightGrayColor()
                     subNodeButton[layers - 3].enabled = false
                 }
                 else {
-                    subNodeButton[layers - 3].strokeColor = blueColor
                     subNodeButton[layers - 3].enabled = true
                 }
             }
             else {
-                addNodeButton[0].strokeColor = blueColor
                 addNodeButton[0].enabled = true
-                subNodeButton[0].strokeColor = blueColor
                 subNodeButton[0].enabled = true
             }
         }
@@ -195,19 +184,15 @@ class SpreadView: UIView {
         addLayer?()
         
         if layers == 8 {
-            addLayerButton.strokeColor = UIColor.lightGrayColor()
             addLayerButton.enabled = false
         }
         else {
-            addLayerButton.strokeColor = blueColor
             addLayerButton.enabled = true
         }
         if layers == 2 {
-            subLayerButton.strokeColor = UIColor.lightGrayColor()
             subLayerButton.enabled = false
         }
         else {
-            subLayerButton.strokeColor = blueColor
             subLayerButton.enabled = true
         }
         addLayerLabel.text = "隐藏层数：\(layers-2)"
@@ -246,16 +231,13 @@ class SpreadView: UIView {
             }
         }
         if nodes == 8 || nodes == 1 {
-            sender.strokeColor = UIColor.lightGrayColor()
             sender.enabled = false
         }
         else{
             if sender.isAddButton {
-                subNodeButton[num - 1].strokeColor = blueColor
                 subNodeButton[num - 1].enabled = true
             }
             else {
-                addNodeButton[num - 1].strokeColor = blueColor
                 addNodeButton[num - 1].enabled = true
             }
         }
