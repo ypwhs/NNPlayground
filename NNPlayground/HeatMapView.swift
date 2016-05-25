@@ -62,13 +62,13 @@ class HeatMapView: UIView {
             }
             //先添加白底圆，再添加颜色圆
             var pathLayer = CAShapeLayer()
-            var path = UIBezierPath(ovalInRect: CGRect(x: Double(halfWidth * trainx[i][0] + halfWidth)-1, y: Double(halfHeight - halfHeight * trainx[i][1])-1, width: 7.0, height: 7.0))  //减1是为了圆心和半径5的圆匹配
+            var path = UIBezierPath(ovalInRect: CGRect(x: Double(halfWidth * trainx[i][0] + halfWidth)-1, y: Double(halfHeight - halfHeight * trainx[i][1])-1, width: 6.0, height: 6.0))  //减1是为了圆心和半径5的圆匹配
             pathLayer.path = path.CGPath
             pathLayer.fillColor = white.CGColor
             dataLayer.addSublayer(pathLayer)
             
             pathLayer = CAShapeLayer()
-            path = UIBezierPath(ovalInRect: CGRect(x: Double(halfWidth * trainx[i][0] + halfWidth), y: Double(halfHeight - halfHeight * trainx[i][1]), width: 5.0, height: 5.0))
+            path = UIBezierPath(ovalInRect: CGRect(x: Double(halfWidth * trainx[i][0] + halfWidth), y: Double(halfHeight - halfHeight * trainx[i][1]), width: 4.0, height: 4.0))
             pathLayer.path = path.CGPath
             if trainy[i] > 0{
                 pathLayer.fillColor = blue.CGColor
@@ -97,13 +97,13 @@ class HeatMapView: UIView {
             }
             //先添加黑底圆，再添加颜色圆
             var pathLayer = CAShapeLayer()
-            var path = UIBezierPath(ovalInRect: CGRect(x: Double(halfWidth * testx[i][0] + halfWidth)-1, y: Double(halfHeight - halfHeight * testx[i][1])-1, width: 7.0, height: 7.0))  //减1是为了圆心和半径5的圆匹配
+            var path = UIBezierPath(ovalInRect: CGRect(x: Double(halfWidth * testx[i][0] + halfWidth)-1, y: Double(halfHeight - halfHeight * testx[i][1])-1, width: 6.0, height: 6.0))  //减1是为了圆心和半径5的圆匹配
             pathLayer.path = path.CGPath
             pathLayer.fillColor = black.CGColor
             dataLayer.addSublayer(pathLayer)
             
             pathLayer = CAShapeLayer()
-            path = UIBezierPath(ovalInRect: CGRect(x: Double(halfWidth * testx[i][0] + halfWidth), y: Double(halfHeight - halfHeight * testx[i][1]), width: 5.0, height: 5.0))
+            path = UIBezierPath(ovalInRect: CGRect(x: Double(halfWidth * testx[i][0] + halfWidth), y: Double(halfHeight - halfHeight * testx[i][1]), width: 4.0, height: 4.0))
             pathLayer.path = path.CGPath
             if testy[i] > 0{
                 pathLayer.fillColor = blue.CGColor

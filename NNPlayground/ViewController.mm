@@ -704,6 +704,21 @@ bool isShowTestData = false;
     [self buildInputImage];
     [networkLock unlock];
     [self getHeatData];
+    
+    [UIView beginAnimations:@"scaleView" context:nil];
+    [UIView setAnimationDuration:0.5];
+    CGAffineTransform transform;
+    if(discretize){
+        transform = CGAffineTransformScale(self.view.transform, 2, 2);
+        transform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(-100, 60), transform);
+    }else{
+        transform = CGAffineTransformScale(self.view.transform, 1, 1);
+        transform = CGAffineTransformConcat(CGAffineTransformMakeTranslation(0, 0), transform);
+    }
+    
+    
+    [_heatMap setTransform:transform];
+    [UIView commitAnimations];
 }
 
 - (void)didReceiveMemoryWarning {
