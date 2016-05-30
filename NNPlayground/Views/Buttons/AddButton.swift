@@ -51,6 +51,27 @@ class AddButton: UIButton {
         }
     }
     
+    override var hidden: Bool{
+        willSet{
+            if newValue {
+                //减少动画未实现
+                let graduallyAnimation = CABasicAnimation(keyPath: "transform.scale")
+                graduallyAnimation.duration = 1
+                graduallyAnimation.fromValue = 1
+                graduallyAnimation.toValue = 0.01
+                layer.addAnimation(graduallyAnimation, forKey: "graduallyAnimation")
+                
+            }
+            else {
+                let graduallyAnimation = CABasicAnimation(keyPath: "transform.scale")
+                graduallyAnimation.duration = 0.1
+                graduallyAnimation.fromValue = 0.01
+                graduallyAnimation.toValue = 1
+                layer.addAnimation(graduallyAnimation, forKey: "graduallyAnimation")
+            }
+        }
+    }
+    
     override func drawRect(rect: CGRect) {
         let path = UIBezierPath(ovalInRect: rect)
         fillColor.setFill()
