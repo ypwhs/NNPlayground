@@ -155,8 +155,9 @@ class SpreadView: UIView {
     func addLayerButtons(sender:AddButton) {
         if sender.isAddButton && layers < 8 {
             layers += 1
-            addNodeButton[layers - 3].hidden = false
-            subNodeButton[layers - 3].hidden = false
+            
+            hideAddButton(addNodeButton[layers - 3], hide: false)
+            hideAddButton(subNodeButton[layers - 3], hide: false)
             if layers != 3 {
                 if !addNodeButton[layers - 4].enabled {
                     addNodeButton[layers - 3].enabled = false
@@ -178,8 +179,9 @@ class SpreadView: UIView {
         }
         if !sender.isAddButton && layers > 2 {
             layers -= 1
-            addNodeButton[layers - 2].hidden = true
-            subNodeButton[layers - 2].hidden = true
+            
+            hideAddButton(addNodeButton[layers - 2], hide: true)
+            hideAddButton(subNodeButton[layers - 2], hide: true)
         }
         addLayer?()
         
