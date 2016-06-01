@@ -40,32 +40,9 @@ func cancel(cancelableTask: CancelableTask?) {
 }
 
 func hideAddButton(sender: AddButton, hide: Bool) {
-    //    CATransition* transition = [CATransition animation];
-    //    transition.startProgress = 0;
-    //    transition.endProgress = 1.0;
-    //    transition.type = kCATransitionPush;
-    //    transition.subtype = kCATransitionFromRight;
-    //    transition.duration = 1.0;
-    //
-    //    // Add the transition animation to both layers
-    //    [myView1.layer addAnimation:transition forKey:@"transition"];
-    //    [myView2.layer addAnimation:transition forKey:@"transition"];
-    //
-    //    // Finally, change the visibility of the layers.
-    //    myView1.hidden = YES;
-    //    myView2.hidden = NO;
-
-//    let transition = CATransition()
-//    transition.startProgress = 0;
-//    transition.endProgress = 1.0;
-//    transition.type = kCATransitionPush;
-//    transition.subtype = kCATransitionFromRight;
-//    transition.duration = 1.0;
-//    
-//    sender.layer.addAnimation(transition, forKey: "transition")
     
     let graduallyAnimation = CABasicAnimation(keyPath: "transform.scale")
-    graduallyAnimation.duration = 0.1
+    graduallyAnimation.duration = 0.2
     graduallyAnimation.fillMode = kCAFillModeForwards
     
     if hide {
@@ -82,6 +59,21 @@ func hideAddButton(sender: AddButton, hide: Bool) {
         sender.layer.addAnimation(graduallyAnimation, forKey: "graduallyAnimation")
         sender.hidden = false
     }
+
+}
+
+func transitionSender(sender:UIView, hide: Bool) {
     
+    let transition = CATransition()
+    transition.duration = 0.2
     
+    sender.layer.addAnimation(transition, forKey: "transition")
+    
+    if hide {
+        sender.hidden = true
+    }
+    else {
+        sender.hidden = false
+    }
+
 }

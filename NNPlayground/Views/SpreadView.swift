@@ -156,8 +156,11 @@ class SpreadView: UIView {
         if sender.isAddButton && layers < 8 {
             layers += 1
             
-            hideAddButton(addNodeButton[layers - 3], hide: false)
-            hideAddButton(subNodeButton[layers - 3], hide: false)
+//            hideAddButton(addNodeButton[layers - 3], hide: false)
+//            hideAddButton(subNodeButton[layers - 3], hide: false)
+            //
+            transitionSender(addNodeButton[layers - 3], hide: false)
+            transitionSender(subNodeButton[layers - 3], hide: false)
             if layers != 3 {
                 if !addNodeButton[layers - 4].enabled {
                     addNodeButton[layers - 3].enabled = false
