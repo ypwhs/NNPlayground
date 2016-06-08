@@ -77,3 +77,27 @@ func transitionSender(sender:UIView, hide: Bool) {
     }
 
 }
+
+func stretchTransition(sender:UIView, toLeft: Bool, changeHidden: Bool) {
+    let transition = CATransition()
+    transition.duration = 0.2
+    if changeHidden&&(!sender.hidden) {
+        transition.type = kCATransitionReveal
+    }
+    else{
+        transition.type = kCATransitionMoveIn
+    }
+    
+    if toLeft {
+        transition.subtype = kCATransitionFromRight
+    }
+    else {
+        transition.subtype = kCATransitionFromLeft
+    }
+    
+    sender.layer.addAnimation(transition, forKey: "transition")
+    
+    if changeHidden {
+        sender.hidden = !sender.hidden
+    }
+}

@@ -155,12 +155,29 @@ class SpreadView: UIView {
     func addLayerButtons(sender:AddButton) {
         if sender.isAddButton && layers < 8 {
             layers += 1
+            addLayer?()
             
 //            hideAddButton(addNodeButton[layers - 3], hide: false)
 //            hideAddButton(subNodeButton[layers - 3], hide: false)
-            //
-            transitionSender(addNodeButton[layers - 3], hide: false)
-            transitionSender(subNodeButton[layers - 3], hide: false)
+            
+//            transitionSender(addNodeButton[layers - 3], hide: false)
+//            transitionSender(subNodeButton[layers - 3], hide: false)
+            // duang
+            for i in 0..<layers-3 {
+                stretchTransition(addNodeButton[i], toLeft: true, changeHidden: false)
+                stretchTransition(subNodeButton[i], toLeft: true, changeHidden: false)
+            }
+            
+            if layers - 3 > 0 {
+                stretchTransition(addNodeButton[layers - 3], toLeft: false, changeHidden: true)
+                stretchTransition(subNodeButton[layers - 3], toLeft: false, changeHidden: true)
+            }
+            else {
+                transitionSender(addNodeButton[layers - 3], hide: false)
+                transitionSender(subNodeButton[layers - 3], hide: false)
+            }
+            
+            // 锁死
             if layers != 3 {
                 if !addNodeButton[layers - 4].enabled {
                     addNodeButton[layers - 3].enabled = false
@@ -182,11 +199,26 @@ class SpreadView: UIView {
         }
         if !sender.isAddButton && layers > 2 {
             layers -= 1
+            addLayer?()
             
-            hideAddButton(addNodeButton[layers - 2], hide: true)
-            hideAddButton(subNodeButton[layers - 2], hide: true)
+//            hideAddButton(addNodeButton[layers - 2], hide: true)
+//            hideAddButton(subNodeButton[layers - 2], hide: true)
+            
+            // duang
+            for i in 0..<layers-2 {
+                stretchTransition(addNodeButton[i], toLeft: false, changeHidden: false)
+                stretchTransition(subNodeButton[i], toLeft: false, changeHidden: false)
+            }
+            
+            if layers - 2 > 0 {
+                stretchTransition(addNodeButton[layers - 2], toLeft: true, changeHidden: true)
+                stretchTransition(subNodeButton[layers - 2], toLeft: true, changeHidden: true)
+            }
+            else {
+                hideAddButton(addNodeButton[layers - 2], hide: true)
+                hideAddButton(subNodeButton[layers - 2], hide: true)
+            }
         }
-        addLayer?()
         
         if layers == 8 {
             addLayerButton.enabled = false

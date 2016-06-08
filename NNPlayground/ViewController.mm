@@ -237,7 +237,7 @@ Dataset dataset = Circle;
     [self reset];
 }
 
--(void) reset{
+- (void) reset{
     _runButton.isRunButton = true;
     always = false;
     [networkLock lock];
