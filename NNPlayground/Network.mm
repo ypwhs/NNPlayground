@@ -10,7 +10,6 @@
 
 
 Network::Network(int ns[], int ls, ActivationFunction _activation, RegularizationFunction _regularzation) {
-    //    int numLayers = (int)networkShape.size();
     activation = _activation;
     regularzation = _regularzation;
     Activation act;
