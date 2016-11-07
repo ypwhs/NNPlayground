@@ -14,14 +14,14 @@ class ShowWebView: UIWebView,UIWebViewDelegate {
     lazy var waitLabel: UILabel = {
         let label = UILabel()
         label.text = "正在载入"
-        label.textColor = UIColor.grayColor()
+        label.textColor = UIColor.gray
         label.font = UIFont(name: "Helvetica", size: 15)
         return label
     }()
     
     lazy var waitView:UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
-        view.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        view.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         return view
     }()
     
@@ -32,14 +32,14 @@ class ShowWebView: UIWebView,UIWebViewDelegate {
         
         layer.masksToBounds = true
         layer.cornerRadius = 5
-        layer.backgroundColor = UIColor.whiteColor().CGColor
+        layer.backgroundColor = UIColor.white.cgColor
         
         delegate = self
-        let u = NSURL(string: myUrl)
-        let request = NSURLRequest(URL: u!)
+        let u = URL(string: myUrl)
+        let request = URLRequest(url: u!)
         loadRequest(request)
-        let networkReachability = Reachability.reachabilityForInternetConnection()
-        let networkStatus = networkReachability.currentReachabilityStatus()
+        let networkReachability = Reachability.forInternetConnection()
+        let networkStatus = networkReachability?.currentReachabilityStatus()
         
         if networkStatus == NotReachable {
             waitLabel.text = "无网络连接"
@@ -55,26 +55,26 @@ class ShowWebView: UIWebView,UIWebViewDelegate {
             addSubview(waitLabel)
             waitLabel.translatesAutoresizingMaskIntoConstraints = false
             
-            let waitViewConstraintY = NSLayoutConstraint(item: waitView, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 8)
-            let waitViewConstraintX = NSLayoutConstraint(item: waitView, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0)
+            let waitViewConstraintY = NSLayoutConstraint(item: waitView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 8)
+            let waitViewConstraintX = NSLayoutConstraint(item: waitView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
             
-            NSLayoutConstraint.activateConstraints([waitViewConstraintX, waitViewConstraintY])
+            NSLayoutConstraint.activate([waitViewConstraintX, waitViewConstraintY])
             
-            let waitLabelConstraintY = NSLayoutConstraint(item: waitLabel, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: -10)
-            let waitLabelConstraintX = NSLayoutConstraint(item: waitLabel, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0)
-            let waitLabelConstraintW = NSLayoutConstraint(item: waitLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 60)
-            let waitLabelConstraintH = NSLayoutConstraint(item: waitLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 18)
+            let waitLabelConstraintY = NSLayoutConstraint(item: waitLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: -10)
+            let waitLabelConstraintX = NSLayoutConstraint(item: waitLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
+            let waitLabelConstraintW = NSLayoutConstraint(item: waitLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60)
+            let waitLabelConstraintH = NSLayoutConstraint(item: waitLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 18)
             
-            NSLayoutConstraint.activateConstraints([waitLabelConstraintX, waitLabelConstraintY, waitLabelConstraintW, waitLabelConstraintH])
+            NSLayoutConstraint.activate([waitLabelConstraintX, waitLabelConstraintY, waitLabelConstraintW, waitLabelConstraintH])
             
             layoutIfNeeded()
         }
         
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         waitView.stopAnimating()
-        waitLabel.hidden = true
+        waitLabel.isHidden = true
     }
 
 }

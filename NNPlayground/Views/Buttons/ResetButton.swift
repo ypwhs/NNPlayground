@@ -13,25 +13,25 @@ class ResetButton: UIButton {
     
     let π:CGFloat = CGFloat(M_PI)
 
-    @IBInspectable var fillColor: UIColor = UIColor.whiteColor(){
+    @IBInspectable var fillColor: UIColor = UIColor.white{
         didSet{
             setNeedsDisplay()
         }
     }
     @IBInspectable var isResetButton: Bool = true
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         didSet{
-            if highlighted {
+            if isHighlighted {
                 fillColor = UIColor(red: 0xEE/0xFF, green: 0xEE/0xFF, blue: 0xEE/0xFF, alpha: 1.0)
             }
             else {
-                fillColor = UIColor.whiteColor()
+                fillColor = UIColor.white
             }
         }
     }
     
-    override func drawRect(rect: CGRect) {
-        let path = UIBezierPath(ovalInRect: rect)
+    override func draw(_ rect: CGRect) {
+        let path = UIBezierPath(ovalIn: rect)
         fillColor.setFill()
         path.fill()
         
@@ -48,11 +48,11 @@ class ResetButton: UIButton {
             let drawSize = CGSize(width: 4, height: 8)
             let originPoint = CGPoint(x: bounds.width/2 - drawSize.width, y: bounds.height/4)
             let trianglePath = UIBezierPath()
-            trianglePath.moveToPoint(CGPoint(x:originPoint.x,
+            trianglePath.move(to: CGPoint(x:originPoint.x,
                 y:originPoint.y))
-            trianglePath.addLineToPoint(CGPoint(x:originPoint.x + drawSize.width,
+            trianglePath.addLine(to: CGPoint(x:originPoint.x + drawSize.width,
                 y:originPoint.y + drawSize.height/2))
-            trianglePath.addLineToPoint(CGPoint(x:originPoint.x + drawSize.width,
+            trianglePath.addLine(to: CGPoint(x:originPoint.x + drawSize.width,
                 y:originPoint.y - drawSize.height/2))
             
             pathColor.setFill()
@@ -62,21 +62,21 @@ class ResetButton: UIButton {
             let stepPath = UIBezierPath()
             stepPath.lineWidth = pathWidth
             
-            stepPath.moveToPoint(CGPoint(x: bounds.width*11/16 + 1.0, y: bounds.height/2 + sqrt(3.0)*bounds.height/8))
-            stepPath.addLineToPoint(CGPoint(x: bounds.width*11/16 + 1.0, y: bounds.height/2 - sqrt(3.0)*bounds.height/8))
+            stepPath.move(to: CGPoint(x: bounds.width*11/16 + 1.0, y: bounds.height/2 + sqrt(3.0)*bounds.height/8))
+            stepPath.addLine(to: CGPoint(x: bounds.width*11/16 + 1.0, y: bounds.height/2 - sqrt(3.0)*bounds.height/8))
 
             
             pathColor.setStroke()
             stepPath.stroke()
             
             let trianglePath = UIBezierPath()
-            trianglePath.moveToPoint(CGPoint(
+            trianglePath.move(to: CGPoint(
                 x:bounds.width*5/16 - 1.0,
                 y:bounds.height/2 + sqrt(3.0)*bounds.height/8))
-            trianglePath.addLineToPoint(CGPoint(
+            trianglePath.addLine(to: CGPoint(
                 x:bounds.width*5/16 - 1.0,
                 y:bounds.height/2 - sqrt(3.0)*bounds.height/8))
-            trianglePath.addLineToPoint(CGPoint(
+            trianglePath.addLine(to: CGPoint(
                 x:bounds.width*11/16 - 1.0,
                 y:bounds.height/2))
             pathColor.setFill()

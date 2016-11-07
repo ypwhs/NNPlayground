@@ -19,11 +19,11 @@ class CheckButton: UIButton {
         }
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let w:CGFloat = 14
         let x:CGFloat = 2
         let y:CGFloat = rect.height/2 - w/2
-        let group = CGRectMake(2, rect.height/2 - w/2, w, w)
+        let group = CGRect(x: 2, y: rect.height/2 - w/2, width: w, height: w)
         
         let checkMarkFrame = UIBezierPath(roundedRect: group, cornerRadius: 2)
         checkMarkFrame.lineWidth = 1.5
@@ -40,12 +40,12 @@ class CheckButton: UIButton {
             fill.fill()
             
             let bezierPath = UIBezierPath()
-            bezierPath.moveToPoint(CGPointMake(x + 0.2 * w, y + 0.6 * w))
-            bezierPath.addLineToPoint(CGPointMake(x + (0.2 + 0.15) * w, y + (0.6 + 0.15) * w))
-            bezierPath.addLineToPoint(CGPointMake(x + (0.2 + 0.15 + 0.4) * w, y + (0.6 + 0.15 - 0.4) * w))
-            bezierPath.lineCapStyle = .Square
+            bezierPath.move(to: CGPoint(x: x + 0.2 * w, y: y + 0.6 * w))
+            bezierPath.addLine(to: CGPoint(x: x + (0.2 + 0.15) * w, y: y + (0.6 + 0.15) * w))
+            bezierPath.addLine(to: CGPoint(x: x + (0.2 + 0.15 + 0.4) * w, y: y + (0.6 + 0.15 - 0.4) * w))
+            bezierPath.lineCapStyle = .square
             
-            UIColor.whiteColor().setStroke()
+            UIColor.white.setStroke()
             bezierPath.lineWidth = 2.5;
             bezierPath.stroke()
         }

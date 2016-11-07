@@ -10,13 +10,13 @@ import UIKit
 import SafariServices
 
 extension UIViewController {
-    func exOpenURL(URL: NSURL) {
+    func exOpenURL(_ URL: Foundation.URL) {
         if #available(iOS 9.0, *) {
-            let safariViewController = SFSafariViewController(URL: URL)
-            presentViewController(safariViewController, animated: true, completion: nil)
+            let safariViewController = SFSafariViewController(url: URL)
+            present(safariViewController, animated: true, completion: nil)
             
         } else {
-            UIApplication.sharedApplication().openURL(URL)
+            UIApplication.shared.openURL(URL)
         }
         
     }

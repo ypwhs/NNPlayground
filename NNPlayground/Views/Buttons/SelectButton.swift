@@ -13,9 +13,9 @@ class SelectButton: UIButton {
     
     @IBInspectable var isChosen:Bool = false
 //    @IBInspectable var fillColor: UIColor = UIColor(red: 24/255.0, green: 61/255.0, blue: 78/255.0, alpha: 1)
-    @IBInspectable var fillColor: UIColor = UIColor.whiteColor().colorWithAlphaComponent(1)
+    @IBInspectable var fillColor: UIColor = UIColor.white.withAlphaComponent(1)
 
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
      
         if isChosen {
             let path = UIBezierPath(rect: rect)
@@ -30,7 +30,7 @@ class SelectButton: UIButton {
         layer.cornerRadius = 5
 //        layer.borderWidth = 2
 //        layer.borderColor = fillColor.CGColor
-        layer.backgroundColor = fillColor.CGColor
+        layer.backgroundColor = fillColor.cgColor
         titleLabel?.textColor = fillColor
     }
 

@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 class AddButton: UIButton {
     
-    @IBInspectable var fillColor: UIColor = UIColor.whiteColor(){
+    @IBInspectable var fillColor: UIColor = UIColor.white{
         didSet{
             setNeedsDisplay()
         }
@@ -21,7 +21,7 @@ class AddButton: UIButton {
             useColor = strokeColor
         }
     }
-    @IBInspectable var unableColor: UIColor = UIColor.lightGrayColor()
+    @IBInspectable var unableColor: UIColor = UIColor.lightGray
     @IBInspectable var isAddButton: Bool = true
     var useColor: UIColor = UIColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0){
         didSet{
@@ -29,20 +29,20 @@ class AddButton: UIButton {
         }
     }
     
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         didSet{
-            if highlighted {
+            if isHighlighted {
                 fillColor = UIColor(red: 0xEE/0xFF, green: 0xEE/0xFF, blue: 0xEE/0xFF, alpha: 1.0)
             }
             else {
-                fillColor = UIColor.whiteColor()
+                fillColor = UIColor.white
             }
         }
     }
     
-    override var enabled: Bool {
+    override var isEnabled: Bool {
         didSet{
-            if enabled {
+            if isEnabled {
                 useColor = strokeColor
             }
             else {
@@ -51,8 +51,8 @@ class AddButton: UIButton {
         }
     }
     
-    override func drawRect(rect: CGRect) {
-        let path = UIBezierPath(ovalInRect: rect)
+    override func draw(_ rect: CGRect) {
+        let path = UIBezierPath(ovalIn: rect)
         fillColor.setFill()
         path.fill()
         
@@ -62,20 +62,20 @@ class AddButton: UIButton {
         let plusPath = UIBezierPath()
         plusPath.lineWidth = plusHeight
         
-        plusPath.moveToPoint(CGPoint(
+        plusPath.move(to: CGPoint(
             x:bounds.width/2 - plusWidth/2,
             y:bounds.height/2))
         
-        plusPath.addLineToPoint(CGPoint(
+        plusPath.addLine(to: CGPoint(
             x:bounds.width/2 + plusWidth/2,
             y:bounds.height/2))
         
         if isAddButton {
-            plusPath.moveToPoint(CGPoint(
+            plusPath.move(to: CGPoint(
                 x:bounds.width/2,
                 y:bounds.height/2 - plusWidth/2))
 
-            plusPath.addLineToPoint(CGPoint(
+            plusPath.addLine(to: CGPoint(
                 x:bounds.width/2,
                 y:bounds.height/2 + plusWidth/2))
         }

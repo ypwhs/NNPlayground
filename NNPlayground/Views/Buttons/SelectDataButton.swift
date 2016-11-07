@@ -27,7 +27,7 @@ class SelectDataButton: UIButton {
         layer.masksToBounds = true
         layer.cornerRadius = 5
         layer.borderWidth = 2
-        layer.borderColor = UIColor.blackColor().CGColor
+        layer.borderColor = UIColor.black.cgColor
         alpha = 0.4
     }
     

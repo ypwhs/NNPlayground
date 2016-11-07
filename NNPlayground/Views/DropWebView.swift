@@ -14,7 +14,7 @@ class DropWebView: UIView {
     
     lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.clearColor()
+        view.backgroundColor = UIColor.clear
         return view
     }()
     
@@ -23,7 +23,7 @@ class DropWebView: UIView {
         return view
     }()
     
-    func showInView(view: UIView, button: UIButton, url: String) {
+    func showInView(_ view: UIView, button: UIButton, url: String) {
         frame = view.bounds
         dropDownButton = button
         webView.myUrl = url
@@ -34,7 +34,7 @@ class DropWebView: UIView {
         
         containerView.alpha = 1
         
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .TransitionCurlUp, animations: {[weak self]  _ in
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations: {[weak self]  _ in
             
             self?.layoutIfNeeded()
             
@@ -44,7 +44,7 @@ class DropWebView: UIView {
     
     func hide() {
         
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .TransitionCurlDown, animations: {[weak self]  _ in
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlDown, animations: {[weak self]  _ in
             
             
             self?.layoutIfNeeded()
@@ -83,11 +83,11 @@ class DropWebView: UIView {
         
         // layout for containerView
         
-        let containerViewConstraintsH = NSLayoutConstraint.constraintsWithVisualFormat("H:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
-        let containerViewConstraintsV = NSLayoutConstraint.constraintsWithVisualFormat("V:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+        let containerViewConstraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+        let containerViewConstraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
         
-        NSLayoutConstraint.activateConstraints(containerViewConstraintsH)
-        NSLayoutConstraint.activateConstraints(containerViewConstraintsV)
+        NSLayoutConstraint.activate(containerViewConstraintsH)
+        NSLayoutConstraint.activate(containerViewConstraintsV)
         
         // layout for webView
         containerView.addSubview(webView)
@@ -100,7 +100,7 @@ class DropWebView: UIView {
 }
 
 extension DropWebView: UIGestureRecognizerDelegate {
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
         if touch.view != containerView {
             return false

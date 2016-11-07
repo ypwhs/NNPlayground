@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-typealias CancelableTask = (cancel: Bool) -> Void
+typealias CancelableTask = (_ cancel: Bool) -> Void
 
-func delay(time: NSTimeInterval, work: dispatch_block_t) -> CancelableTask? {
+func delay(_ time: TimeInterval, work: @escaping ()->()) -> CancelableTask? {
     
     var finalTask: CancelableTask?
     
@@ -20,26 +20,26 @@ func delay(time: NSTimeInterval, work: dispatch_block_t) -> CancelableTask? {
             finalTask = nil
             
         } else {
-            dispatch_async(dispatch_get_main_queue(), work)
+            DispatchQueue.main.async(execute: work)
         }
     }
     
     finalTask = cancelableTask
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(time * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(time * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
         if let task = finalTask {
-            task(cancel: false)
+            task(false)
         }
     }
     
     return finalTask
 }
 
-func cancel(cancelableTask: CancelableTask?) {
-    cancelableTask?(cancel: true)
+func cancel(_ cancelableTask: CancelableTask?) {
+    cancelableTask?(true)
 }
 
-func hideAddButton(sender: AddButton, hide: Bool) {
+func hideAddButton(_ sender: AddButton, hide: Bool) {
     
     let graduallyAnimation = CABasicAnimation(keyPath: "transform.scale")
     graduallyAnimation.duration = 0.2
@@ -48,40 +48,40 @@ func hideAddButton(sender: AddButton, hide: Bool) {
     if hide {
         graduallyAnimation.fromValue = 1
         graduallyAnimation.toValue = 0.01
-        sender.layer.addAnimation(graduallyAnimation, forKey: "graduallyAnimation")
+        sender.layer.add(graduallyAnimation, forKey: "graduallyAnimation")
         delay(0.1){
-            sender.hidden = true
+            sender.isHidden = true
         }
     }
     else {
         graduallyAnimation.fromValue = 0.01
         graduallyAnimation.toValue = 1
-        sender.layer.addAnimation(graduallyAnimation, forKey: "graduallyAnimation")
-        sender.hidden = false
+        sender.layer.add(graduallyAnimation, forKey: "graduallyAnimation")
+        sender.isHidden = false
     }
 
 }
 
-func transitionSender(sender:UIView, hide: Bool) {
+func transitionSender(_ sender:UIView, hide: Bool) {
     
     let transition = CATransition()
     transition.duration = 0.2
     
-    sender.layer.addAnimation(transition, forKey: "transition")
+    sender.layer.add(transition, forKey: "transition")
     
     if hide {
-        sender.hidden = true
+        sender.isHidden = true
     }
     else {
-        sender.hidden = false
+        sender.isHidden = false
     }
 
 }
 
-func stretchTransition(sender:UIView, toLeft: Bool, changeHidden: Bool) {
+func stretchTransition(_ sender:UIView, toLeft: Bool, changeHidden: Bool) {
     let transition = CATransition()
     transition.duration = 0.2
-    if changeHidden&&(!sender.hidden) {
+    if changeHidden&&(!sender.isHidden) {
         transition.type = kCATransitionReveal
     }
     else{
@@ -95,9 +95,9 @@ func stretchTransition(sender:UIView, toLeft: Bool, changeHidden: Bool) {
         transition.subtype = kCATransitionFromLeft
     }
     
-    sender.layer.addAnimation(transition, forKey: "transition")
+    sender.layer.add(transition, forKey: "transition")
     
     if changeHidden {
-        sender.hidden = !sender.hidden
+        sender.isHidden = !sender.isHidden
     }
 }

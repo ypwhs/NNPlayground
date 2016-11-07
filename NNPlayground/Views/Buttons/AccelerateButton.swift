@@ -13,26 +13,26 @@ class AccelerateButton: UIButton {
     
     let π:CGFloat = CGFloat(M_PI)
     
-    @IBInspectable var fillColor: UIColor = UIColor.whiteColor(){
+    @IBInspectable var fillColor: UIColor = UIColor.white{
         didSet{
             setNeedsDisplay()
         }
     }
     @IBInspectable var isEquilateralTriangle: Bool = true
     @IBInspectable var frontWidthRatio: CGFloat = 3/16
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         didSet{
-            if highlighted {
+            if isHighlighted {
                 fillColor = UIColor(red: 0xEE/0xFF, green: 0xEE/0xFF, blue: 0xEE/0xFF, alpha: 1.0)
             }
             else {
-                fillColor = UIColor.whiteColor()
+                fillColor = UIColor.white
             }
         }
     }
     
-    override func drawRect(rect: CGRect) {
-        let path = UIBezierPath(ovalInRect: rect)
+    override func draw(_ rect: CGRect) {
+        let path = UIBezierPath(ovalIn: rect)
         fillColor.setFill()
         path.fill()
         
@@ -40,52 +40,52 @@ class AccelerateButton: UIButton {
         
         if isEquilateralTriangle {
             let trianglePath_1 = UIBezierPath()
-            trianglePath_1.moveToPoint(CGPoint(
+            trianglePath_1.move(to: CGPoint(
                 x:bounds.width*(0.5 - frontWidthRatio) - 0.5,
                 y:bounds.height/2 + sqrt(3.0)*bounds.height*frontWidthRatio*2/5))
-            trianglePath_1.addLineToPoint(CGPoint(
+            trianglePath_1.addLine(to: CGPoint(
                 x:bounds.width*(0.5 - frontWidthRatio) - 0.5,
                 y:bounds.height/2 - sqrt(3.0)*bounds.height*frontWidthRatio*2/5))
-            trianglePath_1.addLineToPoint(CGPoint(
+            trianglePath_1.addLine(to: CGPoint(
                 x:bounds.width*(0.5 + frontWidthRatio/5) - 0.5,
                 y:bounds.height/2))
             pathColor.setFill()
             trianglePath_1.fill()
             
             let trianglePath_2 = UIBezierPath()
-            trianglePath_2.moveToPoint(CGPoint(
+            trianglePath_2.move(to: CGPoint(
                 x:bounds.width*(0.5 + frontWidthRatio/5) + 0.5,
                 y:bounds.height/2 + sqrt(3.0)*bounds.height*frontWidthRatio*2/5))
-            trianglePath_2.addLineToPoint(CGPoint(
+            trianglePath_2.addLine(to: CGPoint(
                 x:bounds.width*(0.5 + frontWidthRatio/5) + 0.5,
                 y:bounds.height/2 - sqrt(3.0)*bounds.height*frontWidthRatio*2/5))
-            trianglePath_2.addLineToPoint(CGPoint(
+            trianglePath_2.addLine(to: CGPoint(
                 x:bounds.width*(0.5 + frontWidthRatio*7/5) + 0.5,
                 y:bounds.height/2))
             trianglePath_2.fill()
         }
         else {
             let trianglePath_1 = UIBezierPath()
-            trianglePath_1.moveToPoint(CGPoint(
+            trianglePath_1.move(to: CGPoint(
                 x:bounds.width*(0.5 - frontWidthRatio) - 0.5,
                 y:bounds.height/2 + bounds.height*frontWidthRatio*4/3))
-            trianglePath_1.addLineToPoint(CGPoint(
+            trianglePath_1.addLine(to: CGPoint(
                 x:bounds.width*(0.5 - frontWidthRatio) - 0.5,
                 y:bounds.height/2 - bounds.height*frontWidthRatio*4/3))
-            trianglePath_1.addLineToPoint(CGPoint(
+            trianglePath_1.addLine(to: CGPoint(
                 x:bounds.width*(0.5 + frontWidthRatio/3) - 0.5,
                 y:bounds.height/2))
             pathColor.setFill()
             trianglePath_1.fill()
             
             let trianglePath_2 = UIBezierPath()
-            trianglePath_2.moveToPoint(CGPoint(
+            trianglePath_2.move(to: CGPoint(
                 x:bounds.width*(0.5 + frontWidthRatio/3) + 0.5,
                 y:bounds.height/2 + bounds.height*frontWidthRatio*4/3))
-            trianglePath_2.addLineToPoint(CGPoint(
+            trianglePath_2.addLine(to: CGPoint(
                 x:bounds.width*(0.5 + frontWidthRatio/3) + 0.5,
                 y:bounds.height/2 - bounds.height*frontWidthRatio*4/3))
-            trianglePath_2.addLineToPoint(CGPoint(
+            trianglePath_2.addLine(to: CGPoint(
                 x:bounds.width*(0.5 + frontWidthRatio*5/3) + 0.5,
                 y:bounds.height/2))
             trianglePath_2.fill()

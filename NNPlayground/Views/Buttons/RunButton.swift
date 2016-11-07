@@ -19,44 +19,44 @@ class RunButton: UIButton {
         }
     }
     
-    override func drawRect(rect: CGRect) {
-        let path = UIBezierPath(ovalInRect: rect)
+    override func draw(_ rect: CGRect) {
+        let path = UIBezierPath(ovalIn: rect)
         fillColor.setFill()
         path.fill()
 
         if isRunButton {
             //create the path
             let trianglePath = UIBezierPath()
-            trianglePath.moveToPoint(CGPoint(
+            trianglePath.move(to: CGPoint(
                 x:bounds.width/2 - sqrt(3.0)*bounds.width/18,
                 y:bounds.height/3))
-            trianglePath.addLineToPoint(CGPoint(
+            trianglePath.addLine(to: CGPoint(
                 x:bounds.width/2 - sqrt(3.0)*bounds.width/18,
                 y:bounds.height*2/3))
-            trianglePath.addLineToPoint(CGPoint(
+            trianglePath.addLine(to: CGPoint(
                 x:bounds.width/2 + sqrt(3.0)*bounds.width/9,
                 y:bounds.height/2))
-            UIColor.whiteColor().setFill()
+            UIColor.white.setFill()
             trianglePath.fill()
         }
         else {
             let pausePath = UIBezierPath()
             pausePath.lineWidth = sqrt(3.0)*bounds.width*2/27
-            pausePath.moveToPoint(CGPoint(
+            pausePath.move(to: CGPoint(
                 x:bounds.width/2 - sqrt(3.0)*bounds.width*2/27,
                 y:bounds.width/2 - bounds.width/6))
-            pausePath.addLineToPoint(CGPoint(
+            pausePath.addLine(to: CGPoint(
                 x:bounds.width/2 - sqrt(3.0)*bounds.width*2/27,
                 y:bounds.width/2 + bounds.width/6))
             
-            pausePath.moveToPoint(CGPoint(
+            pausePath.move(to: CGPoint(
                 x:bounds.width/2 + sqrt(3.0)*bounds.width*2/27,
                 y:bounds.width/2 - bounds.width/6))
-            pausePath.addLineToPoint(CGPoint(
+            pausePath.addLine(to: CGPoint(
                 x:bounds.width/2 + sqrt(3.0)*bounds.width*2/27,
                 y:bounds.width/2 + bounds.width/6))
             //set the stroke color
-            UIColor.whiteColor().setStroke()
+            UIColor.white.setStroke()
         
             //draw the stroke
             pausePath.stroke()
