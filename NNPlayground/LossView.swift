@@ -67,11 +67,11 @@ class LossView: UIView {
         
         context?.setLineWidth(1.0)
         UIColor(white: 0, alpha: 0.2).setStroke()
-        CGContextAddLines(context, trainpoints, trainpoints.count)
+        context?.addLines(between: trainpoints)
         context?.drawPath(using: .stroke)
         
         UIColor.black.setStroke()
-        CGContextAddLines(context, testpoints, testpoints.count)
+        context?.addLines(between: testpoints)
         context?.drawPath(using: .stroke)
     }
     

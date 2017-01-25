@@ -42,7 +42,7 @@ class EasySlider: UISlider {
         let context = CGContext(data: nil, width: Int(diameter*2), height: Int(diameter*2), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo)
 
         context?.setFillColor(red: 0x64/0xFF, green: 0xB5/0xFF, blue: 0xF6/0xFF, alpha: 1.0)
-        CGContextAddArc(context, diameter, diameter, diameter, 0, 2*π, 0)
+        context?.addArc(center: CGPoint(x: diameter, y: diameter), radius: diameter, startAngle: 0, endAngle: 2*π, clockwise: false)
         context?.drawPath(using: .fill)
         
         cgImage = context?.makeImage()

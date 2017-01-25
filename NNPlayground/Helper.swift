@@ -49,7 +49,7 @@ func hideAddButton(_ sender: AddButton, hide: Bool) {
         graduallyAnimation.fromValue = 1
         graduallyAnimation.toValue = 0.01
         sender.layer.add(graduallyAnimation, forKey: "graduallyAnimation")
-        delay(0.1){
+        let _ = delay(0.1){
             sender.isHidden = true
         }
     }
