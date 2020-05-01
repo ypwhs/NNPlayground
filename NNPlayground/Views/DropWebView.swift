@@ -34,20 +34,19 @@ class DropWebView: UIView {
         
         containerView.alpha = 1
         
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations: {[weak self]  _ in
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations: {
             
-            self?.layoutIfNeeded()
+            self.layoutIfNeeded()
             
             }, completion: { _ in
         })
     }
     
-    func hide() {
+    @objc func hide() {
         
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlDown, animations: {[weak self]  _ in
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlDown, animations: {
             
-            
-            self?.layoutIfNeeded()
+            self.layoutIfNeeded()
             
             }, completion: {[weak self] _ in
                 self?.removeFromSuperview()
@@ -64,7 +63,7 @@ class DropWebView: UIView {
             
             makeUI()
             
-            let tap = UITapGestureRecognizer(target: self, action: #selector(DropDownView.hide))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(hide))
             containerView.addGestureRecognizer(tap)
             
             tap.cancelsTouchesInView = true
@@ -83,8 +82,8 @@ class DropWebView: UIView {
         
         // layout for containerView
         
-        let containerViewConstraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
-        let containerViewConstraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+        let containerViewConstraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|[containerView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+        let containerViewConstraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[containerView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
         
         NSLayoutConstraint.activate(containerViewConstraintsH)
         NSLayoutConstraint.activate(containerViewConstraintsV)

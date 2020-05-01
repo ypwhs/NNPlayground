@@ -55,31 +55,31 @@ class DropDownView: UIView {
         layoutIfNeeded()
         
         containerView.alpha = 1
-        
-        UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlUp, animations: {[weak self]  _ in
-            if let strongSelf = self {
-                if (strongSelf.dropDownButton) != nil {
-                    strongSelf.tableView.frame = CGRect(x: (strongSelf.dropDownButton?.frame.minX)!, y: (strongSelf.dropDownButton?.frame.maxY)!, width: (strongSelf.dropDownButton?.frame.width)!, height: strongSelf.totalHeight)
-                }
-            }
-            
-            self?.layoutIfNeeded()
-            
-            }, completion: { _ in
+        UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlUp, animations: {
+        }, completion: { _ in
         })
+//        UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlUp, animations: {[weak self]  _ in
+//            if let strongSelf = self {
+//                if (strongSelf.dropDownButton) != nil {
+//                    strongSelf.tableView.frame = CGRect(x: (strongSelf.dropDownButton?.frame.minX)!, y: (strongSelf.dropDownButton?.frame.maxY)!, width: (strongSelf.dropDownButton?.frame.width)!, height: strongSelf.totalHeight)
+//                }
+//            }
+//
+//            self?.layoutIfNeeded()
+//
+//            }, completion: { _ in
+//        })
     }
     
-    func hide() {
+    @objc func hide() {
         
-        UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlDown, animations: {[weak self]  _ in
+        UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlDown, animations: {
             
-            if let strongSelf = self {
-                if (strongSelf.dropDownButton) != nil {
-                    strongSelf.tableView.frame = CGRect(x: (strongSelf.dropDownButton?.frame.minX)!, y: (strongSelf.dropDownButton?.frame.maxY)!, width: (strongSelf.dropDownButton?.frame.width)!, height: 0)
-                }
+            if (self.dropDownButton) != nil {
+                self.tableView.frame = CGRect(x: (self.dropDownButton?.frame.minX)!, y: (self.dropDownButton?.frame.maxY)!, width: (self.dropDownButton?.frame.width)!, height: 0)
             }
             
-            self?.layoutIfNeeded()
+            self.layoutIfNeeded()
             
             }, completion: {[weak self] _ in
                 self?.removeFromSuperview()
@@ -119,8 +119,8 @@ class DropDownView: UIView {
         
         // layout for containerView
         
-        let containerViewConstraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
-        let containerViewConstraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+        let containerViewConstraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|[containerView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
+        let containerViewConstraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[containerView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
         
         NSLayoutConstraint.activate(containerViewConstraintsH)
         NSLayoutConstraint.activate(containerViewConstraintsV)

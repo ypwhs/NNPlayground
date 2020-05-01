@@ -10,20 +10,20 @@ import UIKit
 
 class EasySlider: UISlider {
     
-    let π:CGFloat = CGFloat(M_PI)
+    let π:CGFloat = .pi
     
     var thumbImage = UIImage()
     
     var diameter:CGFloat = 20
     {
         didSet{
-            setThumbImage(OriginImage(thumbImage, size: CGSize(width: diameter, height: diameter)), for: UIControlState())
+            setThumbImage(OriginImage(thumbImage, size: CGSize(width: diameter, height: diameter)), for: UIControl.State())
         }
     }
     
     override func didMoveToSuperview() {
         thumbImage = UIImage(cgImage: drawImage())
-        setThumbImage(OriginImage(thumbImage, size: CGSize(width: diameter, height: diameter)), for: UIControlState())
+        setThumbImage(OriginImage(thumbImage, size: CGSize(width: diameter, height: diameter)), for: UIControl.State())
     }
     
     func OriginImage(_ image:UIImage, size:CGSize) -> UIImage {

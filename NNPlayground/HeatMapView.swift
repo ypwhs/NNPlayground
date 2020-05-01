@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class HeatMapView: UIView {
+@objcMembers class HeatMapView: UIView {
     let NUM_SHADES = 256
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,8 +29,8 @@ class HeatMapView: UIView {
         self.addGestureRecognizer(recognizer)
     }
     
-    func longpress(_ rec:UILongPressGestureRecognizer){
-        if(rec.state == UIGestureRecognizerState.began){
+    @objc func longpress(_ rec:UILongPressGestureRecognizer){
+        if(rec.state == UIGestureRecognizer.State.began){
 //            print("long press")
         }
     }

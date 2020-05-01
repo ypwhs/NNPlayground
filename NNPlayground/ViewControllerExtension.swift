@@ -8,8 +8,7 @@
 
 import UIKit
 import SafariServices
-
-extension UIViewController {
+@objc extension UIViewController {
     func exOpenURL(_ URL: Foundation.URL) {
         if #available(iOS 9.0, *) {
             let safariViewController = SFSafariViewController(url: URL)

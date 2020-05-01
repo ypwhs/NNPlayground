@@ -21,7 +21,7 @@ class ShowWebView: UIWebView,UIWebViewDelegate {
     
     lazy var waitView:UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
-        view.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.style = UIActivityIndicatorView.Style.gray
         return view
     }()
     

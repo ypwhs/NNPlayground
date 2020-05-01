@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpreadView: UIView {
+@objcMembers class SpreadView: UIView {
     
     var layers = 3
     var buttonWidth:CGFloat = 30
@@ -246,7 +246,7 @@ class SpreadView: UIView {
     
     // MARK: - AddNode
     var addNode: ((_ layer: Int, _ num: Int) -> Int)?
-    func addNodeAction(_ sender:AddButton) {
+    @objc func addNodeAction(_ sender:AddButton) {
         var num = 1
         var nodes = 4
         if sender.isAddButton {
@@ -281,7 +281,7 @@ class SpreadView: UIView {
         
     }
     
-    lazy var addNodeButton: [AddButton] = {
+    var addNodeButton: [AddButton] = {
         let view = AddButton()
         view.frame = CGRect(x: 50, y: 100, width: 30, height: 30)
         view.addTarget(self, action: #selector(addNodeAction), for: .touchUpInside)
@@ -292,10 +292,11 @@ class SpreadView: UIView {
             view.addTarget(self, action: #selector(addNodeAction), for: .touchUpInside)
             views.append(view)
         }
+        
         return views
     }()
     
-    lazy var subNodeButton: [AddButton] = {
+    var subNodeButton: [AddButton] = {
         let view = AddButton()
         view.frame = CGRect(x: 50, y: 150, width: 30, height: 30)
         view.isAddButton = false
@@ -318,7 +319,7 @@ class SpreadView: UIView {
         let view = DropDownView()
         view.labelName = ["0.00001","0.0001","0.001","0.003","0.01","0.03","0.1","0.3","1","3","10"]
         view.showSelectedLabel = {(name: String, num: Int) in
-            self.learningRateButton.setTitle(name, for: UIControlState())
+            self.learningRateButton.setTitle(name, for: UIControl.State())
             view.hide()
             self.setLearningRate?(num)
         }
@@ -338,7 +339,7 @@ class SpreadView: UIView {
         let view = DropDownView()
         view.labelName = ["ReLU","Tanh","Sigmoid","Linear"]
         view.showSelectedLabel = {(name: String, num: Int) in
-            self.activationButton.setTitle(name, for: UIControlState())
+            self.activationButton.setTitle(name, for: UIControl.State())
             view.hide()
             self.setActivation?(num)
         }
@@ -358,7 +359,7 @@ class SpreadView: UIView {
         let view = DropDownView()
         view.labelName = ["None","L1","L2"]
         view.showSelectedLabel = {(name: String, num: Int) in
-            self.regularizationButton.setTitle(name, for: UIControlState())
+            self.regularizationButton.setTitle(name, for: UIControl.State())
             view.hide()
             self.setRegularization?(num)
         }
@@ -378,7 +379,7 @@ class SpreadView: UIView {
         let view = DropDownView()
         view.labelName = ["0","0.001","0.003","0.01","0.03","0.1","0.3","1","3","10"]
         view.showSelectedLabel = {(name: String, num: Int) in
-            self.regularizationRateButton.setTitle(name, for: UIControlState())
+            self.regularizationRateButton.setTitle(name, for: UIControl.State())
             view.hide()
             self.setRegularizationRate?(num)
         }
@@ -398,16 +399,16 @@ class SpreadView: UIView {
         
         layoutIfNeeded()
         
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {[weak self]  _ in
-            self?.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-            }, completion: { _ in
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: { 
+            self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        }, completion: { _ in
         })
         
     }
     
-    func hide() {
-        UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseOut, animations: {[weak self]  _ in
-            self?.backgroundColor = UIColor.clear
+    @objc func hide() {
+        UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseOut, animations: { 
+            self.backgroundColor = UIColor.clear
             }, completion: {[weak self]  _ in
                 self?.removeFromSuperview()
             })
@@ -432,10 +433,11 @@ class SpreadView: UIView {
     }
     
     func makeUI() {
+        
         setCircleButton.isChosen = true
         
-        let setDataButtonWidth = NSLayoutConstraint(item: setCircleButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: buttonWidth + 10)
-        let addLayerButtonWidth = NSLayoutConstraint(item: addLayerButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: buttonWidth)
+        let setDataButtonWidth = NSLayoutConstraint(item: setCircleButton!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: buttonWidth + 10)
+        let addLayerButtonWidth = NSLayoutConstraint(item: addLayerButton!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: buttonWidth)
         NSLayoutConstraint.activate([setDataButtonWidth,addLayerButtonWidth])
         
         self.layoutIfNeeded()

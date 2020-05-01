@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LossView: UIView {
+@objcMembers class LossView: UIView {
     var train:[CGFloat] = []
     var test:[CGFloat] = []
     

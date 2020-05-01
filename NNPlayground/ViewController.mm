@@ -243,7 +243,7 @@ Dataset dataset = Circle;
     [networkLock lock];
     [networkLock unlock];
     [self ui:^{
-        [_lossView clearData];
+        [self->_lossView clearData];
     }];
     [self resetNetwork];
 }
@@ -280,7 +280,8 @@ UIImage * image;
     [self ui:^{
         //更新大图
         Node * outputNode = (*network->network[layers-1])[0];
-        [_heatMap.backgroundLayer setContents:(id)outputNode->getImage().CGImage];
+        
+        [self->_heatMap.backgroundLayer setContents:(id)outputNode->getImage().CGImage];
         
         //更新小图
         for(int i = 0; i < layers - 1; i++){
@@ -466,7 +467,7 @@ double trainLoss = 0, testLoss = 0;
     
     double tmp1 = trainLoss, tmp2 = testLoss;
     [self ui:^{
-        [_lossView addLoss:tmp1 b:tmp2];
+        [self->_lossView addLoss:tmp1 b:tmp2];
     }];
     
     [networkLock unlock];
@@ -480,8 +481,8 @@ double trainLoss = 0, testLoss = 0;
 
 - (void)updateLabel{
     [self ui:^{
-        [_outputLabel setText:[NSString stringWithFormat:@"训练误差\n%.3f\n测试误差\n%.3f\n训练次数\n%d", trainLoss, testLoss, epoch]];
-        [_fpsLabel setText:[NSString stringWithFormat:@"fps:%d", speed]];
+        [self->_outputLabel setText:[NSString stringWithFormat:@"训练误差\n%.3f\n测试误差\n%.3f\n训练次数\n%d", trainLoss, testLoss, epoch]];
+        [self->_fpsLabel setText:[NSString stringWithFormat:@"fps:%d", speed]];
     }];
 }
 

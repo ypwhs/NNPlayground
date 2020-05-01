@@ -43,7 +43,7 @@ func hideAddButton(_ sender: AddButton, hide: Bool) {
     
     let graduallyAnimation = CABasicAnimation(keyPath: "transform.scale")
     graduallyAnimation.duration = 0.2
-    graduallyAnimation.fillMode = kCAFillModeForwards
+    graduallyAnimation.fillMode = CAMediaTimingFillMode.forwards
     
     if hide {
         graduallyAnimation.fromValue = 1
@@ -82,17 +82,17 @@ func stretchTransition(_ sender:UIView, toLeft: Bool, changeHidden: Bool) {
     let transition = CATransition()
     transition.duration = 0.2
     if changeHidden&&(!sender.isHidden) {
-        transition.type = kCATransitionReveal
+        transition.type = CATransitionType.reveal
     }
     else{
-        transition.type = kCATransitionMoveIn
+        transition.type = CATransitionType.moveIn
     }
     
     if toLeft {
-        transition.subtype = kCATransitionFromRight
+        transition.subtype = CATransitionSubtype.fromRight
     }
     else {
-        transition.subtype = kCATransitionFromLeft
+        transition.subtype = CATransitionSubtype.fromLeft
     }
     
     sender.layer.add(transition, forKey: "transition")
