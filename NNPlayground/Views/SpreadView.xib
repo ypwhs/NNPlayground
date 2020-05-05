@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="landscape">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,7 +28,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjJ-aY-Y1O" customClass="DropDownButton" customModule="NNPlayground" customModuleProvider="target">
-                    <rect key="frame" x="153.5" y="33" width="113" height="28.5"/>
+                    <rect key="frame" x="153" y="33" width="113" height="28.5"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="mjJ-aY-Y1O" secondAttribute="height" multiplier="4:1" id="isM-hW-rwV"/>
                     </constraints>
@@ -42,7 +40,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5I-wD-LN0" customClass="DropDownButton" customModule="NNPlayground" customModuleProvider="target">
-                    <rect key="frame" x="296.5" y="33" width="113.5" height="28.5"/>
+                    <rect key="frame" x="296" y="33" width="113.5" height="28.5"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="n5I-wD-LN0" secondAttribute="height" multiplier="4:1" id="zny-wT-qCJ"/>
                     </constraints>
@@ -54,7 +52,7 @@
                     </connections>
                 </button>
                 <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V7U-wg-OaH" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
-                    <rect key="frame" x="421" y="125.5" width="171.5" height="31"/>
+                    <rect key="frame" x="421" y="125" width="171.5" height="31"/>
                     <color key="tintColor" red="0.094117647058823528" green="0.23921568627450979" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="V7U-wg-OaH" secondAttribute="height" multiplier="19:5" id="6k2-7N-U3W"/>
@@ -71,7 +69,7 @@
                     </connections>
                 </slider>
                 <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aF4-tL-qCh" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
-                    <rect key="frame" x="421" y="193.5" width="171.5" height="31"/>
+                    <rect key="frame" x="421" y="193" width="171.5" height="31"/>
                     <color key="tintColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="aF4-tL-qCh" secondAttribute="height" multiplier="19:5" id="vSA-Gy-6XK"/>
@@ -109,7 +107,7 @@
                     </connections>
                 </button>
                 <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.33000000000000002" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Xqd-KB-OVV" customClass="EasySlider" customModule="NNPlayground" customModuleProvider="target">
-                    <rect key="frame" x="421" y="261.5" width="171.5" height="31"/>
+                    <rect key="frame" x="421" y="261" width="171.5" height="31"/>
                     <color key="minimumTrackTintColor" red="0.3921568627" green="0.70980392160000005" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="maximumTrackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
@@ -117,7 +115,7 @@
                     </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="训练数据百分比：50%" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18p-Rh-BWZ">
-                    <rect key="frame" x="423" y="79.5" width="167" height="36"/>
+                    <rect key="frame" x="423" y="79" width="167" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="EgJ-Zb-UbE"/>
                         <constraint firstAttribute="width" constant="120" id="bXu-Dc-v4c"/>
@@ -132,7 +130,7 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="噪声：0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNw-4l-oUA">
-                    <rect key="frame" x="423" y="165.5" width="167" height="18"/>
+                    <rect key="frame" x="423" y="165" width="167" height="18"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="YeQ-Z0-Yka"/>
                         <constraint firstAttribute="height" constant="42" id="buw-JA-bsJ"/>
@@ -180,7 +178,7 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="数据" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emv-GE-s8z">
-                    <rect key="frame" x="5" y="79.5" width="30" height="18"/>
+                    <rect key="frame" x="5" y="79" width="30" height="18"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="goZ-7o-3SV"/>
                         <constraint firstAttribute="height" constant="42" id="prT-s7-Qth"/>
@@ -196,7 +194,7 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="批量大小：10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJX-tX-EvL">
-                    <rect key="frame" x="423" y="233.5" width="167" height="18"/>
+                    <rect key="frame" x="423" y="233" width="167" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="OIY-OK-8mL"/>
                         <constraint firstAttribute="width" constant="120" id="odc-aj-Ju3"/>
@@ -212,7 +210,7 @@
                     </variation>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ntt-EQ-Czi" customClass="SelectButton" customModule="NNPlayground" customModuleProvider="target">
-                    <rect key="frame" x="461.5" y="301.5" width="90" height="30"/>
+                    <rect key="frame" x="461" y="301" width="90" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="ntt-EQ-Czi" secondAttribute="height" multiplier="3:1" id="YMg-cg-frf"/>
                     </constraints>
@@ -224,7 +222,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1s7-Nq-d30" customClass="SelectDataButton" customModule="NNPlayground" customModuleProvider="target">
-                    <rect key="frame" x="5" y="102.5" width="200.5" height="200"/>
+                    <rect key="frame" x="5" y="102" width="200.5" height="200"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="1s7-Nq-d30" secondAttribute="height" multiplier="1:1" id="yhr-19-hk4"/>
                     </constraints>
@@ -234,7 +232,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWs-vb-uXG" customClass="SelectDataButton" customModule="NNPlayground" customModuleProvider="target">
-                    <rect key="frame" x="5" y="312.5" width="200.5" height="200"/>
+                    <rect key="frame" x="5" y="312" width="200.5" height="200"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="tWs-vb-uXG" secondAttribute="height" multiplier="1:1" id="mpk-Dy-EkX"/>
                     </constraints>
@@ -292,7 +290,7 @@
                     </variation>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ut-zU-vXX" customClass="SelectDataButton" customModule="NNPlayground" customModuleProvider="target">
-                    <rect key="frame" x="5" y="522.5" width="200.5" height="200"/>
+                    <rect key="frame" x="5" y="522" width="200.5" height="200"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="9ut-zU-vXX" secondAttribute="height" multiplier="1:1" id="hno-LC-vXa"/>
                     </constraints>
@@ -302,7 +300,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUN-he-QAE" customClass="SelectDataButton" customModule="NNPlayground" customModuleProvider="target">
-                    <rect key="frame" x="5" y="732.5" width="200" height="200"/>
+                    <rect key="frame" x="5" y="732" width="200" height="200"/>
                     <constraints>
                         <constraint firstAttribute="height" secondItem="CUN-he-QAE" secondAttribute="width" multiplier="1:1" id="m8q-mb-7Vd"/>
                     </constraints>
@@ -312,7 +310,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qL9-aa-PSr">
-                    <rect key="frame" x="563.5" y="34.5" width="22" height="22"/>
+                    <rect key="frame" x="563" y="34" width="22" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="b6g-GN-kfO"/>
                         <constraint firstAttribute="width" constant="22" id="gxB-zK-eyj"/>
@@ -338,10 +336,10 @@
             <constraints>
                 <constraint firstItem="GVu-ra-2q8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="0Ul-T2-8Y4"/>
                 <constraint firstItem="9ut-zU-vXX" firstAttribute="top" secondItem="1s7-Nq-d30" secondAttribute="top" id="0wK-ja-bCL"/>
-                <constraint firstItem="x0o-NZ-BgK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="1BB-kG-ZNS"/>
+                <constraint firstItem="x0o-NZ-BgK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="1BB-kG-ZNS"/>
                 <constraint firstItem="V7U-wg-OaH" firstAttribute="trailing" secondItem="18p-Rh-BWZ" secondAttribute="trailing" id="20z-77-l3j"/>
                 <constraint firstItem="ntt-EQ-Czi" firstAttribute="centerX" secondItem="Xqd-KB-OVV" secondAttribute="centerX" id="40F-bM-O28"/>
-                <constraint firstAttribute="trailing" secondItem="qL9-aa-PSr" secondAttribute="trailing" constant="10" id="4iy-yh-VwQ"/>
+                <constraint firstAttribute="trailingMargin" secondItem="qL9-aa-PSr" secondAttribute="trailing" constant="10" id="4iy-yh-VwQ"/>
                 <constraint firstItem="kCb-71-2SQ" firstAttribute="top" secondItem="GVu-ra-2q8" secondAttribute="top" id="5nE-Zw-ZBA"/>
                 <constraint firstItem="V7U-wg-OaH" firstAttribute="leading" secondItem="18p-Rh-BWZ" secondAttribute="leading" id="66r-mr-U7h"/>
                 <constraint firstItem="x0o-NZ-BgK" firstAttribute="leading" secondItem="GVu-ra-2q8" secondAttribute="leading" id="6rj-UJ-Sa7"/>
@@ -372,7 +370,7 @@
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="R3E-eS-rwx"/>
                 <constraint firstItem="ntt-EQ-Czi" firstAttribute="top" secondItem="Xqd-KB-OVV" secondAttribute="bottom" constant="10" id="TPW-IX-HsQ"/>
                 <constraint firstItem="aF4-tL-qCh" firstAttribute="top" secondItem="aNw-4l-oUA" secondAttribute="bottom" constant="10" id="Tt5-Ig-XfS"/>
-                <constraint firstAttribute="trailing" secondItem="18p-Rh-BWZ" secondAttribute="trailing" constant="10" id="UnM-3N-8VT"/>
+                <constraint firstAttribute="trailingMargin" secondItem="18p-Rh-BWZ" secondAttribute="trailing" constant="10" id="UnM-3N-8VT"/>
                 <constraint firstItem="Xqd-KB-OVV" firstAttribute="top" secondItem="nJX-tX-EvL" secondAttribute="bottom" constant="10" id="Wyd-GO-k8y"/>
                 <constraint firstItem="bbM-tD-nBE" firstAttribute="trailing" secondItem="x0o-NZ-BgK" secondAttribute="trailing" id="X4W-Ks-bdu"/>
                 <constraint firstItem="mjJ-aY-Y1O" firstAttribute="width" secondItem="x0o-NZ-BgK" secondAttribute="width" id="XLQ-S9-H3W"/>
@@ -387,7 +385,7 @@
                 <constraint firstItem="eol-uD-pSL" firstAttribute="width" secondItem="bbM-tD-nBE" secondAttribute="width" id="grE-7u-Lbm"/>
                 <constraint firstItem="aNw-4l-oUA" firstAttribute="trailing" secondItem="V7U-wg-OaH" secondAttribute="trailing" id="hpx-iq-vQt"/>
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="leading" secondItem="mjJ-aY-Y1O" secondAttribute="trailing" constant="30" id="j6a-XS-Cy8"/>
-                <constraint firstItem="1s7-Nq-d30" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="jKx-hb-IGv"/>
+                <constraint firstItem="1s7-Nq-d30" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="jKx-hb-IGv"/>
                 <constraint firstItem="mul-yL-jyk" firstAttribute="leading" secondItem="Ie2-cJ-EJ7" secondAttribute="leading" id="l4j-pa-Y5n"/>
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="width" secondItem="x0o-NZ-BgK" secondAttribute="width" id="lLx-nT-XaF"/>
                 <constraint firstItem="mul-yL-jyk" firstAttribute="top" secondItem="x0o-NZ-BgK" secondAttribute="top" id="m4D-aB-mbc"/>
@@ -406,6 +404,7 @@
                 <constraint firstItem="V7U-wg-OaH" firstAttribute="leading" secondItem="mul-yL-jyk" secondAttribute="leading" id="zRc-DB-ck3"/>
                 <constraint firstItem="CUN-he-QAE" firstAttribute="width" secondItem="1s7-Nq-d30" secondAttribute="width" id="zoy-QY-VE8"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="yVo-hg-9Eb"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="R3E-eS-rwx"/>
@@ -436,7 +435,7 @@
                 <outlet property="setSpiralButton" destination="CUN-he-QAE" id="P8z-Jf-mD2"/>
                 <outlet property="subLayerButton" destination="bbM-tD-nBE" id="2KB-xp-rwN"/>
             </connections>
-            <point key="canvasLocation" x="304" y="306"/>
+            <point key="canvasLocation" x="43" y="124"/>
         </view>
     </objects>
     <resources>

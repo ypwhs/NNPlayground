@@ -354,10 +354,19 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     
     //计算各个坐标
     CGFloat margin = _heatMap.frame.origin.y;   //将heatmap的y坐标用于第一个结点的x,y坐标
-    CGFloat x = margin;
+    CGFloat x = 25;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        // 获取屏幕的宽度和高度，取较大一方判断是否为 812.0 或 896.0
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+        CGFloat maxLength = screenWidth > screenHeight ? screenWidth : screenHeight;
+        if (maxLength == 812.0f || maxLength == 896.0f) {
+            x = 65;
+        }
+    }
     CGFloat y = margin;
     
-    CGFloat width = frame.origin.x - margin;
+    CGFloat width = frame.origin.x - x;
     width /= layers - 1;    //两个结点的x坐标差
     
     CGFloat height = self.view.frame.size.height - margin;

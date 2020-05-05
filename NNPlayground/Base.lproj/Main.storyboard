@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,16 +12,12 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="训练误差 0.123 测试误差 0.123 训练次数 1234" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYA-1I-afQ">
-                                <rect key="frame" x="205" y="234" width="60" height="425"/>
+                                <rect key="frame" x="487" y="234" width="60" height="141"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="oGP-1Q-fiQ"/>
                                 </constraints>
@@ -32,7 +26,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="205" y="10" width="160" height="160"/>
+                                <rect key="frame" x="487" y="10" width="160" height="160"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fps:0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-2R-oE7">
                                         <rect key="frame" x="82" y="0.0" width="70" height="21"/>
@@ -53,45 +47,12 @@
                                     <constraint firstAttribute="trailing" secondItem="J6l-2R-oE7" secondAttribute="trailing" constant="8" id="XqH-g0-f1w"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7P-z9-49f" customClass="ConfigureButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="5" y="627" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="x7P-z9-49f" secondAttribute="height" multiplier="1:1" id="hLm-sG-XM7"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="createSpread:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cdW-di-qNw"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jju-Ya-qaA" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="5" y="534.5" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="jju-Ya-qaA" secondAttribute="height" multiplier="1:1" id="I06-J8-02M"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isResetButton" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="oneStep:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cTh-rq-5Dc"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNS-Qj-hId" customClass="LossView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="265" y="234" width="100" height="425"/>
+                                <rect key="frame" x="547" y="234" width="100" height="141"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIM-jn-lzj" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="5" y="464.5" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="vIM-jn-lzj" secondAttribute="height" multiplier="1:1" id="P53-2C-BoC"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isResetButton" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="resetClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D3F-XH-rg9"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zL4-Pb-Aym" customClass="CheckButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="205" y="178" width="102" height="20"/>
+                                <rect key="frame" x="487" y="178" width="102" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="b65-K7-qA5"/>
                                 </constraints>
@@ -103,35 +64,8 @@
                                     <action selector="showTestData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eoJ-fI-Qpz"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6G-jM-tKd">
-                                <rect key="frame" x="10.5" y="604.5" width="19.5" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.094117647058823528" green="0.23921568627450979" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnS-AF-TXQ" customClass="RunButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="5" y="499.5" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="AnS-AF-TXQ" secondAttribute="height" multiplier="1:1" id="dpD-jW-PQy"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRunButton" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="runNN:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D5S-08-g2l"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iR-R1-8lA" customClass="AccelerateButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="5" y="574.5" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="1iR-R1-8lA" secondAttribute="height" multiplier="1:1" id="6P0-VT-e5Z"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="speedUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aw6-3v-DBw"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2o-KL-JYB" customClass="CheckButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="205" y="206" width="88" height="20"/>
+                                <rect key="frame" x="487" y="206" width="88" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="0dN-f3-Iuz"/>
                                 </constraints>
@@ -143,17 +77,77 @@
                                     <action selector="changeDiscretize:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sJ9-br-jDV"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7P-z9-49f" customClass="ConfigureButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="20" y="335" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="x7P-z9-49f" secondAttribute="height" multiplier="1:1" id="hLm-sG-XM7"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="createSpread:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cdW-di-qNw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jju-Ya-qaA" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="20" y="242.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jju-Ya-qaA" secondAttribute="height" multiplier="1:1" id="I06-J8-02M"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isResetButton" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="oneStep:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cTh-rq-5Dc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIM-jn-lzj" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="20" y="172.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vIM-jn-lzj" secondAttribute="height" multiplier="1:1" id="P53-2C-BoC"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isResetButton" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="resetClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D3F-XH-rg9"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6G-jM-tKd">
+                                <rect key="frame" x="25.5" y="312.5" width="19" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.094117647058823528" green="0.23921568627450979" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnS-AF-TXQ" customClass="RunButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="20" y="207.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="AnS-AF-TXQ" secondAttribute="height" multiplier="1:1" id="dpD-jW-PQy"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRunButton" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="runNN:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D5S-08-g2l"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iR-R1-8lA" customClass="AccelerateButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="20" y="282.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="1iR-R1-8lA" secondAttribute="height" multiplier="1:1" id="6P0-VT-e5Z"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="speedUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aw6-3v-DBw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="leading" secondItem="zie-PW-5as" secondAttribute="leading" id="1Nv-dX-FkY"/>
                             <constraint firstItem="NNS-Qj-hId" firstAttribute="leading" secondItem="WYA-1I-afQ" secondAttribute="trailing" id="48E-6B-CGh"/>
                             <constraint firstItem="c6G-jM-tKd" firstAttribute="top" secondItem="1iR-R1-8lA" secondAttribute="bottom" id="5Tf-ic-vor"/>
-                            <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="6Us-un-NHI"/>
+                            <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="RJa-gk-usT" secondAttribute="top" constant="10" id="6Us-un-NHI"/>
                             <constraint firstItem="s2o-KL-JYB" firstAttribute="leading" secondItem="zL4-Pb-Aym" secondAttribute="leading" id="9TJ-dO-MsB"/>
                             <constraint firstItem="NNS-Qj-hId" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="AJ8-rW-ZID"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NNS-Qj-hId" secondAttribute="bottom" constant="8" symbolic="YES" id="B8I-Zo-x04"/>
-                            <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="5" id="C32-dw-CtT"/>
+                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="NNS-Qj-hId" secondAttribute="bottom" constant="8" symbolic="YES" id="B8I-Zo-x04"/>
+                            <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="C32-dw-CtT"/>
                             <constraint firstItem="x7P-z9-49f" firstAttribute="top" secondItem="c6G-jM-tKd" secondAttribute="bottom" constant="8" symbolic="YES" id="EZR-gl-3Hm"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="s2o-KL-JYB" secondAttribute="bottom" constant="8" symbolic="YES" id="KlP-HL-mm2"/>
                             <constraint firstItem="AnS-AF-TXQ" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="KvL-xx-xOY"/>
@@ -165,14 +159,15 @@
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="leading" secondItem="zie-PW-5as" secondAttribute="leading" id="WXR-QA-Kjg"/>
                             <constraint firstItem="jju-Ya-qaA" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="WsR-mK-XsL"/>
                             <constraint firstItem="1iR-R1-8lA" firstAttribute="top" secondItem="jju-Ya-qaA" secondAttribute="bottom" constant="10" id="Ycc-Tf-eGe"/>
-                            <constraint firstItem="zie-PW-5as" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" constant="-10" id="ZjM-dZ-noL"/>
+                            <constraint firstItem="zie-PW-5as" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="ZjM-dZ-noL"/>
                             <constraint firstItem="1iR-R1-8lA" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="b1c-Gy-Lce"/>
                             <constraint firstItem="jju-Ya-qaA" firstAttribute="top" secondItem="AnS-AF-TXQ" secondAttribute="bottom" constant="5" id="dyn-EL-muX"/>
                             <constraint firstItem="c6G-jM-tKd" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="ejC-WE-xZT"/>
                             <constraint firstItem="AnS-AF-TXQ" firstAttribute="top" secondItem="vIM-jn-lzj" secondAttribute="bottom" constant="5" id="kz2-sx-J40"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" symbolic="YES" id="y99-ek-GvO"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="x7P-z9-49f" secondAttribute="bottom" constant="10" id="zBv-ee-ytf"/>
+                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" symbolic="YES" id="y99-ek-GvO"/>
+                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="x7P-z9-49f" secondAttribute="bottom" constant="10" id="zBv-ee-ytf"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="RJa-gk-usT"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -188,12 +183,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="60.5" y="324.5"/>
+            <point key="canvasLocation" x="87.681159420289859" y="217.29910714285714"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>
