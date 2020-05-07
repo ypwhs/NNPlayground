@@ -315,7 +315,7 @@ import UIKit
     // MARK: - DropDown
     @IBOutlet weak var learningRateButton: DropDownButton!
     var setLearningRate: ((_ num: Int) -> Void)?
-    fileprivate lazy var learningRateDropView: DropDownView = {
+    lazy var learningRateDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["0.00001","0.0001","0.001","0.003","0.01","0.03","0.1","0.3","1","3","10"]
         view.showSelectedLabel = {(name: String, num: Int) in
@@ -335,7 +335,7 @@ import UIKit
     
     @IBOutlet weak var activationButton: DropDownButton!
     var setActivation: ((_ num: Int) -> Void)?
-    fileprivate lazy var activationDropView: DropDownView = {
+    lazy var activationDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["ReLU","Tanh","Sigmoid","Linear"]
         view.showSelectedLabel = {(name: String, num: Int) in
@@ -355,7 +355,7 @@ import UIKit
     
     @IBOutlet weak var regularizationButton: DropDownButton!
     var setRegularization: ((_ num: Int) -> Void)?
-    fileprivate lazy var regularizationDropView: DropDownView = {
+    lazy var regularizationDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["None","L1","L2"]
         view.showSelectedLabel = {(name: String, num: Int) in
@@ -375,7 +375,7 @@ import UIKit
     
     @IBOutlet weak var regularizationRateButton: DropDownButton!
     var setRegularizationRate: ((_ num: Int) -> Void)?
-    fileprivate lazy var regularizationRateDropView: DropDownView = {
+    lazy var regularizationRateDropView: DropDownView = {
         let view = DropDownView()
         view.labelName = ["0","0.001","0.003","0.01","0.03","0.1","0.3","1","3","10"]
         view.showSelectedLabel = {(name: String, num: Int) in
@@ -386,6 +386,7 @@ import UIKit
         view.labelIsSelected = 0
         return view
     }()
+    
     @IBAction func regularizationRateDrop(_ sender: DropDownButton) {
         if let window = self.window {
             regularizationRateDropView.showInView(window,button: sender)

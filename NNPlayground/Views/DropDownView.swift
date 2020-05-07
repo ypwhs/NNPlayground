@@ -55,20 +55,17 @@ class DropDownView: UIView {
         layoutIfNeeded()
         
         containerView.alpha = 1
-        UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlUp, animations: {
-        }, completion: { _ in
-        })
-//        UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlUp, animations: {[weak self]  _ in
-//            if let strongSelf = self {
-//                if (strongSelf.dropDownButton) != nil {
-//                    strongSelf.tableView.frame = CGRect(x: (strongSelf.dropDownButton?.frame.minX)!, y: (strongSelf.dropDownButton?.frame.maxY)!, width: (strongSelf.dropDownButton?.frame.width)!, height: strongSelf.totalHeight)
-//                }
-//            }
-//
-//            self?.layoutIfNeeded()
-//
-//            }, completion: { _ in
+//        UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlUp, animations: {
+//        }, completion: { _ in
 //        })
+        UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlUp, animations: {
+                if (self.dropDownButton) != nil {
+                    self.tableView.frame = CGRect(x: (self.dropDownButton?.frame.minX)!, y: (self.dropDownButton?.frame.maxY)!, width: (self.dropDownButton?.frame.width)!, height: self.totalHeight)
+                }
+
+                self.layoutIfNeeded()
+            }, completion: { _ in
+        })
     }
     
     @objc func hide() {
