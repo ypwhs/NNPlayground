@@ -332,7 +332,7 @@
 				TargetAttributes = {
 					A19CD73C1CC89D5300E8CDF9 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = ME6769WAA3;
+						DevelopmentTeam = W26WBSVK66;
 						LastSwiftMigration = 0800;
 					};
 					A19CD7551CC89D5300E8CDF9 = {
@@ -602,10 +602,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = ME6769WAA3;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = W26WBSVK66;
 				INFOPLIST_FILE = NNPlayground/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpeiwen.NNPlayground2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -625,10 +627,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = ME6769WAA3;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = W26WBSVK66;
 				INFOPLIST_FILE = NNPlayground/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpeiwen.NNPlayground2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
