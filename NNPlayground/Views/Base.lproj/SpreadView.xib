@@ -137,7 +137,7 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="激活函数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCb-71-2SQ">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="激活函数:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCb-71-2SQ">
                     <rect key="frame" x="220" y="10" width="170" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="3Fd-nO-vo0"/>
@@ -151,8 +151,8 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数据" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emv-GE-s8z">
-                    <rect key="frame" x="20" y="95.666666666666671" width="30" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数据:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emv-GE-s8z">
+                    <rect key="frame" x="20" y="95.666666666666671" width="199.33333333333334" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="prT-s7-Qth"/>
                     </constraints>
@@ -211,7 +211,7 @@
                         <action selector="setGaussian:" destination="iN0-l3-epB" eventType="touchUpInside" id="lNv-HC-vlw"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正则化函数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHR-zy-UDd">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正则化函数:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHR-zy-UDd">
                     <rect key="frame" x="420" y="10" width="170" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="06q-Pt-h9M"/>
@@ -225,7 +225,7 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正则率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie2-cJ-EJ7">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正则率:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie2-cJ-EJ7">
                     <rect key="frame" x="620" y="10" width="170" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="XtE-Zp-eu4"/>
@@ -296,7 +296,7 @@
                         <action selector="regularizationRateDrop:" destination="iN0-l3-epB" eventType="touchUpInside" id="dox-HR-psV"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学习率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVu-ra-2q8">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学习率:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVu-ra-2q8">
                     <rect key="frame" x="20" y="10" width="170" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="24F-8j-k1B"/>
@@ -313,6 +313,7 @@
             </subviews>
             <viewLayoutGuide key="safeArea" id="yVo-hg-9Eb"/>
             <constraints>
+                <constraint firstItem="emv-GE-s8z" firstAttribute="width" secondItem="1s7-Nq-d30" secondAttribute="width" multiplier="0.15" constant="169.34999999999999" id="0U7-pN-l8G"/>
                 <constraint firstItem="GVu-ra-2q8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="0Ul-T2-8Y4"/>
                 <constraint firstItem="9ut-zU-vXX" firstAttribute="top" secondItem="1s7-Nq-d30" secondAttribute="top" id="0wK-ja-bCL"/>
                 <constraint firstItem="x0o-NZ-BgK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="1BB-kG-ZNS"/>
@@ -323,7 +324,6 @@
                 <constraint firstItem="kCb-71-2SQ" firstAttribute="top" secondItem="GVu-ra-2q8" secondAttribute="top" id="5nE-Zw-ZBA"/>
                 <constraint firstItem="V7U-wg-OaH" firstAttribute="leading" secondItem="18p-Rh-BWZ" secondAttribute="leading" id="66r-mr-U7h"/>
                 <constraint firstItem="x0o-NZ-BgK" firstAttribute="leading" secondItem="GVu-ra-2q8" secondAttribute="leading" id="6rj-UJ-Sa7"/>
-                <constraint firstItem="18p-Rh-BWZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="emv-GE-s8z" secondAttribute="trailing" constant="8" symbolic="YES" id="74V-X2-Dym"/>
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eHR-zy-UDd" secondAttribute="leading" id="9Qf-re-IX6"/>
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="top" secondItem="x0o-NZ-BgK" secondAttribute="top" id="9hG-ph-q57"/>
                 <constraint firstItem="mul-yL-jyk" firstAttribute="leading" secondItem="n5I-wD-LN0" secondAttribute="trailing" constant="30" id="Ajg-3q-lPW"/>
