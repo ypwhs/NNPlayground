@@ -70,6 +70,7 @@
 		A15F49E81CC8B14000409DA5 /* HeatMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeatMapView.swift; sourceTree = "<group>"; };
 		A1667C121CEB6663002372D4 /* CheckButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		A185E5FE1CCBD3A900CB8A4A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A193D40A2916A7CE00EAE311 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A19CD73D1CC89D5300E8CDF9 /* NNPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NNPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19CD7411CC89D5300E8CDF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A19CD7431CC89D5300E8CDF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -78,7 +79,6 @@
 		A19CD7471CC89D5300E8CDF9 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		A19CD74A1CC89D5300E8CDF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A19CD74C1CC89D5300E8CDF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A19CD74F1CC89D5300E8CDF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A19CD7511CC89D5300E8CDF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A19CD7561CC89D5300E8CDF9 /* NNPlaygroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NNPlaygroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19CD75A1CC89D5300E8CDF9 /* NNPlaygroundTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NNPlaygroundTests.m; sourceTree = "<group>"; };
@@ -94,11 +94,9 @@
 		A19CD7781CC89DE700E8CDF9 /* Util.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Util.mm; sourceTree = "<group>"; };
 		A1AABF85255C237D000ED0E1 /* NNPlayground.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NNPlayground.entitlements; sourceTree = "<group>"; };
 		A1FC704B2916686300EA3EE7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		A1FC704C2916686400EA3EE7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		A1FC704E29166B7E00EA3EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		A1FC705229166CFB00EA3EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A1FC705629166D6600EA3EE7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		A1FC705D2916795100EA3EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A1FC7062291679F300EA3EE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SpreadView.xib; sourceTree = "<group>"; };
 		A1FC7064291679F800EA3EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SpreadView.strings; sourceTree = "<group>"; };
 		A1FC7065291679FA00EA3EE7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SpreadView.strings"; sourceTree = "<group>"; };
@@ -489,9 +487,7 @@
 		A19CD74E1CC89D5300E8CDF9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A19CD74F1CC89D5300E8CDF9 /* Base */,
-				A1FC704C2916686400EA3EE7 /* zh-Hans */,
-				A1FC705D2916795100EA3EE7 /* en */,
+				A193D40A2916A7CE00EAE311 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

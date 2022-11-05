@@ -21,6 +21,10 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="神经网络" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCi-AK-aoC">
                                 <rect key="frame" x="0.0" y="153" width="852" height="76"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="852" id="YHa-u2-Cwv"/>
+                                    <constraint firstAttribute="height" constant="76" id="yzd-35-jWv"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -28,10 +32,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="BCi-AK-aoC" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="5hm-Vv-4VW"/>
-                            <constraint firstItem="BCi-AK-aoC" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="94" id="U69-xG-anx"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="BCi-AK-aoC" secondAttribute="bottom" constant="130" id="hEi-be-RLw"/>
-                            <constraint firstItem="BCi-AK-aoC" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ykY-2C-D6Y"/>
+                            <constraint firstItem="BCi-AK-aoC" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.328638" constant="572" id="IWq-nt-5BJ"/>
+                            <constraint firstItem="BCi-AK-aoC" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XUB-mZ-vPB"/>
+                            <constraint firstItem="BCi-AK-aoC" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-5.5" id="myZ-Pa-uNV"/>
                         </constraints>
                     </view>
                 </viewController>
