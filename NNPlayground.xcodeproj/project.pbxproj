@@ -648,7 +648,7 @@
 				CODE_SIGN_ENTITLEMENTS = NNPlayground/NNPlayground.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 2022.11.5;
 				DEVELOPMENT_TEAM = W26WBSVK66;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = NNPlayground/Info.plist;
@@ -657,7 +657,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 2022.11.5;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpeiwen.NNPlayground2;
@@ -683,7 +683,7 @@
 				CODE_SIGN_ENTITLEMENTS = NNPlayground/NNPlayground.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 2022.11.5;
 				DEVELOPMENT_TEAM = W26WBSVK66;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = NNPlayground/Info.plist;
@@ -692,7 +692,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 2022.11.5;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yangpeiwen.NNPlayground2;
