@@ -24,6 +24,7 @@
 		A19CD77A1CC89DE700E8CDF9 /* Network.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7761CC89DE700E8CDF9 /* Network.mm */; };
 		A19CD77B1CC89DE700E8CDF9 /* Util.mm in Sources */ = {isa = PBXBuildFile; fileRef = A19CD7781CC89DE700E8CDF9 /* Util.mm */; };
 		A1FC705129166CFB00EA3EE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1FC705329166CFB00EA3EE7 /* Localizable.strings */; };
+		A1FC7061291679F300EA3EE7 /* SpreadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FC7063291679F300EA3EE7 /* SpreadView.xib */; };
 		AB0B6FDC1CFC6D9000D5BB06 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0B6FDB1CFC6D9000D5BB06 /* Helper.swift */; };
 		AB2D2A0F1CE5DA6000E4FFA4 /* AccelerateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2A0E1CE5DA6000E4FFA4 /* AccelerateButton.swift */; };
 		AB2D2A111CE7137800E4FFA4 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2A101CE7137800E4FFA4 /* SelectButton.swift */; };
@@ -38,7 +39,6 @@
 		AB6C37F61CDA4D15004AAAE9 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6C37F41CDA4D15004AAAE9 /* DropDownCell.xib */; };
 		AB6C37F91CDA4D20004AAAE9 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */; };
 		AB6C37FA1CDA4D20004AAAE9 /* SpreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */; };
-		AB6C37FC1CDA5108004AAAE9 /* SpreadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6C37FB1CDA5108004AAAE9 /* SpreadView.xib */; };
 		ABAC9B0A1CEF433200B74734 /* DropWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B091CEF433200B74734 /* DropWebView.swift */; };
 		ABAC9B0C1CEF475800B74734 /* ShowWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B0B1CEF475800B74734 /* ShowWebView.swift */; };
 		ABAC9B0F1CEF55F900B74734 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B0E1CEF55F900B74734 /* Reachability.m */; };
@@ -98,6 +98,10 @@
 		A1FC704E29166B7E00EA3EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		A1FC705229166CFB00EA3EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A1FC705629166D6600EA3EE7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A1FC705D2916795100EA3EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		A1FC7062291679F300EA3EE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SpreadView.xib; sourceTree = "<group>"; };
+		A1FC7064291679F800EA3EE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SpreadView.strings; sourceTree = "<group>"; };
+		A1FC7065291679FA00EA3EE7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SpreadView.strings"; sourceTree = "<group>"; };
 		AB0B6FDB1CFC6D9000D5BB06 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		AB2D2A0E1CE5DA6000E4FFA4 /* AccelerateButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccelerateButton.swift; path = Views/Buttons/AccelerateButton.swift; sourceTree = "<group>"; };
 		AB2D2A101CE7137800E4FFA4 /* SelectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectButton.swift; path = Views/Buttons/SelectButton.swift; sourceTree = "<group>"; };
@@ -112,7 +116,6 @@
 		AB6C37F41CDA4D15004AAAE9 /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownCell.xib; path = Views/Cells/DropDownCell.xib; sourceTree = "<group>"; };
 		AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownView.swift; path = Views/DropDownView.swift; sourceTree = "<group>"; };
 		AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpreadView.swift; path = Views/SpreadView.swift; sourceTree = "<group>"; };
-		AB6C37FB1CDA5108004AAAE9 /* SpreadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpreadView.xib; path = Views/SpreadView.xib; sourceTree = "<group>"; };
 		ABAC9B091CEF433200B74734 /* DropWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropWebView.swift; path = Views/DropWebView.swift; sourceTree = "<group>"; };
 		ABAC9B0B1CEF475800B74734 /* ShowWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowWebView.swift; path = Views/ShowWebView.swift; sourceTree = "<group>"; };
 		ABAC9B0D1CEF55F900B74734 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -236,6 +239,7 @@
 		AB6C37E61CDA4CE4004AAAE9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A1FC7063291679F300EA3EE7 /* SpreadView.xib */,
 				AB52CDDF1CE0A36D008EC13C /* Sliders */,
 				AB6C37E71CDA4CED004AAAE9 /* Cells */,
 				AB6C37E81CDA4CF5004AAAE9 /* Buttons */,
@@ -244,7 +248,6 @@
 				ABAC9B0B1CEF475800B74734 /* ShowWebView.swift */,
 				AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */,
 				A14F78961CE4C6620056FF51 /* LossView.swift */,
-				AB6C37FB1CDA5108004AAAE9 /* SpreadView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -381,9 +384,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A19CD7501CC89D5300E8CDF9 /* LaunchScreen.storyboard in Resources */,
-				AB6C37FC1CDA5108004AAAE9 /* SpreadView.xib in Resources */,
 				A185E5FF1CCBD3A900CB8A4A /* Images.xcassets in Resources */,
 				A1FC705129166CFB00EA3EE7 /* Localizable.strings in Resources */,
+				A1FC7061291679F300EA3EE7 /* SpreadView.xib in Resources */,
 				A19CD74D1CC89D5300E8CDF9 /* Assets.xcassets in Resources */,
 				AB6C37F61CDA4D15004AAAE9 /* DropDownCell.xib in Resources */,
 				A19CD74B1CC89D5300E8CDF9 /* Main.storyboard in Resources */,
@@ -488,6 +491,7 @@
 			children = (
 				A19CD74F1CC89D5300E8CDF9 /* Base */,
 				A1FC704C2916686400EA3EE7 /* zh-Hans */,
+				A1FC705D2916795100EA3EE7 /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -499,6 +503,17 @@
 				A1FC705629166D6600EA3EE7 /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		A1FC7063291679F300EA3EE7 /* SpreadView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1FC7062291679F300EA3EE7 /* Base */,
+				A1FC7064291679F800EA3EE7 /* en */,
+				A1FC7065291679FA00EA3EE7 /* zh-Hans */,
+			);
+			name = SpreadView.xib;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

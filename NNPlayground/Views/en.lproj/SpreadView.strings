@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "训练数据百分比：50%"; ObjectID = "18p-Rh-BWZ"; */
+"18p-Rh-BWZ.text" = "Train size: 50%";
+
+/* Class = "UILabel"; text = "学习率"; ObjectID = "GVu-ra-2q8"; */
+"GVu-ra-2q8.text" = "Learning Rate";
+
+/* Class = "UILabel"; text = "正则率"; ObjectID = "Ie2-cJ-EJ7"; */
+"Ie2-cJ-EJ7.text" = "Regularization rate";
+
+/* Class = "UILabel"; text = "噪声：0"; ObjectID = "aNw-4l-oUA"; */
+"aNw-4l-oUA.text" = "Noise: 0";
+
+/* Class = "UILabel"; text = "正则化函数"; ObjectID = "eHR-zy-UDd"; */
+"eHR-zy-UDd.text" = "Regularization function";
+
+/* Class = "UILabel"; text = "数据"; ObjectID = "emv-GE-s8z"; */
+"emv-GE-s8z.text" = "Data:";
+
+/* Class = "UILabel"; text = "激活函数"; ObjectID = "kCb-71-2SQ"; */
+"kCb-71-2SQ.text" = "Activation function:";
+
+/* Class = "UILabel"; text = "隐藏层数：1"; ObjectID = "lYQ-eG-Pz5"; */
+"lYQ-eG-Pz5.text" = "Hidden Layer: 1";
+
+/* Class = "UIButton"; normalTitle = "Tanh"; ObjectID = "mjJ-aY-Y1O"; */
+"mjJ-aY-Y1O.normalTitle" = "Tanh";
+
+/* Class = "UIButton"; normalTitle = "0"; ObjectID = "mul-yL-jyk"; */
+"mul-yL-jyk.normalTitle" = "0";
+
+/* Class = "UIButton"; normalTitle = "None"; ObjectID = "n5I-wD-LN0"; */
+"n5I-wD-LN0.normalTitle" = "None";
+
+/* Class = "UILabel"; text = "批量大小：10"; ObjectID = "nJX-tX-EvL"; */
+"nJX-tX-EvL.text" = "Batch size: 10";
+
+/* Class = "UIButton"; normalTitle = "重置"; ObjectID = "ntt-EQ-Czi"; */
+"ntt-EQ-Czi.normalTitle" = "Reset";
+
+/* Class = "UIButton"; normalTitle = "0.03"; ObjectID = "x0o-NZ-BgK"; */
+"x0o-NZ-BgK.normalTitle" = "0.03";
