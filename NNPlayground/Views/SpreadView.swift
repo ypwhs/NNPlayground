@@ -11,6 +11,9 @@ import UIKit
 @objcMembers class SpreadView: UIView {
     
     var layers = 3
+    let minLayers = 2
+    let maxLayers = 7
+    let maxNodes = 8
     var buttonWidth:CGFloat = 30
     var subNodeButtonY:CGFloat = 114
     
@@ -144,7 +147,7 @@ import UIKit
     @IBOutlet weak var addLayerLabel: UILabel!
     
     func addLayerButtons(_ sender:AddButton) {
-        if sender.isAddButton && layers < 8 {
+        if sender.isAddButton && layers < maxLayers {
             layers += 1
             addLayer?()
             
@@ -211,13 +214,13 @@ import UIKit
             }
         }
         
-        if layers == 8 {
+        if layers >= maxLayers {
             addLayerButton.isEnabled = false
         }
         else {
             addLayerButton.isEnabled = true
         }
-        if layers == 2 {
+        if layers <= minLayers {
             subLayerButton.isEnabled = false
         }
         else {
@@ -264,7 +267,7 @@ import UIKit
                 num += 1
             }
         }
-        if nodes == 8 || nodes == 1 {
+        if nodes >= maxNodes || nodes == 1 {
             sender.isEnabled = false
         }
         else{
