@@ -6,7 +6,7 @@
   Copyright © 2022 杨培文. All rights reserved.
 */
 "CFBundleDisplayName" = "神经网络";
-"show_loss" = "训练误差\n%.3f\n测试误差\n%.3f\n训练次数\n%d";
+"show_loss" = "训练误差:\n%.3f\n测试误差:\n%.3f\n训练次数:\n%d";
 "set train data" = "训练数据百分比: %d0%%";
 "set noise" = "噪声: %d";
 "set batch size" = "批处理大小: %d";
