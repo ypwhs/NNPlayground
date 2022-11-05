@@ -1,0 +1,8 @@
+/* 
+  Localizable.strings
+  NNPlayground
+
+  Created by 杨培文 on 2022/11/5.
+  Copyright © 2022 杨培文. All rights reserved.
+*/
+"show_loss" = "Train Loss:\n%.3f\n\nTest Loss:\n%.3f\n\nIter:\n%d";

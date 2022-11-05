@@ -1,0 +1,8 @@
+/* 
+  Localizable.strings
+  NNPlayground
+
+  Created by 杨培文 on 2022/11/5.
+  Copyright © 2022 杨培文. All rights reserved.
+*/
+"show_loss" = "训练误差\n%.3f\n测试误差\n%.3f\n训练次数\n%d";
