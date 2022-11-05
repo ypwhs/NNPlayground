@@ -7,8 +7,9 @@
 //  
 
 import UIKit
+import WebKit
 
-class ShowWebView: UIWebView,UIWebViewDelegate {
+class ShowWebView: WKWebView {
 
     var myUrl:String = ""
     lazy var waitLabel: UILabel = {
@@ -72,7 +73,7 @@ class ShowWebView: UIWebView,UIWebViewDelegate {
         
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+    func viewDidLoad() {
         waitView.stopAnimating()
         waitLabel.isHidden = true
     }
