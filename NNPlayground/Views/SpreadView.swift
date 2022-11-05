@@ -278,7 +278,7 @@ import UIKit
         
     }
     
-    var addNodeButton: [AddButton] = {
+    lazy var addNodeButton: [AddButton] = {
         let view = AddButton()
         view.frame = CGRect(x: 50, y: 100, width: 30, height: 30)
         view.addTarget(self, action: #selector(addNodeAction), for: .touchUpInside)
@@ -293,7 +293,7 @@ import UIKit
         return views
     }()
     
-    var subNodeButton: [AddButton] = {
+    lazy var subNodeButton: [AddButton] = {
         let view = AddButton()
         view.frame = CGRect(x: 50, y: 150, width: 30, height: 30)
         view.isAddButton = false
