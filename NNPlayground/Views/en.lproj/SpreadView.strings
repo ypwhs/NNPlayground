@@ -1,18 +1,18 @@
 
 /* Class = "UILabel"; text = "训练数据百分比：50%"; ObjectID = "18p-Rh-BWZ"; */
-"18p-Rh-BWZ.text" = "Train size: 50%";
+"18p-Rh-BWZ.text" = "Training data percentage: 50%";
 
 /* Class = "UILabel"; text = "学习率"; ObjectID = "GVu-ra-2q8"; */
-"GVu-ra-2q8.text" = "Learning Rate";
+"GVu-ra-2q8.text" = "Learning Rate:";
 
 /* Class = "UILabel"; text = "正则率"; ObjectID = "Ie2-cJ-EJ7"; */
-"Ie2-cJ-EJ7.text" = "Regularization rate";
+"Ie2-cJ-EJ7.text" = "Regularization rate:";
 
 /* Class = "UILabel"; text = "噪声：0"; ObjectID = "aNw-4l-oUA"; */
 "aNw-4l-oUA.text" = "Noise: 0";
 
 /* Class = "UILabel"; text = "正则化函数"; ObjectID = "eHR-zy-UDd"; */
-"eHR-zy-UDd.text" = "Regularization function";
+"eHR-zy-UDd.text" = "Regularization function:";
 
 /* Class = "UILabel"; text = "数据"; ObjectID = "emv-GE-s8z"; */
 "emv-GE-s8z.text" = "Data:";
