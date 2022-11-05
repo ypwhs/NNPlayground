@@ -118,21 +118,14 @@
                     <rect key="frame" x="620" y="95.666666666666671" width="202" height="36.000000000000014"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="EgJ-Zb-UbE"/>
-                        <constraint firstAttribute="width" constant="120" id="bXu-Dc-v4c"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="bXu-Dc-v4c"/>
-                        </mask>
-                    </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="噪声：0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNw-4l-oUA">
                     <rect key="frame" x="620" y="181.66666666666666" width="202" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="120" id="YeQ-Z0-Yka"/>
                         <constraint firstAttribute="height" constant="42" id="buw-JA-bsJ"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -140,16 +133,14 @@
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="YeQ-Z0-Yka"/>
                             <exclude reference="buw-JA-bsJ"/>
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学习率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVu-ra-2q8">
-                    <rect key="frame" x="20" y="10" width="46" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="学习率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVu-ra-2q8">
+                    <rect key="frame" x="20" y="10" width="170" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="24F-8j-k1B"/>
-                        <constraint firstAttribute="width" constant="120" id="R2I-cB-7H0"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -157,15 +148,13 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="24F-8j-k1B"/>
-                            <exclude reference="R2I-cB-7H0"/>
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="激活函数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCb-71-2SQ">
-                    <rect key="frame" x="220" y="10" width="61.333333333333314" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="激活函数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCb-71-2SQ">
+                    <rect key="frame" x="220" y="10" width="170" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="3Fd-nO-vo0"/>
-                        <constraint firstAttribute="width" constant="120" id="GNC-Rv-sWR"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -173,14 +162,12 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="3Fd-nO-vo0"/>
-                            <exclude reference="GNC-Rv-sWR"/>
                         </mask>
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数据" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emv-GE-s8z">
                     <rect key="frame" x="20" y="95.666666666666671" width="30" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="120" id="goZ-7o-3SV"/>
                         <constraint firstAttribute="height" constant="42" id="prT-s7-Qth"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -188,7 +175,6 @@
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="goZ-7o-3SV"/>
                             <exclude reference="prT-s7-Qth"/>
                         </mask>
                     </variation>
@@ -197,7 +183,6 @@
                     <rect key="frame" x="620" y="249.66666666666663" width="202" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="OIY-OK-8mL"/>
-                        <constraint firstAttribute="width" constant="120" id="odc-aj-Ju3"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -205,7 +190,6 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="OIY-OK-8mL"/>
-                            <exclude reference="odc-aj-Ju3"/>
                         </mask>
                     </variation>
                 </label>
@@ -241,11 +225,10 @@
                         <action selector="setGaussian:" destination="iN0-l3-epB" eventType="touchUpInside" id="lNv-HC-vlw"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正则化函数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHR-zy-UDd">
-                    <rect key="frame" x="420" y="10" width="76.666666666666686" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="正则化函数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHR-zy-UDd">
+                    <rect key="frame" x="420" y="10" width="170" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="06q-Pt-h9M"/>
-                        <constraint firstAttribute="width" constant="120" id="daO-vg-7DY"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -253,14 +236,12 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="06q-Pt-h9M"/>
-                            <exclude reference="daO-vg-7DY"/>
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正则率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie2-cJ-EJ7">
-                    <rect key="frame" x="620" y="10" width="46" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="正则率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie2-cJ-EJ7">
+                    <rect key="frame" x="620" y="10" width="170" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="120" id="388-cR-Eca"/>
                         <constraint firstAttribute="height" constant="42" id="XtE-Zp-eu4"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -268,7 +249,6 @@
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="388-cR-Eca"/>
                             <exclude reference="XtE-Zp-eu4"/>
                         </mask>
                     </variation>
@@ -277,7 +257,6 @@
                     <rect key="frame" x="384.33333333333331" y="359" width="83.333333333333314" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="LqP-bq-kjM"/>
-                        <constraint firstAttribute="width" constant="120" id="doQ-PO-Df4"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -285,7 +264,6 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="LqP-bq-kjM"/>
-                            <exclude reference="doQ-PO-Df4"/>
                         </mask>
                     </variation>
                 </label>
@@ -344,12 +322,14 @@
                 <constraint firstItem="kCb-71-2SQ" firstAttribute="top" secondItem="GVu-ra-2q8" secondAttribute="top" id="5nE-Zw-ZBA"/>
                 <constraint firstItem="V7U-wg-OaH" firstAttribute="leading" secondItem="18p-Rh-BWZ" secondAttribute="leading" id="66r-mr-U7h"/>
                 <constraint firstItem="x0o-NZ-BgK" firstAttribute="leading" secondItem="GVu-ra-2q8" secondAttribute="leading" id="6rj-UJ-Sa7"/>
-                <constraint firstItem="n5I-wD-LN0" firstAttribute="leading" secondItem="eHR-zy-UDd" secondAttribute="leading" id="9Qf-re-IX6"/>
+                <constraint firstItem="18p-Rh-BWZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="emv-GE-s8z" secondAttribute="trailing" constant="8" symbolic="YES" id="74V-X2-Dym"/>
+                <constraint firstItem="n5I-wD-LN0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eHR-zy-UDd" secondAttribute="leading" id="9Qf-re-IX6"/>
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="top" secondItem="x0o-NZ-BgK" secondAttribute="top" id="9hG-ph-q57"/>
                 <constraint firstItem="mul-yL-jyk" firstAttribute="leading" secondItem="n5I-wD-LN0" secondAttribute="trailing" constant="30" id="Ajg-3q-lPW"/>
                 <constraint firstItem="qL9-aa-PSr" firstAttribute="leading" secondItem="mul-yL-jyk" secondAttribute="trailing" constant="10" id="BEA-cX-1LJ"/>
                 <constraint firstItem="Xqd-KB-OVV" firstAttribute="trailing" secondItem="aF4-tL-qCh" secondAttribute="trailing" id="C5Q-Qa-lFI"/>
                 <constraint firstItem="Ie2-cJ-EJ7" firstAttribute="top" secondItem="GVu-ra-2q8" secondAttribute="top" id="CTa-Ei-QCw"/>
+                <constraint firstItem="Ie2-cJ-EJ7" firstAttribute="leading" secondItem="eHR-zy-UDd" secondAttribute="trailing" constant="30" id="EDD-qD-EVy"/>
                 <constraint firstItem="qL9-aa-PSr" firstAttribute="bottom" secondItem="mul-yL-jyk" secondAttribute="bottom" id="EjF-6d-z1E"/>
                 <constraint firstItem="aNw-4l-oUA" firstAttribute="leading" secondItem="V7U-wg-OaH" secondAttribute="leading" id="FIW-BW-D70"/>
                 <constraint firstItem="nJX-tX-EvL" firstAttribute="leading" secondItem="aF4-tL-qCh" secondAttribute="leading" id="FUV-Qr-rqE"/>
@@ -371,6 +351,7 @@
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="R3E-eS-rwx"/>
                 <constraint firstItem="ntt-EQ-Czi" firstAttribute="top" secondItem="Xqd-KB-OVV" secondAttribute="bottom" constant="10" id="TPW-IX-HsQ"/>
                 <constraint firstItem="aF4-tL-qCh" firstAttribute="top" secondItem="aNw-4l-oUA" secondAttribute="bottom" constant="10" id="Tt5-Ig-XfS"/>
+                <constraint firstItem="eHR-zy-UDd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kCb-71-2SQ" secondAttribute="trailing" constant="8" symbolic="YES" id="UBd-0R-zSf"/>
                 <constraint firstAttribute="trailingMargin" secondItem="18p-Rh-BWZ" secondAttribute="trailing" constant="10" id="UnM-3N-8VT"/>
                 <constraint firstItem="Xqd-KB-OVV" firstAttribute="top" secondItem="nJX-tX-EvL" secondAttribute="bottom" constant="10" id="Wyd-GO-k8y"/>
                 <constraint firstItem="bbM-tD-nBE" firstAttribute="trailing" secondItem="x0o-NZ-BgK" secondAttribute="trailing" id="X4W-Ks-bdu"/>
@@ -382,12 +363,14 @@
                 <constraint firstItem="tWs-vb-uXG" firstAttribute="width" secondItem="1s7-Nq-d30" secondAttribute="width" id="dhz-Sd-oYm"/>
                 <constraint firstItem="9ut-zU-vXX" firstAttribute="leading" secondItem="tWs-vb-uXG" secondAttribute="leading" id="eBs-SC-o8I"/>
                 <constraint firstItem="mjJ-aY-Y1O" firstAttribute="leading" secondItem="kCb-71-2SQ" secondAttribute="leading" id="eI1-iY-mPO"/>
+                <constraint firstItem="kCb-71-2SQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GVu-ra-2q8" secondAttribute="trailing" constant="8" symbolic="YES" id="faX-Hx-9F2"/>
                 <constraint firstItem="eol-uD-pSL" firstAttribute="leading" secondItem="mjJ-aY-Y1O" secondAttribute="leading" id="gLt-I9-mzL"/>
                 <constraint firstItem="eol-uD-pSL" firstAttribute="width" secondItem="bbM-tD-nBE" secondAttribute="width" id="grE-7u-Lbm"/>
                 <constraint firstItem="aNw-4l-oUA" firstAttribute="trailing" secondItem="V7U-wg-OaH" secondAttribute="trailing" id="hpx-iq-vQt"/>
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="leading" secondItem="mjJ-aY-Y1O" secondAttribute="trailing" constant="30" id="j6a-XS-Cy8"/>
                 <constraint firstItem="1s7-Nq-d30" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="jKx-hb-IGv"/>
-                <constraint firstItem="mul-yL-jyk" firstAttribute="leading" secondItem="Ie2-cJ-EJ7" secondAttribute="leading" id="l4j-pa-Y5n"/>
+                <constraint firstItem="mul-yL-jyk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ie2-cJ-EJ7" secondAttribute="leading" id="l4j-pa-Y5n"/>
+                <constraint firstAttribute="trailing" secondItem="Ie2-cJ-EJ7" secondAttribute="trailing" constant="62" id="l5X-DL-Dsi"/>
                 <constraint firstItem="n5I-wD-LN0" firstAttribute="width" secondItem="x0o-NZ-BgK" secondAttribute="width" id="lLx-nT-XaF"/>
                 <constraint firstItem="mul-yL-jyk" firstAttribute="top" secondItem="x0o-NZ-BgK" secondAttribute="top" id="m4D-aB-mbc"/>
                 <constraint firstItem="mjJ-aY-Y1O" firstAttribute="top" secondItem="x0o-NZ-BgK" secondAttribute="top" id="mq8-WK-bs8"/>
@@ -435,7 +418,7 @@
                 <outlet property="setSpiralButton" destination="CUN-he-QAE" id="P8z-Jf-mD2"/>
                 <outlet property="subLayerButton" destination="bbM-tD-nBE" id="2KB-xp-rwN"/>
             </connections>
-            <point key="canvasLocation" x="43" y="124"/>
+            <point key="canvasLocation" x="42.95774647887324" y="122.90076335877862"/>
         </view>
     </objects>
     <designables>
@@ -446,19 +429,19 @@
             <size key="intrinsicContentSize" width="30" height="30"/>
         </designable>
         <designable name="mjJ-aY-Y1O">
-            <size key="intrinsicContentSize" width="33" height="30"/>
+            <size key="intrinsicContentSize" width="43" height="18"/>
         </designable>
         <designable name="mul-yL-jyk">
-            <size key="intrinsicContentSize" width="30" height="30"/>
+            <size key="intrinsicContentSize" width="20" height="18"/>
         </designable>
         <designable name="n5I-wD-LN0">
-            <size key="intrinsicContentSize" width="37" height="30"/>
+            <size key="intrinsicContentSize" width="47" height="18"/>
         </designable>
         <designable name="ntt-EQ-Czi">
             <size key="intrinsicContentSize" width="31" height="30"/>
         </designable>
         <designable name="x0o-NZ-BgK">
-            <size key="intrinsicContentSize" width="30" height="30"/>
+            <size key="intrinsicContentSize" width="40" height="18"/>
         </designable>
     </designables>
     <resources>
