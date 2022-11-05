@@ -24,29 +24,20 @@ import UIKit
         //slider
         setRatioSlider.setValue(0.5, animated: true)
         setRatioAction(setRatioSlider)
-        setRatio?(4)
+        
         setNoiseSlider.setValue(0, animated: true)
         setNoiseAction(setNoiseSlider)
-        setNoise?(0)
+        
         setBatchSizeSlider.setValue(0.333333333, animated: true)
-        setBatchSize?(9)
         setBatchSizeAction(setBatchSizeSlider)
         
         //addLayer
-        layers = 3
-        addNodeButton[0].isHidden = false
-        subNodeButton[0].isHidden = false
+        layers = 2
         for i in 1...5 {
             addNodeButton[i].isHidden = true
             subNodeButton[i].isHidden = true
         }
         addLayerAction(addLayerButton)
-        addLayerButton.isEnabled = true
-        subLayerButton.isEnabled = true
-        
-        //addNode
-        addNodeButton[0].isEnabled = true
-        subNodeButton[0].isEnabled = true
         
         //dropDown
         learningRateDropView.showSelectedLabel?("0.03", 5)
