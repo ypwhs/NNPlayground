@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "fps:0"; ObjectID = "J6l-2R-oE7"; */
+"J6l-2R-oE7.text" = "fps:0";
+
+/* Class = "UILabel"; text = "训练误差 0.123 测试误差 0.123 训练次数 1234"; ObjectID = "WYA-1I-afQ"; */
+"WYA-1I-afQ.text" = "训练误差 0.123 测试误差 0.123 训练次数 1234";
+
+/* Class = "UILabel"; text = "10x"; ObjectID = "c6G-jM-tKd"; */
+"c6G-jM-tKd.text" = "10x";
+
+/* Class = "UIButton"; normalTitle = "      离散化输出"; ObjectID = "s2o-KL-JYB"; */
+"s2o-KL-JYB.normalTitle" = "      离散化输出";
+
+/* Class = "UIButton"; normalTitle = "      显示测试数据"; ObjectID = "zL4-Pb-Aym"; */
+"zL4-Pb-Aym.normalTitle" = "      显示测试数据";

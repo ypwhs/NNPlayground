@@ -490,7 +490,7 @@ double trainLoss = 0, testLoss = 0;
 
 - (void)updateLabel{
     [self ui:^{
-        [self->_outputLabel setText:[NSString stringWithFormat:@"训练误差\n%.3f\n测试误差\n%.3f\n训练次数\n%d", trainLoss, testLoss, epoch]];
+        [self->_outputLabel setText:[NSString stringWithFormat:NSLocalizedString(@"show_loss", nil), trainLoss, testLoss, epoch]];
         [self->_fpsLabel setText:[NSString stringWithFormat:@"fps:%d", speed]];
     }];
 }

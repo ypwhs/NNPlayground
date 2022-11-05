@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="landscape" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,25 +13,24 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="训练误差 0.123 测试误差 0.123 训练次数 1234" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYA-1I-afQ">
-                                <rect key="frame" x="487" y="234" width="60" height="141"/>
+                                <rect key="frame" x="556" y="234" width="52" height="206"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="oGP-1Q-fiQ"/>
+                                    <constraint firstAttribute="width" constant="52" id="oGP-1Q-fiQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zie-PW-5as" customClass="HeatMapView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="487" y="10" width="160" height="160"/>
+                                <rect key="frame" x="556" y="10" width="160" height="160"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fps:0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6l-2R-oE7">
-                                        <rect key="frame" x="82" y="0.0" width="70" height="21"/>
+                                        <rect key="frame" x="127.66666666666661" y="0.0" width="24.333333333333329" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="7g0-C8-Haq"/>
                                             <constraint firstAttribute="height" constant="21" id="EKt-QX-0SY"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
@@ -44,15 +43,16 @@
                                     <constraint firstAttribute="width" secondItem="zie-PW-5as" secondAttribute="height" multiplier="1:1" id="Dgb-gG-6Vq"/>
                                     <constraint firstAttribute="width" constant="160" id="Fvb-zI-m4a"/>
                                     <constraint firstItem="J6l-2R-oE7" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="top" id="NvW-v2-g5t"/>
+                                    <constraint firstItem="J6l-2R-oE7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zie-PW-5as" secondAttribute="leading" constant="20" symbolic="YES" id="PkU-Zp-ZoZ"/>
                                     <constraint firstAttribute="trailing" secondItem="J6l-2R-oE7" secondAttribute="trailing" constant="8" id="XqH-g0-f1w"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNS-Qj-hId" customClass="LossView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="547" y="234" width="100" height="141"/>
+                                <rect key="frame" x="616" y="234" width="100" height="196"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zL4-Pb-Aym" customClass="CheckButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="487" y="178" width="102" height="20"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zL4-Pb-Aym" customClass="CheckButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="556" y="178" width="160" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="b65-K7-qA5"/>
                                 </constraints>
@@ -64,10 +64,10 @@
                                     <action selector="showTestData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eoJ-fI-Qpz"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2o-KL-JYB" customClass="CheckButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="487" y="206" width="88" height="20"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2o-KL-JYB" customClass="CheckButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="556" y="206" width="160" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="0dN-f3-Iuz"/>
+                                    <constraint firstAttribute="height" constant="20" id="fV2-ZY-GuW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="      离散化输出">
@@ -77,8 +77,8 @@
                                     <action selector="changeDiscretize:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sJ9-br-jDV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7P-z9-49f" customClass="ConfigureButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="20" y="335" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7P-z9-49f" customClass="ConfigureButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="32" y="372" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="x7P-z9-49f" secondAttribute="height" multiplier="1:1" id="hLm-sG-XM7"/>
                                 </constraints>
@@ -86,8 +86,8 @@
                                     <action selector="createSpread:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cdW-di-qNw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jju-Ya-qaA" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="20" y="242.5" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jju-Ya-qaA" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="32" y="279.66666666666669" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jju-Ya-qaA" secondAttribute="height" multiplier="1:1" id="I06-J8-02M"/>
                                 </constraints>
@@ -98,8 +98,8 @@
                                     <action selector="oneStep:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cTh-rq-5Dc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIM-jn-lzj" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="20" y="172.5" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIM-jn-lzj" customClass="ResetButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="32" y="209.66666666666666" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vIM-jn-lzj" secondAttribute="height" multiplier="1:1" id="P53-2C-BoC"/>
                                 </constraints>
@@ -111,13 +111,13 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6G-jM-tKd">
-                                <rect key="frame" x="25.5" y="312.5" width="19" height="14.5"/>
+                                <rect key="frame" x="37.666666666666664" y="349.66666666666669" width="19" height="14.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.094117647058823528" green="0.23921568627450979" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnS-AF-TXQ" customClass="RunButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="20" y="207.5" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnS-AF-TXQ" customClass="RunButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="32" y="244.66666666666663" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="AnS-AF-TXQ" secondAttribute="height" multiplier="1:1" id="dpD-jW-PQy"/>
                                 </constraints>
@@ -128,8 +128,8 @@
                                     <action selector="runNN:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D5S-08-g2l"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iR-R1-8lA" customClass="AccelerateButton" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="20" y="282.5" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iR-R1-8lA" customClass="AccelerateButton" customModule="NNPlayground" customModuleProvider="target">
+                                <rect key="frame" x="32" y="319.66666666666669" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1iR-R1-8lA" secondAttribute="height" multiplier="1:1" id="6P0-VT-e5Z"/>
                                 </constraints>
@@ -138,36 +138,42 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="RJa-gk-usT"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="leading" secondItem="zie-PW-5as" secondAttribute="leading" id="1Nv-dX-FkY"/>
-                            <constraint firstItem="NNS-Qj-hId" firstAttribute="leading" secondItem="WYA-1I-afQ" secondAttribute="trailing" id="48E-6B-CGh"/>
+                            <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="RJa-gk-usT" secondAttribute="leading" constant="36" id="3Ii-VE-cpK"/>
+                            <constraint firstItem="NNS-Qj-hId" firstAttribute="leading" secondItem="WYA-1I-afQ" secondAttribute="trailing" constant="8" id="48E-6B-CGh"/>
                             <constraint firstItem="c6G-jM-tKd" firstAttribute="top" secondItem="1iR-R1-8lA" secondAttribute="bottom" id="5Tf-ic-vor"/>
                             <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="RJa-gk-usT" secondAttribute="top" constant="10" id="6Us-un-NHI"/>
-                            <constraint firstItem="s2o-KL-JYB" firstAttribute="leading" secondItem="zL4-Pb-Aym" secondAttribute="leading" id="9TJ-dO-MsB"/>
                             <constraint firstItem="NNS-Qj-hId" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="AJ8-rW-ZID"/>
-                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="NNS-Qj-hId" secondAttribute="bottom" constant="8" symbolic="YES" id="B8I-Zo-x04"/>
-                            <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="C32-dw-CtT"/>
+                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="NNS-Qj-hId" secondAttribute="bottom" constant="-16" id="B8I-Zo-x04"/>
+                            <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="42" id="C32-dw-CtT"/>
                             <constraint firstItem="x7P-z9-49f" firstAttribute="top" secondItem="c6G-jM-tKd" secondAttribute="bottom" constant="8" symbolic="YES" id="EZR-gl-3Hm"/>
-                            <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="s2o-KL-JYB" secondAttribute="bottom" constant="8" symbolic="YES" id="KlP-HL-mm2"/>
+                            <constraint firstItem="RJa-gk-usT" firstAttribute="trailing" secondItem="zL4-Pb-Aym" secondAttribute="trailing" constant="20" id="JSH-3Y-2YB"/>
                             <constraint firstItem="AnS-AF-TXQ" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="KvL-xx-xOY"/>
                             <constraint firstItem="c6G-jM-tKd" firstAttribute="centerX" secondItem="1iR-R1-8lA" secondAttribute="centerX" id="LJh-sQ-Hd7"/>
+                            <constraint firstItem="s2o-KL-JYB" firstAttribute="trailing" secondItem="zL4-Pb-Aym" secondAttribute="trailing" id="OFD-ZP-HXq"/>
                             <constraint firstItem="x7P-z9-49f" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="Quh-sr-r3P"/>
-                            <constraint firstItem="s2o-KL-JYB" firstAttribute="top" secondItem="zL4-Pb-Aym" secondAttribute="bottom" constant="8" id="Rh8-Ki-DoS"/>
-                            <constraint firstItem="NNS-Qj-hId" firstAttribute="top" secondItem="s2o-KL-JYB" secondAttribute="bottom" constant="8" id="SKg-GX-wFC"/>
+                            <constraint firstItem="WYA-1I-afQ" firstAttribute="top" secondItem="s2o-KL-JYB" secondAttribute="bottom" constant="8" symbolic="YES" id="SC3-Pa-X6a"/>
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="8" id="TV1-tc-vJC"/>
                             <constraint firstItem="WYA-1I-afQ" firstAttribute="leading" secondItem="zie-PW-5as" secondAttribute="leading" id="WXR-QA-Kjg"/>
                             <constraint firstItem="jju-Ya-qaA" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="WsR-mK-XsL"/>
+                            <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="RJa-gk-usT" secondAttribute="leading" constant="26" id="YB9-go-4Qx"/>
                             <constraint firstItem="1iR-R1-8lA" firstAttribute="top" secondItem="jju-Ya-qaA" secondAttribute="bottom" constant="10" id="Ycc-Tf-eGe"/>
                             <constraint firstItem="zie-PW-5as" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="ZjM-dZ-noL"/>
                             <constraint firstItem="1iR-R1-8lA" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="b1c-Gy-Lce"/>
+                            <constraint firstItem="s2o-KL-JYB" firstAttribute="leading" secondItem="zL4-Pb-Aym" secondAttribute="leading" id="dkW-wp-RGU"/>
                             <constraint firstItem="jju-Ya-qaA" firstAttribute="top" secondItem="AnS-AF-TXQ" secondAttribute="bottom" constant="5" id="dyn-EL-muX"/>
+                            <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="RJa-gk-usT" secondAttribute="leading" constant="22" id="eRV-jx-L53"/>
                             <constraint firstItem="c6G-jM-tKd" firstAttribute="centerX" secondItem="vIM-jn-lzj" secondAttribute="centerX" id="ejC-WE-xZT"/>
+                            <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="RJa-gk-usT" secondAttribute="leading" constant="32" id="gJt-s5-Bmm"/>
                             <constraint firstItem="AnS-AF-TXQ" firstAttribute="top" secondItem="vIM-jn-lzj" secondAttribute="bottom" constant="5" id="kz2-sx-J40"/>
-                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" symbolic="YES" id="y99-ek-GvO"/>
-                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="x7P-z9-49f" secondAttribute="bottom" constant="10" id="zBv-ee-ytf"/>
+                            <constraint firstItem="s2o-KL-JYB" firstAttribute="top" secondItem="zL4-Pb-Aym" secondAttribute="bottom" constant="8" symbolic="YES" id="mm8-SG-ro3"/>
+                            <constraint firstItem="NNS-Qj-hId" firstAttribute="top" secondItem="s2o-KL-JYB" secondAttribute="bottom" constant="8" symbolic="YES" id="xLB-Wt-bfs"/>
+                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="-26" id="y99-ek-GvO"/>
+                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="x7P-z9-49f" secondAttribute="bottom" constant="12" id="zBv-ee-ytf"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="RJa-gk-usT"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -183,7 +189,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="87.681159420289859" y="217.29910714285714"/>
+            <point key="canvasLocation" x="87.323943661971839" y="216.03053435114504"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="1iR-R1-8lA">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="AnS-AF-TXQ">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="jju-Ya-qaA">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="s2o-KL-JYB">
+            <size key="intrinsicContentSize" width="88" height="28"/>
+        </designable>
+        <designable name="vIM-jn-lzj">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="x7P-z9-49f">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="zL4-Pb-Aym">
+            <size key="intrinsicContentSize" width="102" height="28"/>
+        </designable>
+    </designables>
 </document>

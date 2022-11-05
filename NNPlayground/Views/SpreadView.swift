@@ -23,30 +23,21 @@ import UIKit
         
         //slider
         setRatioSlider.setValue(0.5, animated: true)
-        setRatioLabel.text = "训练数据百分比：50%"
-        setRatio?(4)
+        setRatioAction(setRatioSlider)
+        
         setNoiseSlider.setValue(0, animated: true)
-        setNoiseLabel.text = "噪声：0"
-        setNoise?(0)
+        setNoiseAction(setNoiseSlider)
+        
         setBatchSizeSlider.setValue(0.333333333, animated: true)
-        setBatchSizeLabel.text = "批量大小：10"
-        setBatchSize?(9)
+        setBatchSizeAction(setBatchSizeSlider)
         
         //addLayer
-        layers = 3
-        addNodeButton[0].isHidden = false
-        subNodeButton[0].isHidden = false
+        layers = 2
         for i in 1...5 {
             addNodeButton[i].isHidden = true
             subNodeButton[i].isHidden = true
         }
-        addLayerLabel.text = "隐藏层数：\(layers-2)"
-        addLayerButton.isEnabled = true
-        subLayerButton.isEnabled = true
-        
-        //addNode
-        addNodeButton[0].isEnabled = true
-        subNodeButton[0].isEnabled = true
+        addLayerAction(addLayerButton)
         
         //dropDown
         learningRateDropView.showSelectedLabel?("0.03", 5)
@@ -135,17 +126,17 @@ import UIKit
     @IBAction func setRatioAction(_ sender: EasySlider) {
         let num = setSpacing(sender, total: 8)
         setRatio?(num)
-        setRatioLabel.text = "训练数据百分比：\(num + 1)0%"
+        setRatioLabel.text = String(format: NSLocalizedString("set train data", comment: "训练数据百分比"), num + 1)
     }
     @IBAction func setNoiseAction(_ sender: EasySlider) {
         let num = setSpacing(sender, total: 10)
         setNoise?(num)
-        setNoiseLabel.text = "噪声：\(num*5)"
+        setNoiseLabel.text = String(format: NSLocalizedString("set noise", comment: "噪声"), num * 5)
     }
     @IBAction func setBatchSizeAction(_ sender: EasySlider) {
         let num = setSpacing(sender, total: 29)
         setBatchSize?(num)
-        setBatchSizeLabel.text = "批量大小：\(num + 1)"
+        setBatchSizeLabel.text = String(format: NSLocalizedString("set batch size", comment: "batch size"), num + 1)
     }
     
     // MARK: - AddLayer
@@ -232,7 +223,13 @@ import UIKit
         else {
             subLayerButton.isEnabled = true
         }
-        addLayerLabel.text = "隐藏层数：\(layers-2)"
+        
+        if layers == 3{
+            addLayerLabel.text = String(format: NSLocalizedString("set hidden layer", comment: "Hidden Layer"), layers - 2)
+        }
+        else {
+            addLayerLabel.text = String(format: NSLocalizedString("set hidden layers", comment: "Hidden Layer"), layers - 2)
+        }
     }
     
     @IBOutlet weak var addLayerButton: AddButton!
@@ -281,7 +278,7 @@ import UIKit
         
     }
     
-    var addNodeButton: [AddButton] = {
+    lazy var addNodeButton: [AddButton] = {
         let view = AddButton()
         view.frame = CGRect(x: 50, y: 100, width: 30, height: 30)
         view.addTarget(self, action: #selector(addNodeAction), for: .touchUpInside)
@@ -296,7 +293,7 @@ import UIKit
         return views
     }()
     
-    var subNodeButton: [AddButton] = {
+    lazy var subNodeButton: [AddButton] = {
         let view = AddButton()
         view.frame = CGRect(x: 50, y: 150, width: 30, height: 30)
         view.isAddButton = false
