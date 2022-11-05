@@ -39,8 +39,6 @@
 		AB6C37F61CDA4D15004AAAE9 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6C37F41CDA4D15004AAAE9 /* DropDownCell.xib */; };
 		AB6C37F91CDA4D20004AAAE9 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */; };
 		AB6C37FA1CDA4D20004AAAE9 /* SpreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */; };
-		ABAC9B0A1CEF433200B74734 /* DropWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B091CEF433200B74734 /* DropWebView.swift */; };
-		ABAC9B0C1CEF475800B74734 /* ShowWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B0B1CEF475800B74734 /* ShowWebView.swift */; };
 		ABAC9B0F1CEF55F900B74734 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B0E1CEF55F900B74734 /* Reachability.m */; };
 		ABAC9B121CF0AD6000B74734 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC9B111CF0AD6000B74734 /* ViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
@@ -116,8 +114,6 @@
 		AB6C37F41CDA4D15004AAAE9 /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DropDownCell.xib; path = Views/Cells/DropDownCell.xib; sourceTree = "<group>"; };
 		AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropDownView.swift; path = Views/DropDownView.swift; sourceTree = "<group>"; };
 		AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpreadView.swift; path = Views/SpreadView.swift; sourceTree = "<group>"; };
-		ABAC9B091CEF433200B74734 /* DropWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropWebView.swift; path = Views/DropWebView.swift; sourceTree = "<group>"; };
-		ABAC9B0B1CEF475800B74734 /* ShowWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowWebView.swift; path = Views/ShowWebView.swift; sourceTree = "<group>"; };
 		ABAC9B0D1CEF55F900B74734 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		ABAC9B0E1CEF55F900B74734 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		ABAC9B111CF0AD6000B74734 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -243,8 +239,6 @@
 				AB6C37E71CDA4CED004AAAE9 /* Cells */,
 				AB6C37E81CDA4CF5004AAAE9 /* Buttons */,
 				AB6C37F71CDA4D20004AAAE9 /* DropDownView.swift */,
-				ABAC9B091CEF433200B74734 /* DropWebView.swift */,
-				ABAC9B0B1CEF475800B74734 /* ShowWebView.swift */,
 				AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */,
 				A1FC7063291679F300EA3EE7 /* SpreadView.xib */,
 				A14F78961CE4C6620056FF51 /* LossView.swift */,
@@ -415,7 +409,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABAC9B121CF0AD6000B74734 /* ViewControllerExtension.swift in Sources */,
-				ABAC9B0A1CEF433200B74734 /* DropWebView.swift in Sources */,
 				AB6C37EF1CDA4D05004AAAE9 /* ConfigureButton.swift in Sources */,
 				A14F78971CE4C6620056FF51 /* LossView.swift in Sources */,
 				A19CD7481CC89D5300E8CDF9 /* ViewController.mm in Sources */,
@@ -439,7 +432,6 @@
 				A19CD77A1CC89DE700E8CDF9 /* Network.mm in Sources */,
 				A19CD7791CC89DE700E8CDF9 /* Node.mm in Sources */,
 				A1667C131CEB6663002372D4 /* CheckButton.swift in Sources */,
-				ABAC9B0C1CEF475800B74734 /* ShowWebView.swift in Sources */,
 				A12F039E1CD49BA100CA4890 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
