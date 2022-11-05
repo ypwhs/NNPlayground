@@ -5,4 +5,10 @@
   Created by 杨培文 on 2022/11/5.
   Copyright © 2022 杨培文. All rights reserved.
 */
+"CFBundleDisplayName" = "NeuralNetworks";
 "show_loss" = "Train Loss:\n%.3f\n\nTest Loss:\n%.3f\n\nIter:\n%d";
+"set train data" = "Training data percentage: %d0%%";
+"set noise" = "Noise: %d";
+"set batch size" = "Batch size: %d";
+"set hidden layer" = "Hidden layer: %d";
+"set hidden layers" = "Hidden layers: %d";

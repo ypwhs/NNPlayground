@@ -239,7 +239,6 @@
 		AB6C37E61CDA4CE4004AAAE9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A1FC7063291679F300EA3EE7 /* SpreadView.xib */,
 				AB52CDDF1CE0A36D008EC13C /* Sliders */,
 				AB6C37E71CDA4CED004AAAE9 /* Cells */,
 				AB6C37E81CDA4CF5004AAAE9 /* Buttons */,
@@ -247,6 +246,7 @@
 				ABAC9B091CEF433200B74734 /* DropWebView.swift */,
 				ABAC9B0B1CEF475800B74734 /* ShowWebView.swift */,
 				AB6C37F81CDA4D20004AAAE9 /* SpreadView.swift */,
+				A1FC7063291679F300EA3EE7 /* SpreadView.xib */,
 				A14F78961CE4C6620056FF51 /* LossView.swift */,
 			);
 			name = Views;
