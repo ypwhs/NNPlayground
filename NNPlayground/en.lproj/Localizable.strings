@@ -6,7 +6,7 @@
   Copyright © 2022 杨培文. All rights reserved.
 */
 "CFBundleDisplayName" = "NeuralNetworks";
-"show_loss" = "Train Loss:\n%.3f\n\nTest Loss:\n%.3f\n\nIter:\n%d";
+"show_loss" = "Train Loss:\n%.3f\nTest Loss:\n%.3f\nIter:\n%d";
 "set train data" = "Training data percentage: %d0%%";
 "set noise" = "Noise: %d";
 "set batch size" = "Batch size: %d";
