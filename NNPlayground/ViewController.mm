@@ -820,6 +820,12 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
             constraint.constant = x;
         }
     }
+    CGSize size = self.view.bounds.size;
+    BOOL foldedOuter = (size.width > 660 && size.width < 700 && size.height > 450 && size.height < 480);
+    CGFloat topGap = foldedOuter ? 24 : 0;
+    for (UIButton *button in buttons) {
+        button.transform = CGAffineTransformMakeTranslation(0, topGap);
+    }
 }
 
 - (void)viewDidLayoutSubviews {
