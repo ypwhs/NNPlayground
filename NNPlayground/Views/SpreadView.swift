@@ -16,6 +16,7 @@ import UIKit
     let maxNodes = 8
     var buttonWidth:CGFloat = 30
     var subNodeButtonY:CGFloat = 114
+    private var dimView: UIView?
     
     var regenerate: (() -> Void)?
     @IBAction func Regenerate(_ sender: UIButton) {
@@ -397,24 +398,35 @@ import UIKit
     //MARK: - View
     func showInView(_ view:UIView) {
         frame = view.bounds
+        backgroundColor = UIColor.clear
+        transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        
+        let dim = UIView(frame: view.bounds)
+        dim.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        dim.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        dim.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SpreadView.hide)))
+        view.addSubview(dim)
+        dimView = dim
+        
         view.addSubview(self)
-        
         layoutIfNeeded()
-        
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: { 
-            self.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        alpha = 0
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
+            self.alpha = 1
         }, completion: { _ in
         })
-        
     }
     
     @objc func hide() {
-        UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseOut, animations: { 
-            self.backgroundColor = UIColor.clear
-            }, completion: {[weak self]  _ in
-                self?.removeFromSuperview()
-                self?.didHide?()
-            })
+        UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseOut, animations: {
+            self.alpha = 0
+            self.dimView?.alpha = 0
+        }, completion: {[weak self]  _ in
+            self?.removeFromSuperview()
+            self?.dimView?.removeFromSuperview()
+            self?.dimView = nil
+            self?.didHide?()
+        })
     }
     
     var isFirstTimeBeenAddAsSubview = true

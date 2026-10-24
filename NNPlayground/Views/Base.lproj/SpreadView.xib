@@ -307,7 +307,7 @@
             <viewLayoutGuide key="safeArea" id="yVo-hg-9Eb"/>
             <constraints>
                 <constraint firstItem="emv-GE-s8z" firstAttribute="width" secondItem="1s7-Nq-d30" secondAttribute="width" multiplier="0.15" constant="169.34999999999999" id="0U7-pN-l8G"/>
-                <constraint firstItem="GVu-ra-2q8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="90" id="0Ul-T2-8Y4"/>
+                <constraint firstItem="GVu-ra-2q8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="44" id="0Ul-T2-8Y4"/>
                 <constraint firstItem="9ut-zU-vXX" firstAttribute="top" secondItem="1s7-Nq-d30" secondAttribute="top" id="0wK-ja-bCL"/>
                 <constraint firstItem="x0o-NZ-BgK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" constant="44" id="1BB-kG-ZNS"/>
                 <constraint firstItem="V7U-wg-OaH" firstAttribute="trailing" secondItem="18p-Rh-BWZ" secondAttribute="trailing" id="20z-77-l3j"/>
