@@ -757,10 +757,6 @@ bool isShowTestData = false;
     [self reset];
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
-}
-
 NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
 
 - (void)hideMainUIForSpread {
