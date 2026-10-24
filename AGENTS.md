@@ -17,6 +17,7 @@ TensorFlow Playground 的 iOS 移植。Swift 5 做 UI，Objective-C++/C++ 做模
 4. UI 开发或逻辑修改必须在 PR 中提供 `master` 与当前 PR 分支的同条件截图对比：同一设备、同一方向、同一操作路径；PR 正文用表格并排展示 `master` 和 `PR`。
 5. 截图必须上传为 GitHub PR 附件，正文引用返回的 `https://github.com/user-attachments/assets/...` URL；截图不提交进仓库，不写本地路径，不引用 `raw.githubusercontent.com`。
    上传使用 `gh` 2.99.0+ 的 `gh pr create --attach` 或 `gh pr edit <number> --body-file <file> --attach <image>`；正文里的本地图片路径会被替换为附件 URL。
+   当前 `gh` 不支持 `--attach` 时，用 `POST https://uploads.github.com/user-attachments/assets?name=<文件名>&content_type=image/png&repository_id=<仓库ID>` 上传，`Authorization: Bearer <token>`，把返回的 `url` 写入正文。
 6. 合并前确认构建、运行、截图对比完成且 PR 为 `mergeable`；合并还必须满足「合并授权」，命令为 `gh pr merge <number> --merge`。合并后报告结果和 PR 链接。
 
 ## 合并授权
