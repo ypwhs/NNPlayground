@@ -357,12 +357,15 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     //计算各个坐标
     CGFloat margin = 24;
     CGFloat x = [self nodeStartX];
-    CGFloat y = margin;
+    // Duo 内屏的右上角有状态栏/灵动岛/通知区域，safeAreaInsets 为 0，
+    // 需要额外给顶部预留 80pt，避免热力图和节点被系统 UI 盖住。
+    CGFloat topInset = [self duoTopInset];
+    CGFloat y = margin + topInset;
     
     CGFloat width = frame.origin.x - x;
     width /= layers - 1;    //两个结点的x坐标差
     
-    CGFloat height = self.view.bounds.size.height - 2 * margin;
+    CGFloat height = self.view.bounds.size.height - y - margin;
     height /= 8;   // 固定 8 个槽位，节点数变化不改变布局
     
     CGFloat ndoeWidth = height - 5*screenScale;
@@ -856,8 +859,49 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
     }
 }
 
+// Duo 内屏横屏时 self.view.bounds 约 951×669，safeAreaInsets 仍为 0，
+// 右上角的状态栏、灵动岛、通知横幅、定位/录制指示都不在安全区内。
+// 这里为手机大屏（内屏）预留 80pt 顶部空间，普通 iPhone 保持 0。
+- (CGFloat)duoTopInset {
+    if ([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPhone) {
+        return 0;
+    }
+    if (self.view.bounds.size.height <= 600) {
+        return 0;
+    }
+    return 80;
+}
+
+- (NSLayoutConstraint *)heatMapTopConstraint {
+    for (NSLayoutConstraint *constraint in self.view.constraints) {
+        if (constraint.firstItem == self.heatMap &&
+            constraint.firstAttribute == NSLayoutAttributeTop) {
+            return constraint;
+        }
+    }
+    return nil;
+}
+
+- (BOOL)applyDuoTopInsetIfNeeded {
+    NSLayoutConstraint *topConstraint = [self heatMapTopConstraint];
+    if (topConstraint == nil) {
+        return NO;
+    }
+    CGFloat target = 108 + [self duoTopInset];
+    if (fabs(topConstraint.constant - target) < 0.5) {
+        return NO;
+    }
+    topConstraint.constant = target;
+    return YES;
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    if ([self applyDuoTopInsetIfNeeded]) {
+        self.lastNodeLayoutSize = CGSizeZero;
+        [self.view setNeedsLayout];
+        return;
+    }
     if (!self.didFinishInitialLayout) return;
     CGSize size = self.view.bounds.size;
     if (!CGSizeEqualToSize(size, self.lastNodeLayoutSize)) {
