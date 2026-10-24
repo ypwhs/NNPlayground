@@ -847,6 +847,7 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
             CGFloat offset = extraOffsets[index].doubleValue;
             button.transform = CGAffineTransformMakeTranslation(0, delta + offset);
         }
+        self.speedUpLabel.transform = self.accelerateButton.transform;
     }
 }
 
