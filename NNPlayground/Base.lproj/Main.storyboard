@@ -183,6 +183,7 @@
                         <outlet property="lossView" destination="NNS-Qj-hId" id="6t2-hD-ySm"/>
                         <outlet property="outputLabel" destination="WYA-1I-afQ" id="YF7-wc-tbU"/>
                         <outlet property="accelerateButton" destination="1iR-R1-8lA" id="acc-01-001"/>
+                        <outlet property="configureButton" destination="x7P-z9-49f" id="cfg-01-001"/>
                         <outlet property="oneStepButton" destination="jju-Ya-qaA" id="one-01-001"/>
                         <outlet property="resetButton" destination="vIM-jn-lzj" id="rst-01-001"/>
                         <outlet property="runButton" destination="AnS-AF-TXQ" id="ES8-pw-8OP"/>

@@ -795,7 +795,7 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
 
 - (void)alignControlButtons {
     CGFloat x = [self nodeStartX];
-    NSArray<UIButton *> *buttons = @[self.resetButton, self.runButton, self.oneStepButton, self.accelerateButton];
+    NSArray<UIButton *> *buttons = @[self.resetButton, self.runButton, self.oneStepButton, self.accelerateButton, self.configureButton];
     if (self.controlButtonLeadingConstraints.count == 0) {
         NSMutableArray<NSLayoutConstraint *> *newConstraints = [NSMutableArray array];
         for (UIButton *button in buttons) {
@@ -820,22 +820,37 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
             constraint.constant = x;
         }
     }
+    for (UIButton *button in buttons) {
+        button.transform = CGAffineTransformIdentity;
+    }
     CGSize size = self.view.bounds.size;
     BOOL foldedOuter = (size.width > 660 && size.width < 700 && size.height > 450 && size.height < 480);
-    CGFloat topGap = foldedOuter ? 24 : 0;
+    if (!foldedOuter) return;
+
+    CGFloat groupBottom = 0;
     for (UIButton *button in buttons) {
-        button.transform = CGAffineTransformMakeTranslation(0, topGap);
+        if (!button) continue;
+        groupBottom = MAX(groupBottom, CGRectGetMaxY(button.frame));
+    }
+    if (groupBottom > 0) {
+        CGFloat bottomInset = MAX(24, self.view.safeAreaInsets.bottom + 8);
+        CGFloat targetBottom = size.height - bottomInset;
+        CGFloat delta = targetBottom - groupBottom;
+        for (UIButton *button in buttons) {
+            button.transform = CGAffineTransformMakeTranslation(0, delta);
+        }
     }
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     if (!self.didFinishInitialLayout) return;
-    [self alignControlButtons];
     CGSize size = self.view.bounds.size;
-    if (CGSizeEqualToSize(size, self.lastNodeLayoutSize)) return;
-    self.lastNodeLayoutSize = size;
-    [self initNodeLayer];
+    if (!CGSizeEqualToSize(size, self.lastNodeLayoutSize)) {
+        self.lastNodeLayoutSize = size;
+        [self initNodeLayer];
+    }
+    [self alignControlButtons];
 }
 
 - (IBAction)createSpread:(ConfigureButton *)sender {

@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *resetButton;
 @property (weak, nonatomic) IBOutlet UIButton *oneStepButton;
 @property (weak, nonatomic) IBOutlet UIButton *accelerateButton;
+@property (weak, nonatomic) IBOutlet UIButton *configureButton;
 @property (weak, nonatomic) IBOutlet UILabel *speedUpLabel;
 
 @end
