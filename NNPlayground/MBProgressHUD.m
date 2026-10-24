@@ -382,7 +382,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
         if (!isActivityIndicator) {
             // Update to indeterminate indicator
             [indicator removeFromSuperview];
-            indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
             [(UIActivityIndicatorView *)indicator startAnimating];
             [self.bezelView addSubview:indicator];
         }
@@ -679,19 +679,9 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
 #pragma mark - Notifications
 
 - (void)registerForNotifications {
-#if !TARGET_OS_TV
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-
-    [nc addObserver:self selector:@selector(statusBarOrientationDidChange:)
-               name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-#endif
 }
 
 - (void)unregisterFromNotifications {
-#if !TARGET_OS_TV
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-#endif
 }
 
 #if !TARGET_OS_TV

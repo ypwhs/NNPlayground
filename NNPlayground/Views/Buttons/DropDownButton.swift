@@ -17,7 +17,6 @@ class DropDownButton: UIButton {
     override func draw(_ rect: CGRect) {
         //title左对齐
         self.contentHorizontalAlignment = .left
-        self.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         
         let path = UIBezierPath(rect: rect)
         fillColor.setFill()
@@ -55,5 +54,12 @@ class DropDownButton: UIButton {
         strokeColor.setFill()
         trianglePath.fill()
 
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let label = titleLabel {
+            label.frame.origin.x = 10
+        }
     }
 }

@@ -399,7 +399,6 @@ import UIKit
     func showInView(_ view:UIView) {
         frame = view.bounds
         backgroundColor = UIColor.clear
-        transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
         
         let dim = UIView(frame: view.bounds)
         dim.autoresizingMask = [.flexibleWidth, .flexibleHeight]

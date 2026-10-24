@@ -353,9 +353,9 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     (*network->network[layers - 1])[0]->initNodeLayer(frame);   //将heatmap的frame设置到网络的输出结点
     
     //计算各个坐标
-    CGFloat margin = _heatMap.frame.origin.y;   //将heatmap的y坐标用于第一个结点的x,y坐标
+    CGFloat margin = 24;   //神经元保持原顶部位置，不跟随热力图下移
     CGFloat x = 25;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         // 获取屏幕的宽度和高度，取较大一方判断是否为 812.0 或 896.0
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
         CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
