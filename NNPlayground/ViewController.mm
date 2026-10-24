@@ -839,6 +839,14 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
         for (UIButton *button in buttons) {
             button.transform = CGAffineTransformMakeTranslation(0, delta);
         }
+        // 底部固定，整体压缩按钮间距，加大顶部间距
+        NSArray<NSNumber *> *extraOffsets = @[@24, @18, @12, @6, @0];
+        for (NSUInteger index = 0; index < buttons.count; index++) {
+            UIButton *button = buttons[index];
+            if (!button) continue;
+            CGFloat offset = extraOffsets[index].doubleValue;
+            button.transform = CGAffineTransformMakeTranslation(0, delta + offset);
+        }
     }
 }
 
