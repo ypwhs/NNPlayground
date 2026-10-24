@@ -59,7 +59,7 @@ TensorFlow Playground 的 iOS 移植。Swift 5 做 UI，Objective-C++/C++ 做模
 2. 新源文件、资源、本地化文件必须加入 `NNPlayground.xcodeproj`（显式 file reference，无 folder sync）。
 3. Base storyboard/xib 为中文；运行时文案走 `Localizable.strings`（en/zh），storyboard/xib 文案走 `Main.strings`/`SpreadView.strings`（en/zh）。`ViewController.mm` 的存图/相册提示是硬编码中文。
 4. 新增第三方依赖需要同时改 pbxproj；当前只有源码内置的 MBProgressHUD、Reachability。
-5. `Info.plist` 只声明横屏，`CFBundleName=神经网络`；保存相册调用 `UIImageWriteToSavedPhotosAlbum`，Info.plist 没有相册权限键。
+5. `Info.plist` 声明横屏、`CFBundleName=神经网络`、`ITSAppUsesNonExemptEncryption=false`；保存相册调用 `UIImageWriteToSavedPhotosAlbum`，使用 `NSPhotoLibraryAddUsageDescription`（只申请写入权限）。
 
 ## 验证
 

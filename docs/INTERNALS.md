@@ -529,13 +529,13 @@ delete[] oldShape
 - `getHeatData`：UI block 在 `unlock` 后执行；block 读取全局 `network`/位图；后台下一帧 `getHeatData` 写同一 `outputBitmap`。
 - `generateBigOutputImage`：在 utility 队列读 `network`/`inputs`，不持 `networkLock`；`resetNetwork` 在主线程 `delete oldNetwork`。
 - `longpressAction`：`UIAlertControllerStyleActionSheet`，未设置 `popoverPresentationController.sourceView`/`sourceRect`。
-- Photo：`longpressAction` 中 action sheet 的 `ok` handler 调用 `UIImageWriteToSavedPhotosAlbum`；Info.plist 没有 `NSPhotoLibraryAddUsageDescription`/`NSPhotoLibraryUsageDescription`。
+- Photo：`longpressAction` 中 action sheet 的 `ok` handler 调用 `UIImageWriteToSavedPhotosAlbum`；Info.plist 声明 `NSPhotoLibraryAddUsageDescription`，未声明 `NSPhotoLibraryUsageDescription`（只写不读）。
 - `rNone` 返回 `w`；`updateWeights` 对每条边计算 `λ*reg'(w)/N`。
 - `always` 无 atomics；训练线程在 `always=false` 后于下一轮 while 退出。
 - `resetNetworkShape`/`addLayer`：`always=false` + `sleep(0.008)` + `lock/unlock`；无线程 join。
 - `LossView.draw`：元素数 1 时按 `(n-1)` 计算 x；`clearData` 只清数组。
 - 长按：`HeatMapView.initLayer` 添加 1s recognizer（空实现）；`ViewController` 对同一 heatMap 添加 0.5s recognizer（存图）。
-- `Info.plist`：`UIApplicationSceneManifest` 指向 `SceneDelegate`；`UIMainStoryboardFile` 已移除；`UIRequiredDeviceCapabilities=[armv7]`，`CFBundleName=神经网络`，横屏 orientations，`UIRequiresFullScreen=true`。
+- `Info.plist`：`UIApplicationSceneManifest` 指向 `SceneDelegate`；`UIMainStoryboardFile` 已移除；无 `UIRequiredDeviceCapabilities`；`CFBundleName=神经网络`；横屏 orientations（iPhone/iPad 各 2 项）；`UIRequiresFullScreen=true`；`ITSAppUsesNonExemptEncryption=false`；`NSPhotoLibraryAddUsageDescription`。
 - `NNPlayground.entitlements`：`com.apple.security.app-sandbox`、`com.apple.security.network.client`；`NNPlayground 2.entitlements` 未在 pbxproj 中引用。
 - `Reachability`：仅 `NNPlayground-Bridging-Header.h` 引入；无 Swift/ObjC 调用点。
 - `Network::forEachNode`、`Network::getOutputNode`、`HeatMapView.setBackground`：无调用点。
@@ -575,6 +575,19 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground -configuration D
 
 - `xcodebuild -list`：targets `NNPlayground`、`NNPlaygroundTests`、`NNPlaygroundUITests`；configurations Debug/Release；scheme `NNPlayground`。
 - `xcodebuild -showBuildSettings`：`IPHONEOS_DEPLOYMENT_TARGET = 17.0`、`PRODUCT_BUNDLE_IDENTIFIER = com.yangpeiwen.NNPlayground2`、`SWIFT_VERSION = 5.0`、`TARGETED_DEVICE_FAMILY = 1,2,6`、`SUPPORTED_PLATFORMS = iphoneos iphonesimulator`。
-- 构建产物 Info.plist：`MinimumOSVersion=17.0`、`UIDeviceFamily=[1,2]`、`UIApplicationSceneManifest`、`UIRequiredDeviceCapabilities=[armv7]`、横屏 orientations、`UIRequiresFullScreen=true`、`CFBundleName=神经网络`。
+- 构建产物 Info.plist：`MinimumOSVersion=17.0`、`UIDeviceFamily=[1,2]`、`UIApplicationSceneManifest`、无 `UIRequiredDeviceCapabilities`、横屏 orientations、`UIRequiresFullScreen=true`、`CFBundleName=神经网络`、`ITSAppUsesNonExemptEncryption=false`、`NSPhotoLibraryAddUsageDescription`。
 - 2026-10-24 09:37 在 iPhone 15 / iOS 17.2 安装启动成功（pid 51391），截图路径 `/tmp/nnp-initial.png`；画面为 2 输入、4 隐藏、1 输出热力图，右侧 loss 文本 0.530/0.574/0。
 - 2026-10-24 09:40 后 `simctl list runtimes` 输出为空；`simctl list devices available` 无可用设备；`/Applications/Xcode.app` 下无 `Simulator.app`。
+- 2026-10-24 14:00 后 Xcode 27.1 的 iOS 27.0/27.1 runtime 可用；`simctl` 可无 GUI 启动设备。iPhone 18 Pro Max（2868×1320）、iPhone 17e、iPhone SE 3、iPhone Duo、iPad Air 13-inch (M4)（2048×2732）、iPad Pro 13-inch (M5)（2064×2752）均可安装运行。
+- 2026-10-24 14:50 起用临时 XCUITest 驱动真实 UI：`XCUIDevice.orientation = landscapeLeft` 解决 iPad 竖屏启动时布局按 1024×1366 计算的问题；`XCUIScreen.mainScreen.screenshot` 附件为 1320×2868/2064×2752，带 EXIF orientation 8，需 `ImageOps.exif_transpose` 后才是横屏尺寸。
+- 2026-10-24 15:00 版本号更新为 `2026.10.24`（build `2026102401`）；Debug/Release 构建通过；Release 签名证书仍只有 Apple Development，App Store 分发需补 Distribution 证书或在 Xcode Cloud 归档。
+
+## 11. 发布准备记录（2026-10-24）
+
+- 发布目标：iPhone 版 `神经网络`（App Store id `1116487840`，bundle `com.yangpeiwen.NNPlayground2`）的通用更新；该更新首次把 iPhone 应用扩展到 iPad。iPad 独立应用 id `1115132797` 不受影响。
+- 版本：`MARKETING_VERSION = 2026.10.24`，`CURRENT_PROJECT_VERSION = 2026102401`。采用日期式版本，构建号 = 日期 + 两位序号。
+- 素材：iPhone 6.9"（2868×1320）与 iPad 13"（2752×2064）横屏截图，中文/英文各 4 张；中文 App Preview 26.5 秒、1920×886、H.264。
+- App Store 文案、隐私政策、审核备注、截图顺序和提交清单见桌面 `2026-10-24/` 目录（不提交进仓库）。
+- 已知限制：iPhone 17 / 18 系列横屏 440pt 高度下，右侧 loss 数字标签被 Auto Layout 压缩为 0 高度，只显示 loss 曲线；iPad 正常。该问题不影响构建与提交，若本次要修，需单独改布局并重新截取对比图。
+- 签名：`security find-identity` 只有 `Apple Development: Peiwen Yang (8H535XCXVJ)`；无 Distribution 证书，无法本机导出 App Store 签名包。Xcode Cloud manifest 已存在，推荐走 Xcode Cloud 归档或补证书。
+
