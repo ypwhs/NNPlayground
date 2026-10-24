@@ -119,7 +119,7 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground \
 ## 7. 2026-10-24 发布记录
 
 - 版本：`2026.10.24`，build `2026.10.24`（version 与 build 相同，沿用旧工程写法）。
-- 变更：iPhone/iPad 通用支持、iPhone Duo 横屏适配、Duo 内屏右上角为状态栏/灵动岛/通知/定位指示预留 80pt、UIScene 生命周期、安全区布局、英文文案优化、相册写入权限、出口合规声明。
+- 变更：iPhone/iPad 通用支持、iPhone Duo 横屏适配、Duo 内屏右上角为状态栏/灵动岛/通知/定位指示预留 80pt（按 size class 区分内屏与折叠外屏）、UIScene 生命周期、安全区布局、英文文案优化、相册写入权限、出口合规声明。
 - 已验证：Debug/Release 构建通过；iPhone 18 Pro Max、iPhone 17e、iPhone SE 3、iPhone Duo、iPad Air 13-inch (M4)、iPad Pro 13-inch (M5) 安装启动；中英文截图与中文 App Preview 已生成。
 - 未完成：本机无 Distribution 证书，尚未归档上传；iPad 端参数面板为拉伸布局；iPhone 6.9" 横屏下右侧 loss 数字标签被压缩，只显示 loss 曲线（不影响提交）。
 - 素材目录：桌面 `2026-10-24/`，包含截图、视频、元数据、隐私政策、审核备注、构建说明和校验清单。

@@ -859,17 +859,21 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
     }
 }
 
-// Duo 内屏横屏时 self.view.bounds 约 951×669，safeAreaInsets 仍为 0，
-// 右上角的状态栏、灵动岛、通知横幅、定位/录制指示都不在安全区内。
-// 这里为手机大屏（内屏）预留 80pt 顶部空间，普通 iPhone 保持 0。
-- (CGFloat)duoTopInset {
+// Duo 内屏横屏时窗口约 951×669，safeAreaInsets 仍为 0；折叠外屏约 678×466。
+// 折叠时 view.bounds 可能仍是内屏尺寸，所以不能用 view 高度判断。
+// 用 size class 区分：内屏 regular/regular，折叠外屏 compact/compact。
+// 内屏右上角的状态栏、灵动岛、通知横幅、定位/录制指示不在安全区内，
+// 预留 80pt 作为系统浮层高度；折叠外屏继续只用 safeAreaInsets（左 84 / 下 34）。
+- (BOOL)isDuoInnerScreen {
     if ([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPhone) {
-        return 0;
+        return NO;
     }
-    if (self.view.bounds.size.height <= 600) {
-        return 0;
-    }
-    return 80;
+    return self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
+           self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular;
+}
+
+- (CGFloat)duoTopInset {
+    return [self isDuoInnerScreen] ? 80 : 0;
 }
 
 - (NSLayoutConstraint *)heatMapTopConstraint {
@@ -893,6 +897,14 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
     }
     topConstraint.constant = target;
     return YES;
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if ([self applyDuoTopInsetIfNeeded]) {
+        self.lastNodeLayoutSize = CGSizeZero;
+        [self.view setNeedsLayout];
+    }
 }
 
 - (void)viewDidLayoutSubviews {

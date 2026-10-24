@@ -543,7 +543,7 @@ delete[] oldShape
 - `SpreadView.xib`：root 852×393；部分数据集按钮 frame y 到 748；安装的约束中四个数据按钮纵向排列（`top = 上一个 bottom + 10`）。
 - `SelectButton.didMoveToSuperview`：`layer.backgroundColor` 与 `titleLabel?.textColor` 都设为 `fillColor`；`fillColor` 默认白色。
 - `initNodeLayer`：先用 `_spreadView.buttonWidth` 布置 add/sub 按钮，后按屏高赋值为 29/36。
-- Duo 内屏横屏 `self.view.bounds` 约 951×669，`safeAreaInsets` 仍为 0；`duoTopInset` 对 phone 且高度 >600 返回 80，热力图 top 约束从 108 调到 188，节点 y 从 24 移到 104，8 槽位高度按剩余空间重算；普通 iPhone/iPad 返回 0。用于避开右上角状态栏、灵动岛、通知横幅、定位/录制指示。
+- Duo 内屏横屏 `self.view.bounds` 约 951×669，`safeAreaInsets` 仍为 0；`duoTopInset` 只对 phone 且 `traitCollection` 为 regular/regular 的内屏返回 80，折叠外屏 compact/compact 返回 0（折叠时 `view.bounds` 可能仍是内屏尺寸，不能按高度判断）。内屏热力图 top 约束从 108 调到 188，节点 y 从 24 移到 104，8 槽位高度按剩余空间重算；折叠外屏继续使用 `safeAreaInsets`（实测左 84 / 下 34）。用于避开内屏右上角状态栏、灵动岛、通知横幅、定位/录制指示。
 - `SelectDataButton`：选中 alpha 1，未选 0.4。
 - `DropDownView`：行高取按钮高度；总高超过窗口底部时截断并允许滚动。
 - 启动截图（2026-10-24）：`fps:0`，训练/测试误差 0.530/0.574，训练次数 0。
@@ -583,6 +583,7 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground -configuration D
 - 2026-10-24 14:50 起用临时 XCUITest 驱动真实 UI：`XCUIDevice.orientation = landscapeLeft` 解决 iPad 竖屏启动时布局按 1024×1366 计算的问题；`XCUIScreen.mainScreen.screenshot` 附件为 1320×2868/2064×2752，带 EXIF orientation 8，需 `ImageOps.exif_transpose` 后才是横屏尺寸。
 - 2026-10-24 15:00 版本号更新为 `2026.10.24`（build `2026.10.24`）；Debug/Release 构建通过；Release 签名证书仍只有 Apple Development，App Store 分发需补 Distribution 证书或在 Xcode Cloud 归档。
 - 2026-10-25 01:20 修复 Duo 内屏右上角系统区域：`duoTopInset` 预留 80pt，热力图/节点下移；用 Clock 系统通知横幅在 Duo 上验证，热力图、loss 和训练按钮不再被通知遮挡；普通 iPhone 18 Pro Max 回归布局不变。
+- 2026-10-25 01:35 修正 Duo 内屏/折叠外屏判断：不再用 `view.bounds.height > 600`，改为 `traitCollection` regular/regular；折叠外屏 compact/compact 返回 0，使用 safeAreaInsets（左 84 / 下 34）。实测折叠外屏 678×466，避免折叠后被误加 80pt。
 
 ## 11. 发布准备记录（2026-10-24）
 
