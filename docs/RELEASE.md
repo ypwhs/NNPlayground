@@ -19,9 +19,10 @@ iPad 独立应用 `神经网络`（id 1115132797，bundle `com.yangpeiwen.NNPlay
 ## 2. 版本规则
 
 - `MARKETING_VERSION` 用日期式 `YYYY.MM.DD`，例如 `2026.10.24`。
-- `CURRENT_PROJECT_VERSION` 用 `YYYYMMDD` + 两位序号，例如 `2026102401`；同一天第二次上传改 `2026102402`。
+- `CURRENT_PROJECT_VERSION` 目前与 `MARKETING_VERSION` 相同，都用 `YYYY.MM.DD`，例如 `2026.10.24`；App Store 允许 version 与 build 相同。
+- 同一天需要第二次上传时，不能加第四段（`2026.10.24.1` 非法）；改用更大的三段 build，例如 `2026.10.2401`，或次日日期 `2026.10.25`。首次上传前确认好后续策略。
 - 两个值都在 `NNPlayground.xcodeproj/project.pbxproj` 的 Debug/Release 两处同步修改。
-- App Store Connect 的版本号必须大于线上已批准版本（线上是 `1.2`），构建号必须唯一且递增。
+- App Store Connect 的版本号必须大于线上已批准版本（线上是 `1.2`），构建号必须唯一且递增；`2026.10.24` 大于旧 build `2022.11.5`。
 
 ## 3. 发布前检查
 
@@ -117,7 +118,7 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground \
 
 ## 7. 2026-10-24 发布记录
 
-- 版本：`2026.10.24`，build `2026102401`。
+- 版本：`2026.10.24`，build `2026.10.24`（version 与 build 相同，沿用旧工程写法）。
 - 变更：iPhone/iPad 通用支持、iPhone Duo 横屏适配、UIScene 生命周期、安全区布局、英文文案优化、相册写入权限、出口合规声明。
 - 已验证：Debug/Release 构建通过；iPhone 18 Pro Max、iPhone 17e、iPhone SE 3、iPhone Duo、iPad Air 13-inch (M4)、iPad Pro 13-inch (M5) 安装启动；中英文截图与中文 App Preview 已生成。
 - 未完成：本机无 Distribution 证书，尚未归档上传；iPad 端参数面板为拉伸布局；iPhone 6.9" 横屏下右侧 loss 数字标签被压缩，只显示 loss 曲线（不影响提交）。

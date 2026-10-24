@@ -580,12 +580,12 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground -configuration D
 - 2026-10-24 09:40 后 `simctl list runtimes` 输出为空；`simctl list devices available` 无可用设备；`/Applications/Xcode.app` 下无 `Simulator.app`。
 - 2026-10-24 14:00 后 Xcode 27.1 的 iOS 27.0/27.1 runtime 可用；`simctl` 可无 GUI 启动设备。iPhone 18 Pro Max（2868×1320）、iPhone 17e、iPhone SE 3、iPhone Duo、iPad Air 13-inch (M4)（2048×2732）、iPad Pro 13-inch (M5)（2064×2752）均可安装运行。
 - 2026-10-24 14:50 起用临时 XCUITest 驱动真实 UI：`XCUIDevice.orientation = landscapeLeft` 解决 iPad 竖屏启动时布局按 1024×1366 计算的问题；`XCUIScreen.mainScreen.screenshot` 附件为 1320×2868/2064×2752，带 EXIF orientation 8，需 `ImageOps.exif_transpose` 后才是横屏尺寸。
-- 2026-10-24 15:00 版本号更新为 `2026.10.24`（build `2026102401`）；Debug/Release 构建通过；Release 签名证书仍只有 Apple Development，App Store 分发需补 Distribution 证书或在 Xcode Cloud 归档。
+- 2026-10-24 15:00 版本号更新为 `2026.10.24`（build `2026.10.24`）；Debug/Release 构建通过；Release 签名证书仍只有 Apple Development，App Store 分发需补 Distribution 证书或在 Xcode Cloud 归档。
 
 ## 11. 发布准备记录（2026-10-24）
 
 - 发布目标：iPhone 版 `神经网络`（App Store id `1116487840`，bundle `com.yangpeiwen.NNPlayground2`）的通用更新；该更新首次把 iPhone 应用扩展到 iPad。iPad 独立应用 id `1115132797` 不受影响。
-- 版本：`MARKETING_VERSION = 2026.10.24`，`CURRENT_PROJECT_VERSION = 2026102401`。采用日期式版本，构建号 = 日期 + 两位序号。
+- 版本：`MARKETING_VERSION = 2026.10.24`，`CURRENT_PROJECT_VERSION = 2026.10.24`。采用日期式版本，version 与 build 相同；同日重传需换更大的三段 build（如 `2026.10.2401`），不能加四段。
 - 素材：iPhone 6.9"（2868×1320）与 iPad 13"（2752×2064）横屏截图，中文/英文各 4 张；中文 App Preview 26.5 秒、1920×886、H.264。
 - App Store 文案、隐私政策、审核备注、截图顺序和提交清单见桌面 `2026-10-24/` 目录（不提交进仓库）。
 - 已知限制：iPhone 17 / 18 系列横屏 440pt 高度下，右侧 loss 数字标签被 Auto Layout 压缩为 0 高度，只显示 loss 曲线；iPad 正常。该问题不影响构建与提交，若本次要修，需单独改布局并重新截取对比图。

@@ -649,7 +649,7 @@
 				CODE_SIGN_ENTITLEMENTS = NNPlayground/NNPlayground.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2026102401;
+				CURRENT_PROJECT_VERSION = 2026.10.24;
 				DEVELOPMENT_TEAM = W26WBSVK66;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = NNPlayground/Info.plist;
@@ -687,7 +687,7 @@
 				CODE_SIGN_ENTITLEMENTS = NNPlayground/NNPlayground.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2026102401;
+				CURRENT_PROJECT_VERSION = 2026.10.24;
 				DEVELOPMENT_TEAM = W26WBSVK66;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = NNPlayground/Info.plist;
