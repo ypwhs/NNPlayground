@@ -827,19 +827,28 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
     BOOL foldedOuter = (size.width > 660 && size.width < 700 && size.height > 450 && size.height < 480);
     if (!foldedOuter) return;
 
+    CGFloat groupTop = CGFLOAT_MAX;
     CGFloat groupBottom = 0;
     for (UIButton *button in buttons) {
         if (!button) continue;
+        groupTop = MIN(groupTop, CGRectGetMinY(button.frame));
         groupBottom = MAX(groupBottom, CGRectGetMaxY(button.frame));
     }
     if (groupBottom > 0) {
-        CGFloat bottomInset = MAX(24, self.view.safeAreaInsets.bottom + 8);
-        CGFloat targetBottom = size.height - bottomInset;
-        CGFloat delta = targetBottom - groupBottom;
-        for (UIButton *button in buttons) {
-            button.transform = CGAffineTransformMakeTranslation(0, delta);
+        CGFloat fallbackBottom = size.height - MAX(24, self.view.safeAreaInsets.bottom + 8);
+        CGFloat nodeBottom = 0;
+        for (int i = 0; i < layers - 1; i++) {
+            for (int j = 0; j < networkShape[i]; j++) {
+                Node *node = (*network->network[i])[j];
+                nodeBottom = MAX(nodeBottom, CGRectGetMaxY(node->nodeLayer.frame));
+            }
         }
-        // 底部固定，整体压缩按钮间距，加大顶部间距
+        CGFloat groupHeight = groupBottom - groupTop;
+        CGFloat targetBottom = fallbackBottom;
+        if (nodeBottom - 170 >= groupHeight) {
+            targetBottom = nodeBottom;
+        }
+        CGFloat delta = targetBottom - groupBottom;
         NSArray<NSNumber *> *extraOffsets = @[@24, @18, @12, @6, @0];
         for (NSUInteger index = 0; index < buttons.count; index++) {
             UIButton *button = buttons[index];
