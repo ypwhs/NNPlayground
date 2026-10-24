@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="训练误差 0.123 测试误差 0.123 训练次数 1234" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYA-1I-afQ">
-                                <rect key="frame" x="576" y="248" width="48" height="158"/>
+                                <rect key="frame" x="576" y="248" width="48" height="140"/>
                                 <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNS-Qj-hId" customClass="LossView" customModule="NNPlayground" customModuleProvider="target">
-                                <rect key="frame" x="632" y="248" width="104" height="154"/>
+                                <rect key="frame" x="632" y="248" width="104" height="140"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zL4-Pb-Aym" customClass="CheckButton" customModule="NNPlayground" customModuleProvider="target">
@@ -143,8 +143,7 @@
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="trailing" secondItem="s2o-KL-JYB" secondAttribute="trailing" id="5Do-Qt-x7M"/>
                             <constraint firstItem="c6G-jM-tKd" firstAttribute="top" secondItem="1iR-R1-8lA" secondAttribute="bottom" id="5Tf-ic-vor"/>
                             <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="RJa-gk-usT" secondAttribute="top" constant="24" id="6Us-un-NHI"/>
-                            <constraint firstItem="NNS-Qj-hId" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="AJ8-rW-ZID"/>
-                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="NNS-Qj-hId" secondAttribute="bottom" constant="12" id="B8I-Zo-x04"/>
+                            <constraint firstItem="NNS-Qj-hId" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="AJ8-rW-ZID"/>
                             <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="42" id="C32-dw-CtT"/>
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="8" symbolic="YES" id="Cgj-EC-erO"/>
                             <constraint firstItem="x7P-z9-49f" firstAttribute="top" secondItem="c6G-jM-tKd" secondAttribute="bottom" constant="8" symbolic="YES" id="EZR-gl-3Hm"/>
@@ -168,8 +167,11 @@
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="leading" secondItem="s2o-KL-JYB" secondAttribute="leading" id="qg3-4L-TGJ"/>
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="leading" secondItem="zie-PW-5as" secondAttribute="leading" id="tyD-hv-UWO"/>
                             <constraint firstItem="NNS-Qj-hId" firstAttribute="top" secondItem="s2o-KL-JYB" secondAttribute="bottom" constant="8" symbolic="YES" id="xLB-Wt-bfs"/>
-                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" id="y99-ek-GvO"/>
                             <constraint firstItem="s2o-KL-JYB" firstAttribute="top" secondItem="zL4-Pb-Aym" secondAttribute="bottom" constant="8" symbolic="YES" id="yPc-7l-QqX"/>
+                            <constraint firstItem="NNS-Qj-hId" firstAttribute="height" constant="140" priority="750" id="D1a-l0-hgt"/>
+                            <constraint firstItem="WYA-1I-afQ" firstAttribute="height" constant="140" priority="750" id="D1a-l0-lbl"/>
+                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NNS-Qj-hId" secondAttribute="bottom" constant="12" id="D1a-l0-bot"/>
+                            <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" id="D1a-l0-btl"/>
                             <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="x7P-z9-49f" secondAttribute="bottom" constant="12" id="zBv-ee-ytf"/>
                         </constraints>
                     </view>
