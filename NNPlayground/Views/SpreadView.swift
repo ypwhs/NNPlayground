@@ -401,7 +401,7 @@ import UIKit
         layoutIfNeeded()
         
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: { 
-            self.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+            self.backgroundColor = UIColor.black.withAlphaComponent(0.25)
         }, completion: { _ in
         })
         
@@ -434,6 +434,12 @@ import UIKit
     }
     
     func makeUI() {
+        
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
+        blurView.frame = bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurView.isUserInteractionEnabled = false
+        insertSubview(blurView, at: 0)
         
         setCircleButton.isChosen = true
         
