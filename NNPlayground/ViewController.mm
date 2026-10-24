@@ -525,6 +525,10 @@ int maxfps = 120;
         [strongSelf resetNetworkShape];
     };
     
+    _spreadView.didHide = ^{
+        [strongSelf restoreMainUIAfterSpread];
+    };
+    
     _spreadView.introduce = ^(NSURL *url){
         [strongSelf exOpenURL:url];
     };
@@ -753,6 +757,32 @@ bool isShowTestData = false;
     [self reset];
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
+
+- (void)hideMainUIForSpread {
+    if (hiddenSubviewStates != nil) return;
+    hiddenSubviewStates = [NSMutableArray array];
+    for (UIView *subview in self.view.subviews) {
+        [hiddenSubviewStates addObject:@(subview.hidden)];
+        if (subview != _heatMap) {
+            subview.hidden = YES;
+        }
+    }
+}
+
+- (void)restoreMainUIAfterSpread {
+    if (hiddenSubviewStates == nil) return;
+    NSArray<UIView *> *subviews = self.view.subviews;
+    for (NSUInteger i = 0; i < subviews.count && i < hiddenSubviewStates.count; i++) {
+        subviews[i].hidden = [hiddenSubviewStates[i] boolValue];
+    }
+    hiddenSubviewStates = nil;
+}
+
 - (IBAction)createSpread:(ConfigureButton *)sender {
     CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     [rotateAnimation setFromValue:[NSNumber numberWithDouble:0.0]];
@@ -760,6 +790,7 @@ bool isShowTestData = false;
     [rotateAnimation setDuration:0.2];
     [sender.layer addAnimation:rotateAnimation forKey:@"configureButtonRotate"];
     if (UIWindow *window = self.view.window) {
+        [self hideMainUIForSpread];
         [_spreadView showInView:window];
     }
 }

@@ -58,6 +58,7 @@ import UIKit
 //        let view = DropWebView()
 //        return view
 //    }()
+    var didHide: (() -> Void)?
     var introduce: ((_ url: URL) -> Void)?
     @IBAction func IntroduceAction(_ sender: UIButton) {
 //        if let window = self.window {
@@ -401,7 +402,7 @@ import UIKit
         layoutIfNeeded()
         
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: { 
-            self.backgroundColor = UIColor.black.withAlphaComponent(0.25)
+            self.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         }, completion: { _ in
         })
         
@@ -412,6 +413,7 @@ import UIKit
             self.backgroundColor = UIColor.clear
             }, completion: {[weak self]  _ in
                 self?.removeFromSuperview()
+                self?.didHide?()
             })
     }
     
@@ -435,12 +437,6 @@ import UIKit
     
     func makeUI() {
         
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
-        blurView.frame = bounds
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurView.isUserInteractionEnabled = false
-        insertSubview(blurView, at: 0)
-        
         setCircleButton.isChosen = true
         
         let setDataButtonWidth = NSLayoutConstraint(item: setCircleButton!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: buttonWidth + 10)
@@ -459,6 +455,15 @@ import UIKit
                 addNodeButton[i].isHidden = true
                 subNodeButton[i].isHidden = true
             }
+        }
+        
+        for subview in subviews {
+            guard let label = subview as? UILabel else { continue }
+            label.layer.shadowColor = UIColor.black.cgColor
+            label.layer.shadowOpacity = 0.8
+            label.layer.shadowRadius = 2
+            label.layer.shadowOffset = .zero
+            label.layer.masksToBounds = false
         }
         
     }
