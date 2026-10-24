@@ -139,11 +139,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="RJa-gk-usT" secondAttribute="leading" constant="36" id="3Ii-VE-cpK"/>
-                            <constraint firstItem="NNS-Qj-hId" firstAttribute="leading" secondItem="WYA-1I-afQ" secondAttribute="trailing" constant="8" id="48E-6B-CGh"/>
+                            <constraint firstItem="NNS-Qj-hId" firstAttribute="leading" secondItem="WYA-1I-afQ" secondAttribute="leading" id="48E-6B-CGh"/>
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="trailing" secondItem="s2o-KL-JYB" secondAttribute="trailing" id="5Do-Qt-x7M"/>
                             <constraint firstItem="c6G-jM-tKd" firstAttribute="top" secondItem="1iR-R1-8lA" secondAttribute="bottom" id="5Tf-ic-vor"/>
                             <constraint firstItem="zie-PW-5as" firstAttribute="top" secondItem="RJa-gk-usT" secondAttribute="top" constant="108" id="6Us-un-NHI"/>
-                            <constraint firstItem="8bC-Xf-vdC" firstAttribute="trailing" secondItem="NNS-Qj-hId" secondAttribute="trailing" constant="16" id="AJ8-rW-ZID"/>
+                            <constraint firstItem="NNS-Qj-hId" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="AJ8-rW-ZID"/>
                             <constraint firstItem="AnS-AF-TXQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="42" id="C32-dw-CtT"/>
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="top" secondItem="zie-PW-5as" secondAttribute="bottom" constant="8" symbolic="YES" id="Cgj-EC-erO"/>
                             <constraint firstItem="x7P-z9-49f" firstAttribute="top" secondItem="c6G-jM-tKd" secondAttribute="bottom" constant="8" symbolic="YES" id="EZR-gl-3Hm"/>
@@ -166,9 +166,9 @@
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="trailing" secondItem="zie-PW-5as" secondAttribute="trailing" id="m3f-eN-20p"/>
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="leading" secondItem="s2o-KL-JYB" secondAttribute="leading" id="qg3-4L-TGJ"/>
                             <constraint firstItem="zL4-Pb-Aym" firstAttribute="leading" secondItem="zie-PW-5as" secondAttribute="leading" id="tyD-hv-UWO"/>
-                            <constraint firstItem="NNS-Qj-hId" firstAttribute="top" secondItem="s2o-KL-JYB" secondAttribute="bottom" constant="8" symbolic="YES" id="xLB-Wt-bfs"/>
+                            <constraint firstItem="NNS-Qj-hId" firstAttribute="top" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" symbolic="YES" id="xLB-Wt-bfs"/>
                             <constraint firstItem="s2o-KL-JYB" firstAttribute="top" secondItem="zL4-Pb-Aym" secondAttribute="bottom" constant="8" symbolic="YES" id="yPc-7l-QqX"/>
-                            <constraint firstItem="NNS-Qj-hId" firstAttribute="height" constant="140" priority="750" id="D1a-l0-hgt"/>
+                            <constraint firstItem="NNS-Qj-hId" firstAttribute="height" constant="120" priority="750" id="D1a-l0-hgt"/>
                             <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NNS-Qj-hId" secondAttribute="bottom" constant="12" id="D1a-l0-bot"/>
                             <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WYA-1I-afQ" secondAttribute="bottom" constant="8" id="D1a-l0-btl"/>
                             <constraint firstItem="RJa-gk-usT" firstAttribute="bottom" secondItem="x7P-z9-49f" secondAttribute="bottom" constant="12" id="zBv-ee-ytf"/>
