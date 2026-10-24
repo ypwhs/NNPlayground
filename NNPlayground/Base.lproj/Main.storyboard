@@ -182,6 +182,9 @@
                         <outlet property="heatMap" destination="zie-PW-5as" id="EUz-mc-KX6"/>
                         <outlet property="lossView" destination="NNS-Qj-hId" id="6t2-hD-ySm"/>
                         <outlet property="outputLabel" destination="WYA-1I-afQ" id="YF7-wc-tbU"/>
+                        <outlet property="accelerateButton" destination="1iR-R1-8lA" id="acc-01-001"/>
+                        <outlet property="oneStepButton" destination="jju-Ya-qaA" id="one-01-001"/>
+                        <outlet property="resetButton" destination="vIM-jn-lzj" id="rst-01-001"/>
                         <outlet property="runButton" destination="AnS-AF-TXQ" id="ES8-pw-8OP"/>
                         <outlet property="speedUpLabel" destination="c6G-jM-tKd" id="xUK-6m-FnY"/>
                     </connections>
