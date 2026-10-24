@@ -357,6 +357,12 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     UIEdgeInsets safeInsets = self.view.safeAreaInsets;
     CGFloat margin = MAX(24, safeInsets.top + 12);   //避开摄像头/状态栏
     CGFloat x = MAX(25, safeInsets.left + 12);
+    CGSize boundsSize = self.view.bounds.size;
+    if (boundsSize.width > 600 && boundsSize.width < 800 && boundsSize.height > 420 && boundsSize.height < 540) {
+        // iPhone Duo 折叠外屏横屏：左上角有前置摄像头
+        margin = MAX(margin, 100);
+        x = MAX(x, 100);
+    }
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         // 获取屏幕的宽度和高度，取较大一方判断是否为 812.0 或 896.0
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
