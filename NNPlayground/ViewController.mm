@@ -850,6 +850,13 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
     return UIInterfaceOrientationLandscapeRight;
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    if (self.didFinishInitialLayout) {
+        [self initNodeLayer];
+    }
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     if (!self.didFinishInitialLayout) return;
