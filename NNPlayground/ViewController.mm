@@ -358,12 +358,12 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     UIEdgeInsets safeInsets = self.view.safeAreaInsets;
     CGFloat margin = 24;
     CGFloat x = [self nodeStartX];
-    CGFloat y = safeInsets.top + margin;
+    CGFloat y = margin;
     
     CGFloat width = frame.origin.x - x;
     width /= layers - 1;    //两个结点的x坐标差
     
-    CGFloat height = self.view.bounds.size.height - safeInsets.top - safeInsets.bottom - 2 * margin;
+    CGFloat height = self.view.bounds.size.height - 2 * margin;
     height /= 8;   // 固定 8 个槽位，节点数变化不改变布局
     
     CGFloat ndoeWidth = height - 5*screenScale;
@@ -775,6 +775,7 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
         subviews[i].hidden = [hiddenSubviewStates[i] boolValue];
     }
     hiddenSubviewStates = nil;
+    [self initNodeLayer];
 }
 
 - (CGFloat)nodeStartX {
