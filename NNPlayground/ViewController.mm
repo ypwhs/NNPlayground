@@ -359,14 +359,14 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     CGFloat x = [self nodeStartX];
     CGSize boundsSize = self.view.bounds.size;
     BOOL foldedOuter = (boundsSize.width > 660 && boundsSize.width < 700 && boundsSize.height > 450 && boundsSize.height < 480);
-    CGFloat firstNodeYOffset = foldedOuter ? 100 : 0;   //只下移左上角第一个输入神经元，避开摄像头
+    CGFloat firstNodeYOffset = foldedOuter ? 120 : 0;   //只下移左上角第一个输入神经元，避开摄像头
     CGFloat y = margin;
     
     CGFloat width = frame.origin.x - x;
     width /= layers - 1;    //两个结点的x坐标差
     
-    CGFloat height = self.view.frame.size.height - margin;
-    height /= 8;
+    CGFloat height = self.view.bounds.size.height - margin;
+    height /= 8;   // 固定 8 个槽位，节点数变化不改变布局
     
     CGFloat ndoeWidth = height - 5*screenScale;
     ndoeWidth = ndoeWidth > 50 ? 50 : ndoeWidth;
@@ -835,19 +835,13 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
         groupBottom = MAX(groupBottom, CGRectGetMaxY(button.frame));
     }
     if (groupBottom > 0) {
-        CGFloat fallbackBottom = size.height - MAX(24, self.view.safeAreaInsets.bottom + 8);
-        CGFloat nodeBottom = 0;
-        for (int i = 0; i < layers - 1; i++) {
-            for (int j = 0; j < networkShape[i]; j++) {
-                Node *node = (*network->network[i])[j];
-                nodeBottom = MAX(nodeBottom, CGRectGetMaxY(node->nodeLayer.frame));
-            }
-        }
+        CGFloat height = (size.height - 24) / 8;
+        CGFloat nodeWidth = MIN(50, height - 5 * [UIScreen mainScreen].scale);
+        CGFloat fixedBottom = 24 + height * 7 + nodeWidth;
         CGFloat groupHeight = groupBottom - groupTop;
-        CGFloat targetBottom = fallbackBottom;
-        if (nodeBottom - 170 >= groupHeight) {
-            targetBottom = nodeBottom;
-        }
+        CGFloat targetBottom = fixedBottom;
+        if (targetBottom > size.height - 8) targetBottom = size.height - 8;
+        if (targetBottom - groupHeight < 170) targetBottom = 170 + groupHeight;
         CGFloat delta = targetBottom - groupBottom;
         NSArray<NSNumber *> *extraOffsets = @[@24, @18, @12, @6, @0];
         for (NSUInteger index = 0; index < buttons.count; index++) {
