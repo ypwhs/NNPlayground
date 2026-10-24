@@ -2,12 +2,23 @@
 
 TensorFlow Playground 的 iOS 移植。Swift 5 做 UI，Objective-C++/C++ 做模型和 Core Animation。iPhone/iPad，横屏，最低 iOS 17.0。
 
-本文件只放修改代码时必须遵守的约束。架构、时序、数学、数据、渲染、UI 接线、环境与构建记录在 [docs/INTERNALS.md](docs/INTERNALS.md)。
+本文件放开发任务和代码修改必须遵守的约束。架构、时序、数学、数据、渲染、UI 接线、环境与构建记录在 [docs/INTERNALS.md](docs/INTERNALS.md)。
 
 ## 语言
 
 1. 思考、回答、文档、代码注释、commit message、PR 标题与正文一律使用中文。
 2. 代码标识符、类型名、API 名称、日志、分支名保持英文或工程现有写法，不强行翻译。
+
+## 开发流程
+
+1. 每个开发任务从最新 `master` 新建分支；分支名用 `<类型>/<英文短横线描述>`，类型取 `feat`/`fix`/`docs`/`refactor`/`chore`。
+2. 每个阶段性成果单独 commit；commit message 用中文，格式 `<类型>：<摘要>`，正文列出改动点。无关改动不混入同一 commit，已推送的提交不改写，后续阶段追加新 commit。
+3. 完成后 `git push -u origin <分支>`，用 `gh pr create --base master` 创建 PR，把 PR 链接发给用户。PR 标题和正文用中文，正文包含改动、原因、验证结果、影响范围。
+4. UI 开发或逻辑修改必须在 PR 中提供 `master` 与当前 PR 分支的同条件截图对比：同一设备、同一方向、同一操作路径；PR 正文用表格并排展示 `master` 和 `PR`。
+5. 截图必须使用 GitHub 可访问的 URL，不能写本地路径。图片提交到 PR 分支的 `docs/pr-assets/<分支名>/`，命名为 `master.png` 和 `pr.png`；push 后使用固定 commit SHA 的 raw 链接：
+   `https://raw.githubusercontent.com/ypwphs/NNPlayground/<commit-sha>/docs/pr-assets/<分支名>/master.png`
+   `https://raw.githubusercontent.com/ypwphs/NNPlayground/<commit-sha>/docs/pr-assets/<分支名>/pr.png`
+6. 合并前确认构建、运行、截图对比完成且 PR 为 `mergeable`；用 `gh pr merge <number> --merge` 合并；合并后把 PR 链接发给用户。
 
 ## 架构与状态
 
