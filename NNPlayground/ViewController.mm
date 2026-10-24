@@ -354,15 +354,11 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     (*network->network[layers - 1])[0]->initNodeLayer(frame);   //将heatmap的frame设置到网络的输出结点
     
     //计算各个坐标
-    UIEdgeInsets safeInsets = self.view.safeAreaInsets;
-    CGFloat margin = MAX(24, safeInsets.top + 12);   //避开摄像头/状态栏
-    CGFloat x = MAX(25, safeInsets.left + 12);
+    CGFloat margin = 24;
+    CGFloat x = 25;
     CGSize boundsSize = self.view.bounds.size;
-    if (boundsSize.width > 600 && boundsSize.width < 800 && boundsSize.height > 420 && boundsSize.height < 540) {
-        // iPhone Duo 折叠外屏横屏：左上角有前置摄像头
-        margin = MAX(margin, 100);
-        x = MAX(x, 100);
-    }
+    BOOL foldedOuter = (boundsSize.width > 660 && boundsSize.width < 700 && boundsSize.height > 450 && boundsSize.height < 480);
+    CGFloat firstNodeYOffset = foldedOuter ? 100 : 0;   //只下移左上角第一个输入神经元，避开摄像头
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         // 获取屏幕的宽度和高度，取较大一方判断是否为 812.0 或 896.0
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
@@ -386,7 +382,9 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
 
     for(int i = 0; i < layers - 1; i++){
         for(int j = 0; j < networkShape[i]; j++){
-            frame.origin = CGPointMake(x + width*i, y + height*j);
+            CGFloat nodeY = y + height*j;
+            if (i == 0 && j == 0) nodeY += firstNodeYOffset;
+            frame.origin = CGPointMake(x + width*i, nodeY);
             Node * node = (*network->network[i])[j];
             node->initNodeLayer(frame);
         }
