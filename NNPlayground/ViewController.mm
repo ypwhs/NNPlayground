@@ -11,7 +11,8 @@
 using namespace std;
 
 @interface ViewController ()
-
+@property (nonatomic) CGSize lastNodeLayoutSize;
+@property (nonatomic) BOOL didFinishInitialLayout;
 @end
 
 @implementation ViewController
@@ -354,6 +355,9 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     
     //计算各个坐标
     CGFloat margin = 24;   //神经元保持原顶部位置，不跟随热力图下移
+    if (self.view.bounds.size.height > self.view.bounds.size.width) {
+        margin = 90;       //竖屏/折叠时避开状态栏
+    }
     CGFloat x = 25;
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         // 获取屏幕的宽度和高度，取较大一方判断是否为 812.0 或 896.0
@@ -655,6 +659,8 @@ CGFloat screenScale = [UIScreen mainScreen].scale;
     longpress.minimumPressDuration = 0.5;
     [_heatMap addGestureRecognizer:longpress];
     [self resetNetwork];
+    self.lastNodeLayoutSize = self.view.bounds.size;
+    self.didFinishInitialLayout = YES;
 }
 
 MBProgressHUD *hud;
@@ -777,6 +783,15 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
         subviews[i].hidden = [hiddenSubviewStates[i] boolValue];
     }
     hiddenSubviewStates = nil;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if (!self.didFinishInitialLayout) return;
+    CGSize size = self.view.bounds.size;
+    if (CGSizeEqualToSize(size, self.lastNodeLayoutSize)) return;
+    self.lastNodeLayoutSize = size;
+    [self initNodeLayer];
 }
 
 - (IBAction)createSpread:(ConfigureButton *)sender {
