@@ -11,7 +11,7 @@
 ```
 NNPlayground/
 ├── main.m                         UIApplicationMain
-├── AppDelegate.h/.m               模板空壳，storyboard 启动
+├── AppDelegate.h/.m               AppDelegate + SceneDelegate；SceneDelegate 加载 Main.storyboard 并创建窗口
 ├── ViewController.h/.mm           应用状态机 + 数据生成 + 训练 + 渲染调度 + 布局
 ├── Network.h/.mm                  MLP 结构、forward/backProp/updateWeights（C++）
 ├── Node.h/.mm                     Node/Link 数学 + CALayer + 位图
@@ -52,6 +52,8 @@ NNPlayground/
 - `always` 是普通 `bool`，主线程写、utility 队列读。
 
 ### 2.2 启动
+
+`SceneDelegate` 的 `scene:willConnectToSession:options:` 加载 `Main.storyboard`，创建 `UIWindow`、设置 rootViewController 并 makeKeyAndVisible；随后执行：
 
 ```
 viewDidLoad
@@ -533,7 +535,7 @@ delete[] oldShape
 - `resetNetworkShape`/`addLayer`：`always=false` + `sleep(0.008)` + `lock/unlock`；无线程 join。
 - `LossView.draw`：元素数 1 时按 `(n-1)` 计算 x；`clearData` 只清数组。
 - 长按：`HeatMapView.initLayer` 添加 1s recognizer（空实现）；`ViewController` 对同一 heatMap 添加 0.5s recognizer（存图）。
-- `Info.plist`：`UIRequiredDeviceCapabilities=[armv7]`，`CFBundleName=神经网络`，横屏 orientations，`UIRequiresFullScreen=true`。
+- `Info.plist`：`UIApplicationSceneManifest` 指向 `SceneDelegate`；`UIMainStoryboardFile` 已移除；`UIRequiredDeviceCapabilities=[armv7]`，`CFBundleName=神经网络`，横屏 orientations，`UIRequiresFullScreen=true`。
 - `NNPlayground.entitlements`：`com.apple.security.app-sandbox`、`com.apple.security.network.client`；`NNPlayground 2.entitlements` 未在 pbxproj 中引用。
 - `Reachability`：仅 `NNPlayground-Bridging-Header.h` 引入；无 Swift/ObjC 调用点。
 - `Network::forEachNode`、`Network::getOutputNode`、`HeatMapView.setBackground`：无调用点。
@@ -573,6 +575,6 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground -configuration D
 
 - `xcodebuild -list`：targets `NNPlayground`、`NNPlaygroundTests`、`NNPlaygroundUITests`；configurations Debug/Release；scheme `NNPlayground`。
 - `xcodebuild -showBuildSettings`：`IPHONEOS_DEPLOYMENT_TARGET = 17.0`、`PRODUCT_BUNDLE_IDENTIFIER = com.yangpeiwen.NNPlayground2`、`SWIFT_VERSION = 5.0`、`TARGETED_DEVICE_FAMILY = 1,2,6`、`SUPPORTED_PLATFORMS = iphoneos iphonesimulator`。
-- 构建产物 Info.plist：`MinimumOSVersion=17.0`、`UIDeviceFamily=[1,2]`、`UIRequiredDeviceCapabilities=[armv7]`、横屏 orientations、`UIRequiresFullScreen=true`、`CFBundleName=神经网络`。
+- 构建产物 Info.plist：`MinimumOSVersion=17.0`、`UIDeviceFamily=[1,2]`、`UIApplicationSceneManifest`、`UIRequiredDeviceCapabilities=[armv7]`、横屏 orientations、`UIRequiresFullScreen=true`、`CFBundleName=神经网络`。
 - 2026-10-24 09:37 在 iPhone 15 / iOS 17.2 安装启动成功（pid 51391），截图路径 `/tmp/nnp-initial.png`；画面为 2 输入、4 隐藏、1 输出热力图，右侧 loss 文本 0.530/0.574/0。
 - 2026-10-24 09:40 后 `simctl list runtimes` 输出为空；`simctl list devices available` 无可用设备；`/Applications/Xcode.app` 下无 `Simulator.app`。
