@@ -355,7 +355,6 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     (*network->network[layers - 1])[0]->initNodeLayer(frame);   //将heatmap的frame设置到网络的输出结点
     
     //计算各个坐标
-    UIEdgeInsets safeInsets = self.view.safeAreaInsets;
     CGFloat margin = 24;
     CGFloat x = [self nodeStartX];
     CGFloat y = margin;
