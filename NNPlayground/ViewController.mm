@@ -13,7 +13,7 @@ using namespace std;
 @interface ViewController ()
 @property (nonatomic) CGSize lastNodeLayoutSize;
 @property (nonatomic) BOOL didFinishInitialLayout;
-@property (nonatomic, strong) NSArray<NSLayoutConstraint *> *controlButtonLeadingConstraints;
+@property (nonatomic, strong) UIStackView *controlStack;
 @end
 
 @implementation ViewController
@@ -355,17 +355,15 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     (*network->network[layers - 1])[0]->initNodeLayer(frame);   //将heatmap的frame设置到网络的输出结点
     
     //计算各个坐标
+    UIEdgeInsets safeInsets = self.view.safeAreaInsets;
     CGFloat margin = 24;
     CGFloat x = [self nodeStartX];
-    CGSize boundsSize = self.view.bounds.size;
-    BOOL foldedOuter = (boundsSize.width > 660 && boundsSize.width < 700 && boundsSize.height > 450 && boundsSize.height < 480);
-    CGFloat firstNodeYOffset = foldedOuter ? 120 : 0;   //只下移左上角第一个输入神经元，避开摄像头
-    CGFloat y = margin;
+    CGFloat y = safeInsets.top + margin;
     
     CGFloat width = frame.origin.x - x;
     width /= layers - 1;    //两个结点的x坐标差
     
-    CGFloat height = self.view.bounds.size.height - margin;
+    CGFloat height = self.view.bounds.size.height - safeInsets.top - safeInsets.bottom - 2 * margin;
     height /= 8;   // 固定 8 个槽位，节点数变化不改变布局
     
     CGFloat ndoeWidth = height - 5*screenScale;
@@ -375,7 +373,6 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     for(int i = 0; i < layers - 1; i++){
         for(int j = 0; j < networkShape[i]; j++){
             CGFloat nodeY = y + height*j;
-            if (i == 0 && j == 0) nodeY += firstNodeYOffset;
             frame.origin = CGPointMake(x + width*i, nodeY);
             Node * node = (*network->network[i])[j];
             node->initNodeLayer(frame);
@@ -782,6 +779,7 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
 
 - (CGFloat)nodeStartX {
     CGFloat x = 25;
+    x = MAX(x, self.view.safeAreaInsets.left + 24);
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
         CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
@@ -794,64 +792,52 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
 }
 
 - (void)alignControlButtons {
-    CGFloat x = [self nodeStartX];
+    if (self.controlStack) return;
     NSArray<UIButton *> *buttons = @[self.resetButton, self.runButton, self.oneStepButton, self.accelerateButton, self.configureButton];
-    if (self.controlButtonLeadingConstraints.count == 0) {
-        NSMutableArray<NSLayoutConstraint *> *newConstraints = [NSMutableArray array];
+    NSMutableArray<NSLayoutConstraint *> *obsolete = [NSMutableArray array];
+    for (NSLayoutConstraint *constraint in self.view.constraints) {
+        BOOL involves = NO;
         for (UIButton *button in buttons) {
-            if (!button) continue;
-            NSMutableArray<NSLayoutConstraint *> *oldConstraints = [NSMutableArray array];
-            for (NSLayoutConstraint *constraint in self.view.constraints) {
-                BOOL involvesButton = (constraint.firstItem == button || constraint.secondItem == button);
-                BOOL isLeading = (constraint.firstAttribute == NSLayoutAttributeLeading || constraint.secondAttribute == NSLayoutAttributeLeading);
-                if (involvesButton && isLeading) {
-                    [oldConstraints addObject:constraint];
-                }
+            if (constraint.firstItem == button || constraint.secondItem == button) {
+                involves = YES;
+                break;
             }
-            [NSLayoutConstraint deactivateConstraints:oldConstraints];
-            button.translatesAutoresizingMaskIntoConstraints = NO;
-            NSLayoutConstraint *leading = [button.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:x];
-            [newConstraints addObject:leading];
         }
-        [NSLayoutConstraint activateConstraints:newConstraints];
-        self.controlButtonLeadingConstraints = newConstraints;
-    } else {
-        for (NSLayoutConstraint *constraint in self.controlButtonLeadingConstraints) {
-            constraint.constant = x;
-        }
+        if (involves) [obsolete addObject:constraint];
     }
-    for (UIButton *button in buttons) {
-        button.transform = CGAffineTransformIdentity;
-    }
-    CGSize size = self.view.bounds.size;
-    BOOL foldedOuter = (size.width > 660 && size.width < 700 && size.height > 450 && size.height < 480);
-    if (!foldedOuter) return;
+    [NSLayoutConstraint deactivateConstraints:obsolete];
 
-    CGFloat groupTop = CGFLOAT_MAX;
-    CGFloat groupBottom = 0;
+    NSMutableArray<UIView *> *arranged = [NSMutableArray array];
     for (UIButton *button in buttons) {
         if (!button) continue;
-        groupTop = MIN(groupTop, CGRectGetMinY(button.frame));
-        groupBottom = MAX(groupBottom, CGRectGetMaxY(button.frame));
+        [button.widthAnchor constraintEqualToConstant:40].active = YES;
+        [button.heightAnchor constraintEqualToConstant:40].active = YES;
+        [arranged addObject:button];
     }
-    if (groupBottom > 0) {
-        CGFloat height = (size.height - 24) / 8;
-        CGFloat nodeWidth = MIN(50, height - 5 * [UIScreen mainScreen].scale);
-        CGFloat fixedBottom = 24 + height * 7 + nodeWidth;
-        CGFloat groupHeight = groupBottom - groupTop;
-        CGFloat targetBottom = fixedBottom;
-        if (targetBottom > size.height - 8) targetBottom = size.height - 8;
-        if (targetBottom - groupHeight < 170) targetBottom = 170 + groupHeight;
-        CGFloat delta = targetBottom - groupBottom;
-        NSArray<NSNumber *> *extraOffsets = @[@24, @18, @12, @6, @0];
-        for (NSUInteger index = 0; index < buttons.count; index++) {
-            UIButton *button = buttons[index];
-            if (!button) continue;
-            CGFloat offset = extraOffsets[index].doubleValue;
-            button.transform = CGAffineTransformMakeTranslation(0, delta + offset);
-        }
-        self.speedUpLabel.transform = self.accelerateButton.transform;
-    }
+    if (self.speedUpLabel) [arranged addObject:self.speedUpLabel];
+
+    UIStackView *stack = [[UIStackView alloc] initWithArrangedSubviews:arranged];
+    stack.axis = UILayoutConstraintAxisVertical;
+    stack.alignment = UIStackViewAlignmentLeading;
+    stack.spacing = 8;
+    stack.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:stack];
+    self.controlStack = stack;
+
+    UILayoutGuide *safe = self.view.safeAreaLayoutGuide;
+    [NSLayoutConstraint activateConstraints:@[
+        [stack.leadingAnchor constraintEqualToAnchor:safe.leadingAnchor constant:24],
+        [stack.bottomAnchor constraintEqualToAnchor:safe.bottomAnchor constant:-12],
+    ]];
+}
+
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationLandscapeRight;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -862,7 +848,6 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
         self.lastNodeLayoutSize = size;
         [self initNodeLayer];
     }
-    [self alignControlButtons];
 }
 
 - (IBAction)createSpread:(ConfigureButton *)sender {

@@ -27,6 +27,27 @@
     self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
+
+    UIWindowScene *windowScene = (UIWindowScene *)scene;
+    [self lockWindowSceneToLandscape:windowScene];
+}
+
+- (void)lockWindowSceneToLandscape:(UIWindowScene *)windowScene {
+    if (@available(iOS 16.0, *)) {
+        UIWindowSceneGeometryPreferencesIOS *preferences =
+            [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:UIInterfaceOrientationMaskLandscape];
+        [windowScene requestGeometryUpdateWithPreferences:preferences errorHandler:^(NSError *error) {
+            NSLog(@"requestGeometryUpdate failed: %@", error);
+        }];
+    }
+}
+
+- (void)sceneDidBecomeActive:(UIScene *)scene {
+    if (![scene isKindOfClass:[UIWindowScene class]]) return;
+    UIWindowScene *windowScene = (UIWindowScene *)scene;
+    if (!UIInterfaceOrientationIsLandscape(windowScene.interfaceOrientation)) {
+        [self lockWindowSceneToLandscape:windowScene];
+    }
 }
 
 @end
