@@ -803,6 +803,9 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
                 break;
             }
         }
+        if (constraint.firstItem == self.speedUpLabel || constraint.secondItem == self.speedUpLabel) {
+            involves = YES;
+        }
         if (involves) [obsolete addObject:constraint];
     }
     [NSLayoutConstraint deactivateConstraints:obsolete];
@@ -814,8 +817,6 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
         [button.heightAnchor constraintEqualToConstant:40].active = YES;
         [arranged addObject:button];
     }
-    if (self.speedUpLabel) [arranged addObject:self.speedUpLabel];
-
     UIStackView *stack = [[UIStackView alloc] initWithArrangedSubviews:arranged];
     stack.axis = UILayoutConstraintAxisVertical;
     stack.alignment = UIStackViewAlignmentLeading;
@@ -829,6 +830,14 @@ NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
         [stack.leadingAnchor constraintEqualToAnchor:safe.leadingAnchor constant:24],
         [stack.bottomAnchor constraintEqualToAnchor:safe.bottomAnchor constant:-12],
     ]];
+    if (self.speedUpLabel) {
+        self.speedUpLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:self.speedUpLabel];
+        [NSLayoutConstraint activateConstraints:@[
+            [self.speedUpLabel.leadingAnchor constraintEqualToAnchor:self.accelerateButton.trailingAnchor constant:6],
+            [self.speedUpLabel.centerYAnchor constraintEqualToAnchor:self.accelerateButton.centerYAnchor],
+        ]];
+    }
 }
 
 
