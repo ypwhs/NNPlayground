@@ -18,7 +18,13 @@ TensorFlow Playground 的 iOS 移植。Swift 5 做 UI，Objective-C++/C++ 做模
 5. 截图必须使用 GitHub 可访问的 URL，不能写本地路径。图片提交到 PR 分支的 `docs/pr-assets/<分支名>/`，命名为 `master.png` 和 `pr.png`；push 后使用固定 commit SHA 的 raw 链接：
    `https://raw.githubusercontent.com/ypwphs/NNPlayground/<commit-sha>/docs/pr-assets/<分支名>/master.png`
    `https://raw.githubusercontent.com/ypwphs/NNPlayground/<commit-sha>/docs/pr-assets/<分支名>/pr.png`
-6. 合并前确认构建、运行、截图对比完成且 PR 为 `mergeable`；用 `gh pr merge <number> --merge` 合并；合并后把 PR 链接发给用户。
+6. 合并前确认构建、运行、截图对比完成且 PR 为 `mergeable`；合并还必须满足「合并授权」，命令为 `gh pr merge <number> --merge`。合并后报告结果和 PR 链接。
+
+## 合并授权
+
+1. 任何 PR 合并都必须在当前对话中获得明确授权（例如“合并 PR #12”）。
+2. 规则文本、任务类型（开发/文档/规则更新）、构建通过、截图齐全、PR 可合并状态都不构成合并授权。
+3. 未获得明确授权时，只能创建 PR、发送链接、报告状态，不执行 `gh pr merge`。
 
 ## 架构与状态
 
