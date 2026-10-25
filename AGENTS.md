@@ -15,10 +15,16 @@ TensorFlow Playground 的 iOS 移植。Swift 5 做 UI，Objective-C++/C++ 做模
 2. 每个阶段性成果单独 commit；commit message 用中文，格式 `<类型>：<摘要>`，正文列出改动点。无关改动不混入同一 commit，已推送的提交不改写，后续阶段追加新 commit。
 3. 完成后 `git push -u origin <分支>`，用 `gh pr create --base master` 创建 PR，把 PR 链接发给用户。PR 标题和正文用中文，正文包含改动、原因、验证结果、影响范围。
 4. UI 开发或逻辑修改必须在 PR 中提供 `master` 与当前 PR 分支的同条件截图对比：同一设备、同一方向、同一操作路径；PR 正文用表格并排展示 `master` 和 `PR`。
-5. 截图必须使用 GitHub 可访问的 URL，不能写本地路径。图片提交到 PR 分支的 `docs/pr-assets/<分支名>/`，命名为 `master.png` 和 `pr.png`；push 后使用固定 commit SHA 的 raw 链接：
-   `https://raw.githubusercontent.com/ypwphs/NNPlayground/<commit-sha>/docs/pr-assets/<分支名>/master.png`
-   `https://raw.githubusercontent.com/ypwphs/NNPlayground/<commit-sha>/docs/pr-assets/<分支名>/pr.png`
-6. 合并前确认构建、运行、截图对比完成且 PR 为 `mergeable`；用 `gh pr merge <number> --merge` 合并；合并后把 PR 链接发给用户。
+5. 截图必须上传为 GitHub PR 附件，正文引用返回的 `https://github.com/user-attachments/assets/...` URL；截图不提交进仓库，不写本地路径，不引用 `raw.githubusercontent.com`。
+   上传使用 `gh` 2.99.0+ 的 `gh pr create --attach` 或 `gh pr edit <number> --body-file <file> --attach <image>`；正文里的本地图片路径会被替换为附件 URL。
+   当前 `gh` 不支持 `--attach` 时，用 `POST https://uploads.github.com/user-attachments/assets?name=<文件名>&content_type=image/png&repository_id=<仓库ID>` 上传，`Authorization: Bearer <token>`，把返回的 `url` 写入正文。
+6. 合并前确认构建、运行、截图对比完成且 PR 为 `mergeable`；合并还必须满足「合并授权」，命令为 `gh pr merge <number> --merge`。合并后报告结果和 PR 链接。
+
+## 合并授权
+
+1. 任何 PR 合并都必须在当前对话中获得明确授权（例如“合并 PR #12”）。
+2. 规则文本、任务类型（开发/文档/规则更新）、构建通过、截图齐全、PR 可合并状态都不构成合并授权。
+3. 未获得明确授权时，只能创建 PR、发送链接、报告状态，不执行 `gh pr merge`。
 
 ## 架构与状态
 
@@ -45,7 +51,7 @@ TensorFlow Playground 的 iOS 移植。Swift 5 做 UI，Objective-C++/C++ 做模
 2. 颜色：`getColor(-output)`，+1 蓝、-1 橙、0 灰；离散化取 `getColor(-output >= 0 ? 1 : -1)`；连接线 `getColor(-weight)`，线宽 `clamp(|weight|,0.5,4)`。
 3. 结点/连接线 CALayer 挂在 `self.view.layer`；输出结点只 `initNodeLayer` 设 frame，不加入视图，输出图写入 `heatMap.backgroundLayer.contents`。`Node` 析构移除自己的三个 layer 并删除入边，`Link` 析构移除 `curveLayer`；每条 Link 只由目的 Node 删除。
 4. `initNodeLayer` 负责结点坐标、结点尺寸、AddButton 位置和 `_spreadView.buttonWidth`（29/36）；`SpreadView.xib` 的 frame 数据不参与实际布局。
-5. 工程锁定横屏，没有旋转重排；`HeatMapView` 的两个 layer frame 在 init 时取当时的值。
+5. 普通手机和 iPad 保持横屏；iOS 27+ 的 phone regular/regular scene 额外允许竖屏，方向集合统一由 `AppDelegate` 按 scene traits 决定。安全区变化及热图 frame 变化都要重排节点与连线，不能只比较窗口尺寸。`HeatMapView` 仍为固定 160pt 正方形，其两个 layer frame 在 init 时取当时的值。
 
 ## IB、资源、本地化
 
@@ -53,10 +59,10 @@ TensorFlow Playground 的 iOS 移植。Swift 5 做 UI，Objective-C++/C++ 做模
 2. 新源文件、资源、本地化文件必须加入 `NNPlayground.xcodeproj`（显式 file reference，无 folder sync）。
 3. Base storyboard/xib 为中文；运行时文案走 `Localizable.strings`（en/zh），storyboard/xib 文案走 `Main.strings`/`SpreadView.strings`（en/zh）。`ViewController.mm` 的存图/相册提示是硬编码中文。
 4. 新增第三方依赖需要同时改 pbxproj；当前只有源码内置的 MBProgressHUD、Reachability。
-5. `Info.plist` 只声明横屏，`CFBundleName=神经网络`；保存相册调用 `UIImageWriteToSavedPhotosAlbum`，Info.plist 没有相册权限键。
+5. `Info.plist` 声明横屏、`CFBundleName=神经网络`、`ITSAppUsesNonExemptEncryption=false`；保存相册调用 `UIImageWriteToSavedPhotosAlbum`，使用 `NSPhotoLibraryAddUsageDescription`（只申请写入权限）。
 
 ## 验证
 
 1. 构建/运行命令、环境记录和已验证结果在 [docs/INTERNALS.md §10](docs/INTERNALS.md)。
-2. `NNPlaygroundTests`、`NNPlaygroundUITests` 是模板：只含 `testExample`/`testPerformanceExample`，UI test 查询的 `Button`/switch `0`/`1` 在 storyboard 中不存在，不能作为功能覆盖。
+2. `NNPlaygroundTests` 包含 LossView 几何及真实宿主安全区布局回归，另保留模板用例。`NNPlaygroundUITests` 覆盖三种方向请求下的单步、加速切换、训练暂停、配置切换与重置；配合 [tests/capture_layout.py](tests/capture_layout.py) 采集 `--mask=black` 截图并检查实际方向、显示器及统计区。必须逐图目视检查；这些测试不等于连续旋转、折叠切换或真机验证。Debug 诊断仅在显式传入 `-NNPReviewOrientation` 时启用，Release 不包含该入口。
 3. 当前完整 code map、默认值、生命周期、模型 API、数学、数据集、UI 接线、性能计数、实现事实在 [docs/INTERNALS.md](docs/INTERNALS.md)。

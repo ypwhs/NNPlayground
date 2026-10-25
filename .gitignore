@@ -5,6 +5,9 @@
 ## User settings
 xcuserdata/
 
+## Local build output
+DerivedData
+
 ## Xcode 8 and earlier
 *.xcscmblueprint
 *.xccheckout

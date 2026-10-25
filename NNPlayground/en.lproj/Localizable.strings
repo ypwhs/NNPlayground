@@ -7,6 +7,7 @@
 */
 "CFBundleDisplayName" = "NeuralNetworks";
 "show_loss" = "Train Loss:\n%.3f\nTest Loss:\n%.3f\nIter:\n%d";
+"show_loss_compact" = "Train loss: %.3f\nTest loss: %.3f\nIterations: %d";
 "set train data" = "Training data percentage: %d0%%";
 "set noise" = "Noise: %d";
 "set batch size" = "Batch size: %d";

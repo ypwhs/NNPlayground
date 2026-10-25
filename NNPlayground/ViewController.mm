@@ -7,11 +7,17 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
 
 using namespace std;
 
-@interface ViewController ()
+// 横屏翻转时尺寸可能不变，但右侧面板位置仍可能改变。
+static CGRect lastHeatMapLayoutFrame = CGRectZero;
 
+@interface ViewController ()
+@property (nonatomic) CGSize lastNodeLayoutSize;
+@property (nonatomic) BOOL didFinishInitialLayout;
+@property (nonatomic, strong) UIStackView *controlStack;
 @end
 
 @implementation ViewController
@@ -353,24 +359,18 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
     (*network->network[layers - 1])[0]->initNodeLayer(frame);   //将heatmap的frame设置到网络的输出结点
     
     //计算各个坐标
-    CGFloat margin = _heatMap.frame.origin.y;   //将heatmap的y坐标用于第一个结点的x,y坐标
-    CGFloat x = 25;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        // 获取屏幕的宽度和高度，取较大一方判断是否为 812.0 或 896.0
-        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-        CGFloat maxLength = screenWidth > screenHeight ? screenWidth : screenHeight;
-        if (maxLength == 812.0f || maxLength == 896.0f) {
-            x = 65;
-        }
-    }
-    CGFloat y = margin;
+    CGFloat margin = 24;
+    CGFloat x = [self nodeStartX];
+    // Duo 内屏的右上角有状态栏/灵动岛/通知区域，safeAreaInsets 为 0，
+    // 需要额外给顶部预留 80pt，避免热力图和节点被系统 UI 盖住。
+    CGFloat topInset = [self duoTopInset];
+    CGFloat y = margin + topInset;
     
     CGFloat width = frame.origin.x - x;
     width /= layers - 1;    //两个结点的x坐标差
     
-    CGFloat height = self.view.frame.size.height - margin;
-    height /= 8;
+    CGFloat height = self.view.bounds.size.height - y - margin;
+    height /= 8;   // 固定 8 个槽位，节点数变化不改变布局
     
     CGFloat ndoeWidth = height - 5*screenScale;
     ndoeWidth = ndoeWidth > 50 ? 50 : ndoeWidth;
@@ -378,7 +378,8 @@ unsigned int * outputBitmap = new unsigned int[bigOutputImageWidth*bigOutputImag
 
     for(int i = 0; i < layers - 1; i++){
         for(int j = 0; j < networkShape[i]; j++){
-            frame.origin = CGPointMake(x + width*i, y + height*j);
+            CGFloat nodeY = y + height*j;
+            frame.origin = CGPointMake(x + width*i, nodeY);
             Node * node = (*network->network[i])[j];
             node->initNodeLayer(frame);
         }
@@ -488,9 +489,15 @@ double trainLoss = 0, testLoss = 0;
     [self updateLabel];
 }
 
+- (NSString *)statisticsText {
+    NSString *key = self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact
+        ? @"show_loss_compact" : @"show_loss";
+    return [NSString stringWithFormat:NSLocalizedString(key, nil), trainLoss, testLoss, epoch];
+}
+
 - (void)updateLabel{
     [self ui:^{
-        [self->_outputLabel setText:[NSString stringWithFormat:NSLocalizedString(@"show_loss", nil), trainLoss, testLoss, epoch]];
+        [self->_outputLabel setText:[self statisticsText]];
         [self->_fpsLabel setText:[NSString stringWithFormat:@"fps:%d", speed]];
     }];
 }
@@ -523,6 +530,10 @@ int maxfps = 120;
     
     _spreadView.regenerate = ^{
         [strongSelf resetNetworkShape];
+    };
+    
+    _spreadView.didHide = ^{
+        [strongSelf restoreMainUIAfterSpread];
     };
     
     _spreadView.introduce = ^(NSURL *url){
@@ -633,24 +644,17 @@ CGFloat screenScale = [UIScreen mainScreen].scale;
     [self updateDataset];
     [self initSpreadView];
     
-    //左侧约束
-    int height = self.view.frame.size.height;
-    NSLayoutConstraint * runButtonWidth;
-    if (height == 320) {
-        runButtonWidth = [NSLayoutConstraint constraintWithItem:_runButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:39];
-    }
-    else {
-        runButtonWidth = [NSLayoutConstraint constraintWithItem:_runButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:46];
-    }
-    [NSLayoutConstraint activateConstraints:[NSArray arrayWithObjects:runButtonWidth, nil]];
+    // 按钮尺寸统一由 alignControlButtons 设置，避免旧宽度与按钮栈约束冲突。
     [self.view layoutIfNeeded];
-//    NSLog(@"%f",_runButton.frame.size.height);
     
 
     UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpressAction:)];
     longpress.minimumPressDuration = 0.5;
     [_heatMap addGestureRecognizer:longpress];
     [self resetNetwork];
+    self.lastNodeLayoutSize = self.view.bounds.size;
+    self.didFinishInitialLayout = YES;
+    [self alignControlButtons];
 }
 
 MBProgressHUD *hud;
@@ -753,6 +757,240 @@ bool isShowTestData = false;
     [self reset];
 }
 
+NSMutableArray<NSNumber *> *hiddenSubviewStates = nil;
+
+- (void)hideMainUIForSpread {
+    if (hiddenSubviewStates != nil) return;
+    hiddenSubviewStates = [NSMutableArray array];
+    for (UIView *subview in self.view.subviews) {
+        [hiddenSubviewStates addObject:@(subview.hidden)];
+        if (subview != _heatMap) {
+            subview.hidden = YES;
+        }
+    }
+}
+
+- (void)restoreMainUIAfterSpread {
+    if (hiddenSubviewStates == nil) return;
+    NSArray<UIView *> *subviews = self.view.subviews;
+    for (NSUInteger i = 0; i < subviews.count && i < hiddenSubviewStates.count; i++) {
+        subviews[i].hidden = [hiddenSubviewStates[i] boolValue];
+    }
+    hiddenSubviewStates = nil;
+    [self initNodeLayer];
+}
+
+- (CGFloat)nodeStartX {
+    // 正常边距与系统安全区取较大者，不把两份留白叠加，也不按机型尺寸判断。
+    return MAX(25, self.view.safeAreaInsets.left);
+}
+
+- (void)alignControlButtons {
+    if (self.controlStack) return;
+    NSArray<UIButton *> *buttons = @[self.resetButton, self.runButton, self.oneStepButton, self.accelerateButton, self.configureButton];
+    NSMutableArray<NSLayoutConstraint *> *obsolete = [NSMutableArray array];
+    for (NSLayoutConstraint *constraint in self.view.constraints) {
+        BOOL involves = NO;
+        for (UIButton *button in buttons) {
+            if (constraint.firstItem == button || constraint.secondItem == button) {
+                involves = YES;
+                break;
+            }
+        }
+        if (constraint.firstItem == self.speedUpLabel || constraint.secondItem == self.speedUpLabel) {
+            involves = YES;
+        }
+        if (involves) [obsolete addObject:constraint];
+    }
+    [NSLayoutConstraint deactivateConstraints:obsolete];
+
+    NSMutableArray<UIView *> *arranged = [NSMutableArray array];
+    for (UIButton *button in buttons) {
+        if (!button) continue;
+        [button.widthAnchor constraintEqualToConstant:40].active = YES;
+        [button.heightAnchor constraintEqualToConstant:40].active = YES;
+        [arranged addObject:button];
+    }
+    UIStackView *stack = [[UIStackView alloc] initWithArrangedSubviews:arranged];
+    stack.axis = UILayoutConstraintAxisVertical;
+    stack.alignment = UIStackViewAlignmentLeading;
+    stack.spacing = 8;
+    stack.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:stack];
+    self.controlStack = stack;
+
+    UILayoutGuide *safe = self.view.safeAreaLayoutGuide;
+    NSLayoutConstraint *preferredLeading = [stack.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:24];
+    preferredLeading.priority = UILayoutPriorityDefaultHigh;
+    [NSLayoutConstraint activateConstraints:@[
+        preferredLeading,
+        [stack.leadingAnchor constraintGreaterThanOrEqualToAnchor:safe.leadingAnchor],
+        [stack.bottomAnchor constraintEqualToAnchor:safe.bottomAnchor constant:-12],
+    ]];
+    if (self.speedUpLabel) {
+        self.speedUpLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:self.speedUpLabel];
+        [NSLayoutConstraint activateConstraints:@[
+            [self.speedUpLabel.leadingAnchor constraintEqualToAnchor:self.accelerateButton.trailingAnchor constant:6],
+            [self.speedUpLabel.centerYAnchor constraintEqualToAnchor:self.accelerateButton.centerYAnchor],
+        ]];
+    }
+}
+
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [AppDelegate supportedOrientationsForWindowScene:self.viewIfLoaded.window.windowScene];
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    UIInterfaceOrientation current = self.viewIfLoaded.window.windowScene.interfaceOrientation;
+    if (current != UIInterfaceOrientationUnknown &&
+        ([self supportedInterfaceOrientations] & (1 << current))) {
+        return current;
+    }
+    return UIInterfaceOrientationLandscapeRight;
+}
+
+- (void)viewIsAppearing:(BOOL)animated {
+    [super viewIsAppearing:animated];
+    [self setNeedsUpdateOfSupportedInterfaceOrientations];
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    // 180° 翻转可能不改变窗口尺寸，必须在约束完成后重排节点与连线。
+    self.lastNodeLayoutSize = CGSizeZero;
+    [self.view setNeedsLayout];
+}
+
+// Duo 内屏横屏时窗口约 951×669，safeAreaInsets 仍为 0；折叠外屏约 678×466。
+// 折叠时 view.bounds 可能仍是内屏尺寸，所以不能用 view 高度判断。
+// 用 size class 区分：内屏 regular/regular，折叠外屏 compact/compact。
+// 内屏右上角的状态栏、灵动岛、通知横幅、定位/录制指示不在安全区内，
+// 预留 80pt 作为系统浮层高度；折叠外屏继续只用 safeAreaInsets（左 84 / 下 34）。
+- (BOOL)isDuoInnerScreen {
+    if ([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
+    return self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
+           self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular;
+}
+
+- (CGFloat)duoTopInset {
+    return [self isDuoInnerScreen] ? 80 : 0;
+}
+
+- (NSLayoutConstraint *)heatMapTopConstraint {
+    for (NSLayoutConstraint *constraint in self.view.constraints) {
+        if (constraint.firstItem == self.heatMap &&
+            constraint.firstAttribute == NSLayoutAttributeTop) {
+            return constraint;
+        }
+    }
+    return nil;
+}
+
+- (BOOL)applyDuoTopInsetIfNeeded {
+    NSLayoutConstraint *topConstraint = [self heatMapTopConstraint];
+    if (topConstraint == nil) {
+        return NO;
+    }
+    self.outputLabel.text = [self statisticsText];
+    CGFloat textHeight = [self.outputLabel sizeThatFits:CGSizeMake(160, CGFLOAT_MAX)].height;
+    // 热图160、两复选框与间距64、文字、曲线间距8、最小曲线48、底边距12。
+    // 按真实可用高度上移右侧面板，不通过压没文字或曲线来消除约束冲突。
+    CGFloat requiredHeight = 160 + 64 + ceil(textHeight) + 8 + 48 + 12;
+    CGFloat availableHeight = self.view.safeAreaLayoutGuide.layoutFrame.size.height;
+    CGFloat target = MAX(24, MIN(108 + [self duoTopInset], availableHeight - requiredHeight));
+    if (fabs(topConstraint.constant - target) < 0.5) {
+        return NO;
+    }
+    topConstraint.constant = target;
+    return YES;
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if ([self applyDuoTopInsetIfNeeded]) {
+        self.lastNodeLayoutSize = CGSizeZero;
+        [self.view setNeedsLayout];
+    }
+}
+
+#if DEBUG
+// 仅在截图测试显式传参时启用；Release 不含方向测试入口或诊断文件写入。
+static NSTimer *layoutReviewTimer;
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (![NSProcessInfo.processInfo.arguments containsObject:@"-NNPReviewOrientation"]) return;
+    NSInteger orientation = [NSUserDefaults.standardUserDefaults integerForKey:@"NNPReviewOrientation"];
+    if (orientation != UIInterfaceOrientationPortrait &&
+        orientation != UIInterfaceOrientationLandscapeLeft &&
+        orientation != UIInterfaceOrientationLandscapeRight) return;
+    self.runButton.accessibilityIdentifier = @"reviewRun";
+    self.resetButton.accessibilityIdentifier = @"reviewReset";
+    self.oneStepButton.accessibilityIdentifier = @"reviewStep";
+    self.accelerateButton.accessibilityIdentifier = @"reviewSpeed";
+    self.speedUpLabel.accessibilityIdentifier = @"reviewSpeedLabel";
+    self.configureButton.accessibilityIdentifier = @"reviewConfigure";
+    self.fpsLabel.accessibilityIdentifier = @"reviewFPS";
+    self.spreadView.setCircleButton.accessibilityIdentifier = @"reviewCircle";
+    self.spreadView.setExclusiveOrButton.accessibilityIdentifier = @"reviewXor";
+    self.spreadView.addLayerButton.accessibilityIdentifier = @"reviewAddLayer";
+    self.spreadView.subLayerButton.accessibilityIdentifier = @"reviewSubLayer";
+    [layoutReviewTimer invalidate];
+    __weak typeof(self) weakSelf = self;
+    layoutReviewTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 repeats:YES block:^(NSTimer *timer) {
+        if (!weakSelf) { [timer invalidate]; return; }
+        [weakSelf writeLayoutReview];
+    }];
+    UIWindowSceneGeometryPreferencesIOS *preferences = [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:(1UL << orientation)];
+    [self.view.window.windowScene requestGeometryUpdateWithPreferences:preferences errorHandler:^(NSError *error) {
+        NSLog(@"REVIEW_GEOMETRY_ERROR %@", error);
+    }];
+}
+
+- (void)writeLayoutReview {
+    UIWindowScene *scene = self.view.window.windowScene;
+    if (!scene) return;
+    UIEdgeInsets safe = self.view.safeAreaInsets;
+    CGRect heat = self.heatMap.frame;
+    CGSize screenPixels = scene.screen.nativeBounds.size;
+    NSDictionary *info = @{@"orientation": @(scene.effectiveGeometry.interfaceOrientation),
+        @"width": @(self.view.bounds.size.width), @"height": @(self.view.bounds.size.height),
+        @"windowWidth": @(self.view.window.bounds.size.width), @"windowHeight": @(self.view.window.bounds.size.height),
+        @"horizontal": @(scene.traitCollection.horizontalSizeClass), @"vertical": @(scene.traitCollection.verticalSizeClass),
+        @"left": @(safe.left), @"right": @(safe.right), @"top": @(safe.top), @"bottom": @(safe.bottom),
+        @"heatX": @(heat.origin.x), @"heatY": @(heat.origin.y), @"heatWidth": @(heat.size.width), @"heatHeight": @(heat.size.height),
+        @"nodeX": @([self nodeStartX]), @"buttonX": @(self.controlStack.frame.origin.x),
+        @"statisticsHeight": @(self.outputLabel.bounds.size.height),
+        @"statisticsRequiredHeight": @([self.outputLabel sizeThatFits:CGSizeMake(self.outputLabel.bounds.size.width, CGFLOAT_MAX)].height),
+        @"lossHeight": @(self.lossView.bounds.size.height), @"lossBottom": @(CGRectGetMaxY(self.lossView.frame)),
+        @"mask": @([self supportedInterfaceOrientations]), @"screenPixelWidth": @(screenPixels.width),
+        @"screenPixelHeight": @(screenPixels.height), @"scale": @(scene.screen.scale),
+        @"epoch": @(epoch), @"training": @(always), @"speedUp": @(isSpeedUp),
+        @"settingsVisible": @(self.spreadView.superview != nil), @"dataset": @((int)dataset), @"layers": @(layers)};
+    [info writeToFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Documents/layout-review.plist"] atomically:YES];
+}
+#endif
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if ([self applyDuoTopInsetIfNeeded]) {
+        self.lastNodeLayoutSize = CGSizeZero;
+        [self.view setNeedsLayout];
+        return;
+    }
+    if (!self.didFinishInitialLayout) return;
+    CGSize size = self.view.bounds.size;
+    if (!CGSizeEqualToSize(size, self.lastNodeLayoutSize) ||
+        !CGRectEqualToRect(self.heatMap.frame, lastHeatMapLayoutFrame)) {
+        self.lastNodeLayoutSize = size;
+        lastHeatMapLayoutFrame = self.heatMap.frame;
+        [self initNodeLayer];
+    }
+}
+
 - (IBAction)createSpread:(ConfigureButton *)sender {
     CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     [rotateAnimation setFromValue:[NSNumber numberWithDouble:0.0]];
@@ -760,6 +998,7 @@ bool isShowTestData = false;
     [rotateAnimation setDuration:0.2];
     [sender.layer addAnimation:rotateAnimation forKey:@"configureButtonRotate"];
     if (UIWindow *window = self.view.window) {
+        [self hideMainUIForSpread];
         [_spreadView showInView:window];
     }
 }

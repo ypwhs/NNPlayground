@@ -39,15 +39,19 @@ class DropDownView: UIView {
         return view
     }()
     
+    private func anchorFrame(in view: UIView) -> CGRect {
+        guard let button = dropDownButton else { return .zero }
+        return button.convert(button.bounds, to: view)
+    }
+    
     func showInView(_ view: UIView,button: DropDownButton) {
         frame = view.bounds
         dropDownButton = button
-        if (dropDownButton) != nil {
-            totalHeight = (dropDownButton?.frame.height)! * CGFloat(labelName.count)
-            tableView.rowHeight = (dropDownButton?.frame.height)!
-            if totalHeight > frame.height - (dropDownButton?.frame.maxY)! {
-                totalHeight = frame.height - (dropDownButton?.frame.maxY)! - 10
-            }
+        let anchor = anchorFrame(in: view)
+        totalHeight = anchor.height * CGFloat(labelName.count)
+        tableView.rowHeight = anchor.height
+        if totalHeight > frame.height - anchor.maxY {
+            totalHeight = frame.height - anchor.maxY - 10
         }
         
         view.addSubview(self)
@@ -55,29 +59,18 @@ class DropDownView: UIView {
         layoutIfNeeded()
         
         containerView.alpha = 1
-//        UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlUp, animations: {
-//        }, completion: { _ in
-//        })
         UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlUp, animations: {
-                if (self.dropDownButton) != nil {
-                    self.tableView.frame = CGRect(x: (self.dropDownButton?.frame.minX)!, y: (self.dropDownButton?.frame.maxY)!, width: (self.dropDownButton?.frame.width)!, height: self.totalHeight)
-                }
-
+                self.tableView.frame = CGRect(x: anchor.minX, y: anchor.maxY, width: anchor.width, height: self.totalHeight)
                 self.layoutIfNeeded()
             }, completion: { _ in
         })
     }
     
     @objc func hide() {
-        
+        let anchor = anchorFrame(in: superview ?? self)
         UIView.animate(withDuration: Double(labelName.count) * 0.02, delay: 0.0, options: .transitionCurlDown, animations: {
-            
-            if (self.dropDownButton) != nil {
-                self.tableView.frame = CGRect(x: (self.dropDownButton?.frame.minX)!, y: (self.dropDownButton?.frame.maxY)!, width: (self.dropDownButton?.frame.width)!, height: 0)
-            }
-            
-            self.layoutIfNeeded()
-            
+                self.tableView.frame = CGRect(x: anchor.minX, y: anchor.maxY, width: anchor.width, height: 0)
+                self.layoutIfNeeded()
             }, completion: {[weak self] _ in
                 self?.removeFromSuperview()
         })

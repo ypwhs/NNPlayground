@@ -1,53 +1,60 @@
-//
-//  NNPlaygroundUITests.m
-//  NNPlaygroundUITests
-//
-//  Created by 杨培文 on 16/4/21.
-//  Copyright © 2016年 杨培文. All rights reserved.
-//
-
 #import <XCTest/XCTest.h>
 
 @interface NNPlaygroundUITests : XCTestCase
-
 @end
 
 @implementation NNPlaygroundUITests
 
-- (void)setUp {
-    [super setUp];
-    
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-    
-    // In UI tests it is usually best to stop immediately when a failure occurs.
+- (void)capturePhase:(NSString *)phase {
+    // 给 Debug 诊断快照留出刷新时间；宿主脚本在标记后捕获带硬件遮罩的屏幕。
+    [NSThread sleepForTimeInterval:0.6];
+    NSLog(@"LAYOUT_CAPTURE_READY %@", phase);
+    [NSThread sleepForTimeInterval:6];
+}
+
+- (void)exerciseOrientation:(NSInteger)orientation name:(NSString *)name {
     self.continueAfterFailure = NO;
-    // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-    [[[XCUIApplication alloc] init] launch];
-    
-    // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-}
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
-- (void)testExample {
-    // Use recording to get started writing UI tests.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    
+    // 界面左右横屏与设备左右朝向相反；同步物理方向，避免 iPad 截图内容倒置。
+    UIDeviceOrientation deviceOrientation = UIDeviceOrientationPortrait;
+    if (orientation == UIInterfaceOrientationLandscapeLeft) deviceOrientation = UIDeviceOrientationLandscapeRight;
+    if (orientation == UIInterfaceOrientationLandscapeRight) deviceOrientation = UIDeviceOrientationLandscapeLeft;
+    XCUIDevice.sharedDevice.orientation = deviceOrientation;
     XCUIApplication *app = [[XCUIApplication alloc] init];
-    XCUIElement *button = [[[[app.otherElements containingType:XCUIElementTypeButton identifier:@"Button"] childrenMatchingType:XCUIElementTypeButton] matchingIdentifier:@"Button"] elementBoundByIndex:0];
-    [button tap];
-    
-    XCUIElement *switch2 = app.switches[@"0"];
-    [switch2 tap];
-    
-    for(int i = 0; i < 5; i++)
-        [button tap];
-    
-    XCUIElement *switch3 = app.switches[@"1"];
-    [switch3 tap];
+    app.launchArguments = @[@"-AppleLanguages", @"(zh-Hans)", @"-AppleLocale", @"zh_CN",
+                           @"-NNPReviewOrientation", [@(orientation) stringValue]];
+    [app launch];
+    XCUIElement *run = app.buttons[@"reviewRun"];
+    XCTAssertTrue([run waitForExistenceWithTimeout:10]);
+
+    [app.buttons[@"reviewStep"] tap];
+    [app.buttons[@"reviewSpeed"] tap];
+    XCTAssertTrue([app.staticTexts[@"reviewSpeedLabel"] waitForExistenceWithTimeout:3]);
+    [app.buttons[@"reviewSpeed"] tap];
+    XCTAssertFalse(app.staticTexts[@"reviewSpeedLabel"].isHittable);
+    [run tap];
+    [NSThread sleepForTimeInterval:3];
+    [run tap];
+    [self capturePhase:[name stringByAppendingString:@"-trained"]];
+
+    [app.buttons[@"reviewConfigure"] tap];
+    XCTAssertTrue([app.buttons[@"reviewXor"] waitForExistenceWithTimeout:5]);
+    [app.buttons[@"reviewXor"] tap];
+    [app.buttons[@"reviewCircle"] tap];
+    [app.buttons[@"reviewAddLayer"] tap];
+    [app.buttons[@"reviewSubLayer"] tap];
+    [self capturePhase:[name stringByAppendingString:@"-settings"]];
+
+    // 以已显示的控件为坐标基准，避免折叠设备 app.frame 仍是旧屏幕范围。
+    // 点击数据按钮右侧空白，走原有关闭手势，不新增测试专用关闭操作。
+    XCUICoordinate *blank = [[app.buttons[@"reviewCircle"] coordinateWithNormalizedOffset:CGVectorMake(1, 0.5)]
+                             coordinateWithOffset:CGVectorMake(8, 0)];
+    [blank tap];
+    XCTAssertTrue([run waitForExistenceWithTimeout:5]);
+    [app.buttons[@"reviewReset"] tap];
+    [self capturePhase:[name stringByAppendingString:@"-reset"]];
 }
 
+- (void)testLeft { [self exerciseOrientation:UIInterfaceOrientationLandscapeLeft name:@"left"]; }
+- (void)testRight { [self exerciseOrientation:UIInterfaceOrientationLandscapeRight name:@"right"]; }
+- (void)testPortrait { [self exerciseOrientation:UIInterfaceOrientationPortrait name:@"portrait"]; }
 @end
