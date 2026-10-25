@@ -51,7 +51,7 @@ TensorFlow Playground 的 iOS 移植。Swift 5 做 UI，Objective-C++/C++ 做模
 2. 颜色：`getColor(-output)`，+1 蓝、-1 橙、0 灰；离散化取 `getColor(-output >= 0 ? 1 : -1)`；连接线 `getColor(-weight)`，线宽 `clamp(|weight|,0.5,4)`。
 3. 结点/连接线 CALayer 挂在 `self.view.layer`；输出结点只 `initNodeLayer` 设 frame，不加入视图，输出图写入 `heatMap.backgroundLayer.contents`。`Node` 析构移除自己的三个 layer 并删除入边，`Link` 析构移除 `curveLayer`；每条 Link 只由目的 Node 删除。
 4. `initNodeLayer` 负责结点坐标、结点尺寸、AddButton 位置和 `_spreadView.buttonWidth`（29/36）；`SpreadView.xib` 的 frame 数据不参与实际布局。
-5. 工程锁定横屏，没有旋转重排；`HeatMapView` 的两个 layer frame 在 init 时取当时的值。
+5. 普通手机和 iPad 保持横屏；iOS 27+ 的 phone regular/regular scene 额外允许竖屏，方向集合统一由 `AppDelegate` 按 scene traits 决定。安全区变化及热图 frame 变化都要重排节点与连线，不能只比较窗口尺寸。`HeatMapView` 仍为固定 160pt 正方形，其两个 layer frame 在 init 时取当时的值。
 
 ## IB、资源、本地化
 
@@ -64,5 +64,5 @@ TensorFlow Playground 的 iOS 移植。Swift 5 做 UI，Objective-C++/C++ 做模
 ## 验证
 
 1. 构建/运行命令、环境记录和已验证结果在 [docs/INTERNALS.md §10](docs/INTERNALS.md)。
-2. `NNPlaygroundTests` 包含 LossView 安全区绘制范围的几何回归测试，另保留模板用例；几何测试不等于实际旋转或折叠验证。`NNPlaygroundUITests` 仍是模板，查询的 `Button`/switch `0`/`1` 在 storyboard 中不存在，不能作为功能覆盖。
+2. `NNPlaygroundTests` 包含 LossView 几何及真实宿主安全区布局回归，另保留模板用例。`NNPlaygroundUITests` 覆盖三种方向请求下的单步、加速切换、训练暂停、配置切换与重置；配合 [tests/capture_layout.py](tests/capture_layout.py) 采集 `--mask=black` 截图并检查实际方向、显示器及统计区。必须逐图目视检查；这些测试不等于连续旋转、折叠切换或真机验证。Debug 诊断仅在显式传入 `-NNPReviewOrientation` 时启用，Release 不包含该入口。
 3. 当前完整 code map、默认值、生命周期、模型 API、数学、数据集、UI 接线、性能计数、实现事实在 [docs/INTERNALS.md](docs/INTERNALS.md)。

@@ -22,6 +22,53 @@
 
 @implementation NNPlaygroundTests
 
+- (UIViewController *)layoutController {
+    for (UIScene *scene in UIApplication.sharedApplication.connectedScenes) {
+        if (![scene isKindOfClass:UIWindowScene.class]) continue;
+        for (UIWindow *window in ((UIWindowScene *)scene).windows) {
+            if (window.isKeyWindow) return window.rootViewController;
+        }
+    }
+    XCTFail(@"未找到测试宿主窗口");
+    return nil;
+}
+
+- (void)assertSafeHorizontalLayout:(UIViewController *)controller {
+    [controller.view layoutIfNeeded];
+    UIView *heatMap = [controller valueForKey:@"heatMap"];
+    UIView *stack = [controller valueForKey:@"controlStack"];
+    XCTAssertNotNil(heatMap);
+    XCTAssertNotNil(stack);
+    UIEdgeInsets safe = controller.view.safeAreaInsets;
+    XCTAssertEqualWithAccuracy(CGRectGetMaxX(heatMap.frame),
+                              controller.view.bounds.size.width - MAX(28, safe.right), 0.5);
+    XCTAssertEqualWithAccuracy(stack.frame.origin.x, MAX(24, safe.left), 0.5);
+    NSNumber *nodeX = [controller valueForKey:@"nodeStartX"];
+    XCTAssertEqualWithAccuracy(nodeX.doubleValue, MAX(25, safe.left), 0.5);
+}
+
+- (void)testHorizontalContentRespectsActualSafeArea {
+    [self assertSafeHorizontalLayout:[self layoutController]];
+}
+
+- (void)testSameSizeSafeAreaChangeRelayoutsContent {
+    UIViewController *controller = [self layoutController];
+    UIEdgeInsets original = controller.additionalSafeAreaInsets;
+    CGSize size = controller.view.bounds.size;
+    @try {
+        controller.additionalSafeAreaInsets = UIEdgeInsetsMake(0, 90, 0, 120);
+        [self assertSafeHorizontalLayout:controller];
+        XCTAssertTrue(CGSizeEqualToSize(size, controller.view.bounds.size));
+        controller.additionalSafeAreaInsets = UIEdgeInsetsMake(0, 120, 0, 90);
+        [self assertSafeHorizontalLayout:controller];
+        XCTAssertTrue(CGSizeEqualToSize(size, controller.view.bounds.size));
+    } @finally {
+        controller.additionalSafeAreaInsets = original;
+        [controller.view layoutIfNeeded];
+    }
+    [self assertSafeHorizontalLayout:controller];
+}
+
 - (CGRect)plotForWindow:(UIEdgeInsets)windowInsets localRight:(CGFloat)localRight {
     Class<LossPlotGeometry> lossView = (Class<LossPlotGeometry>)NSClassFromString(@"NNPlayground.LossView");
     XCTAssertNotNil(lossView);

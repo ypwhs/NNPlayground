@@ -10,7 +10,7 @@
 | App Store id | 1116487840 |
 | Bundle ID | `com.yangpeiwen.NNPlayground2` |
 | 开发者 | 杨培文（Team `W26WBSVK66`） |
-| 支持设备 | iPhone / iPad，iOS 17.0+，仅横屏 |
+| 支持设备 | iPhone / iPad，iOS 17.0+；普通手机和 iPad 横屏，iOS 27+ phone regular/regular 场景额外支持竖屏 |
 | 价格 | 免费，无内购、无广告、无账号 |
 | 主分类 | 教育 |
 
@@ -123,3 +123,12 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground \
 - 已验证：Debug/Release 构建通过；iPhone 18 Pro Max、iPhone 17e、iPhone SE 3、iPhone Duo、iPad Air 13-inch (M4)、iPad Pro 13-inch (M5) 安装启动；中英文截图与中文 App Preview 已生成。
 - 未完成：本机无 Distribution 证书，尚未归档上传；iPad 端参数面板为拉伸布局；iPhone 6.9" 横屏下右侧 loss 数字标签被压缩，只显示 loss 曲线（不影响提交）。
 - 素材目录：桌面 `2026-10-24/`，包含截图、视频、元数据、隐私政策、审核备注、构建说明和校验清单。
+
+## 8. 2026-10-26 适配复查补充
+
+- 已修复双向横屏的左右安全区、Duo 内屏竖屏黑边及紧凑屏幕统计文字/曲线被压缩的问题。版本仍保持已确认的 `2026.10.24`，未自动改变营销或构建版本。
+- 当前六台模拟器（18 Pro Max、17e、SE3、iPad Pro 13 M5、Duo 内屏、Duo 外屏）完成三种方向请求和实际操作，共 18 项 UI 测试、54 张带系统黑色遮罩原图；自动断言通过，全部原图逐张目视复核。另 10 项单元测试通过，Release 模拟器构建成功。
+- iPad 左右横屏截图均正向；物理设备竖持但应用保持横屏时，portrait 请求的三张原始屏幕截图为竖画布、内容侧转 90°，不作为可直接上传的正向商店图片。普通手机和 Duo 外屏的 portrait 请求不表示启用了竖屏。
+- 截图和原始日志保存在桌面 `2026-10-26/全机型最终复查/`。复用流程见 [测试说明](../tests/README.md)，必须明确选择当前点亮显示器并保留 `--mask=black`；不能用无遮罩截图判定摄像头适配。
+- 以上是模拟器逐方向启动验证，不涵盖连续折叠/训练中旋转/真机。此前商店截图与视频仍为旧布局，上架前需按最终版本重新生成中英文商店截图和中文视频；此批中文调试证据不能直接替代整套上架素材。
+- Distribution 签名、App Store 上传和 GitHub PR 截图附件仍未完成；GitHub CLI 未登录。未经明确授权不合并 PR。

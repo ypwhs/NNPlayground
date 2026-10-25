@@ -594,6 +594,17 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground -configuration D
 - 几何回归覆盖右侧遮挡、左侧更大、左右对称、无遮挡、宽度下限、不同安全区输入恢复；不将纯几何单测当成真实折叠/旋转测试。Duo 模拟器接受方向请求后画面仍保持右下摄像头，本轮不声称完成真实换边或内外屏切换验证。
 - 截图驱动及诊断日志代码只用于验证，提交前恢复；桌面 `2026-10-25/Duo右下角适配/` 保存本轮截图。修复前对照基于 `0cb8c99`，不是 master 截图。GitHub CLI 未登录，PR 附件更新仍待认证。
 
+### 10.2 双向安全区、内屏竖屏与统计区（2026-10-26）
+
+- 主界面左右边距统一为正常边距与系统安全区的较大者：按钮 `max(24,left)`、节点 `max(25,left)`、热图右侧 `max(28,right)`。不再叠加左侧 24pt，也不再让右侧固定 28pt 覆盖安全区。热图以下内容随原对齐链一起避让。
+- 安全区变化先失效布局缓存，再在 Auto Layout 完成后重建节点及连线；同尺寸翻转仍检查热图 frame，避免连线停在旧位置。删除按钮栈 40pt 与旧运行按钮 39/46pt 的冲突约束。
+- 方向策略由 `AppDelegate` 统一按 scene traits 决定。iOS 27+、phone regular/regular 额外允许 portrait，使用公开 scene 方向代理覆盖 plist；普通手机和 iPad 仍仅横屏。连接、激活、traits/geometry 更新时只修正不合法方向，不强制将合法内屏竖屏拉回横屏。
+- 紧凑垂直 size class 使用中英文三行统计；根据安全区可用高度和文本实际所需高度上移右侧面板。曲线首选 120pt @249，最低 48pt @1000，不再靠压没文字或曲线满足布局。
+- 可复用流程保存在 [测试说明](../tests/README.md) 和 [截图脚本](../tests/capture_layout.py)。每设备执行 left/right/portrait 三种方向请求，每方向实际单步、切换加速、训练暂停、打开设置、切换数据集和层数再恢复、关闭及重置，保存 trained/settings/reset 三张遮罩截图与布局证据。
+- `UIInterfaceOrientationLandscapeLeft=4`、`LandscapeRight=3` 与设备朝向枚举相反。测试同时设置物理设备朝向和 scene 方向；按当前 scene 的实际像素尺寸选择显示器，避免 Duo 名称、默认显示器和折叠状态不一致导致截到黑屏。关闭设置以可见数据按钮的相对空白位置定位，不用可能滞后的 `app.frame`。
+- Debug 诊断只有显式传入 `-NNPReviewOrientation` 才启用；Release 完全不包含该测试入口。脚本自动检查实际方向、状态、统计文字高度、曲线最低高度及安全区，仍须逐张人工检查遮罩、完整显示和黑边。
+- 最终 Debug 单元测试：10 项、0 失败（含 2 项原模板用例）；Release 模拟器构建成功。真实连续折叠、训练中旋转、后台折叠恢复和真机仍需另测，不以逐方向冷启动截图代替。
+
 ## 11. 发布准备记录（2026-10-24）
 
 - 发布目标：iPhone 版 `神经网络`（App Store id `1116487840`，bundle `com.yangpeiwen.NNPlayground2`）的通用更新；该更新首次把 iPhone 应用扩展到 iPad。iPad 独立应用 id `1115132797` 不受影响。

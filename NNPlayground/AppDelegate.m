@@ -14,6 +14,10 @@
 
 @interface SceneDelegate : UIResponder <UIWindowSceneDelegate>
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic) UIInterfaceOrientationMask lastSupportedOrientations;
+@property (nonatomic) UIInterfaceOrientationMask lastRequestedOrientations;
+@property (nonatomic) UIInterfaceOrientation lastRequestedFromOrientation;
+@property (nonatomic) BOOL orientationUpdateScheduled;
 @end
 
 @implementation SceneDelegate
@@ -29,30 +33,101 @@
     [self.window makeKeyAndVisible];
 
     UIWindowScene *windowScene = (UIWindowScene *)scene;
-    [self lockWindowSceneToLandscape:windowScene];
+    [windowScene registerForTraitChanges:@[
+        UITraitUserInterfaceIdiom.class,
+        UITraitHorizontalSizeClass.class,
+        UITraitVerticalSizeClass.class,
+    ] withTarget:self action:@selector(windowSceneTraitsDidChange:)];
+    [self scheduleOrientationUpdateForWindowScene:windowScene];
 }
 
-- (void)lockWindowSceneToLandscape:(UIWindowScene *)windowScene {
-    if (@available(iOS 16.0, *)) {
-        UIWindowSceneGeometryPreferencesIOS *preferences =
-            [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:UIInterfaceOrientationMaskLandscape];
-        [windowScene requestGeometryUpdateWithPreferences:preferences errorHandler:^(NSError *error) {
-            NSLog(@"requestGeometryUpdate failed: %@", error);
-        }];
+- (UIInterfaceOrientationMask)supportedInterfaceOrientationsForWindowScene:(UIWindowScene *)windowScene {
+    return [AppDelegate supportedOrientationsForWindowScene:windowScene];
+}
+
+- (void)windowSceneTraitsDidChange:(UIWindowScene *)windowScene {
+    [self scheduleOrientationUpdateForWindowScene:windowScene];
+}
+
+- (void)scheduleOrientationUpdateForWindowScene:(UIWindowScene *)windowScene {
+    if (self.orientationUpdateScheduled) return;
+    self.orientationUpdateScheduled = YES;
+    __weak typeof(self) weakSelf = self;
+    __weak UIWindowScene *weakScene = windowScene;
+    // 等待同一轮 traits 传播，避免 scene 与根控制器暂时使用不同方向集合。
+    dispatch_async(dispatch_get_main_queue(), ^{
+        typeof(self) strongSelf = weakSelf;
+        UIWindowScene *scene = weakScene;
+        if (!strongSelf) return;
+        strongSelf.orientationUpdateScheduled = NO;
+        if (!scene || strongSelf.window.windowScene != scene) return;
+        [strongSelf updateOrientationsForWindowScene:scene];
+    });
+}
+
+- (void)updateOrientationsForWindowScene:(UIWindowScene *)windowScene {
+    UIInterfaceOrientationMask supported = [AppDelegate supportedOrientationsForWindowScene:windowScene];
+    if (self.lastSupportedOrientations != supported) {
+        self.lastSupportedOrientations = supported;
+        self.lastRequestedOrientations = 0;
+        UIViewController *controller = self.window.rootViewController;
+        while (controller) {
+            [controller setNeedsUpdateOfSupportedInterfaceOrientations];
+            controller = controller.presentedViewController;
+        }
     }
+
+    UIInterfaceOrientation orientation = windowScene.effectiveGeometry.interfaceOrientation;
+    if (orientation == UIInterfaceOrientationUnknown) return;
+    if ((supported & (1UL << orientation)) != 0) {
+        self.lastRequestedOrientations = 0;
+        return;
+    }
+    if (windowScene.activationState != UISceneActivationStateForegroundActive) return;
+    if (self.lastRequestedOrientations == supported &&
+        self.lastRequestedFromOrientation == orientation) return;
+
+    // 只修正不再支持的方向；合法竖屏或横屏不主动改变，失败也不循环重试。
+    self.lastRequestedOrientations = supported;
+    self.lastRequestedFromOrientation = orientation;
+    UIWindowSceneGeometryPreferencesIOS *preferences =
+        [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:supported];
+    [windowScene requestGeometryUpdateWithPreferences:preferences errorHandler:^(NSError *error) {
+        NSLog(@"requestGeometryUpdate failed: %@", error);
+    }];
 }
 
 - (void)sceneDidBecomeActive:(UIScene *)scene {
     if (![scene isKindOfClass:[UIWindowScene class]]) return;
-    UIWindowScene *windowScene = (UIWindowScene *)scene;
-    if (!UIInterfaceOrientationIsLandscape(windowScene.interfaceOrientation)) {
-        [self lockWindowSceneToLandscape:windowScene];
-    }
+    // 新的激活周期允许重试此前在后台或切换中未能完成的方向请求。
+    self.lastRequestedOrientations = 0;
+    [self scheduleOrientationUpdateForWindowScene:(UIWindowScene *)scene];
+}
+
+- (void)windowScene:(UIWindowScene *)windowScene didUpdateEffectiveGeometry:(UIWindowSceneGeometry *)previousEffectiveGeometry {
+    [self scheduleOrientationUpdateForWindowScene:windowScene];
+}
+
+- (void)windowScene:(UIWindowScene *)windowScene didUpdateCoordinateSpace:(id<UICoordinateSpace>)previousCoordinateSpace interfaceOrientation:(UIInterfaceOrientation)previousInterfaceOrientation traitCollection:(UITraitCollection *)previousTraitCollection {
+    if (@available(iOS 26.0, *)) return;
+    [self scheduleOrientationUpdateForWindowScene:windowScene];
 }
 
 @end
 
 @implementation AppDelegate
+
++ (UIInterfaceOrientationMask)supportedOrientationsForWindowScene:(UIWindowScene *)scene {
+    if (@available(iOS 27.0, *)) {
+        UITraitCollection *traits = scene.traitCollection;
+        if (traits.userInterfaceIdiom == UIUserInterfaceIdiomPhone &&
+            traits.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
+            traits.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+            return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
+        }
+    }
+    return UIInterfaceOrientationMaskLandscape;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
