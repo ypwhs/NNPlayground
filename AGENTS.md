@@ -64,5 +64,5 @@ TensorFlow Playground 的 iOS 移植。Swift 5 做 UI，Objective-C++/C++ 做模
 ## 验证
 
 1. 构建/运行命令、环境记录和已验证结果在 [docs/INTERNALS.md §10](docs/INTERNALS.md)。
-2. `NNPlaygroundTests`、`NNPlaygroundUITests` 是模板：只含 `testExample`/`testPerformanceExample`，UI test 查询的 `Button`/switch `0`/`1` 在 storyboard 中不存在，不能作为功能覆盖。
+2. `NNPlaygroundTests` 包含 LossView 安全区绘制范围的几何回归测试，另保留模板用例；几何测试不等于实际旋转或折叠验证。`NNPlaygroundUITests` 仍是模板，查询的 `Button`/switch `0`/`1` 在 storyboard 中不存在，不能作为功能覆盖。
 3. 当前完整 code map、默认值、生命周期、模型 API、数学、数据集、UI 接线、性能计数、实现事实在 [docs/INTERNALS.md](docs/INTERNALS.md)。

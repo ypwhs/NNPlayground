@@ -12,6 +12,28 @@ import UIKit
     var train:[CGFloat] = []
     var test:[CGFloat] = []
     
+    // 只处理右侧额外的安全区；普通手机左右对称的安全区保持原有绘制范围。
+    // 安全区已经转换到本视图坐标，不需要机型名称、屏幕尺寸或摄像头坐标。
+    @objc(plotBoundsForBounds:safeAreaInsets:windowSafeAreaInsets:)
+    class func plotBounds(for bounds: CGRect, safeAreaInsets: UIEdgeInsets,
+                          windowSafeAreaInsets: UIEdgeInsets) -> CGRect {
+        guard windowSafeAreaInsets.right > windowSafeAreaInsets.left else { return bounds }
+        let inset = min(bounds.width, max(0, safeAreaInsets.right))
+        return CGRect(x: bounds.minX, y: bounds.minY,
+                      width: bounds.width - inset, height: bounds.height)
+    }
+
+    override func safeAreaInsetsDidChange() {
+        super.safeAreaInsetsDidChange()
+        setNeedsDisplay()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // 折叠或旋转后重新缩放整条曲线，而不是裁掉被遮挡的数据。
+        setNeedsDisplay()
+    }
+
     override func draw(_ rect: CGRect) {
         if train.count < 1{
             return
@@ -38,8 +60,11 @@ import UIKit
         min *= 0.9
         let delta = (max - min)*1.1
         
-        let width = rect.width
-        let height = rect.height
+        let plot = Self.plotBounds(for: bounds, safeAreaInsets: safeAreaInsets,
+                                   windowSafeAreaInsets: window?.safeAreaInsets ?? .zero)
+        guard plot.width > 0, plot.height > 0 else { return }
+        let width = plot.width
+        let height = plot.height
         let n = train.count
         
         var trainpoints = [CGPoint]()

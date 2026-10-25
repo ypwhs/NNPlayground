@@ -399,6 +399,7 @@ nodeW  = min(50, height - 5*screenScale)
 - `addLoss(a,b)` 向 train/test 数组 append，`setNeedsDisplay`。
 - `draw`：空数组返回；取两组数据的 max/min，`min*=0.9`，`delta=(max-min)*1.1`；元素数 <5000 时逐点画，否则按 `i*n/5000` 抽样 5000 点；训练灰、测试黑。
 - 元素数为 1 时 x 坐标按 `width*i/(n-1)` 计算。
+- `plotBounds`：仅当窗口右安全区大于左安全区时，从绘制宽度扣除 LossView 本地 `safeAreaInsets.right`（限制在 0…bounds.width），重新缩放整条曲线，不裁掉数据。普通手机左右对称安全区、反向横屏及无遮挡视图保持原宽；不改任何 Auto Layout 约束、frame 或高度。`safeAreaInsetsDidChange` / `layoutSubviews` 请求重绘，训练暂停时也能响应布局变化。
 
 ## 7. UI 层
 
@@ -584,6 +585,14 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground -configuration D
 - 2026-10-24 15:00 版本号更新为 `2026.10.24`（build `2026.10.24`）；Debug/Release 构建通过；Release 签名证书仍只有 Apple Development，App Store 分发需补 Distribution 证书或在 Xcode Cloud 归档。
 - 2026-10-25 01:20 修复 Duo 内屏右上角系统区域：`duoTopInset` 预留 80pt，热力图/节点下移；用 Clock 系统通知横幅在 Duo 上验证，热力图、loss 和训练按钮不再被通知遮挡；普通 iPhone 18 Pro Max 回归布局不变。
 - 2026-10-25 01:35 修正 Duo 内屏/折叠外屏判断：不再用 `view.bounds.height > 600`，改为 `traitCollection` regular/regular；折叠外屏 compact/compact 返回 0，使用 safeAreaInsets（左 84 / 下 34）。实测折叠外屏 678×466，避免折叠后被误加 80pt。
+
+### 10.1 Duo 右下角摄像头避让（2026-10-25）
+
+- 带摄像头遮罩复现：外屏 678×466，摄像头位于右下角时根视图安全区为 `{0,0,34,84}`，并非之前反向状态的 `{0,84,34,0}`。LossView frame 为 `{{490,340},{160,80}}`，本地右安全区 56pt。
+- 仅修改 LossView 自身绘制宽度，160pt → 104pt，右端位于窗口 x=594；两条曲线完整缩放，摄像头不再遮挡曲线。热图、标签、控件、节点与训练逻辑不变，不添加机型名称、屏幕尺寸判断或固定避让常量。
+- 已实测运行与截图：Duo 外屏右下摄像头；iPhone 18 Pro Max、17e、SE 3；iPad Pro 13-inch M5。普通手机与 iPad 曲线保留原宽。截图均使用 `simctl io screenshot --mask=black`，在训练后暂停、测试退出前捕获。
+- 几何回归覆盖右侧遮挡、左侧更大、左右对称、无遮挡、宽度下限、不同安全区输入恢复；不将纯几何单测当成真实折叠/旋转测试。Duo 模拟器接受方向请求后画面仍保持右下摄像头，本轮不声称完成真实换边或内外屏切换验证。
+- 截图驱动及诊断日志代码只用于验证，提交前恢复；桌面 `2026-10-25/Duo右下角适配/` 保存本轮截图。修复前对照基于 `0cb8c99`，不是 master 截图。GitHub CLI 未登录，PR 附件更新仍待认证。
 
 ## 11. 发布准备记录（2026-10-24）
 
