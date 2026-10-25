@@ -131,4 +131,5 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground \
 - iPad 左右横屏截图均正向；物理设备竖持但应用保持横屏时，portrait 请求的三张原始屏幕截图为竖画布、内容侧转 90°，不作为可直接上传的正向商店图片。普通手机和 Duo 外屏的 portrait 请求不表示启用了竖屏。
 - 截图和原始日志保存在桌面 `2026-10-26/全机型最终复查/`。复用流程见 [测试说明](../tests/README.md)，必须明确选择当前点亮显示器并保留 `--mask=black`；不能用无遮罩截图判定摄像头适配。
 - 以上是模拟器逐方向启动验证，不涵盖连续折叠/训练中旋转/真机。此前商店截图与视频仍为旧布局，上架前需按最终版本重新生成中英文商店截图和中文视频；此批中文调试证据不能直接替代整套上架素材。
-- Distribution 签名、App Store 上传和 GitHub PR 截图附件仍未完成；GitHub CLI 未登录。未经明确授权不合并 PR。
+- 54 张最新原图已作为 GitHub 附件发布至 [PR #7](https://github.com/ypwhs/NNPlayground/pull/7)，统一为每行最多两图、等宽保比例；其余状态按机型折叠，旧版截图独立保留。全部附件已逐张核验公开可读且 SHA-256 与原图一致。画廊生成器见 [build_layout_gallery.py](../tests/build_layout_gallery.py)，离线画廊和完整原图压缩包保存在本轮桌面目录。
+- GitHub CLI 本身未单独登录，但已使用本仓库现有 Git 凭据完成 API 上传与正文更新。master 同条件图像对照、Distribution 签名和 App Store 上传仍未完成。未经明确授权不合并 PR。
