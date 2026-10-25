@@ -139,3 +139,53 @@ UI 测试先同步 `XCUIDevice` 的物理朝向，再由 Debug 钩子申请对�
 PYTHONPYCACHEPREFIX=/tmp/nnp-layout-pycache python3 -m py_compile tests/capture_layout.py
 python3 tests/capture_layout.py --help
 ```
+
+## 整理已有截图：离线总览与 GitHub 章节
+
+[build_layout_gallery.py](build_layout_gallery.py) 仅用 Python 标准库，读取总摘要和已有 PNG；不运行模拟器、不联网、不认证、不上传、不修改 PR，也不复制、旋转、重拍图片或生成缩略图。不改变上面的采集协议及任何验收状态。每设备须有完整、不重复的九阶段，且每阶段只有一张明确显示器的截图；缺图、候选歧义、非 `black` 遮罩记录、当前 PNG 尺寸与摘要不符均明确失败。
+
+```bash
+python3 tests/build_layout_gallery.py --help
+
+# 输出目录必须尚不存在；本批为 6 设备 × 9 阶段，共 54 张中文截图。
+python3 tests/build_layout_gallery.py \
+  --summary '/Users/ypw/Desktop/2026-10-26/全机型最终复查/summary.json' \
+  --output-dir /tmp/nnp-gallery-review-001
+
+# 由上传者另行准备真实附件清单；生成器本身不执行任何上传。
+python3 tests/build_layout_gallery.py \
+  --summary '/Users/ypw/Desktop/2026-10-26/全机型最终复查/summary.json' \
+  --output-dir /tmp/nnp-gallery-review-002 \
+  --attachments /tmp/nnp-uploaded-attachments.json
+
+PYTHONPYCACHEPREFIX=/tmp/nnp-gallery-pycache python3 -m py_compile tests/build_layout_gallery.py
+```
+
+未提供附件清单时只生成 `截图总览.html`：顶部设备导航、每设备一节，等宽两列（窄屏一列），所有原图直接嵌入并延迟加载；点击打开原图，宽度随列调整、高度自动，保持原始比例。图片 URL 是相对 HTML 所在目录的 URL 编码路径，可直接离线打开；原图不复制，移动 HTML 或原图后需重新生成。已存在的输出目录（包括符号链接）及输出文件均拒绝覆盖。
+
+附件清单格式如下；路径必须指向摘要对应的绝对 PNG 路径，`url` 必须替换为上传者取得的真实 GitHub 附件 URL，`sha256` 为该原图当前字节的 SHA-256，不能使用示例占位内容：
+
+```json
+{
+  "sourceCommit": "45e674f",
+  "attachments": {
+    "/绝对路径/原图.png": {
+      "url": "https://github.com/user-attachments/assets/00000000-0000-0000-0000-000000000000",
+      "sha256": "替换为64位十六进制SHA-256"
+    }
+  }
+}
+```
+
+提供 `--attachments` 后逐张校验附件 URL 的完整 GitHub 前缀与 UUID 格式、清单完整性及当前 PNG 的 SHA-256；任何缺失、非法 URL 或哈希不匹配都在创建输出目录前失败，绝不退回本地路径或 `raw.githubusercontent.com`。校验只针对清单与本地原图，不进行网络请求，也不能据此证明远端 URL 可访问或其远端内容一致；清单来源需由上传者负责。
+
+通过后额外生成 `GitHub截图展示.md`，只含可拼入 PR 的截图章节，不是完整 PR 正文。每机型主展示依次为 `left-trained`、`right-trained`、`left-settings`、`left-reset`，其余五张仍以图片放入同机型的 `details`；全部 54 张都保留。使用 HTML table 每行两图，单元格宽度 50%，图片统一 `width="460"`、不固定高度，并链接同一附件原图。
+
+两种输出均从摘要的 `createdAt` 取得日期。无清单时不猜测截图来源提交，标题标为“未标注来源提交”；提供清单时使用明确填写的 `sourceCommit`（7–40 位十六进制）。复用于其它提交时应提供正确来源提交的清单，不能把当前 Git HEAD 或本批历史提交当作新截图来源。
+
+展示中的方向和命名边界：
+
+- 其它四机型使用 `18ProMax`、`17e`、`SE3`、`iPadPro13M5` 友好名。两个 Duo 的标题依据所有快照的 `mask & 2` 及横/纵 `regular/regular`（RR）判定为“展开内屏”或“折叠外屏”；采集名含 `Inner` 也不能据此认定为内屏。证据冲突或阶段间改变时拒绝猜测。
+- 每图保留原始阶段名和实际 `orientation`。非 Duo 展开内屏的 `portrait` 请求仍保持横屏，仅实际 `orientation=1` 标为“真竖屏”；Duo 真竖屏即使在折叠详情中也明确标记。
+- iPad 的 `portrait` 请求可能生成原生竖画布、横屏内容侧转 90°；这不是 iPad 竖屏支持，不应旋转图片伪装成另一种采集结果。
+- 明确声明本批中文截图、所有原图 `--mask=black`；旧 `10x` / `5 节点` 截图不属于本次 54 张九阶段证据，不替换 `trained/settings/reset` 的实际状态。
