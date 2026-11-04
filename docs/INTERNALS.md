@@ -11,7 +11,7 @@
 ```
 NNPlayground/
 ├── main.m                         UIApplicationMain
-├── AppDelegate.h/.m               模板空壳，storyboard 启动
+├── AppDelegate.h/.m               AppDelegate + SceneDelegate；SceneDelegate 加载 Main.storyboard 并创建窗口
 ├── ViewController.h/.mm           应用状态机 + 数据生成 + 训练 + 渲染调度 + 布局
 ├── Network.h/.mm                  MLP 结构、forward/backProp/updateWeights（C++）
 ├── Node.h/.mm                     Node/Link 数学 + CALayer + 位图
@@ -52,6 +52,8 @@ NNPlayground/
 - `always` 是普通 `bool`，主线程写、utility 队列读。
 
 ### 2.2 启动
+
+`SceneDelegate` 的 `scene:willConnectToSession:options:` 加载 `Main.storyboard`，创建 `UIWindow`、设置 rootViewController 并 makeKeyAndVisible；随后执行：
 
 ```
 viewDidLoad
@@ -397,6 +399,7 @@ nodeW  = min(50, height - 5*screenScale)
 - `addLoss(a,b)` 向 train/test 数组 append，`setNeedsDisplay`。
 - `draw`：空数组返回；取两组数据的 max/min，`min*=0.9`，`delta=(max-min)*1.1`；元素数 <5000 时逐点画，否则按 `i*n/5000` 抽样 5000 点；训练灰、测试黑。
 - 元素数为 1 时 x 坐标按 `width*i/(n-1)` 计算。
+- `plotBounds`：仅当窗口右安全区大于左安全区时，从绘制宽度扣除 LossView 本地 `safeAreaInsets.right`（限制在 0…bounds.width），重新缩放整条曲线，不裁掉数据。普通手机左右对称安全区、反向横屏及无遮挡视图保持原宽；不改任何 Auto Layout 约束、frame 或高度。`safeAreaInsetsDidChange` / `layoutSubviews` 请求重绘，训练暂停时也能响应布局变化。
 
 ## 7. UI 层
 
@@ -527,13 +530,13 @@ delete[] oldShape
 - `getHeatData`：UI block 在 `unlock` 后执行；block 读取全局 `network`/位图；后台下一帧 `getHeatData` 写同一 `outputBitmap`。
 - `generateBigOutputImage`：在 utility 队列读 `network`/`inputs`，不持 `networkLock`；`resetNetwork` 在主线程 `delete oldNetwork`。
 - `longpressAction`：`UIAlertControllerStyleActionSheet`，未设置 `popoverPresentationController.sourceView`/`sourceRect`。
-- Photo：`longpressAction` 中 action sheet 的 `ok` handler 调用 `UIImageWriteToSavedPhotosAlbum`；Info.plist 没有 `NSPhotoLibraryAddUsageDescription`/`NSPhotoLibraryUsageDescription`。
+- Photo：`longpressAction` 中 action sheet 的 `ok` handler 调用 `UIImageWriteToSavedPhotosAlbum`；Info.plist 声明 `NSPhotoLibraryAddUsageDescription`，未声明 `NSPhotoLibraryUsageDescription`（只写不读）。
 - `rNone` 返回 `w`；`updateWeights` 对每条边计算 `λ*reg'(w)/N`。
 - `always` 无 atomics；训练线程在 `always=false` 后于下一轮 while 退出。
 - `resetNetworkShape`/`addLayer`：`always=false` + `sleep(0.008)` + `lock/unlock`；无线程 join。
 - `LossView.draw`：元素数 1 时按 `(n-1)` 计算 x；`clearData` 只清数组。
 - 长按：`HeatMapView.initLayer` 添加 1s recognizer（空实现）；`ViewController` 对同一 heatMap 添加 0.5s recognizer（存图）。
-- `Info.plist`：`UIRequiredDeviceCapabilities=[armv7]`，`CFBundleName=神经网络`，横屏 orientations，`UIRequiresFullScreen=true`。
+- `Info.plist`：`UIApplicationSceneManifest` 指向 `SceneDelegate`；`UIMainStoryboardFile` 已移除；无 `UIRequiredDeviceCapabilities`；`CFBundleName=神经网络`；横屏 orientations（iPhone/iPad 各 2 项）；`UIRequiresFullScreen=true`；`ITSAppUsesNonExemptEncryption=false`；`NSPhotoLibraryAddUsageDescription`。
 - `NNPlayground.entitlements`：`com.apple.security.app-sandbox`、`com.apple.security.network.client`；`NNPlayground 2.entitlements` 未在 pbxproj 中引用。
 - `Reachability`：仅 `NNPlayground-Bridging-Header.h` 引入；无 Swift/ObjC 调用点。
 - `Network::forEachNode`、`Network::getOutputNode`、`HeatMapView.setBackground`：无调用点。
@@ -541,6 +544,7 @@ delete[] oldShape
 - `SpreadView.xib`：root 852×393；部分数据集按钮 frame y 到 748；安装的约束中四个数据按钮纵向排列（`top = 上一个 bottom + 10`）。
 - `SelectButton.didMoveToSuperview`：`layer.backgroundColor` 与 `titleLabel?.textColor` 都设为 `fillColor`；`fillColor` 默认白色。
 - `initNodeLayer`：先用 `_spreadView.buttonWidth` 布置 add/sub 按钮，后按屏高赋值为 29/36。
+- Duo 内屏横屏 `self.view.bounds` 约 951×669，`safeAreaInsets` 仍为 0；`duoTopInset` 只对 phone 且 `traitCollection` 为 regular/regular 的内屏返回 80，折叠外屏 compact/compact 返回 0（折叠时 `view.bounds` 可能仍是内屏尺寸，不能按高度判断）。内屏热力图 top 约束从 108 调到 188，节点 y 从 24 移到 104，8 槽位高度按剩余空间重算；折叠外屏继续使用 `safeAreaInsets`（实测左 84 / 下 34）。用于避开内屏右上角状态栏、灵动岛、通知横幅、定位/录制指示。
 - `SelectDataButton`：选中 alpha 1，未选 0.4。
 - `DropDownView`：行高取按钮高度；总高超过窗口底部时截断并允许滚动。
 - 启动截图（2026-10-24）：`fps:0`，训练/测试误差 0.530/0.574，训练次数 0。
@@ -573,6 +577,40 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground -configuration D
 
 - `xcodebuild -list`：targets `NNPlayground`、`NNPlaygroundTests`、`NNPlaygroundUITests`；configurations Debug/Release；scheme `NNPlayground`。
 - `xcodebuild -showBuildSettings`：`IPHONEOS_DEPLOYMENT_TARGET = 17.0`、`PRODUCT_BUNDLE_IDENTIFIER = com.yangpeiwen.NNPlayground2`、`SWIFT_VERSION = 5.0`、`TARGETED_DEVICE_FAMILY = 1,2,6`、`SUPPORTED_PLATFORMS = iphoneos iphonesimulator`。
-- 构建产物 Info.plist：`MinimumOSVersion=17.0`、`UIDeviceFamily=[1,2]`、`UIRequiredDeviceCapabilities=[armv7]`、横屏 orientations、`UIRequiresFullScreen=true`、`CFBundleName=神经网络`。
+- 构建产物 Info.plist：`MinimumOSVersion=17.0`、`UIDeviceFamily=[1,2]`、`UIApplicationSceneManifest`、无 `UIRequiredDeviceCapabilities`、横屏 orientations、`UIRequiresFullScreen=true`、`CFBundleName=神经网络`、`ITSAppUsesNonExemptEncryption=false`、`NSPhotoLibraryAddUsageDescription`。
 - 2026-10-24 09:37 在 iPhone 15 / iOS 17.2 安装启动成功（pid 51391），截图路径 `/tmp/nnp-initial.png`；画面为 2 输入、4 隐藏、1 输出热力图，右侧 loss 文本 0.530/0.574/0。
 - 2026-10-24 09:40 后 `simctl list runtimes` 输出为空；`simctl list devices available` 无可用设备；`/Applications/Xcode.app` 下无 `Simulator.app`。
+- 2026-10-24 14:00 后 Xcode 27.1 的 iOS 27.0/27.1 runtime 可用；`simctl` 可无 GUI 启动设备。iPhone 18 Pro Max（2868×1320）、iPhone 17e、iPhone SE 3、iPhone Duo、iPad Air 13-inch (M4)（2048×2732）、iPad Pro 13-inch (M5)（2064×2752）均可安装运行。
+- 2026-10-24 14:50 起用临时 XCUITest 驱动真实 UI：`XCUIDevice.orientation = landscapeLeft` 解决 iPad 竖屏启动时布局按 1024×1366 计算的问题；`XCUIScreen.mainScreen.screenshot` 附件为 1320×2868/2064×2752，带 EXIF orientation 8，需 `ImageOps.exif_transpose` 后才是横屏尺寸。
+- 2026-10-24 15:00 版本号更新为 `2026.10.24`（build `2026.10.24`）；Debug/Release 构建通过；Release 签名证书仍只有 Apple Development，App Store 分发需补 Distribution 证书或在 Xcode Cloud 归档。
+- 2026-10-25 01:20 修复 Duo 内屏右上角系统区域：`duoTopInset` 预留 80pt，热力图/节点下移；用 Clock 系统通知横幅在 Duo 上验证，热力图、loss 和训练按钮不再被通知遮挡；普通 iPhone 18 Pro Max 回归布局不变。
+- 2026-10-25 01:35 修正 Duo 内屏/折叠外屏判断：不再用 `view.bounds.height > 600`，改为 `traitCollection` regular/regular；折叠外屏 compact/compact 返回 0，使用 safeAreaInsets（左 84 / 下 34）。实测折叠外屏 678×466，避免折叠后被误加 80pt。
+
+### 10.1 Duo 右下角摄像头避让（2026-10-25）
+
+- 带摄像头遮罩复现：外屏 678×466，摄像头位于右下角时根视图安全区为 `{0,0,34,84}`，并非之前反向状态的 `{0,84,34,0}`。LossView frame 为 `{{490,340},{160,80}}`，本地右安全区 56pt。
+- 仅修改 LossView 自身绘制宽度，160pt → 104pt，右端位于窗口 x=594；两条曲线完整缩放，摄像头不再遮挡曲线。热图、标签、控件、节点与训练逻辑不变，不添加机型名称、屏幕尺寸判断或固定避让常量。
+- 已实测运行与截图：Duo 外屏右下摄像头；iPhone 18 Pro Max、17e、SE 3；iPad Pro 13-inch M5。普通手机与 iPad 曲线保留原宽。截图均使用 `simctl io screenshot --mask=black`，在训练后暂停、测试退出前捕获。
+- 几何回归覆盖右侧遮挡、左侧更大、左右对称、无遮挡、宽度下限、不同安全区输入恢复；不将纯几何单测当成真实折叠/旋转测试。Duo 模拟器接受方向请求后画面仍保持右下摄像头，本轮不声称完成真实换边或内外屏切换验证。
+- 截图驱动及诊断日志代码只用于验证，提交前恢复；桌面 `2026-10-25/Duo右下角适配/` 保存本轮截图。修复前对照基于 `0cb8c99`，不是 master 截图。GitHub CLI 未登录，PR 附件更新仍待认证。
+
+### 10.2 双向安全区、内屏竖屏与统计区（2026-10-26）
+
+- 主界面左右边距统一为正常边距与系统安全区的较大者：按钮 `max(24,left)`、节点 `max(25,left)`、热图右侧 `max(28,right)`。不再叠加左侧 24pt，也不再让右侧固定 28pt 覆盖安全区。热图以下内容随原对齐链一起避让。
+- 安全区变化先失效布局缓存，再在 Auto Layout 完成后重建节点及连线；同尺寸翻转仍检查热图 frame，避免连线停在旧位置。删除按钮栈 40pt 与旧运行按钮 39/46pt 的冲突约束。
+- 方向策略由 `AppDelegate` 统一按 scene traits 决定。iOS 27+、phone regular/regular 额外允许 portrait，使用公开 scene 方向代理覆盖 plist；普通手机和 iPad 仍仅横屏。连接、激活、traits/geometry 更新时只修正不合法方向，不强制将合法内屏竖屏拉回横屏。
+- 紧凑垂直 size class 使用中英文三行统计；根据安全区可用高度和文本实际所需高度上移右侧面板。曲线首选 120pt @249，最低 48pt @1000，不再靠压没文字或曲线满足布局。
+- 可复用流程保存在 [测试说明](../tests/README.md) 和 [截图脚本](../tests/capture_layout.py)。每设备执行 left/right/portrait 三种方向请求，每方向实际单步、切换加速、训练暂停、打开设置、切换数据集和层数再恢复、关闭及重置，保存 trained/settings/reset 三张遮罩截图与布局证据。
+- `UIInterfaceOrientationLandscapeLeft=4`、`LandscapeRight=3` 与设备朝向枚举相反。测试同时设置物理设备朝向和 scene 方向；按当前 scene 的实际像素尺寸选择显示器，避免 Duo 名称、默认显示器和折叠状态不一致导致截到黑屏。关闭设置以可见数据按钮的相对空白位置定位，不用可能滞后的 `app.frame`。
+- Debug 诊断只有显式传入 `-NNPReviewOrientation` 才启用；Release 完全不包含该测试入口。脚本自动检查实际方向、状态、统计文字高度、曲线最低高度及安全区，仍须逐张人工检查遮罩、完整显示和黑边。
+- 最终 Debug 单元测试：10 项、0 失败（含 2 项原模板用例）；Release 模拟器构建成功。真实连续折叠、训练中旋转、后台折叠恢复和真机仍需另测，不以逐方向冷启动截图代替。
+
+## 11. 发布准备记录（2026-10-24）
+
+- 发布目标：iPhone 版 `神经网络`（App Store id `1116487840`，bundle `com.yangpeiwen.NNPlayground2`）的通用更新；该更新首次把 iPhone 应用扩展到 iPad。iPad 独立应用 id `1115132797` 不受影响。
+- 版本：`MARKETING_VERSION = 2026.10.24`，`CURRENT_PROJECT_VERSION = 2026.10.24`。采用日期式版本，version 与 build 相同；同日重传需换更大的三段 build（如 `2026.10.2401`），不能加四段。
+- 素材：iPhone 6.9"（2868×1320）与 iPad 13"（2752×2064）横屏截图，中文/英文各 4 张；中文 App Preview 26.5 秒、1920×886、H.264。
+- App Store 文案、隐私政策、审核备注、截图顺序和提交清单见桌面 `2026-10-24/` 目录（不提交进仓库）。
+- 已知限制：iPhone 17 / 18 系列横屏 440pt 高度下，右侧 loss 数字标签被 Auto Layout 压缩为 0 高度，只显示 loss 曲线；iPad 正常。该问题不影响构建与提交，若本次要修，需单独改布局并重新截取对比图。
+- 签名：`security find-identity` 只有 `Apple Development: Peiwen Yang (8H535XCXVJ)`；无 Distribution 证书，无法本机导出 App Store 签名包。Xcode Cloud manifest 已存在，推荐走 Xcode Cloud 归档或补证书。
+

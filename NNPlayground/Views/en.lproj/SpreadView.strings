@@ -12,7 +12,7 @@
 "aNw-4l-oUA.text" = "Noise: 0";
 
 /* Class = "UILabel"; text = "正则化函数"; ObjectID = "eHR-zy-UDd"; */
-"eHR-zy-UDd.text" = "Regularization function:";
+"eHR-zy-UDd.text" = "Regularization:";
 
 /* Class = "UILabel"; text = "数据"; ObjectID = "emv-GE-s8z"; */
 "emv-GE-s8z.text" = "Data:";

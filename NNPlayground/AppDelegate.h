@@ -12,6 +12,9 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+// 方向策略以 scene 的布局环境为准，供 scene 与控制器共同使用。
++ (UIInterfaceOrientationMask)supportedOrientationsForWindowScene:(UIWindowScene *)scene;
+
 
 @end
 
