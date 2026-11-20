@@ -39,7 +39,7 @@ iPad 独立应用 `神经网络`（id 1115132797，bundle `com.yangpeiwen.NNPlay
 
 ## 4. 构建与上传
 
-本机当前只有 Apple Development 证书，没有 Distribution 证书，不能直接导出 App Store 签名包。可选：
+2026-10-26 已实测：即使本地钥匙串只有 Apple Development 身份，现有 Xcode Apple 账户仍可通过 **Cloud Managed Apple Distribution** 完成 App Store 分发签名。不能仅凭 `security find-identity` 没有本地 Distribution 身份就判定无法上传。归档、导出和上传均需检查实际退出码与服务端回执；当时账户可用不保证以后一直有效。可选：
 
 ### 4.1 Xcode 归档
 

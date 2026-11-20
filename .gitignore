@@ -11,3 +11,7 @@ DerivedData
 ## Xcode 8 and earlier
 *.xcscmblueprint
 *.xccheckout
+
+## Python 缓存
+__pycache__/
+*.pyc

@@ -1,0 +1,11 @@
+# GitHub PR diff 折叠配置
+#
+# 给下列测试/发布工具文件加 linguist-generated，GitHub 会在 PR 的 Files changed
+# 中默认折叠这些文件的 diff（显示“marked as generated”），避免几千行采集脚本
+# 淹没真正的代码变更。它们仍是普通源码文件，会被正常检出、构建与运行。
+# 官方说明：https://docs.github.com/en/repositories/working-with-files/managing-files/customizing-how-changed-files-appear-on-github
+tests/capture_layout.py linguist-generated
+tests/capture_appstore.py linguist-generated
+tests/build_layout_gallery.py linguist-generated
+tests/export_app_preview.swift linguist-generated
+NNPlaygroundUITests/NNPlaygroundUITests.m linguist-generated
