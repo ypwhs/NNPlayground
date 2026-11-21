@@ -140,3 +140,4 @@ xcodebuild -project NNPlayground.xcodeproj -scheme NNPlayground \
 - 核实：另一款是同一开发者 2020 年上架的 iPad 独立版《神经网络》（id `1115132797`）。iPhone 版 1.2 商店图标、iPad 版商店图标与 `2026.10.24` 构建图标是同一张图；iPhone 版在 2020 年改图标前使用的独立图标仍在仓库历史中。
 - 处理：恢复 iPhone 版原始图标（`93a3bbc^` 的 `Icon-60@3x.png`），1024 主图与全部尺寸由该 180px 素材重采样；构建号改为 `2026.11.21`，版本号保持 `2026.10.24` 以复用已建版本、截图与预览；审核备注补充 4.3(a) 说明后重新提审。
 - 版本规则补充：重新上传同一版本时 `CURRENT_PROJECT_VERSION` 可单独递增，不必与 `MARKETING_VERSION` 相同。
+- 2026-11-21 12:50 重新提交成功：版本 `2026.10.24`、构建 `2026.11.21`、手动发布，reviewSubmission `121605cf-4de6-40aa-983c-0db225b1f792` 状态 `WAITING_FOR_REVIEW`。
